@@ -17,18 +17,13 @@ div.big-container {
   height: 100%;
 }
 
-div.footer {
-  position: absolute;
-  text-align: center;
-  font-size: 8px;
-}
-
 div.social-container {
   display: table;
   margin: 0 auto;
   background-color: #5f5fc4;
   border-radius: 8px;
-  padding: 8px;
+  padding: 4px;
+  align-content: center;
 }
 
 div.bio-container{
