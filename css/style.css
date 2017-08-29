@@ -485,3 +485,7 @@ header h1 {
   text-align: center;
   margin: auto;
 }
+.section:hover .collageimg{
+  opacity: 0.3;
+  transition: 0.5s ease;
+}
