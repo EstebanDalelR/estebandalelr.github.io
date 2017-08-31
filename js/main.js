@@ -7,7 +7,7 @@ jQuery(document).ready(function($){
 
 	//on scolling, show/animate timeline blocks when enter the viewport
 	$(window).on('scroll', function(){
-		(!window.requestAnimationFrame) 
+		(!window.requestAnimationFrame)
 			? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
 			: window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
 	});
@@ -24,3 +24,4 @@ jQuery(document).ready(function($){
 		});
 	}
 });
+/*SM: Falta el "use strict"*/

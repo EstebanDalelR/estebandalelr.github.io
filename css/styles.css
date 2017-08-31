@@ -184,3 +184,8 @@ width:110px;
 img.collageimg:hover{
   filter:blur(2px);
 }
+/*SM: Las estlos estan bien organizados, agrupados en la diferentes secciones de
+      la pagina. Comentarios describiendo a que parte del documento hace referencia
+      cada sección facilitaria la lectura.*/
+/*SM: Buen uso de media queries para crear responsive layouts. */
+/*Code Reviewed by: SM - Sebastian Martinez*/
