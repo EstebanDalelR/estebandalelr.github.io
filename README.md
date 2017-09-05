@@ -9,3 +9,8 @@ Also, i have my own hosting at http://estebandalelr.co/
 * Some HTML, routed by hand.
 * CSS to make it pretty.
 * JS and JQuery for animations.
+* JSONs to set the data order, and to make it easier to mantain
+
+## Project Structure
+index.html
+CNAME
