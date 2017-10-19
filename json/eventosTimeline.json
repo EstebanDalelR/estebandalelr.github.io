@@ -2,6 +2,12 @@
  "events": [
    {
      "src": "img/compass.svg",
+     "title": "Got Elected ACM Uniandes President",
+     "desc":  "<a href='http://www.acm.org/'>Association for Computing Machinery</a> Uniandes student chapter. <br> Quadrupled the amount of freshment in the chapter.",
+     "date": "Apr 2015"
+   },
+   {
+     "src": "img/compass.svg",
      "title": "Got Appointed Campus Manager in Kiwi",
      "desc":  "<a href='https://www.kiwicampus.com/'>Kiwi Campus</a> is a logistics company for students.",
      "date": "Apr 2015"
