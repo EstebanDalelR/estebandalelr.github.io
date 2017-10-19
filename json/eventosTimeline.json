@@ -2,10 +2,22 @@
  "events": [
    {
      "src": "img/check.svg",
+     "title": "Got Appointed Campus Manager in Kiwi",
+     "desc":  "<a href='https://www.kiwicampus.com/'>Kiwi Campus</a> is a logistics company for students.",
+     "date": "Apr 2015"
+   },
+   {
+     "src": "img/check.svg",
+     "title": "Joined ACM Uniandes Student Chapter",
+     "desc":  "<a href='http://www.acm.org/'>Association for Computing Machinery</a> is the biggest group about computing.",
+     "date": "Jul 2015"
+   },
+   {
+     "src": "img/check.svg",
      "title": "Competed in the 'Innovación con TIC' contest",
      "desc":  "A bianual competition where teams take a semester to design and implement a product<br>Runner up CAM team wit IoT project based on Arduino",
      "date": "Apr 2015"
-   },
+   },  
    {
      "src": "img/cpu.svg",
      "title": "Attended TEDx Las Aguas 2015",
@@ -38,7 +50,7 @@
    },
    {
      "src": "img/layers.svg",
-     "title": "Got accepted into Universidad de los Andes",
+     "title": "Got accepted into Universidad de los Andes as a Chemical Engineering Student",
      "desc": "<a href='http://uniandes.edu.co/'>Universidad de los Andes</a> is the top University in Colombia <br>I began my studies in Chemical Engineering",
      "date": "Jul 2012"
    },
