@@ -104,7 +104,26 @@
               async
               integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
               crossorigin="anonymous"></script>
-          <script src="js/collageParser.js"></script>
+          <script >
+          var data = [];
+          $.getJSON("json/collage.json", function (jsondata) {
+
+            data = jsondata;
+            var links = data["pictures"];
+
+            for (var key in links) {
+              var toadd =  "<img src='"
+             +links[key].src
+             + "' alt= '"
+             +links[key].alt
+             +"'>"
+              $('#photos').append(toadd);
+            }
+
+          }
+
+          );
+</script>
         </section>
       </div>
     </div>
