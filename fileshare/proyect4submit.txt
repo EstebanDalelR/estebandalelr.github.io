@@ -1,0 +1,17 @@
+Dalel Rueda
+Esteban
+estebandalelr@gmail.com
+201227078
+Samuel
+Baquero
+S.baquero10@uniandes.edu.co
+201316145
+Senecampus
+A map to help new students find important places, also a report zone for infrastructural problems
+https://github.com/EstebanDalelR/WebDevProyect4
+http://localhost:3000/
+http://estebandalelr.co/img/senecampus.jpeg
+http://estebandalelr.co/
+https://samuelbaquero.github.io/MyWebsite/
+-
+https://docs.google.com/presentation/d/1Z2fBsVt21f0bJtwlT7icoJVVkT9hSsPjoNJn6ztfo0s/edit?usp=sharing
