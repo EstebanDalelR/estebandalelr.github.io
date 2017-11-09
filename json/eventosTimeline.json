@@ -1,15 +1,27 @@
 {
  "events": [
-   {
+  
+      {
+     "src": "img/compass.svg",
+     "title": "Began working at Rappi",
+     "desc":  "<a href='https://www.rappi.com/'>Rappi, a YC company</a> held a competition. <br> My team won, and I began working with the CEO, for 6 months. <br> After that I went into the Product team.",
+     "date": "Apr 2015"
+   },
+  {
+     "src": "img/check.svg",
+     "title": "Began as President in the ACM Student Chapter",
+     "desc":  "<a href='http://www.acm.org/'>Association for Computing Machinery</a> Uniandes student chapter.,
+     "date": "Feb 2016"
+   },   {
      "src": "img/compass.svg",
      "title": "Got Elected ACM Uniandes President",
      "desc":  "<a href='http://www.acm.org/'>Association for Computing Machinery</a> Uniandes student chapter. <br> Quadrupled the amount of freshment in the chapter.",
-     "date": "Apr 2015"
+     "date": "Oct 2015"
    },
    {
      "src": "img/compass.svg",
      "title": "Got Appointed Campus Manager in Kiwi",
-     "desc":  "<a href='https://www.kiwicampus.com/'>Kiwi Campus</a> is a logistics company for students.",
+     "desc":  "<a href='https://www.kiwicampus.com/'>Kiwi Campus</a> is a logistics company for students.<br> Took about 25% of the market with no paid marketing.",
      "date": "Apr 2015"
    },
    {
