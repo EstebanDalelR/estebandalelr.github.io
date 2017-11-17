@@ -1,6 +1,17 @@
 {
  "events": [
         {
+     "src": "img/check.svg",
+     "title": "Became Facebook Developer Circle Lead",
+     "desc":  "Joined as Student Ambassador and earned the Lead tittle.",
+     "date": "Jul 2017"
+   },   {
+     "src": "img/check.svg",
+     "title": "Won AI Hackathon with a VR app",
+     "desc":  "Hack Society by AI Society held a hackathon and I won the VR prize.",
+     "date": "Jul 2017"
+   },        
+  {
      "src": "img/compass.svg",
      "title": "Left Rappi",
      "desc":  "<a href='https://www.rappi.com/'>Rappi, a YC company</a> was amazing, butI had to finish my university.",
