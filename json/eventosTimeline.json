@@ -1,16 +1,21 @@
 {
  "events": [
-  
+        {
+     "src": "img/compass.svg",
+     "title": "Left Rappi",
+     "desc":  "<a href='https://www.rappi.com/'>Rappi, a YC company</a> was amazing, butI had to finish my university.",
+     "date": "Jul 2017"
+   },
       {
      "src": "img/compass.svg",
      "title": "Began working at Rappi",
      "desc":  "<a href='https://www.rappi.com/'>Rappi, a YC company</a> held a competition. <br> My team won, and I began working with the CEO, for 6 months. <br> After that I went into the Product team.",
-     "date": "Apr 2015"
+     "date": "May 2016"
    },
   {
      "src": "img/check.svg",
      "title": "Began as President in the ACM Student Chapter",
-     "desc":  "<a href='http://www.acm.org/'>Association for Computing Machinery</a> Uniandes student chapter.,
+     "desc":  "<a href='http://www.acm.org/'>Association for Computing Machinery</a> Uniandes student chapter.",
      "date": "Feb 2016"
    },   {
      "src": "img/compass.svg",
