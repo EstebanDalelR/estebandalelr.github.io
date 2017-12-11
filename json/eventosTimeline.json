@@ -1,6 +1,11 @@
 {
   "events": [
-    {
+   {
+      "src": "img/check.svg",
+      "title": "Won Facebook Developer Circles Community Challenge",
+      "desc": "Created a Qu'orange clone using React, submitted it and won the local challenge.",
+      "date": "Nov 2017"
+    }, {
       "src": "img/check.svg",
       "title": "Became Facebook Developer Circle Lead",
       "desc": "Joined as Student Ambassador and earned the Lead tittle.",
