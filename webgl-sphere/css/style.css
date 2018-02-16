@@ -1,0 +1,68 @@
+html,
+body {
+	box-sizing: border-box;
+	position: relative;
+	width : 100%;
+	height : 100%;
+	margin : 0;
+	padding : 0;
+	background-color : rgb(0, 85, 85);
+}
+
+h3 {
+	margin-top:0.5em;
+	margin-bottom:0.5em;
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+canvas {
+	position : absolute;
+	top : 0;
+	left : 0;
+	width:100%;
+	height:100%;
+}
+
+.controls {
+	position: absolute;
+	z-index: 1;
+	width: 20%;
+	padding:0 10px 10px 20px;
+}
+
+.controls select,
+.controls input {
+	display: block;
+	width: 100%;
+}
+
+.controls span {
+	color: white;
+}
+
+.sliderGroup {
+	width : 100%;
+}
+
+.sliderGroup input {
+	padding:0;
+	margin:0;
+	float:left;
+	border:0;
+}
+
+.sliderGroup input[type="range"] {
+	width:calc(100% - 58px);
+}
+
+.sliderGroup input[type="text"] {
+	width:58px;
+}
