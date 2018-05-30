@@ -4,9 +4,22 @@
 
 // Auto-generated content.
 import {VRInstance} from 'react-vr-web';
+import * as OVRUI from 'ovrui';
+import ControllerRayCaster from 'react-vr-controller-raycaster';
+
+const THREE = require('three');
 
 function init(bundle, parent, options) {
-  const vr = new VRInstance(bundle, 'GerisGame', parent, {
+    const scene = new THREE.Scene();
+    const vr = new VRInstance(bundle, 'GerisGame', parent, {
+
+      raycasters: [
+        new ControllerRayCaster({scene, color: '#ff0000'}),
+        new OVRUI.MouseRayCaster(),
+      ],
+  
+      scene: scene,
+      cursorVisibility: 'visible',
     // Add custom options here
     ...options,
   });
