@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Registro Campesinos</title>
+</head>
+<body>
+  <div>
+    <h3>Nombre</h3>
+    <input type="text" autofocus id="name" required>
+    <h3>Apellido</h3>
+    <input type="text" id="lastName" required>
+    <h3>Cédula</h3>
+    <input type="number" id="idcc" required>
+    <h3>Personas a Cargo</h3>
+    <input type="number" id="peopleInCharge" required>
+    <h3>Producto</h3>
+    <input type="text" id="product" required>
+    <h3>Tipo Terreno</h3>
+    <div>
+      <div>
+        <input type="radio" id="proprietario" name="areatype" value="proprietario">
+        <label for="proprietario">Proprietario</label>
+      </div>
+      <div>
+        <input type="radio" id="baldio" name="areatype" value="baldio">
+        <label for="baldio">Baldío</label>
+      </div>
+      <div>
+        <input type="radio" id="arrendatario" name="areatype" value="arrendatario">
+        <label for="arrendatario">Arrendatario</label>
+      </div>
+      <div>
+        <input type="radio" id="otro" name="areatype" value="otro">
+        <label for="otro">Otro</label>
+      </div>
+    </div>
+    <h3>Area</h3>
+    <input type="number" id="area" required>
+  </div>
+  <br />
+  <div>
+    <button onclick="saveFarmer()">Guardar</button>
+  </div>
+  <h4>Total guardados: <span id="savedPeople"></span></h4>
+  <div id="savedPeopleDiv">
+      <table id="table">
+      </table>
+  </div>
+</body>
+<script src="saveFarmer.js"></script>
+<link rel="stylesheet" href="css/styles.css?v=1.0">
+</html>
