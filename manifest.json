@@ -1,0 +1,23 @@
+{
+	"dir" : "ltr",
+	"lang" : "en",
+	"name" : "Esteban Dalel R",
+	"scope" : "/",
+	"display" : "browser",
+	"start_url" : "https://estebandalelr.co/",
+	"short_name" : "EstebanDalelR",
+	"theme_color" : "transparent",
+	"description" : "My homepage",
+	"orientation" : "any",
+	"background_color" : "transparent",
+	"related_applications" : [],
+	"prefer_related_applications" : false,
+	"icons" : [
+		{
+			"src": "https://estebandalelr.co/assets/favicon.ico",
+			"sizes": "16x16"
+		}],
+	"url" : "https://estebandalelr.co/",
+	"screenshots" : [],
+	"generated" : "true"
+}
