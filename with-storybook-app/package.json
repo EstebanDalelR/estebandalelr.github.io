@@ -1,0 +1,38 @@
+{
+  "name": "with-storybook",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "build:tailwind": "postcss styles/index.css -o styles/tailwind.css"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.8.4",
+    "next": "latest",
+    "postcss-cli": "^7.1.1",
+    "postcss-import": "^12.0.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@storybook/addon-a11y": "^5.3.19",
+    "@storybook/addon-actions": "^5.2.3",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-links": "5.2.3",
+    "@storybook/addon-notes": "^5.3.19",
+    "@storybook/addons": "^5.2.3",
+    "@storybook/react": "5.2.3",
+    "@types/node": "^14.0.14",
+    "@types/react": "^16.9.41",
+    "@types/react-dom": "^16.9.8",
+    "babel-loader": "^8.0.5",
+    "postcss-preset-env": "^6.7.0",
+    "tailwindcss": "^1.4.6",
+    "typescript": "^3.9.5"
+  }
+}
