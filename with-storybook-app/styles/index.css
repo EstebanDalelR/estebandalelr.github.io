@@ -1,8 +1,10 @@
 @tailwind base;
-a {
+.externalLink {
     @apply text-blue-700;
     @apply underline;
 }
-
+.externalLink::after {
+    content: "↗";
+}
 @tailwind components;
 @tailwind utilities;

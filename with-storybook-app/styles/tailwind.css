@@ -591,11 +591,15 @@ video {
   height: auto;
 }
 
-a {
+.externalLink {
   --text-opacity: 1;
   color: #2b6cb0;
   color: rgba(43, 108, 176, var(--text-opacity));
   text-decoration: underline;
+}
+
+.externalLink::after {
+  content: "↗";
 }
 
 .container {
