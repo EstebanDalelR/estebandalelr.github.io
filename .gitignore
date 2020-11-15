@@ -30,4 +30,5 @@ yarn-error.log*
 .env.production.local
 
 # vercel
-.vercel
+.vercelnext-env.d.ts
+package-lock.json
