@@ -12,6 +12,11 @@ export default function IndexPage() {
           <a href="https://github.com/estebandalelr/">Github</a>
           <a href="https://www.linkedin.com/in/estebandalelr/">LinkedIn</a>
         </div>
+        <p>
+          <a href="https://blog.estebandalelr.co">
+            Read my blog!
+          </a>
+        </p>
       </div>
     </div>
   )
