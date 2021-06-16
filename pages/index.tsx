@@ -1,9 +1,15 @@
 import Image from "next/image"
+import author from "../public/esteban"
+
 export default function IndexPage() {
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <div className="shadow-md flex justify-center items-center flex-col p-4 rounded bg-green-100">
-        <Image className="rounded-full" src="/esteban.jfif" width={200} height={200} />
+        <Image
+          className="rounded-full"
+          placeholder="blur"
+          alt="picture of esteban"
+          src={author} />
         <h1 className="text-3xl">Esteban Dalel R</h1>
         <h2 className="italic">I make good software and tell bad jokes</h2>
         <p>Find me on:</p>
