@@ -4,7 +4,7 @@ import author from "../public/estebandalelr.jpg"
 export default function IndexPage() {
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      <div className="shadow-md flex justify-center items-center flex-col p-4 rounded bg-red-100">
+      <div className="shadow-md flex justify-center items-center flex-col p-4 rounded bg-red-200">
         <Image
           className="rounded-full"
           placeholder="blur"
