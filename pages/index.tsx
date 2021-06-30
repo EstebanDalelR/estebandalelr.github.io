@@ -1,5 +1,5 @@
 import Image from "next/image"
-import author from "../public/estebandalelr"
+import author from "../public/estebandalelr.jpg"
 
 export default function IndexPage() {
   return (
