@@ -11,6 +11,10 @@ function MyApp({ Component, pageProps }) {
 
         <title>Esteban Dalel R</title>
         <meta name="description" content="I make good software and tell bad jokes" />
+        
+        <meta property="og:title" content="Esteban Dalel R" />
+        <meta property="og:type" content="I make good software and tell bad jokes" />
+        <meta property="og:image" content="https://www.estebandalelr.co/estebandalelr.jpg" />
       </Head>
       <Component {...pageProps} />
     </>
