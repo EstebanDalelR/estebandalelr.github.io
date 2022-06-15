@@ -7,7 +7,7 @@ export default function GithubAchievements() {
         A compilation of <a href='https://github.blog/2022-06-09-introducing-achievements-recognizing-the-many-stages-of-a-developers-coding-journey/'>GitHub Achievements</a>
       </p>
       {ga.map((achievement) => {
-        (
+        return (
           <div>
             <h2>{achievement.name}</h2>
             <p>{achievement.description}</p>
