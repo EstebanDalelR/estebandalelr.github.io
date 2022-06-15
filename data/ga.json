@@ -1,0 +1,12 @@
+[
+    {
+        "name":"YOLO",
+        "image":"https://github.githubassets.com/images/modules/profile/achievements/yolo-default.png",
+        "description": "You want it? You merge it."
+    },
+    {
+        "name":"Pull Shark",
+        "image":"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+        "description":"@username opened pull requests that have been merged."
+    }
+]
