@@ -19,7 +19,7 @@ export default function GithubAchievements() {
         })}
       </div>
     </div>
-    <footer>Made by Esteban Dalel R.  <a href="https://github.com/estebandalelr/estebandalelr.github.io">Contribute on GitHub</a></a></footer>
+    <footer>Made by Esteban Dalel R.  <a href="https://github.com/estebandalelr/estebandalelr.github.io">Contribute on GitHub</a></footer>
     </main>
   );
 }
