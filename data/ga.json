@@ -8,5 +8,10 @@
         "name":"Pull Shark",
         "image":"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
         "description":"@username opened pull requests that have been merged."
+    },
+    {
+        "name":"Arctic Code Vault Contributor",
+        "image":"https://github.githubassets.com/images/modules/profile/achievements/arctic-code-vault-contributor-default.png",
+        "description": "@username contributed code to several repositories in the 2020 GitHub Archive Program."
     }
 ]
