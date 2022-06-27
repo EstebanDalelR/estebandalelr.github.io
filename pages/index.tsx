@@ -15,7 +15,7 @@ export default function IndexPage() {
         <p>Find me on:</p>
         <div className="w-full flex flex-wrap justify-around">
           <a href="https://twitter.com/EstebanDalelR">Twitter</a>
-          <a href="https://github.com/estebandalelr/">Github</a>
+          <a href="https://github.com/estebandalelr/">GitHub</a>
           <a href="https://www.linkedin.com/in/estebandalelr/">LinkedIn</a>
           <a href="https://www.youtube.com/c/EstebanDalel">YouTube</a>
         </div>
