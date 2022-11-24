@@ -17,7 +17,7 @@ export default function IndexPage() {
           <a href="https://twitter.com/EstebanDalelR">Twitter</a>
           <a href="https://github.com/estebandalelr/">GitHub</a>
           <a href="https://www.linkedin.com/in/estebandalelr/">LinkedIn</a>
-          <a href="https://www.youtube.com/c/EstebanDalel">YouTube</a>
+          <a href="https://www.youtube.com/@estebandalelr">YouTube</a>
         </div>
         <p>
           <a href="https://blog.estebandalelr.co">
