@@ -3,23 +3,24 @@ import React, { useRef, useState } from "react";
 export default function VidMaker() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [videoUrl, setVideoUrl] = useState("");
-  const canvasRef = useRef(null); // Create the ref for the canvas
+  const canvasRef = useRef<HTMLCanvasElement | null>(null); // Create the ref for the canvas
 
   const handleFileChange = (event) => {
     setSelectedFiles(Array.from(event.target.files));
   };
   function createVideo(images, durationPerImage) {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
+    const ctx = canvas?.getContext("2d");
     // Assuming all images are the same size - you'd need to handle different sizes
+    if (!canvas || !ctx) return;
+
     canvas.width = 640; // Set to your required dimensions
     canvas.height = 480;
 
     // Create a video stream from the canvas
-    const stream = canvas.captureStream();
+    const stream = canvas?.captureStream();
     const mediaRecorder = new MediaRecorder(stream);
-    const chunks = [];
+    const chunks: Blob[] = [];
 
     mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
     mediaRecorder.onstop = () => {
@@ -41,7 +42,7 @@ export default function VidMaker() {
       // Draw the image onto the canvas
       const img = new Image();
       img.onload = () => {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas?.width, canvas?.height);
         currentImage++;
         setTimeout(processImage, durationPerImage * 1000);
       };
@@ -61,14 +62,14 @@ export default function VidMaker() {
       "Enter the duration for each image in seconds:",
       "0.1"
     );
-    let timeDuration = parseFloat(duration);
+    let timeDuration = parseFloat(duration!);
     if (!timeDuration || isNaN(timeDuration) || timeDuration <= 0) {
       alert("Please enter a valid number for the duration.");
       return;
     }
 
     // Now proceed to create the video
-    createVideo(selectedFiles, parseFloat(duration));
+    createVideo(selectedFiles, parseFloat(duration!));
   };
 
   return (
@@ -91,16 +92,6 @@ export default function VidMaker() {
         </div>
       )}
       <canvas ref={canvasRef} id="canvas"></canvas>
-      {selectedFiles.length > 0 && (
-        <div>
-          <h2>Selected Files:</h2>
-          <ul>
-            {selectedFiles.map((file) => (
-              <li key={file.name}>{file.name}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </>
   );
 }
