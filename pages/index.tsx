@@ -12,6 +12,7 @@ export default function IndexPage() {
           src={author} />
         <h1 className="text-3xl">Esteban Dalel R</h1>
         <h2 className="italic">I make good software and tell bad jokes</h2>
+        <h23 className="italic">Engineer at <a href="https://astronuts.io">Astronuts</a></h3>
         <p>Find me on:</p>
         <div className="w-full flex flex-wrap justify-around">
           <a href="https://twitter.com/EstebanDalelR">Twitter</a>
