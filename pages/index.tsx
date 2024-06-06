@@ -9,6 +9,9 @@ export default function IndexPage() {
           className="rounded-full"
           placeholder="blur"
           alt="picture of esteban"
+          width={200} // specify the width of the image
+          height={200} // specify the height of the image
+          priority // preloads the image
           src={author} />
         <h1 className="text-3xl">Esteban Dalel R</h1>
         <h2 className="italic">I make good software and tell bad jokes</h2>
