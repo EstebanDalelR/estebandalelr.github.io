@@ -16,16 +16,13 @@ export default function IndexPage() {
         />
         <h1 className="text-3xl">Esteban Dalel R</h1>
         <h2 className="italic">I make good software and tell bad jokes</h2>
-        <p>Find me on:</p>
-        <div className="w-full flex flex-wrap justify-around">
+        <div className="w-full flex items-center justify-center underline flex-col space-y-4 py-4">
           <a href="https://twitter.com/EstebanDalelR">Twitter</a>
           <a href="https://github.com/estebandalelr/">GitHub</a>
           <a href="https://www.linkedin.com/in/estebandalelr/">LinkedIn</a>
           <a href="https://www.youtube.com/@estebandalelr">YouTube</a>
-        </div>
-        <p>
           <a href="https://blog.estebandalelr.co">Read my blog!</a>
-        </p>
+        </div>
       </div>
     </div>
   );
