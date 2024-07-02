@@ -1,5 +1,5 @@
-import Image from "next/image"
-import author from "../public/estebandalelr.jpg"
+import Image from "next/image";
+import author from "../public/estebandalelr.jpg";
 
 export default function IndexPage() {
   return (
@@ -12,7 +12,8 @@ export default function IndexPage() {
           width={200} // specify the width of the image
           height={200} // specify the height of the image
           priority // preloads the image
-          src={author} />
+          src={author}
+        />
         <h1 className="text-3xl">Esteban Dalel R</h1>
         <h2 className="italic">I make good software and tell bad jokes</h2>
         <p>Find me on:</p>
@@ -23,11 +24,9 @@ export default function IndexPage() {
           <a href="https://www.youtube.com/@estebandalelr">YouTube</a>
         </div>
         <p>
-          <a href="https://blog.estebandalelr.co">
-            Read my blog!
-          </a>
+          <a href="https://blog.estebandalelr.co">Read my blog!</a>
         </p>
       </div>
     </div>
-  )
+  );
 }
