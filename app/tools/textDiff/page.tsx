@@ -37,8 +37,7 @@ export default function TextDiff() {
     setText2(e.target.value);
   };
 
-  const renderTextWithHighlighting = (text: string, isText1: boolean) => {
-    const lines = text.split("\n");
+  const renderTextWithHighlighting = (lines: string[]) => {
     return lines.map((line, index) => {
       const isDifferent = diffLines.has(index);
       return (
@@ -79,19 +78,26 @@ export default function TextDiff() {
           placeholder="Enter second text here..."
         />
       </div>
+
       <div className="flex flex-row gap-4">
         <span> lines: {splitText1.length}</span>
-        <span> diff lines: {diffLines.size}</span>
+        <span> diff lines: {text1 && text2 ? diffLines.size : 0}</span>
         <span> lines: {splitText2.length}</span>
       </div>
-      <div className="flex flex-row gap-4 w-full justify-between">
-        <div className="border-2 border-gray-300 rounded-md p-2 overflow-auto w-1/2">
-          {renderTextWithHighlighting(text1, true)}
+      {text1 && text2 ? (
+        <div className="flex flex-row gap-4 w-full justify-between">
+          <div className="border-2 border-gray-300 rounded-md p-2 overflow-auto w-1/2">
+            {renderTextWithHighlighting(splitText1)}
+          </div>
+          <div className="border-2 border-gray-300 rounded-md p-2 overflow-auto w-1/2">
+            {renderTextWithHighlighting(splitText2)}
+          </div>
         </div>
-        <div className="border-2 border-gray-300 rounded-md p-2 overflow-auto w-1/2">
-          {renderTextWithHighlighting(text2, false)}
+      ) : (
+        <div>
+          <span>Please enter text to see the diff</span>
         </div>
-      </div>
+      )}
     </div>
   );
 }
