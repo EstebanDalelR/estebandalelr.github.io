@@ -70,23 +70,43 @@ export default function TextDiff() {
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
       <h1>Text Diff</h1>
 
-      <div className="flex flex-row gap-4 w-full">
-        <textarea
-          value={text1}
-          rows={10}
-          cols={50}
-          onChange={handleText1Change}
-          className="border-2 border-gray-300 rounded-md p-2 font-mono w-1/2"
-          placeholder="Enter first text here..."
-        />
-        <textarea
-          value={text2}
-          rows={10}
-          cols={50}
-          onChange={handleText2Change}
-          className="border-2 border-gray-300 rounded-md p-2 font-mono w-1/2"
-          placeholder="Enter second text here..."
-        />
+      <div className="flex flex-row gap-4 w-full md:flex-row flex-col">
+        <div className="flex flex-col gap-4 w-full ">
+          <textarea
+            value={text1}
+            rows={10}
+            cols={50}
+            onChange={handleText1Change}
+            className="border-2 border-gray-300 rounded-md p-2 font-mono "
+            placeholder="Enter first text here..."
+          />
+          <button
+            className="border-2 border-gray-300 rounded-md p-2"
+            onClick={() => {
+              navigator.clipboard.writeText(text1);
+            }}
+          >
+            Copy
+          </button>
+        </div>
+        <div className="flex flex-col gap-4 w-full ">
+          <textarea
+            value={text2}
+            rows={10}
+            cols={50}
+            onChange={handleText2Change}
+            className="border-2 border-gray-300 rounded-md p-2 font-mono"
+            placeholder="Enter second text here..."
+          />
+          <button
+            className="border-2 border-gray-300 rounded-md p-2"
+            onClick={() => {
+              navigator.clipboard.writeText(text2);
+            }}
+          >
+            Copy
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-row gap-4">
