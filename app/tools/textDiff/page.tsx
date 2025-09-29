@@ -1,6 +1,35 @@
 "use client";
 import { useState, useEffect } from "react";
 
+const TextWithHighlighting = ({
+  lines,
+  diffLines,
+}: {
+  lines: string[];
+  diffLines: Set<number>;
+}) => {
+  return (
+    <>
+      {lines.map((line, index) => {
+        const isDifferent = diffLines.has(index);
+        return (
+          <div
+            key={index}
+            className={`font-mono whitespace-pre-wrap flex ${
+              isDifferent ? "bg-red-200" : ""
+            }`}
+          >
+            <span className="text-gray-500 pr-2 select-none min-w-[3rem] text-right">
+              {index + 1}
+            </span>
+            <span className="flex-1">{line || " "}</span>
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
 export default function TextDiff() {
   const [text1, setText1] = useState("");
   const [splitText1, setSplitText1] = useState<string[]>([]);
@@ -11,14 +40,10 @@ export default function TextDiff() {
 
   const calculateDiff = () => {
     // go row per row checking diff
-    const rows1 = text1.split("\n");
-    const rows2 = text2.split("\n");
-    setSplitText1(rows1);
-    setSplitText2(rows2);
     const differentLines = new Set<number>();
 
-    for (let i = 0; i < Math.max(rows1.length, rows2.length); i++) {
-      if (rows1[i] !== rows2[i]) {
+    for (let i = 0; i < Math.max(splitText1.length, splitText2.length); i++) {
+      if (splitText1[i] !== splitText2[i]) {
         differentLines.add(i);
       }
     }
@@ -28,32 +53,17 @@ export default function TextDiff() {
   // Real-time diff calculation
   useEffect(() => {
     calculateDiff();
-  }, [text1, text2]);
+  }, [splitText1, splitText2, text1, text2]);
 
   const handleText1Change = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText1(e.target.value);
+    const newValue = e.target.value;
+    setText1(newValue);
+    setSplitText1(newValue.split("\n"));
   };
   const handleText2Change = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText2(e.target.value);
-  };
-
-  const renderTextWithHighlighting = (lines: string[]) => {
-    return lines.map((line, index) => {
-      const isDifferent = diffLines.has(index);
-      return (
-        <div
-          key={index}
-          className={`font-mono whitespace-pre-wrap flex ${
-            isDifferent ? "bg-red-200" : ""
-          }`}
-        >
-          <span className="text-gray-500 pr-2 select-none min-w-[3rem] text-right">
-            {index + 1}
-          </span>
-          <span className="flex-1">{line || " "}</span>
-        </div>
-      );
-    });
+    const newValue = e.target.value;
+    setText2(newValue);
+    setSplitText2(newValue.split("\n"));
   };
 
   return (
@@ -87,10 +97,10 @@ export default function TextDiff() {
       {text1 && text2 ? (
         <div className="flex flex-row gap-4 w-full justify-between">
           <div className="border-2 border-gray-300 rounded-md p-2 overflow-auto w-1/2">
-            {renderTextWithHighlighting(splitText1)}
+            <TextWithHighlighting lines={splitText1} diffLines={diffLines} />
           </div>
           <div className="border-2 border-gray-300 rounded-md p-2 overflow-auto w-1/2">
-            {renderTextWithHighlighting(splitText2)}
+            <TextWithHighlighting lines={splitText2} diffLines={diffLines} />
           </div>
         </div>
       ) : (
