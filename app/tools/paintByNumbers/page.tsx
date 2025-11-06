@@ -44,49 +44,67 @@ export default function PaintByNumbers() {
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     const originalCtx = originalCanvas.getContext("2d");
 
-    if (!ctx || !originalCtx) return;
+    if (!ctx || !originalCtx) {
+      setProcessing(false);
+      return;
+    }
 
     const img = new window.Image();
     img.crossOrigin = "anonymous";
-    img.onload = () => {
-      // Set canvas dimensions
-      const maxWidth = 800;
-      const scale = Math.min(1, maxWidth / img.width);
-      const width = img.width * scale;
-      const height = img.height * scale;
 
-      canvas.width = width;
-      canvas.height = height;
-      originalCanvas.width = width;
-      originalCanvas.height = height;
-
-      // Draw original image
-      originalCtx.drawImage(img, 0, 0, width, height);
-      ctx.drawImage(img, 0, 0, width, height);
-
-      // Get image data
-      const imageData = ctx.getImageData(0, 0, width, height);
-      const pixels = imageData.data;
-
-      // Perform color quantization using k-means
-      const colors = quantizeColors(pixels, numColors);
-      setColorPalette(colors);
-
-      // Create paint by numbers version
-      const paintByNumbersData = createPaintByNumbers(
-        pixels,
-        colors,
-        width,
-        height
-      );
-
-      // Draw the result
-      ctx.putImageData(paintByNumbersData.imageData, 0, 0);
-
-      // Draw numbers on regions
-      drawNumbers(ctx, paintByNumbersData.regions, colors);
-
+    img.onerror = () => {
+      console.error("Failed to load image");
       setProcessing(false);
+    };
+
+    img.onload = () => {
+      try {
+        // Set canvas dimensions
+        const maxWidth = 800;
+        const scale = Math.min(1, maxWidth / img.width);
+        const width = img.width * scale;
+        const height = img.height * scale;
+
+        canvas.width = width;
+        canvas.height = height;
+        originalCanvas.width = width;
+        originalCanvas.height = height;
+
+        // Draw original image
+        originalCtx.drawImage(img, 0, 0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Get image data
+        const imageData = ctx.getImageData(0, 0, width, height);
+        const pixels = imageData.data;
+
+        // Perform color quantization using k-means
+        const colors = quantizeColors(pixels, numColors);
+
+        // Convert colors to grayscale shades for paint by numbers
+        const grayscaleColors = convertToGrayscale(colors);
+        setColorPalette(colors); // Keep original colors for palette display
+
+        // Create paint by numbers version with grayscale
+        const paintByNumbersData = createPaintByNumbers(
+          pixels,
+          colors,
+          grayscaleColors,
+          width,
+          height
+        );
+
+        // Draw the result
+        ctx.putImageData(paintByNumbersData.imageData, 0, 0);
+
+        // Draw numbers on regions
+        drawNumbers(ctx, paintByNumbersData.regions, grayscaleColors);
+
+        setProcessing(false);
+      } catch (error) {
+        console.error("Error processing image:", error);
+        setProcessing(false);
+      }
     };
     img.src = image;
   };
@@ -156,9 +174,36 @@ export default function PaintByNumbers() {
     );
   };
 
+  const convertToGrayscale = (colors: Color[]): Color[] => {
+    // Sort colors by brightness
+    const colorsBrightness = colors.map((color, index) => ({
+      color,
+      brightness: (color.r * 299 + color.g * 587 + color.b * 114) / 1000,
+      index,
+    }));
+
+    colorsBrightness.sort((a, b) => a.brightness - b.brightness);
+
+    // Create evenly spaced grayscale values
+    const grayscaleColors: Color[] = new Array(colors.length);
+    const step = 255 / (colors.length - 1);
+
+    colorsBrightness.forEach((item, i) => {
+      const grayValue = Math.round(i * step);
+      grayscaleColors[item.index] = {
+        r: grayValue,
+        g: grayValue,
+        b: grayValue,
+      };
+    });
+
+    return grayscaleColors;
+  };
+
   const createPaintByNumbers = (
     pixels: Uint8ClampedArray,
     colors: Color[],
+    grayscaleColors: Color[],
     width: number,
     height: number
   ) => {
@@ -181,10 +226,10 @@ export default function PaintByNumbers() {
         }
       }
 
-      // Set pixel to quantized color
-      imageData.data[i] = colors[colorIndex].r;
-      imageData.data[i + 1] = colors[colorIndex].g;
-      imageData.data[i + 2] = colors[colorIndex].b;
+      // Set pixel to grayscale color
+      imageData.data[i] = grayscaleColors[colorIndex].r;
+      imageData.data[i + 1] = grayscaleColors[colorIndex].g;
+      imageData.data[i + 2] = grayscaleColors[colorIndex].b;
       imageData.data[i + 3] = 255;
 
       // Track regions for number placement
@@ -325,7 +370,7 @@ export default function PaintByNumbers() {
     regions: Array<{ colorIndex: number; x: number; y: number }>,
     colors: Color[]
   ) => {
-    ctx.font = "bold 14px Arial";
+    ctx.font = "bold 18px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
@@ -333,13 +378,21 @@ export default function PaintByNumbers() {
       const color = colors[region.colorIndex];
       const brightness = (color.r * 299 + color.g * 587 + color.b * 114) / 1000;
 
-      // Choose contrasting color for text
-      ctx.fillStyle = brightness > 128 ? "#000000" : "#FFFFFF";
-      ctx.strokeStyle = brightness > 128 ? "#FFFFFF" : "#000000";
-      ctx.lineWidth = 3;
-
+      // Choose contrasting color for text with strong outline
       const number = (region.colorIndex + 1).toString();
+
+      // Draw thick white outline
+      ctx.strokeStyle = brightness > 128 ? "#FFFFFF" : "#000000";
+      ctx.lineWidth = 5;
       ctx.strokeText(number, region.x, region.y);
+
+      // Draw thin contrasting outline
+      ctx.strokeStyle = brightness > 128 ? "#000000" : "#FFFFFF";
+      ctx.lineWidth = 2;
+      ctx.strokeText(number, region.x, region.y);
+
+      // Fill with contrasting color
+      ctx.fillStyle = brightness > 128 ? "#000000" : "#FFFFFF";
       ctx.fillText(number, region.x, region.y);
     });
   };
