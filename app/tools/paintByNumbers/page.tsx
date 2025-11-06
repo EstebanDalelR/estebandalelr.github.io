@@ -80,25 +80,25 @@ export default function PaintByNumbers() {
 
         // Perform color quantization using k-means
         const colors = quantizeColors(pixels, numColors);
-
-        // Convert colors to grayscale shades for paint by numbers
-        const grayscaleColors = convertToGrayscale(colors);
         setColorPalette(colors); // Keep original colors for palette display
 
-        // Create paint by numbers version with grayscale
+        // Create paint by numbers version with outlines only
         const paintByNumbersData = createPaintByNumbers(
           pixels,
           colors,
-          grayscaleColors,
           width,
           height
         );
 
-        // Draw the result
-        ctx.putImageData(paintByNumbersData.imageData, 0, 0);
+        // Fill canvas with white
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, width, height);
+
+        // Draw borders between regions
+        drawBorders(ctx, paintByNumbersData.colorMap, width, height);
 
         // Draw numbers on regions
-        drawNumbers(ctx, paintByNumbersData.regions, grayscaleColors);
+        drawNumbers(ctx, paintByNumbersData.regions, colors);
 
         setProcessing(false);
       } catch (error) {
@@ -174,40 +174,13 @@ export default function PaintByNumbers() {
     );
   };
 
-  const convertToGrayscale = (colors: Color[]): Color[] => {
-    // Sort colors by brightness
-    const colorsBrightness = colors.map((color, index) => ({
-      color,
-      brightness: (color.r * 299 + color.g * 587 + color.b * 114) / 1000,
-      index,
-    }));
-
-    colorsBrightness.sort((a, b) => a.brightness - b.brightness);
-
-    // Create evenly spaced grayscale values
-    const grayscaleColors: Color[] = new Array(colors.length);
-    const step = 255 / (colors.length - 1);
-
-    colorsBrightness.forEach((item, i) => {
-      const grayValue = Math.round(i * step);
-      grayscaleColors[item.index] = {
-        r: grayValue,
-        g: grayValue,
-        b: grayValue,
-      };
-    });
-
-    return grayscaleColors;
-  };
-
   const createPaintByNumbers = (
     pixels: Uint8ClampedArray,
     colors: Color[],
-    grayscaleColors: Color[],
     width: number,
     height: number
   ) => {
-    const imageData = new ImageData(width, height);
+    const colorMap = new Uint8Array(width * height);
     const regions: Map<number, { x: number; y: number; count: number }> =
       new Map();
 
@@ -226,14 +199,11 @@ export default function PaintByNumbers() {
         }
       }
 
-      // Set pixel to grayscale color
-      imageData.data[i] = grayscaleColors[colorIndex].r;
-      imageData.data[i + 1] = grayscaleColors[colorIndex].g;
-      imageData.data[i + 2] = grayscaleColors[colorIndex].b;
-      imageData.data[i + 3] = 255;
+      // Store color index in map
+      const pixelIndex = i / 4;
+      colorMap[pixelIndex] = colorIndex;
 
       // Track regions for number placement
-      const pixelIndex = i / 4;
       const x = pixelIndex % width;
       const y = Math.floor(pixelIndex / width);
 
@@ -247,28 +217,17 @@ export default function PaintByNumbers() {
       region.count += 1;
     }
 
-    // Calculate centroid for each region
-    const regionCentroids: Array<{ colorIndex: number; x: number; y: number }> =
-      [];
-    regions.forEach((region, colorIndex) => {
-      regionCentroids.push({
-        colorIndex,
-        x: Math.floor(region.x / region.count),
-        y: Math.floor(region.y / region.count),
-      });
-    });
-
     // Find multiple regions for each color using flood fill sampling
-    const detailedRegions = findRegions(imageData, width, height, colors);
+    const detailedRegions = findRegions(colorMap, width, height, colors.length);
 
-    return { imageData, regions: detailedRegions };
+    return { colorMap, regions: detailedRegions };
   };
 
   const findRegions = (
-    imageData: ImageData,
+    colorMap: Uint8Array,
     width: number,
     height: number,
-    colors: Color[]
+    numColors: number
   ) => {
     const visited = new Array(width * height).fill(false);
     const regions: Array<{ colorIndex: number; x: number; y: number }> = [];
@@ -280,33 +239,17 @@ export default function PaintByNumbers() {
       for (let x = 0; x < width; x += sampleStep) {
         const index = y * width + x;
         if (!visited[index]) {
-          const pixelIndex = index * 4;
-          const pixel = {
-            r: imageData.data[pixelIndex],
-            g: imageData.data[pixelIndex + 1],
-            b: imageData.data[pixelIndex + 2],
-          };
-
-          // Find which color this pixel belongs to
-          let colorIndex = 0;
-          let minDist = Infinity;
-          for (let i = 0; i < colors.length; i++) {
-            const dist = colorDistance(pixel, colors[i]);
-            if (dist < minDist) {
-              minDist = dist;
-              colorIndex = i;
-            }
-          }
+          const colorIndex = colorMap[index];
 
           // Flood fill to mark this region
           const regionSize = floodFill(
-            imageData,
+            colorMap,
             visited,
             x,
             y,
             width,
             height,
-            pixel
+            colorIndex
           );
 
           // Only add region if it's significant size
@@ -321,19 +264,18 @@ export default function PaintByNumbers() {
   };
 
   const floodFill = (
-    imageData: ImageData,
+    colorMap: Uint8Array,
     visited: boolean[],
     startX: number,
     startY: number,
     width: number,
     height: number,
-    targetColor: Color
+    targetColorIndex: number
   ): number => {
     const stack: Array<{ x: number; y: number }> = [
       { x: startX, y: startY },
     ];
     let size = 0;
-    const tolerance = 10;
 
     while (stack.length > 0 && size < 10000) {
       const { x, y } = stack.pop()!;
@@ -343,14 +285,7 @@ export default function PaintByNumbers() {
       const index = y * width + x;
       if (visited[index]) continue;
 
-      const pixelIndex = index * 4;
-      const pixel = {
-        r: imageData.data[pixelIndex],
-        g: imageData.data[pixelIndex + 1],
-        b: imageData.data[pixelIndex + 2],
-      };
-
-      if (colorDistance(pixel, targetColor) > tolerance) continue;
+      if (colorMap[index] !== targetColorIndex) continue;
 
       visited[index] = true;
       size++;
@@ -365,34 +300,65 @@ export default function PaintByNumbers() {
     return size;
   };
 
+  const drawBorders = (
+    ctx: CanvasRenderingContext2D,
+    colorMap: Uint8Array,
+    width: number,
+    height: number
+  ) => {
+    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 2;
+
+    // Draw borders where adjacent pixels have different colors
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const index = y * width + x;
+        const currentColor = colorMap[index];
+
+        // Check right neighbor
+        if (x < width - 1) {
+          const rightIndex = index + 1;
+          if (colorMap[rightIndex] !== currentColor) {
+            ctx.beginPath();
+            ctx.moveTo(x + 1, y);
+            ctx.lineTo(x + 1, y + 1);
+            ctx.stroke();
+          }
+        }
+
+        // Check bottom neighbor
+        if (y < height - 1) {
+          const bottomIndex = index + width;
+          if (colorMap[bottomIndex] !== currentColor) {
+            ctx.beginPath();
+            ctx.moveTo(x, y + 1);
+            ctx.lineTo(x + 1, y + 1);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+  };
+
   const drawNumbers = (
     ctx: CanvasRenderingContext2D,
     regions: Array<{ colorIndex: number; x: number; y: number }>,
     colors: Color[]
   ) => {
-    ctx.font = "bold 18px Arial";
+    ctx.font = "bold 16px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
     regions.forEach((region) => {
-      const color = colors[region.colorIndex];
-      const brightness = (color.r * 299 + color.g * 587 + color.b * 114) / 1000;
-
-      // Choose contrasting color for text with strong outline
       const number = (region.colorIndex + 1).toString();
 
-      // Draw thick white outline
-      ctx.strokeStyle = brightness > 128 ? "#FFFFFF" : "#000000";
-      ctx.lineWidth = 5;
+      // Draw white outline for visibility
+      ctx.strokeStyle = "#FFFFFF";
+      ctx.lineWidth = 4;
       ctx.strokeText(number, region.x, region.y);
 
-      // Draw thin contrasting outline
-      ctx.strokeStyle = brightness > 128 ? "#000000" : "#FFFFFF";
-      ctx.lineWidth = 2;
-      ctx.strokeText(number, region.x, region.y);
-
-      // Fill with contrasting color
-      ctx.fillStyle = brightness > 128 ? "#000000" : "#FFFFFF";
+      // Draw black text
+      ctx.fillStyle = "#000000";
       ctx.fillText(number, region.x, region.y);
     });
   };
