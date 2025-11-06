@@ -6,6 +6,7 @@ export default function EmbroideryTracer() {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [colorSvg, setColorSvg] = useState<string | null>(null);
   const [monochromesvg, setMonochromeSvg] = useState<string | null>(null);
+  const [lineSvg, setLineSvg] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -52,6 +53,7 @@ export default function EmbroideryTracer() {
     setIsProcessing(true);
     setColorSvg(null);
     setMonochromeSvg(null);
+    setLineSvg(null);
 
     // Process for color trace
     const colorOptions = {
@@ -83,11 +85,28 @@ export default function EmbroideryTracer() {
       blurdelta: 20,
     };
 
+    // Process for line art (edges only)
+    const lineOptions = {
+      ltres: 0.01,
+      qtres: 1,
+      pathomit: 8,
+      colorsampling: 0,
+      numberofcolors: 2,
+      mincolorratio: 0,
+      colorquantcycles: 3,
+      scale: 1,
+      strokewidth: 2,
+      linefilter: true,
+      blurradius: 2,
+      blurdelta: 20,
+    };
+
     let colorDone = false;
     let monochromeDone = false;
+    let lineDone = false;
 
     const checkComplete = () => {
-      if (colorDone && monochromeDone) {
+      if (colorDone && monochromeDone && lineDone) {
         setIsProcessing(false);
       }
     };
@@ -114,6 +133,17 @@ export default function EmbroideryTracer() {
         },
         monochromeOptions
       );
+
+      // Generate line art SVG with callback
+      ImageTracer.imageToSVG(
+        imageDataUrl,
+        (svgString: string) => {
+          setLineSvg(svgString);
+          lineDone = true;
+          checkComplete();
+        },
+        lineOptions
+      );
     } catch (error) {
       console.error("Error processing image:", error);
       alert("Error processing image. Please try a different image.");
@@ -137,6 +167,7 @@ export default function EmbroideryTracer() {
     setUploadedImage(null);
     setColorSvg(null);
     setMonochromeSvg(null);
+    setLineSvg(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -149,8 +180,7 @@ export default function EmbroideryTracer() {
           Embroidery Trace Generator
         </h1>
         <p className="text-center text-gray-600 mb-6">
-          Upload an image to generate traced SVG paths for embroidery - both
-          color and monochrome
+          Upload an image to generate traced SVG paths for embroidery - color, monochrome, and line art
         </p>
 
         {/* Upload Area */}
@@ -278,6 +308,29 @@ export default function EmbroideryTracer() {
                 </div>
               </div>
             )}
+
+            {/* Line Art Trace */}
+            {lineSvg && (
+              <div className="border-2 border-gray-300 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-3">
+                  <h2 className="text-xl font-semibold">Line Art (Outlines Only)</h2>
+                  <button
+                    onClick={() =>
+                      downloadSvg(lineSvg, "embroidery-lines.svg")
+                    }
+                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                  >
+                    Download Line Art SVG
+                  </button>
+                </div>
+                <div className="bg-white p-4 rounded flex justify-center">
+                  <div
+                    dangerouslySetInnerHTML={{ __html: lineSvg }}
+                    className="max-w-full"
+                  />
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -288,8 +341,7 @@ export default function EmbroideryTracer() {
         <ul className="list-disc list-inside space-y-1 text-gray-700">
           <li>Upload an image by clicking or dragging it into the upload area</li>
           <li>
-            The image will be automatically processed to create both color and
-            monochrome traces
+            The image will be automatically processed to create three versions: color, monochrome, and line art
           </li>
           <li>
             Color trace preserves the original colors (great for colorful
@@ -298,6 +350,9 @@ export default function EmbroideryTracer() {
           <li>
             Monochrome trace converts to black and white (perfect for single-color
             embroidery)
+          </li>
+          <li>
+            Line art shows only the outlines and edges (ideal for outline stitching)
           </li>
           <li>Download the SVG files to use with your embroidery software</li>
           <li>
