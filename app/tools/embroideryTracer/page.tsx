@@ -53,61 +53,72 @@ export default function EmbroideryTracer() {
     setColorSvg(null);
     setMonochromeSvg(null);
 
-    // Create an image element to load the image
-    const img = new Image();
-    img.onload = () => {
-      // Process for color trace
-      const colorOptions = {
-        ltres: 0.01,
-        qtres: 1,
-        pathomit: 8,
-        colorsampling: 1,
-        numberofcolors: 16,
-        mincolorratio: 0.02,
-        colorquantcycles: 3,
-        scale: 1,
-        strokewidth: 1,
-        blurradius: 0,
-        blurdelta: 20,
-      };
+    // Process for color trace
+    const colorOptions = {
+      ltres: 0.01,
+      qtres: 1,
+      pathomit: 8,
+      colorsampling: 1,
+      numberofcolors: 16,
+      mincolorratio: 0.02,
+      colorquantcycles: 3,
+      scale: 1,
+      strokewidth: 1,
+      blurradius: 0,
+      blurdelta: 20,
+    };
 
-      // Process for monochrome trace
-      const monochromeOptions = {
-        ltres: 0.01,
-        qtres: 1,
-        pathomit: 8,
-        colorsampling: 0,
-        numberofcolors: 2,
-        mincolorratio: 0.02,
-        colorquantcycles: 3,
-        scale: 1,
-        strokewidth: 1,
-        blurradius: 0,
-        blurdelta: 20,
-      };
+    // Process for monochrome trace
+    const monochromeOptions = {
+      ltres: 0.01,
+      qtres: 1,
+      pathomit: 8,
+      colorsampling: 0,
+      numberofcolors: 2,
+      mincolorratio: 0.02,
+      colorquantcycles: 3,
+      scale: 1,
+      strokewidth: 1,
+      blurradius: 0,
+      blurdelta: 20,
+    };
 
-      try {
-        // Generate color SVG
-        const colorSvgString = ImageTracer.imageToSVG(
-          imageDataUrl,
-          colorOptions
-        );
-        setColorSvg(colorSvgString);
+    let colorDone = false;
+    let monochromeDone = false;
 
-        // Generate monochrome SVG
-        const monochromeSvgString = ImageTracer.imageToSVG(
-          imageDataUrl,
-          monochromeOptions
-        );
-        setMonochromeSvg(monochromeSvgString);
-      } catch (error) {
-        console.error("Error processing image:", error);
-        alert("Error processing image. Please try a different image.");
-      } finally {
+    const checkComplete = () => {
+      if (colorDone && monochromeDone) {
         setIsProcessing(false);
       }
     };
-    img.src = imageDataUrl;
+
+    try {
+      // Generate color SVG with callback
+      ImageTracer.imageToSVG(
+        imageDataUrl,
+        (svgString: string) => {
+          setColorSvg(svgString);
+          colorDone = true;
+          checkComplete();
+        },
+        colorOptions
+      );
+
+      // Generate monochrome SVG with callback
+      ImageTracer.imageToSVG(
+        imageDataUrl,
+        (svgString: string) => {
+          setMonochromeSvg(svgString);
+          monochromeDone = true;
+          checkComplete();
+        },
+        monochromeOptions
+      );
+    } catch (error) {
+      console.error("Error processing image:", error);
+      alert("Error processing image. Please try a different image.");
+      setIsProcessing(false);
+    }
   };
 
   const downloadSvg = (svgString: string, filename: string) => {
