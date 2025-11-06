@@ -9,6 +9,7 @@
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.6",
     "@ffmpeg/util": "^0.12.1",
+    "imagetracerjs": "^1.2.6",
     "next": "^14",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
