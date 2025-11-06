@@ -107,7 +107,7 @@ export default function DeepGame() {
     setIsFlipped(true);
 
     // Mark card as used
-    setUsedCards(prev => new Set([...prev, selectedCard.id]));
+    setUsedCards(prev => new Set([...Array.from(prev), selectedCard.id]));
   };
 
   const resetGame = () => {
