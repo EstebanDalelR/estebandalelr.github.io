@@ -70,12 +70,11 @@ export default function PaintByNumbers() {
         originalCanvas.width = width;
         originalCanvas.height = height;
 
-        // Draw original image
+        // Draw original image to original canvas only
         originalCtx.drawImage(img, 0, 0, width, height);
-        ctx.drawImage(img, 0, 0, width, height);
 
-        // Get image data
-        const imageData = ctx.getImageData(0, 0, width, height);
+        // Get image data from original canvas
+        const imageData = originalCtx.getImageData(0, 0, width, height);
         const pixels = imageData.data;
 
         // Perform color quantization using k-means
@@ -90,7 +89,7 @@ export default function PaintByNumbers() {
           height
         );
 
-        // Fill canvas with white
+        // Fill paint-by-numbers canvas with white background
         ctx.fillStyle = "#FFFFFF";
         ctx.fillRect(0, 0, width, height);
 
