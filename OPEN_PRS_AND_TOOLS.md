@@ -155,20 +155,39 @@
 
 ---
 
+## Tools Index Page
+
+### `/tools` - Tools Landing Page
+- **Location**: `app/tools/page.tsx`
+- **Status**: ✅ Available
+- **Description**: Central hub for all available tools
+- **Features**:
+  - **Available Tools Section**: Cards for active tools with direct links
+  - **Coming Soon Section**: Preview of tools under development
+  - **Tool Cards**: Each card displays icon, description, status, and key features
+  - **Responsive Grid**: Adapts from 1 to 3 columns based on screen size
+  - **Hover Effects**: Interactive cards with smooth transitions
+  - **Status Badges**: Clear visual indicators (Available/Coming Soon)
+- **UI Theme**: Slate/blue gradient (from-slate-50 to-blue-50)
+- **Design**: Clean, modern cards with icons and feature lists
+
+---
+
 ## Summary After All PRs Merge
 
-### Total Routes: 7
+### Total Routes: 8
 
 #### Main Routes (2)
 1. **`/`** - Home page with interactive book design
 2. **`/money`** - Group expense tracker and bill splitter
 
-#### Tool Routes (5)
-1. **`/tools/textDiff`** - Text comparison tool ✅ (merged)
-2. **`/tools/imageTrace`** - Laser etching tracer ✅ (merged)
-3. **`/tools/embroideryTracer`** - Embroidery SVG generator (pending)
-4. **`/tools/paintByNumbers`** - Paint-by-numbers converter (pending)
-5. **`/tools/qr`** - QR code generator (pending)
+#### Tools Section (6)
+1. **`/tools`** - Tools index/landing page ✅ (available)
+2. **`/tools/textDiff`** - Text comparison tool ✅ (merged)
+3. **`/tools/imageTrace`** - Laser etching tracer ✅ (merged)
+4. **`/tools/embroideryTracer`** - Embroidery SVG generator (pending)
+5. **`/tools/paintByNumbers`** - Paint-by-numbers converter (pending)
+6. **`/tools/qr`** - QR code generator (pending)
 
 ### Dependencies to be Added
 - **`imagetracerjs`** - For embroidery tracing (embroidery-trace-uploader PR)
@@ -190,9 +209,11 @@
 - All tools use client-side processing (no server required)
 - All tools feature modern, gradient-based UI designs
 - Most tools include drag-and-drop file upload functionality
+- **NEW**: `/tools` index page created to serve as a central hub for all tools
 
 ---
 
 **Last Updated**: 2025-11-14
 **Repository**: estebandalelr.github.io
 **Current Branch**: claude/list-open-prs-tools-011CUtorMGX5X9g4GSu8VZt5
+**Latest Addition**: Tools index page (`app/tools/page.tsx`)
