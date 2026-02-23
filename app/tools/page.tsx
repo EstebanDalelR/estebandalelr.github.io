@@ -25,6 +25,12 @@ const tools = [
     href: "/tools/swedish",
     color: "from-blue-500 to-purple-500",
   },
+  {
+    name: "Paint by Numbers",
+    description: "Upload an image and convert it to a paint by numbers artwork.",
+    href: "/tools/paintByNumbers",
+    color: "from-orange-500 to-pink-500",
+  },
 ];
 
 export default function ToolsIndex() {
