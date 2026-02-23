@@ -53,7 +53,7 @@ export default function TextDiff() {
   // Real-time diff calculation
   useEffect(() => {
     calculateDiff();
-  }, [splitText1, splitText2, text1, text2]);
+  }, [splitText1, splitText2]);
 
   const handleText1Change = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
@@ -70,7 +70,7 @@ export default function TextDiff() {
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
       <h1>Text Diff</h1>
 
-      <div className="flex flex-row gap-4 w-full md:flex-row flex-col">
+      <div className="flex flex-col md:flex-row gap-4 w-full">
         <div className="flex flex-col gap-4 w-full ">
           <textarea
             value={text1}

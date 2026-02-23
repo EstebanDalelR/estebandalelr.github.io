@@ -55,6 +55,8 @@ export default function ASLLearning() {
   const [quizAttempts, setQuizAttempts] = useState(0);
   const [usedCards, setUsedCards] = useState<Set<string>>(new Set());
   const [includeNumbers, setIncludeNumbers] = useState(false);
+  const [lastAnswerCorrect, setLastAnswerCorrect] = useState<boolean | null>(null);
+  const [quizOptions, setQuizOptions] = useState<string[]>([]);
 
   const allSigns = { ...ASL_ALPHABET, ...(includeNumbers ? ASL_NUMBERS : {}) };
   const allKeys = Object.keys(allSigns);
@@ -67,31 +69,41 @@ export default function ASLLearning() {
 
   const getRandomCard = () => {
     const availableKeys = allKeys.filter((key) => !usedCards.has(key));
+    let nextCard: string;
 
     if (availableKeys.length === 0) {
       // Reset if all cards have been used
       setUsedCards(new Set());
-      const randomKey = allKeys[Math.floor(Math.random() * allKeys.length)];
-      setCurrentCard(randomKey);
-      setUsedCards(new Set([randomKey]));
+      nextCard = allKeys[Math.floor(Math.random() * allKeys.length)];
+      setUsedCards(new Set([nextCard]));
     } else {
-      const randomKey = availableKeys[Math.floor(Math.random() * availableKeys.length)];
-      setCurrentCard(randomKey);
-      setUsedCards(new Set([...Array.from(usedCards), randomKey]));
+      nextCard = availableKeys[Math.floor(Math.random() * availableKeys.length)];
+      setUsedCards(new Set([...Array.from(usedCards), nextCard]));
     }
+    setCurrentCard(nextCard);
     setShowAnswer(false);
+    setLastAnswerCorrect(null);
+
+    // Generate quiz options with the correct answer included
+    const options = allKeys
+      .filter((key) => key !== nextCard)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 5);
+    options.push(nextCard);
+    options.sort(() => Math.random() - 0.5);
+    setQuizOptions(options);
   };
 
   const handleQuizAnswer = (selectedLetter: string) => {
     setQuizAttempts(quizAttempts + 1);
-    if (selectedLetter === currentCard) {
+    const isCorrect = selectedLetter === currentCard;
+    setLastAnswerCorrect(isCorrect);
+    setShowAnswer(true);
+    if (isCorrect) {
       setScore(score + 1);
-      setShowAnswer(true);
       setTimeout(() => {
         getRandomCard();
       }, 1500);
-    } else {
-      setShowAnswer(true);
     }
   };
 
@@ -189,14 +201,6 @@ export default function ASLLearning() {
   );
 
   const renderQuiz = () => {
-    const quizOptions = allKeys
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 6);
-
-    if (!quizOptions.includes(currentCard)) {
-      quizOptions[Math.floor(Math.random() * quizOptions.length)] = currentCard;
-    }
-
     return (
       <div className="max-w-2xl mx-auto">
         <div className="bg-gray-800 rounded-lg p-8 shadow-xl">
@@ -219,12 +223,14 @@ export default function ASLLearning() {
           {showAnswer && (
             <div
               className={`mb-4 p-4 rounded-lg text-center font-bold text-lg ${
-                showAnswer
+                lastAnswerCorrect
                   ? "bg-green-600 text-white"
                   : "bg-red-600 text-white"
               }`}
             >
-              {showAnswer && `Correct! This is "${currentCard}"`}
+              {lastAnswerCorrect
+                ? `Correct! This is "${currentCard}"`
+                : `Wrong! The correct answer is "${currentCard}"`}
             </div>
           )}
 
@@ -240,6 +246,15 @@ export default function ASLLearning() {
               </button>
             ))}
           </div>
+
+          {showAnswer && !lastAnswerCorrect && (
+            <button
+              onClick={getRandomCard}
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors mb-4"
+            >
+              Next Question
+            </button>
+          )}
 
           <button
             onClick={resetQuiz}
