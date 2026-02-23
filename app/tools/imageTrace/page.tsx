@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 export default function ImageTrace() {
   const [image, setImage] = useState<string | null>(null);
@@ -11,13 +11,6 @@ export default function ImageTrace() {
   const [processing, setProcessing] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  // Process image when parameters change
-  useEffect(() => {
-    if (image) {
-      processImage();
-    }
-  }, [image, threshold, edgeStrength, invert]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -46,7 +39,7 @@ export default function ImageTrace() {
     e.preventDefault();
   };
 
-  const processImage = () => {
+  const processImage = useCallback(() => {
     if (!image || !canvasRef.current) return;
 
     setProcessing(true);
@@ -102,7 +95,14 @@ export default function ImageTrace() {
     };
 
     img.src = image;
-  };
+  }, [image, threshold, edgeStrength, invert]);
+
+  // Process image when parameters change
+  useEffect(() => {
+    if (image) {
+      processImage();
+    }
+  }, [image, processImage]);
 
   const sobelEdgeDetection = (
     pixels: Uint8ClampedArray,

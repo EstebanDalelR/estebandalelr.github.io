@@ -108,9 +108,11 @@ const BrailleCell = ({ dots, size = "medium" }: BrailleCellProps) => {
   const dotSize = sizeClasses[size];
   const gap = gapClasses[size];
 
+  // Braille dots are numbered in columns: 1,2,3 (left) and 4,5,6 (right)
+  // Grid renders row-by-row, so order must be [1,4,2,5,3,6]
   return (
     <div className={`grid grid-cols-2 ${gap} p-2`}>
-      {[1, 2, 3, 4, 5, 6].map((dotNum) => (
+      {[1, 4, 2, 5, 3, 6].map((dotNum) => (
         <div
           key={dotNum}
           className={`${dotSize} rounded-full ${
@@ -266,7 +268,7 @@ export default function BrailleLearning() {
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
                   <div className="grid grid-cols-2 gap-2 p-3 bg-white rounded-lg">
-                    {[1, 2, 3, 4, 5, 6].map((num) => (
+                    {[1, 4, 2, 5, 3, 6].map((num) => (
                       <div
                         key={num}
                         className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold"
@@ -388,7 +390,7 @@ export default function BrailleLearning() {
 
               <div className="inline-block bg-gray-50 rounded-lg p-6 mb-6">
                 <div className="grid grid-cols-2 gap-3">
-                  {[1, 2, 3, 4, 5, 6].map((dotNum) => (
+                  {[1, 4, 2, 5, 3, 6].map((dotNum) => (
                     <button
                       key={dotNum}
                       onClick={() => toggleDot(dotNum)}

@@ -1,5 +1,15 @@
-import Head from "next/head";
+import type { Metadata } from "next";
 import "../styles/index.css";
+
+export const metadata: Metadata = {
+  title: "Esteban Dalel R",
+  description: "I make good software and tell bad jokes",
+  openGraph: {
+    title: "Esteban Dalel R",
+    type: "website",
+    images: ["https://www.estebandalelr.co/estebandalelr.jpg"],
+  },
+};
 
 export default function RootLayout({
   children,
@@ -8,23 +18,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-
-        <title>Esteban Dalel R</title>
-        <meta
-          name="description"
-          content="I make good software and tell bad jokes"
-        />
-
-        <meta property="og:title" content="Esteban Dalel R" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:image"
-          content="https://www.estebandalelr.co/estebandalelr.jpg"
-        />
-      </Head>
       <body>{children}</body>
     </html>
   );

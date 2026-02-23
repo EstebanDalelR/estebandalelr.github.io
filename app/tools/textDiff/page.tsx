@@ -70,7 +70,7 @@ export default function TextDiff() {
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
       <h1>Text Diff</h1>
 
-      <div className="flex flex-row gap-4 w-full md:flex-row flex-col">
+      <div className="flex flex-col gap-4 w-full md:flex-row">
         <div className="flex flex-col gap-4 w-full ">
           <textarea
             value={text1}
