@@ -38,8 +38,8 @@ export default function TextDiff() {
 
   const [diffLines, setDiffLines] = useState<Set<number>>(new Set());
 
-  const calculateDiff = () => {
-    // go row per row checking diff
+  // Real-time diff calculation
+  useEffect(() => {
     const differentLines = new Set<number>();
 
     for (let i = 0; i < Math.max(splitText1.length, splitText2.length); i++) {
@@ -48,12 +48,7 @@ export default function TextDiff() {
       }
     }
     setDiffLines(differentLines);
-  };
-
-  // Real-time diff calculation
-  useEffect(() => {
-    calculateDiff();
-  }, [splitText1, splitText2, text1, text2]);
+  }, [splitText1, splitText2]);
 
   const handleText1Change = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
@@ -70,7 +65,7 @@ export default function TextDiff() {
     <div className="w-full h-full flex flex-col items-center justify-center gap-4">
       <h1>Text Diff</h1>
 
-      <div className="flex flex-row gap-4 w-full md:flex-row flex-col">
+      <div className="flex flex-col gap-4 w-full md:flex-row">
         <div className="flex flex-col gap-4 w-full ">
           <textarea
             value={text1}
