@@ -31,6 +31,66 @@ const tools = [
     href: "/tools/paintByNumbers",
     color: "from-orange-500 to-pink-500",
   },
+  {
+    name: "ASL Learning",
+    description: "Learn American Sign Language alphabet and numbers.",
+    href: "/tools/asl",
+    color: "from-violet-500 to-purple-600",
+  },
+  {
+    name: "Braille",
+    description: "Interactive Braille alphabet learning tool.",
+    href: "/tools/braille",
+    color: "from-amber-500 to-yellow-600",
+  },
+  {
+    name: "Cursive",
+    description: "Practice cursive handwriting with letters and common words.",
+    href: "/tools/cursive",
+    color: "from-rose-400 to-pink-500",
+  },
+  {
+    name: "Embroidery Tracer",
+    description: "Generate traced SVG paths from images for embroidery patterns.",
+    href: "/tools/embroideryTracer",
+    color: "from-fuchsia-500 to-pink-600",
+  },
+  {
+    name: "Morse Code",
+    description: "Learn, practice, and master Morse code.",
+    href: "/tools/morse",
+    color: "from-cyan-500 to-blue-500",
+  },
+  {
+    name: "Piano",
+    description: "Learn piano with an interactive keyboard, chords, and melodies.",
+    href: "/tools/piano",
+    color: "from-gray-700 to-gray-900",
+  },
+  {
+    name: "Portuguese Learning",
+    description: "Master Portuguese vocabulary, verbs, and common phrases.",
+    href: "/tools/portuguese",
+    color: "from-green-500 to-emerald-600",
+  },
+  {
+    name: "QR Code Generator",
+    description: "Create custom QR codes from text or URLs.",
+    href: "/tools/qr",
+    color: "from-indigo-500 to-blue-600",
+  },
+  {
+    name: "Video Converter",
+    description: "Convert videos between formats like AVI, MP4, MOV, and WebM.",
+    href: "/tools/videoConverter",
+    color: "from-red-500 to-orange-500",
+  },
+  {
+    name: "Stop Motion Editor",
+    description: "Upload images to create a stop motion animation with configurable timing.",
+    href: "/tools/videoEditor",
+    color: "from-teal-500 to-cyan-600",
+  },
 ];
 
 export default function ToolsIndex() {
@@ -44,7 +104,7 @@ export default function ToolsIndex() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tools.map((tool) => (
             <Link
               key={tool.href}
