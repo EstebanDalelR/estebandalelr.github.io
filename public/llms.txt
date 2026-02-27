@@ -1,0 +1,29 @@
+# estebandalelr.co
+
+> Personal website and tool collection by Esteban Dalel R.
+
+## About
+
+Personal website with a collection of free, browser-based tools. All tools run entirely in the browser with no server-side processing — your files and data never leave your device.
+
+## Tools
+
+All tools are available at /tools and run 100% client-side for full privacy.
+
+- [Character Count](/tools/characterCount): Get detailed character, word, and sentence statistics for any text.
+- [Text Diff](/tools/textDiff): Compare two blocks of text side-by-side and highlight differences.
+- [Image Trace](/tools/imageTrace): Convert images to traced outlines for laser etching.
+- [Swedish Learning](/tools/swedish): Flashcards and quizzes to learn Swedish vocabulary.
+- [Paint by Numbers](/tools/paintByNumbers): Upload an image and convert it to a paint by numbers artwork.
+- [ASL Learning](/tools/asl): Learn American Sign Language alphabet and numbers.
+- [Braille](/tools/braille): Interactive Braille alphabet learning tool.
+- [Cursive](/tools/cursive): Practice cursive handwriting with letters and common words.
+- [Embroidery Tracer](/tools/embroideryTracer): Generate traced SVG paths from images for embroidery patterns.
+- [Morse Code](/tools/morse): Learn, practice, and master Morse code.
+- [Piano](/tools/piano): Learn piano with an interactive keyboard, chords, and melodies.
+- [Portuguese Learning](/tools/portuguese): Master Portuguese vocabulary, verbs, and common phrases.
+- [QR Code Generator](/tools/qr): Create custom QR codes from text or URLs.
+- [Video Converter](/tools/videoConverter): Convert videos between formats like AVI, MP4, MOV, and WebM.
+- [Stop Motion Editor](/tools/videoEditor): Upload images to create a stop motion animation with configurable timing.
+- [Merge PDF](/tools/mergePdf): Combine multiple PDF files into a single document.
+- [Split PDF](/tools/splitPdf): Extract pages or split a PDF into separate files.
