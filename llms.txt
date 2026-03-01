@@ -1,0 +1,31 @@
+# Esteban Dalel R
+
+> Personal website and collection of browser-based tools built by Esteban Dalel R. All tools run entirely client-side — no files are uploaded to a server.
+
+## Pages
+
+- [Home](https://www.estebandalelr.co/): Portfolio homepage with profile and social links.
+- [Tools](https://www.estebandalelr.co/tools): Directory of all available browser tools.
+- [Deep Connection](https://www.estebandalelr.co/deep): Card game with tiered questions for couples.
+- [Money Splitter](https://www.estebandalelr.co/money): Group expense tracker and settlement calculator.
+
+## Tools
+
+- [Character Count](https://www.estebandalelr.co/tools/characterCount): Detailed character, word, and sentence statistics for any text.
+- [Text Diff](https://www.estebandalelr.co/tools/textDiff): Side-by-side text comparison with highlighted differences.
+- [Image Trace](https://www.estebandalelr.co/tools/imageTrace): Convert images to traced outlines for laser etching using Sobel edge detection.
+- [Paint by Numbers](https://www.estebandalelr.co/tools/paintByNumbers): Convert an image into a paint-by-numbers artwork.
+- [Embroidery Tracer](https://www.estebandalelr.co/tools/embroideryTracer): Generate SVG paths from images for embroidery patterns.
+- [QR Code Generator](https://www.estebandalelr.co/tools/qr): Create custom QR codes from any text or URL.
+- [Video Converter](https://www.estebandalelr.co/tools/videoConverter): Convert videos between AVI, MP4, MOV, WebM, and MKV using FFmpeg WASM.
+- [Stop Motion Editor](https://www.estebandalelr.co/tools/videoEditor): Upload images to create stop motion animations.
+- [Audio Trimmer](https://www.estebandalelr.co/tools/audioTrimmer): Cut audio files to any start and end time using FFmpeg WASM.
+- [Audio Splitter](https://www.estebandalelr.co/tools/audioSplitter): Split audio into multiple segments at custom time points using FFmpeg WASM.
+- [Audio Pitch Shifter](https://www.estebandalelr.co/tools/audioPitchShifter): Raise or lower the pitch of audio files by semitones using FFmpeg WASM.
+- [Piano](https://www.estebandalelr.co/tools/piano): Interactive keyboard with chords and melodies.
+- [Morse Code](https://www.estebandalelr.co/tools/morse): Learn and practice Morse code with audio playback via Web Audio API.
+- [ASL Learning](https://www.estebandalelr.co/tools/asl): American Sign Language alphabet and numbers flashcards.
+- [Braille](https://www.estebandalelr.co/tools/braille): Interactive Braille alphabet learning tool.
+- [Cursive](https://www.estebandalelr.co/tools/cursive): Practice cursive handwriting with letters and common words.
+- [Swedish Learning](https://www.estebandalelr.co/tools/swedish): Flashcards and quizzes for Swedish vocabulary.
+- [Portuguese Learning](https://www.estebandalelr.co/tools/portuguese): Portuguese vocabulary, verbs, and common phrases.
