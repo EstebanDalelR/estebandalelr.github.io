@@ -11,6 +11,7 @@
     "@ffmpeg/util": "^0.12.1",
     "imagetracerjs": "^1.2.6",
     "next": "^14",
+    "pdf-lib": "^1.17.1",
     "qrcode": "^1.5.4",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"

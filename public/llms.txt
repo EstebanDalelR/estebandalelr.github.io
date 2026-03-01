@@ -21,6 +21,8 @@
 - [Piano](https://estebandalelr.github.io/tools/piano): Interactive piano keyboard with chords and melodies.
 - [Swedish Learning](https://estebandalelr.github.io/tools/swedish): Swedish vocabulary flashcards and quizzes.
 - [Portuguese Learning](https://estebandalelr.github.io/tools/portuguese): Portuguese vocabulary, verb conjugation, and common phrases.
+- [Merge PDF](https://estebandalelr.github.io/tools/mergePdf): Combine multiple PDF files into a single document. Drag-and-drop with reorder support.
+- [Split PDF](https://estebandalelr.github.io/tools/splitPdf): Extract page ranges, individual pages, or odd/even pages from a PDF.
 
 ## Other Pages
 
