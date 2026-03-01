@@ -86,7 +86,7 @@ export default function SplitPdf() {
           setSplitting(false);
           return;
         }
-        const indices = [];
+        const indices: number[] = [];
         for (let i = rangeStart - 1; i < rangeEnd; i++) {
           indices.push(i);
         }
@@ -108,8 +108,8 @@ export default function SplitPdf() {
         }
       } else if (splitMode === "every") {
         // Split into chunks: odd pages / even pages
-        const oddIndices = [];
-        const evenIndices = [];
+        const oddIndices: number[] = [];
+        const evenIndices: number[] = [];
         for (let i = 0; i < pageCount; i++) {
           if (i % 2 === 0) oddIndices.push(i);
           else evenIndices.push(i);
