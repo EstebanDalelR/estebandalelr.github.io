@@ -1,29 +1,42 @@
-# estebandalelr.co
+# Esteban Dalel R — Personal Tools Site
 
-> Personal website and tool collection by Esteban Dalel R.
-
-## About
-
-Personal website with a collection of free, browser-based tools. All tools run entirely in the browser with no server-side processing — your files and data never leave your device.
+> A collection of small, browser-based utilities built by Esteban Dalel R.
+> All tools run entirely client-side with no data sent to any server.
 
 ## Tools
 
-All tools are available at /tools and run 100% client-side for full privacy.
+- [Image Converter](https://estebandalelr.github.io/tools/imageConverter): Convert images between PNG, JPG, and WebP formats. Apply black & white or duotone (recolorize) effects. Split images into configurable grid pieces.
+- [Image Trace](https://estebandalelr.github.io/tools/imageTrace): Convert images to edge-traced outlines using Sobel edge detection. Optimized for laser etching.
+- [Paint by Numbers](https://estebandalelr.github.io/tools/paintByNumbers): Generate a paint-by-numbers worksheet from any image using k-means color quantization.
+- [Embroidery Tracer](https://estebandalelr.github.io/tools/embroideryTracer): Generate SVG paths from images for embroidery patterns. Outputs color trace, monochrome trace, and line art.
+- [Video Converter](https://estebandalelr.github.io/tools/videoConverter): Convert video files between AVI, MP4, MOV, WebM, and MKV using FFmpeg in the browser.
+- [Stop Motion Editor](https://estebandalelr.github.io/tools/videoEditor): Upload a sequence of images and export a stop motion animation video.
+- [QR Code Generator](https://estebandalelr.github.io/tools/qr): Create custom QR codes from any text or URL with configurable colors and error correction.
+- [Character Count](https://estebandalelr.github.io/tools/characterCount): Analyze text for character, word, and sentence statistics.
+- [Text Diff](https://estebandalelr.github.io/tools/textDiff): Compare two text blocks side-by-side with highlighted differences.
+- [ASL Learning](https://estebandalelr.github.io/tools/asl): Learn the American Sign Language alphabet and numbers with interactive flashcards.
+- [Braille](https://estebandalelr.github.io/tools/braille): Interactive Braille alphabet learning tool.
+- [Cursive](https://estebandalelr.github.io/tools/cursive): Practice cursive handwriting with letter and word guides.
+- [Morse Code](https://estebandalelr.github.io/tools/morse): Learn, practice, and decode Morse code.
+- [Piano](https://estebandalelr.github.io/tools/piano): Interactive piano keyboard with chords and melodies.
+- [Swedish Learning](https://estebandalelr.github.io/tools/swedish): Swedish vocabulary flashcards and quizzes.
+- [Portuguese Learning](https://estebandalelr.github.io/tools/portuguese): Portuguese vocabulary, verb conjugation, and common phrases.
+- [Merge PDF](https://estebandalelr.github.io/tools/mergePdf): Combine multiple PDF files into a single document. Drag-and-drop with reorder support.
+- [Split PDF](https://estebandalelr.github.io/tools/splitPdf): Extract page ranges, individual pages, or odd/even pages from a PDF.
 
-- [Character Count](/tools/characterCount): Get detailed character, word, and sentence statistics for any text.
-- [Text Diff](/tools/textDiff): Compare two blocks of text side-by-side and highlight differences.
-- [Image Trace](/tools/imageTrace): Convert images to traced outlines for laser etching.
-- [Swedish Learning](/tools/swedish): Flashcards and quizzes to learn Swedish vocabulary.
-- [Paint by Numbers](/tools/paintByNumbers): Upload an image and convert it to a paint by numbers artwork.
-- [ASL Learning](/tools/asl): Learn American Sign Language alphabet and numbers.
-- [Braille](/tools/braille): Interactive Braille alphabet learning tool.
-- [Cursive](/tools/cursive): Practice cursive handwriting with letters and common words.
-- [Embroidery Tracer](/tools/embroideryTracer): Generate traced SVG paths from images for embroidery patterns.
-- [Morse Code](/tools/morse): Learn, practice, and master Morse code.
-- [Piano](/tools/piano): Learn piano with an interactive keyboard, chords, and melodies.
-- [Portuguese Learning](/tools/portuguese): Master Portuguese vocabulary, verbs, and common phrases.
-- [QR Code Generator](/tools/qr): Create custom QR codes from text or URLs.
-- [Video Converter](/tools/videoConverter): Convert videos between formats like AVI, MP4, MOV, and WebM.
-- [Stop Motion Editor](/tools/videoEditor): Upload images to create a stop motion animation with configurable timing.
-- [Merge PDF](/tools/mergePdf): Combine multiple PDF files into a single document.
-- [Split PDF](/tools/splitPdf): Extract pages or split a PDF into separate files.
+## Other Pages
+
+- [Group Expenses](https://estebandalelr.github.io/money): Split group expenses and calculate settlements between participants.
+- [Deep Connection](https://estebandalelr.github.io/deep): A relationship card game with tiered conversation questions.
+
+## About
+
+Built with Next.js, React, TypeScript, and Tailwind CSS.
+All image and video processing happens in the browser using the Canvas API and WebAssembly (FFmpeg).
+No backend, no data collection.
+
+## Contact
+
+- GitHub: https://github.com/EstebanDalelR
+- Twitter/X: https://twitter.com/estebandalelr
+- LinkedIn: https://linkedin.com/in/estebandalelr
