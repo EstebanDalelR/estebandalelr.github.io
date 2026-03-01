@@ -109,6 +109,24 @@ const tools = [
     href: "/tools/audioPitchShifter",
     color: "from-violet-500 to-purple-600",
   },
+  {
+    name: "Image Converter",
+    description: "Convert image formats, apply black & white or duotone effects, and split images into grid pieces.",
+    href: "/tools/imageConverter",
+    color: "from-pink-500 to-rose-600",
+  },
+  {
+    name: "Merge PDF",
+    description: "Combine multiple PDF files into a single document.",
+    href: "/tools/mergePdf",
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    name: "Split PDF",
+    description: "Extract pages or split a PDF into separate files.",
+    href: "/tools/splitPdf",
+    color: "from-cyan-500 to-blue-500",
+  },
 ];
 
 export default function ToolsIndex() {
