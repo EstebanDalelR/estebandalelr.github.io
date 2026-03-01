@@ -91,6 +91,24 @@ const tools = [
     href: "/tools/videoEditor",
     color: "from-teal-500 to-cyan-600",
   },
+  {
+    name: "Audio Trimmer",
+    description: "Cut audio files to any start and end time, right in your browser.",
+    href: "/tools/audioTrimmer",
+    color: "from-amber-500 to-orange-600",
+  },
+  {
+    name: "Audio Splitter",
+    description: "Split audio into multiple segments at custom time points.",
+    href: "/tools/audioSplitter",
+    color: "from-sky-500 to-blue-600",
+  },
+  {
+    name: "Audio Pitch Shifter",
+    description: "Raise or lower the pitch of any audio file by semitones.",
+    href: "/tools/audioPitchShifter",
+    color: "from-violet-500 to-purple-600",
+  },
 ];
 
 export default function ToolsIndex() {
