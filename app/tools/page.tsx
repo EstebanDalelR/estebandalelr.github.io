@@ -91,6 +91,12 @@ const tools = [
     href: "/tools/videoEditor",
     color: "from-teal-500 to-cyan-600",
   },
+  {
+    name: "Image Converter",
+    description: "Convert image formats, apply black & white or duotone effects, and split images into grid pieces.",
+    href: "/tools/imageConverter",
+    color: "from-pink-500 to-rose-600",
+  },
 ];
 
 export default function ToolsIndex() {
