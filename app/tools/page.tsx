@@ -127,6 +127,12 @@ const tools = [
     href: "/tools/splitPdf",
     color: "from-cyan-500 to-blue-500",
   },
+  {
+    name: "Money Splitter",
+    description: "Track and split group expenses with friends, with automatic settlement calculations.",
+    href: "/tools/money",
+    color: "from-emerald-500 to-teal-600",
+  },
 ];
 
 export default function ToolsIndex() {
