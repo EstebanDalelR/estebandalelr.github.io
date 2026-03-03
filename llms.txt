@@ -7,7 +7,6 @@
 - [Home](https://www.estebandalelr.co/): Portfolio homepage with profile and social links.
 - [Tools](https://www.estebandalelr.co/tools): Directory of all available browser tools.
 - [Deep Connection](https://www.estebandalelr.co/deep): Card game with tiered questions for couples.
-- [Money Splitter](https://www.estebandalelr.co/money): Group expense tracker and settlement calculator.
 
 ## Tools
 
@@ -29,3 +28,4 @@
 - [Cursive](https://www.estebandalelr.co/tools/cursive): Practice cursive handwriting with letters and common words.
 - [Swedish Learning](https://www.estebandalelr.co/tools/swedish): Flashcards and quizzes for Swedish vocabulary.
 - [Portuguese Learning](https://www.estebandalelr.co/tools/portuguese): Portuguese vocabulary, verbs, and common phrases.
+- [Money Splitter](https://www.estebandalelr.co/tools/money): Group expense tracker and settlement calculator.
