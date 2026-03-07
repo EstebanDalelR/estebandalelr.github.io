@@ -133,6 +133,12 @@ const tools = [
     href: "/tools/money",
     color: "from-emerald-500 to-teal-600",
   },
+  {
+    name: "NATO Phonetic Alphabet",
+    description: "Learn the pilot alphabet with a reference chart, text converter, and quiz mode.",
+    href: "/tools/pilotAlphabet",
+    color: "from-green-500 to-emerald-600",
+  },
 ];
 
 export default function ToolsIndex() {
