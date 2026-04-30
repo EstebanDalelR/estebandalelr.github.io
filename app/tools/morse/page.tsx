@@ -69,6 +69,185 @@ const textFromMorseMap: { [key: string]: string } = Object.entries(
   return acc;
 }, {} as { [key: string]: string });
 
+const TONE_FREQUENCY = 600;
+const TONE_GAIN = 0.3;
+
+// Build a schedule of beep start times + durations (in seconds) for a morse string,
+// given the dot unit length in seconds.
+function buildSchedule(morse: string, dotSeconds: number) {
+  const dot = dotSeconds;
+  const dash = dot * 3;
+  const symbolGap = dot;
+  const letterGap = dot * 3;
+  const wordGap = dot * 7;
+
+  const beeps: { start: number; duration: number }[] = [];
+  let t = 0;
+  const letters = morse.split(" ");
+  for (let i = 0; i < letters.length; i++) {
+    const letter = letters[i];
+    if (letter === "/") {
+      t += wordGap;
+      continue;
+    }
+    for (let j = 0; j < letter.length; j++) {
+      const symbol = letter[j];
+      if (symbol === "." || symbol === "-") {
+        const dur = symbol === "." ? dot : dash;
+        beeps.push({ start: t, duration: dur });
+        t += dur;
+        if (j < letter.length - 1) t += symbolGap;
+      }
+    }
+    if (i < letters.length - 1 && letters[i + 1] !== "/") t += letterGap;
+  }
+  return { beeps, totalDuration: t };
+}
+
+// Encode an AudioBuffer as a 16-bit PCM mono WAV Blob.
+function audioBufferToWavBlob(buffer: AudioBuffer): Blob {
+  const numChannels = 1;
+  const sampleRate = buffer.sampleRate;
+  const samples = buffer.getChannelData(0);
+  const bytesPerSample = 2;
+  const blockAlign = numChannels * bytesPerSample;
+  const byteRate = sampleRate * blockAlign;
+  const dataSize = samples.length * bytesPerSample;
+  const bufferSize = 44 + dataSize;
+  const ab = new ArrayBuffer(bufferSize);
+  const view = new DataView(ab);
+
+  const writeString = (offset: number, s: string) => {
+    for (let i = 0; i < s.length; i++) view.setUint8(offset + i, s.charCodeAt(i));
+  };
+
+  writeString(0, "RIFF");
+  view.setUint32(4, 36 + dataSize, true);
+  writeString(8, "WAVE");
+  writeString(12, "fmt ");
+  view.setUint32(16, 16, true); // PCM chunk size
+  view.setUint16(20, 1, true); // PCM format
+  view.setUint16(22, numChannels, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, byteRate, true);
+  view.setUint16(32, blockAlign, true);
+  view.setUint16(34, 8 * bytesPerSample, true);
+  writeString(36, "data");
+  view.setUint32(40, dataSize, true);
+
+  let offset = 44;
+  for (let i = 0; i < samples.length; i++) {
+    const s = Math.max(-1, Math.min(1, samples[i]));
+    view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
+    offset += 2;
+  }
+  return new Blob([ab], { type: "audio/wav" });
+}
+
+// Decode an audio file into a morse string by analyzing tone on/off envelope.
+async function audioFileToMorse(file: File): Promise<string> {
+  const arrayBuffer = await file.arrayBuffer();
+  const Ctx: typeof AudioContext =
+    window.AudioContext || (window as any).webkitAudioContext;
+  const ctx = new Ctx();
+  let audioBuffer: AudioBuffer;
+  try {
+    audioBuffer = await ctx.decodeAudioData(arrayBuffer.slice(0));
+  } finally {
+    ctx.close();
+  }
+
+  // Mix down to mono
+  const length = audioBuffer.length;
+  const channels = audioBuffer.numberOfChannels;
+  const mono = new Float32Array(length);
+  for (let c = 0; c < channels; c++) {
+    const data = audioBuffer.getChannelData(c);
+    for (let i = 0; i < length; i++) mono[i] += data[i] / channels;
+  }
+
+  const sampleRate = audioBuffer.sampleRate;
+  const windowMs = 5;
+  const windowSize = Math.max(1, Math.floor(sampleRate * (windowMs / 1000)));
+
+  // RMS envelope per window
+  const envelope: number[] = [];
+  for (let i = 0; i < mono.length; i += windowSize) {
+    let sum = 0;
+    const end = Math.min(i + windowSize, mono.length);
+    for (let j = i; j < end; j++) sum += mono[j] * mono[j];
+    envelope.push(Math.sqrt(sum / (end - i)));
+  }
+
+  // Threshold relative to peak
+  let peak = 0;
+  for (const v of envelope) if (v > peak) peak = v;
+  if (peak === 0) return "";
+  const threshold = peak * 0.35;
+
+  // Build run-length segments of on/off in milliseconds
+  type Seg = { on: boolean; ms: number };
+  const segs: Seg[] = [];
+  let curOn = envelope[0] > threshold;
+  let curCount = 1;
+  for (let i = 1; i < envelope.length; i++) {
+    const isOn = envelope[i] > threshold;
+    if (isOn === curOn) {
+      curCount++;
+    } else {
+      segs.push({ on: curOn, ms: curCount * windowMs });
+      curOn = isOn;
+      curCount = 1;
+    }
+  }
+  segs.push({ on: curOn, ms: curCount * windowMs });
+
+  // Drop very short blips (likely noise, under 20ms) by absorbing them into
+  // the previous segment, then merge any resulting same-type runs.
+  const cleaned: Seg[] = [];
+  for (const s of segs) {
+    if (s.ms < 20 && cleaned.length > 0) {
+      cleaned[cleaned.length - 1].ms += s.ms;
+      continue;
+    }
+    const last = cleaned[cleaned.length - 1];
+    if (last && last.on === s.on) {
+      last.ms += s.ms;
+    } else {
+      cleaned.push({ ...s });
+    }
+  }
+
+  // Trim leading/trailing silence
+  while (cleaned.length && !cleaned[0].on) cleaned.shift();
+  while (cleaned.length && !cleaned[cleaned.length - 1].on) cleaned.pop();
+  if (!cleaned.length) return "";
+
+  // Estimate dot unit as the shortest "on" duration
+  let dot = Infinity;
+  for (const s of cleaned) if (s.on && s.ms < dot) dot = s.ms;
+  if (!isFinite(dot)) return "";
+
+  // Build morse string
+  let morse = "";
+  for (const s of cleaned) {
+    if (s.on) {
+      morse += s.ms < dot * 2 ? "." : "-";
+    } else {
+      // gaps: < 2 units = intra-letter (skip), 2..5 = letter, > 5 = word
+      const units = s.ms / dot;
+      if (units < 2) {
+        // same letter
+      } else if (units < 5) {
+        morse += " ";
+      } else {
+        morse += " / ";
+      }
+    }
+  }
+  return morse;
+}
+
 export default function MorseCodeLearning() {
   const [textInput, setTextInput] = useState("");
   const [morseInput, setMorseInput] = useState("");
@@ -77,7 +256,10 @@ export default function MorseCodeLearning() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
+  const [copyStatus, setCopyStatus] = useState<string | null>(null);
+  const [decodeStatus, setDecodeStatus] = useState<string | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Convert text to morse
   useEffect(() => {
@@ -134,10 +316,10 @@ export default function MorseCodeLearning() {
         oscillator.connect(gainNode);
         gainNode.connect(audioContext.destination);
 
-        oscillator.frequency.value = 600;
+        oscillator.frequency.value = TONE_FREQUENCY;
         oscillator.type = "sine";
 
-        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.setValueAtTime(TONE_GAIN, audioContext.currentTime);
 
         oscillator.start();
         setTimeout(() => {
@@ -189,6 +371,96 @@ export default function MorseCodeLearning() {
     }
   };
 
+  // Render the current morse output to a WAV file and trigger a download.
+  const downloadMorseAudio = async () => {
+    if (!morseOutput) return;
+    const dotSeconds = 0.06 / playbackSpeed; // matches 60ms / speed
+    const { beeps, totalDuration } = buildSchedule(morseOutput, dotSeconds);
+    if (totalDuration === 0) return;
+
+    const sampleRate = 44100;
+    const padding = 0.1; // small tail
+    const OfflineCtx: typeof OfflineAudioContext =
+      window.OfflineAudioContext || (window as any).webkitOfflineAudioContext;
+    const offline = new OfflineCtx(
+      1,
+      Math.ceil((totalDuration + padding) * sampleRate),
+      sampleRate
+    );
+
+    for (const b of beeps) {
+      const osc = offline.createOscillator();
+      const gain = offline.createGain();
+      osc.frequency.value = TONE_FREQUENCY;
+      osc.type = "sine";
+      // Short ramps to avoid clicks
+      const ramp = Math.min(0.005, b.duration / 4);
+      gain.gain.setValueAtTime(0, b.start);
+      gain.gain.linearRampToValueAtTime(TONE_GAIN, b.start + ramp);
+      gain.gain.setValueAtTime(TONE_GAIN, b.start + b.duration - ramp);
+      gain.gain.linearRampToValueAtTime(0, b.start + b.duration);
+      osc.connect(gain).connect(offline.destination);
+      osc.start(b.start);
+      osc.stop(b.start + b.duration);
+    }
+
+    const rendered = await offline.startRendering();
+    const blob = audioBufferToWavBlob(rendered);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    const slug =
+      textInput
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "")
+        .slice(0, 32) || "morse";
+    a.download = `${slug}.wav`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  const copyToClipboard = async (text: string, label: string) => {
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyStatus(`${label} copied!`);
+    } catch {
+      setCopyStatus("Copy failed");
+    }
+    setTimeout(() => setCopyStatus(null), 1800);
+  };
+
+  const handleAudioUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setDecodeStatus("Decoding…");
+    try {
+      const morse = await audioFileToMorse(file);
+      if (!morse) {
+        setDecodeStatus("Could not detect any tones");
+      } else {
+        setMorseInput(morse.trim());
+        setDecodeStatus("Decoded from audio");
+      }
+    } catch (err) {
+      setDecodeStatus("Failed to read audio file");
+    } finally {
+      // Reset so the same file can be picked again
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      setTimeout(() => setDecodeStatus(null), 2500);
+    }
+  };
+
+  const actionBtn =
+    "py-2 px-3 rounded-lg font-semibold text-sm transition-all";
+  const primaryBtn = `${actionBtn} bg-cyan-600 hover:bg-cyan-700 text-white`;
+  const ghostBtn = `${actionBtn} bg-gray-700 hover:bg-gray-600 text-white`;
+  const disabledBtn = `${actionBtn} bg-gray-700 text-gray-500 cursor-not-allowed`;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white p-4">
       <div className="max-w-7xl mx-auto">
@@ -198,6 +470,12 @@ export default function MorseCodeLearning() {
         <p className="text-center text-gray-300 mb-8">
           Learn, practice, and master Morse code
         </p>
+
+        {copyStatus && (
+          <div className="fixed top-4 right-4 bg-cyan-600 text-white px-4 py-2 rounded-lg shadow-lg z-50">
+            {copyStatus}
+          </div>
+        )}
 
         {/* Main converter section */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -217,17 +495,29 @@ export default function MorseCodeLearning() {
                 <span className="text-gray-500">Morse code will appear here...</span>
               )}
             </div>
-            <button
-              onClick={() => playMorseSound(morseOutput)}
-              disabled={!morseOutput || isPlaying}
-              className={`mt-4 w-full py-2 px-4 rounded-lg font-semibold transition-all ${
-                !morseOutput || isPlaying
-                  ? "bg-gray-700 text-gray-500 cursor-not-allowed"
-                  : "bg-cyan-600 hover:bg-cyan-700 text-white"
-              }`}
-            >
-              {isPlaying ? "Playing..." : "🔊 Play Morse Code"}
-            </button>
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <button
+                onClick={() => playMorseSound(morseOutput)}
+                disabled={!morseOutput || isPlaying}
+                className={!morseOutput || isPlaying ? disabledBtn : primaryBtn}
+              >
+                {isPlaying ? "Playing..." : "🔊 Play"}
+              </button>
+              <button
+                onClick={() => copyToClipboard(morseOutput, "Morse code")}
+                disabled={!morseOutput}
+                className={!morseOutput ? disabledBtn : ghostBtn}
+              >
+                📋 Copy Morse
+              </button>
+              <button
+                onClick={downloadMorseAudio}
+                disabled={!morseOutput || isPlaying}
+                className={!morseOutput || isPlaying ? disabledBtn : ghostBtn}
+              >
+                ⬇️ Download .wav
+              </button>
+            </div>
           </div>
 
           {/* Morse to Text */}
@@ -246,9 +536,37 @@ export default function MorseCodeLearning() {
                 <span className="text-gray-500">Decoded text will appear here...</span>
               )}
             </div>
-            <div className="mt-4 text-sm text-gray-400">
-              <p>💡 Tip: Use spaces between letters and " / " for word breaks</p>
-              <p className="mt-1">Example: .... . .-.. .-.. --- / .-- --- .-. .-.. -..</p>
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className={ghostBtn}
+              >
+                ⬆️ Upload audio to decode
+              </button>
+              <button
+                onClick={() => copyToClipboard(textOutput, "Text")}
+                disabled={!textOutput}
+                className={!textOutput ? disabledBtn : ghostBtn}
+              >
+                📋 Copy Text
+              </button>
+            </div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="audio/*"
+              onChange={handleAudioUpload}
+              className="hidden"
+            />
+            <div className="mt-3 text-sm text-gray-400 min-h-5">
+              {decodeStatus ? (
+                <span className="text-cyan-300">{decodeStatus}</span>
+              ) : (
+                <>
+                  <p>💡 Tip: Use spaces between letters and " / " for word breaks</p>
+                  <p className="mt-1">Example: .... . .-.. .-.. --- / .-- --- .-. .-.. -..</p>
+                </>
+              )}
             </div>
           </div>
         </div>
