@@ -61,6 +61,11 @@ const vocabulary: Word[] = [
   { swedish: "Torsdag", english: "Thursday", pronunciation: "torsh-dahg", category: "Time & Days" },
   { swedish: "Fredag", english: "Friday", pronunciation: "freh-dahg", category: "Time & Days" },
 
+  // Prepositions
+  { swedish: "Framför", english: "In front of", pronunciation: "fram-fur", category: "Prepositions" },
+  { swedish: "Under", english: "Under / Below", pronunciation: "un-der", category: "Prepositions" },
+  { swedish: "Bakom", english: "Behind", pronunciation: "bah-kom", category: "Prepositions" },
+
   // Common Words
   { swedish: "Ja", english: "Yes", pronunciation: "yah", category: "Common Words" },
   { swedish: "Nej", english: "No", pronunciation: "nay", category: "Common Words" },
