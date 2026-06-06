@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 import "../styles/index.css";
 
 export default function RootLayout({
@@ -24,8 +25,18 @@ export default function RootLayout({
           property="og:image"
           content="https://www.estebandalelr.co/estebandalelr.jpg"
         />
+
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#000000" />
       </Head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script id="sw-register" strategy="afterInteractive">{`
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+          }
+        `}</Script>
+      </body>
     </html>
   );
 }
