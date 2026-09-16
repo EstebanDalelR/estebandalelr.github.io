@@ -278,7 +278,7 @@ function PartGlyph({ c, stroke }: { c: Comp; stroke: string }) {
   let body;
   if (c.type === 'W') body = <line x1={-45} y1={0} x2={45} y2={0} {...s} />;
   else if (c.type === 'R') {
-    const pts = [];
+    const pts: string[] = [];
     for (let i = 0; i <= 8; i++) pts.push(`${-24 + i * 6},${i === 0 || i === 8 ? 0 : i % 2 ? -8 : 8}`);
     body = (<><line x1={-45} y1={0} x2={-24} y2={0} {...s} /><polyline points={pts.join(' ')} {...s} /><line x1={24} y1={0} x2={45} y2={0} {...s} /></>);
   } else {
@@ -370,7 +370,7 @@ export default function KirchhoffLab() {
   const usedNodes = new Set(comps.flatMap((c) => [c.a, c.b]));
 
   const edges = useMemo(() => {
-    const e = [];
+    const e: [number, number][] = [];
     for (let y = 0; y < ROWS; y++)
       for (let x = 0; x < COLS; x++) {
         if (x < COLS - 1) e.push([nid(x, y), nid(x + 1, y)]);
