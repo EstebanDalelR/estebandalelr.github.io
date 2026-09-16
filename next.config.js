@@ -1,1 +1,5 @@
-module.exports = { output: 'export', images: { unoptimized: true } };
+module.exports = { 
+  output: 'export', 
+  images: { unoptimized: true },
+  transpilePackages: ['three'],
+};
