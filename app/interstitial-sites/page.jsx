@@ -608,7 +608,7 @@ export default function InterstitialSites() {
     (a ? "border-sky-400 bg-sky-900 text-sky-100" : "border-slate-700 text-slate-400 hover:border-slate-500");
 
   return (
-    <div className="w-full h-full flex flex-col bg-slate-950 text-slate-200 font-sans" style={{ height: "100%", minHeight: 660 }}>
+    <div className="w-full h-full flex flex-col bg-slate-950 text-slate-200 font-sans" style={{ height: "100dvh", minHeight: 660 }}>
       <div className="flex items-baseline justify-between px-4 py-2 border-b border-slate-800">
         <h1 className="text-sm font-medium text-slate-100">Interstitial sites &middot; {S.name}</h1>
         <span className="text-xs text-slate-500">drag orbit &middot; scroll zoom &middot; click an atom to count it</span>
