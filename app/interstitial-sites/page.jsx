@@ -244,8 +244,59 @@ const hklLabel = (S, hkl) => {
   return "(" + idx.join(messy ? " " : "") + ")";
 };
 
-const PRESETS_CUBIC = [[1, 0, 0], [1, 1, 0], [1, 1, 1], [2, 1, 0]];
-const PRESETS_HEX = [[0, 0, 1], [1, 0, 0], [1, 1, 0], [1, 0, 1]];
+const PRESETS_CUBIC = [[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 1, 1], [2, 1, 0]];
+const PRESETS_HEX = [[0, 0, 1], [1, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 1], [2, 1, 0]];
+
+// axis gizmo: the three crystal axes, which for cubic are just x, y, z
+function axisSprite(text, css) {
+  const cv = document.createElement("canvas");
+  cv.width = 256; cv.height = 64;
+  const g = cv.getContext("2d");
+  g.fillStyle = css;
+  g.font = "600 34px ui-monospace, Menlo, monospace";
+  g.textAlign = "center";
+  g.textBaseline = "middle";
+  g.fillText(text, 128, 34);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: new THREE.CanvasTexture(cv), transparent: true, depthTest: false,
+  }));
+  sp.scale.set(1.6, 0.4, 1);
+  return sp;
+}
+
+function buildAxes(S) {
+  const g = new THREE.Group();
+  const L = 1.75 * A;
+  const names = S.cell === "hex"
+    ? [["a1", "[100]"], ["a2", "[010]"], ["c", "[001]"]]
+    : [["x", "[100]"], ["y", "[010]"], ["z", "[001]"]];
+  const cols = [[0xff6b6b, "#ff6b6b"], [0x7ee787, "#7ee787"], [0x79c0ff, "#79c0ff"]];
+
+  S.lattice.forEach((vec, i) => {
+    const len = Math.hypot(vec[0], vec[1], vec[2]);
+    const u = new THREE.Vector3(vec[0] / len, vec[1] / len, vec[2] / len);
+    const [hex, css] = cols[i];
+
+    const lg = new THREE.BufferGeometry();
+    lg.setAttribute("position", new THREE.Float32BufferAttribute(
+      [0, 0, 0, u.x * L, u.y * L, u.z * L], 3
+    ));
+    g.add(new THREE.LineSegments(lg, new THREE.LineBasicMaterial({ color: hex })));
+
+    const tip = new THREE.Mesh(
+      new THREE.ConeGeometry(0.07, 0.24, 16),
+      new THREE.MeshBasicMaterial({ color: hex })
+    );
+    tip.position.copy(u).multiplyScalar(L);
+    tip.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), u);
+    g.add(tip);
+
+    const sp = axisSprite(names[i][0] + " " + names[i][1], css);
+    sp.position.copy(u).multiplyScalar(L + 0.45);
+    g.add(sp);
+  });
+  return g;
+}
 
 const COL_ATOM = 0x93a7c4, COL_MARK = 0xffb347, COL_OCT = 0x35c4f0, COL_TET = 0xf7568f;
 
@@ -263,6 +314,7 @@ export default function InterstitialSites() {
   const [scale, setScale] = useState(0.55);
   const [clipCell, setClipCell] = useState(true);
   const [hkl, setHkl] = useState([1, 1, 1]);
+  const [axes, setAxes] = useState(true);
   const [cutPos, setCutPos] = useState(1);
   const [counted, setCounted] = useState({});
   const [status, setStatus] = useState("");
@@ -561,6 +613,9 @@ export default function InterstitialSites() {
       return g;
     };
 
+    ctx.groups.axes = buildAxes(S);
+    ctx.root.add(ctx.groups.axes);
+
     ctx.groups.oct = mkSites(S.oct, COL_OCT, S.ratios.oct);
     ctx.groups.tet = mkSites(S.tet, COL_TET, S.ratios.tet);
     ctx.groups.octCage = mkCages(S.oct, COL_OCT, 6);
@@ -584,6 +639,7 @@ export default function InterstitialSites() {
     [
       ["oct", sites === "oct"], ["tet", sites === "tet"],
       ["octCage", sites === "oct" && cage], ["tetCage", sites === "tet" && cage],
+      ["axes", axes],
     ].forEach(([k, vis]) => {
       const g = ctx.groups[k];
       if (!g) return;
@@ -663,7 +719,7 @@ export default function InterstitialSites() {
       });
     });
     for (let i = used; i < ctx.capPool.length; i++) ctx.capPool[i].visible = false;
-  }, [sid, scale, sites, cage, ghosts, ghostOp, clipCell, hkl, cutPos, counted]);
+  }, [sid, scale, sites, cage, ghosts, ghostOp, clipCell, hkl, cutPos, counted, axes]);
 
   const btn = (a) =>
     "flex-1 py-1 text-xs rounded-sm border " +
@@ -689,10 +745,16 @@ export default function InterstitialSites() {
           </div>
 
           <div className="space-y-2 text-xs">
-            <label className="flex items-center gap-2 text-slate-300">
-              <input type="checkbox" checked={clipCell} onChange={(e) => setClipCell(e.target.checked)} className="accent-sky-400" />
-              Clip atoms to the cell
-            </label>
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 text-slate-300">
+                <input type="checkbox" checked={clipCell} onChange={(e) => setClipCell(e.target.checked)} className="accent-sky-400" />
+                Clip atoms to the cell
+              </label>
+              <label className="flex items-center gap-2 text-slate-300">
+                <input type="checkbox" checked={axes} onChange={(e) => setAxes(e.target.checked)} className="accent-slate-300" />
+                Axes
+              </label>
+            </div>
             <div className="flex items-center gap-3">
               <span className="w-16 shrink-0 text-slate-400">Radius</span>
               <input type="range" min="0.15" max="1" step="0.01" value={scale} onChange={(e) => setScale(+e.target.value)} className="flex-1 accent-slate-300" />
@@ -712,9 +774,15 @@ export default function InterstitialSites() {
               </div>
               <span className="w-16 text-right tabular-nums text-amber-300">{hklLabel(S, hkl)}</span>
             </div>
-            <div className="flex gap-1">
+            <div className="flex flex-wrap gap-1">
               {(S.cell === "hex" ? PRESETS_HEX : PRESETS_CUBIC).map((q) => (
-                <button key={q.join()} onClick={() => setHkl(q)} className={btn(hkl.join() === q.join())}>
+                <button key={q.join()} onClick={() => setHkl(q)}
+                  className={
+                    "py-1 px-2 text-xs rounded-sm border tabular-nums " +
+                    (hkl.join() === q.join()
+                      ? "border-sky-400 bg-sky-900 text-sky-100"
+                      : "border-slate-700 text-slate-400 hover:border-slate-500")
+                  }>
                   {hklLabel(S, q)}
                 </button>
               ))}
