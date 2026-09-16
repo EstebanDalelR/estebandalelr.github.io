@@ -1,24 +1,43 @@
 'use client';
 import { useState, useMemo } from 'react';
 
+type PartType = 'R' | 'V' | 'I';
+type CompType = 'W' | PartType;
+type Comp = { id: string; type: CompType; a: number; b: number; value?: number; name?: string };
+type Part = Comp & { type: PartType; value: number; name: string };
+type Pt = [number, number];
+type SpecItem = ['W', ...Pt[]] | [PartType, Pt, Pt, number];
+type QKind = 'I' | 'V';
+type Question = { kind: QKind; target: string };
+type Level = { title: string; concept: string; hint: string; q: Question; spec: SpecItem[] };
+type Res = Record<string, { I: number; V: number }>;
+type Sol =
+  | { ok: true; res: Res; volt: Record<number, number>; groundNames: string; empty?: undefined; msg?: undefined }
+  | { ok: false; msg: string; empty?: boolean };
+type Inspect = { k: 'n'; id: number } | { k: 'c'; id: string } | null;
+type Tool = CompType | 'flip' | 'erase' | 'inspect';
+type Feedback = { t: 'ok' | 'bad' | 'warn'; m: string } | null;
+
+const isPart = (c: Comp): c is Part => c.type !== 'W';
+
 /* ---------------------------------------------------------------- grid */
 const COLS = 7, ROWS = 5, SP = 90, PAD = 48;
 const VW = PAD * 2 + (COLS - 1) * SP;
 const VH = PAD * 2 + (ROWS - 1) * SP;
-const PREFIX = { R: 'R', V: 'Vs', I: 'Is' };
-const UNIT = { R: 'Ω', V: 'V', I: 'A' };
-const DEFAULTS = { R: 4, V: 12, I: 1 };
+const PREFIX: Record<PartType, string> = { R: 'R', V: 'Vs', I: 'Is' };
+const UNIT: Record<PartType, string> = { R: 'Ω', V: 'V', I: 'A' };
+const DEFAULTS: Record<PartType, number> = { R: 4, V: 12, I: 1 };
 
-const nid = (x, y) => y * COLS + x;
-const nxy = (id) => [id % COLS, Math.floor(id / COLS)];
-const pos = (id) => { const [x, y] = nxy(id); return [PAD + x * SP, PAD + y * SP]; };
-const nodeName = (id) => { const [x, y] = nxy(id); return String.fromCharCode(65 + x) + (y + 1); };
-const edgeKey = (a, b) => (a < b ? `${a}-${b}` : `${b}-${a}`);
-const fmt = (v) => (Math.abs(v) < 1e-9 ? '0' : String(+v.toFixed(3)));
+const nid = (x: number, y: number): number => y * COLS + x;
+const nxy = (id: number): Pt => [id % COLS, Math.floor(id / COLS)];
+const pos = (id: number): Pt => { const [x, y] = nxy(id); return [PAD + x * SP, PAD + y * SP]; };
+const nodeName = (id: number): string => { const [x, y] = nxy(id); return String.fromCharCode(65 + x) + (y + 1); };
+const edgeKey = (a: number, b: number): string => (a < b ? `${a}-${b}` : `${b}-${a}`);
+const fmt = (v: number): string => (Math.abs(v) < 1e-9 ? '0' : String(+v.toFixed(3)));
 let uid = 0;
 
 // ---- ENGINE START
-function gauss(A, z) {
+function gauss(A: number[][], z: number[]): number[] | null {
   const N = z.length;
   for (let col = 0; col < N; col++) {
     let piv = col, best = Math.abs(A[col][col]);
@@ -32,7 +51,7 @@ function gauss(A, z) {
       z[r] -= f * z[col];
     }
   }
-  const x = new Array(N).fill(0);
+  const x: number[] = new Array(N).fill(0);
   for (let r = N - 1; r >= 0; r--) {
     let s = z[r];
     for (let k = r + 1; k < N; k++) s -= A[r][k] * x[k];
@@ -43,21 +62,21 @@ function gauss(A, z) {
 
 /* Modified nodal analysis. Wires are ideal: merged into nets, their currents
    recovered afterwards from KCL over a spanning tree of each wire net. */
-function solve(comps) {
+function solve(comps: Comp[]): Sol {
   if (!comps.length) return { ok: false, empty: true, msg: 'Board is empty. Click between two dots to place a part.' };
-  const parent = new Map();
-  const find = (n) => {
+  const parent = new Map<number, number>();
+  const find = (n: number): number => {
     if (!parent.has(n)) parent.set(n, n);
     let r = n;
-    while (parent.get(r) !== r) r = parent.get(r);
+    while (parent.get(r) !== r) r = parent.get(r)!;
     parent.set(n, r);
     return r;
   };
   const wires = comps.filter((c) => c.type === 'W');
-  const parts = comps.filter((c) => c.type !== 'W');
+  const parts = comps.filter(isPart);
   comps.forEach((c) => { find(c.a); find(c.b); });
   wires.forEach((w) => parent.set(find(w.a), find(w.b)));
-  const net = (n) => find(n);
+  const net = (n: number) => find(n);
 
   for (const c of parts) {
     if (c.type === 'V' && net(c.a) === net(c.b) && c.value !== 0)
@@ -65,21 +84,21 @@ function solve(comps) {
   }
 
   const nets = [...new Set(comps.flatMap((c) => [net(c.a), net(c.b)]))];
-  const ip = new Map(nets.map((n) => [n, n]));
-  const ifind = (n) => { while (ip.get(n) !== n) n = ip.get(n); return n; };
+  const ip = new Map<number, number>(nets.map((n) => [n, n]));
+  const ifind = (n: number): number => { while (ip.get(n) !== n) n = ip.get(n)!; return n; };
   parts.forEach((c) => { const x = ifind(net(c.a)), y = ifind(net(c.b)); if (x !== y) ip.set(x, y); });
-  const ground = new Map();
+  const ground = new Map<number, number>();
   parts.forEach((c) => { if (c.type === 'V') { const r = ifind(net(c.a)); if (!ground.has(r)) ground.set(r, net(c.a)); } });
   nets.forEach((n) => { const r = ifind(n); if (!ground.has(r)) ground.set(r, n); });
   const groundNets = new Set(ground.values());
 
-  const idx = new Map();
+  const idx = new Map<number, number>();
   let n = 0;
   nets.forEach((nt) => { if (!groundNets.has(nt)) idx.set(nt, n++); });
   const vs = parts.filter((c) => c.type === 'V');
   const N = n + vs.length;
-  const A = Array.from({ length: N }, () => new Array(N).fill(0));
-  const z = new Array(N).fill(0);
+  const A: number[][] = Array.from({ length: N }, () => new Array(N).fill(0));
+  const z: number[] = new Array(N).fill(0);
 
   parts.forEach((c) => {
     const i = idx.get(net(c.a)), j = idx.get(net(c.b));
@@ -104,11 +123,11 @@ function solve(comps) {
   const x = N ? gauss(A, z) : [];
   if (!x) return { ok: false, msg: 'Unsolvable: a current source has no return path, or voltage sources are in parallel.' };
 
-  const vNet = (nt) => (idx.has(nt) ? x[idx.get(nt)] : 0);
-  const volt = {};
+  const vNet = (nt: number) => (idx.has(nt) ? x[idx.get(nt)!] : 0);
+  const volt: Record<number, number> = {};
   comps.forEach((c) => { volt[c.a] = vNet(net(c.a)); volt[c.b] = vNet(net(c.b)); });
 
-  const res = {};
+  const res: Res = {};
   parts.forEach((c) => {
     const V = volt[c.a] - volt[c.b];
     const I = c.type === 'R' ? V / c.value : c.type === 'I' ? c.value : x[n + vs.indexOf(c)];
@@ -116,30 +135,30 @@ function solve(comps) {
   });
 
   // wire currents: required wire outflow at each point = -(outflow through parts)
-  const inj = new Map();
+  const inj = new Map<number, number>();
   parts.forEach((c) => {
     const I = res[c.id].I;
     inj.set(c.a, (inj.get(c.a) || 0) + I);
     inj.set(c.b, (inj.get(c.b) || 0) - I);
   });
-  const adj = new Map();
+  const adj = new Map<number, [number, Comp][]>();
   wires.forEach((w) => {
     res[w.id] = { I: 0, V: 0 };
-    [[w.a, w.b], [w.b, w.a]].forEach(([p, q]) => { if (!adj.has(p)) adj.set(p, []); adj.get(p).push([q, w]); });
+    [[w.a, w.b], [w.b, w.a]].forEach(([p, q]) => { if (!adj.has(p)) adj.set(p, []); adj.get(p)!.push([q, w]); });
   });
-  const seen = new Set();
+  const seen = new Set<number>();
   for (const start of adj.keys()) {
     if (seen.has(start)) continue;
-    const order = [start], par = new Map();
+    const order = [start], par = new Map<number, [number, Comp]>();
     seen.add(start);
     for (let k = 0; k < order.length; k++) {
-      for (const [q, w] of adj.get(order[k])) if (!seen.has(q)) { seen.add(q); par.set(q, [order[k], w]); order.push(q); }
+      for (const [q, w] of adj.get(order[k])!) if (!seen.has(q)) { seen.add(q); par.set(q, [order[k], w]); order.push(q); }
     }
-    const acc = new Map(order.map((p) => [p, -(inj.get(p) || 0)]));
+    const acc = new Map<number, number>(order.map((p) => [p, -(inj.get(p) || 0)]));
     for (let k = order.length - 1; k > 0; k--) {
-      const p = order[k], [pp, w] = par.get(p), o = acc.get(p);
+      const p = order[k], [pp, w] = par.get(p)!, o = acc.get(p)!;
       res[w.id].I = w.a === p ? o : -o;
-      acc.set(pp, acc.get(pp) + o);
+      acc.set(pp, acc.get(pp)! + o);
     }
   }
 
@@ -147,17 +166,17 @@ function solve(comps) {
 }
 
 /* spec: ['W', [x,y], [x,y], ...] polyline of wires, or [type, [x,y] a, [x,y] b, value] */
-function build(spec) {
-  const comps = [], counts = { R: 0, V: 0, I: 0 };
+function build(spec: SpecItem[]): Comp[] {
+  const comps: Comp[] = [], counts: Record<PartType, number> = { R: 0, V: 0, I: 0 };
   let i = 0;
-  const add = (type, a, b, value) => {
-    const c = { id: `c${i++}`, type, a, b };
+  const add = (type: CompType, a: number, b: number, value?: number) => {
+    const c: Comp = { id: `c${i++}`, type, a, b };
     if (type !== 'W') { counts[type]++; c.value = value; c.name = PREFIX[type] + counts[type]; }
     comps.push(c);
   };
   spec.forEach((s) => {
     if (s[0] === 'W') {
-      const pts = s.slice(1);
+      const pts = s.slice(1) as Pt[];
       for (let k = 0; k < pts.length - 1; k++) {
         let [x1, y1] = pts[k];
         const [x2, y2] = pts[k + 1];
@@ -165,14 +184,14 @@ function build(spec) {
         while (x1 !== x2 || y1 !== y2) { add('W', nid(x1, y1), nid(x1 + dx, y1 + dy)); x1 += dx; y1 += dy; }
       }
     } else {
-      const [t, [x1, y1], [x2, y2], v] = s;
+      const [t, [x1, y1], [x2, y2], v] = s as [PartType, Pt, Pt, number];
       add(t, nid(x1, y1), nid(x2, y2), v);
     }
   });
   return comps;
 }
 
-const LEVELS = [
+const LEVELS: Level[] = [
   {
     title: "Ohm's law",
     concept: 'Current through a resistor equals the voltage across it divided by its resistance: I = V / R.',
@@ -232,7 +251,7 @@ const LEVELS = [
 ];
 // ---- ENGINE END
 
-const TOOLS = [
+const TOOLS: { k: Tool; label: string; help: string }[] = [
   { k: 'W', label: 'Wire', help: 'Click between two dots to draw a wire.' },
   { k: 'R', label: 'Resistor', help: 'Click between two dots to place a resistor. Placing on an occupied spot replaces it.' },
   { k: 'V', label: 'Voltage source', help: 'The + terminal faces right or up. Use Flip to reverse it.' },
@@ -242,20 +261,20 @@ const TOOLS = [
   { k: 'inspect', label: 'Inspect', help: 'Click a dot to check KCL, or a part to read its current, voltage and power.' },
 ];
 
-const geom = (c) => {
+const geom = (c: Comp) => {
   const [ax, ay] = pos(c.a), [bx, by] = pos(c.b);
   return { ax, ay, bx, by, mx: (ax + bx) / 2, my: (ay + by) / 2, ux: (bx - ax) / SP, uy: (by - ay) / SP, horiz: ay === by };
 };
-const arrowChar = (ux, uy) => (ux > 0 ? '→' : ux < 0 ? '←' : uy > 0 ? '↓' : '↑');
-const qText = (q) =>
+const arrowChar = (ux: number, uy: number): string => (ux > 0 ? '→' : ux < 0 ? '←' : uy > 0 ? '↓' : '↑');
+const qText = (q: Question): string =>
   q.kind === 'I'
     ? `What current flows through ${q.target} in the direction of its arrow, in amps? Answer negative if it flows the other way.`
     : `What is the voltage across ${q.target}, measured from + to −, in volts?`;
 
-function PartGlyph({ c, stroke }) {
+function PartGlyph({ c, stroke }: { c: Comp; stroke: string }) {
   const g = geom(c);
   const ang = (Math.atan2(g.by - g.ay, g.bx - g.ax) * 180) / Math.PI;
-  const s = { stroke, strokeWidth: 2.2, fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round' };
+  const s = { stroke, strokeWidth: 2.2, fill: 'none', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
   let body;
   if (c.type === 'W') body = <line x1={-45} y1={0} x2={45} y2={0} {...s} />;
   else if (c.type === 'R') {
@@ -275,7 +294,7 @@ function PartGlyph({ c, stroke }) {
   return <g transform={`translate(${g.mx} ${g.my}) rotate(${ang})`}>{body}</g>;
 }
 
-function Inspector({ inspect, comps, sol }) {
+function Inspector({ inspect, comps, sol }: { inspect: Inspect; comps: Comp[]; sol: Sol }) {
   if (!inspect || !sol.ok) return <p className="kl-small">Click a dot to check KCL at that node, or a part to read its current, voltage and power.</p>;
   if (inspect.k === 'n') {
     const id = inspect.id;
@@ -306,13 +325,14 @@ function Inspector({ inspect, comps, sol }) {
   if (!c) return null;
   const { I, V } = sol.res[c.id];
   const [from, to] = I >= 0 ? [c.a, c.b] : [c.b, c.a];
-  let p = null;
+  const val = c.value ?? 0;
+  let p: string | null = null;
   if (c.type === 'R') p = `absorbs ${fmt(V * I)} W`;
-  else if (c.type === 'V') { const d = c.value * I; p = d >= 0 ? `delivers ${fmt(d)} W` : `absorbs ${fmt(-d)} W`; }
-  else if (c.type === 'I') { const d = -V * c.value; p = d >= 0 ? `delivers ${fmt(d)} W` : `absorbs ${fmt(-d)} W`; }
+  else if (c.type === 'V') { const d = val * I; p = d >= 0 ? `delivers ${fmt(d)} W` : `absorbs ${fmt(-d)} W`; }
+  else if (c.type === 'I') { const d = -V * val; p = d >= 0 ? `delivers ${fmt(d)} W` : `absorbs ${fmt(-d)} W`; }
   return (
     <>
-      <h3 className="kl-h4">{c.type === 'W' ? `Wire ${nodeName(c.a)} to ${nodeName(c.b)}` : `${c.name}, ${fmt(c.value)} ${UNIT[c.type]}`}</h3>
+      <h3 className="kl-h4">{c.type === 'W' ? `Wire ${nodeName(c.a)} to ${nodeName(c.b)}` : `${c.name}, ${fmt(val)} ${UNIT[c.type]}`}</h3>
       <table className="kl-table"><tbody>
         <tr><td>Current</td><td className="kl-num">{fmt(Math.abs(I))} A, {nodeName(from)} to {nodeName(to)}</td></tr>
         <tr><td>V({nodeName(c.a)}) − V({nodeName(c.b)})</td><td className="kl-num">{fmt(V)} V</td></tr>
@@ -323,20 +343,20 @@ function Inspector({ inspect, comps, sol }) {
 }
 
 export default function KirchhoffLab() {
-  const [mode, setMode] = useState('levels');
+  const [mode, setMode] = useState<'levels' | 'sandbox'>('levels');
   const [lvl, setLvl] = useState(0);
-  const [solved, setSolved] = useState([]);
+  const [solved, setSolved] = useState<number[]>([]);
   const [revealed, setRevealed] = useState(false);
   const [answer, setAnswer] = useState('');
-  const [fb, setFb] = useState(null);
+  const [fb, setFb] = useState<Feedback>(null);
   const [showHint, setShowHint] = useState(false);
-  const [inspect, setInspect] = useState(null);
+  const [inspect, setInspect] = useState<Inspect>(null);
 
-  const [sbComps, setSbComps] = useState([]);
-  const [tool, setTool] = useState('R');
-  const [vals, setVals] = useState(DEFAULTS);
+  const [sbComps, setSbComps] = useState<Comp[]>([]);
+  const [tool, setTool] = useState<Tool>('R');
+  const [vals, setVals] = useState<Record<PartType, string>>({ R: '4', V: '12', I: '1' });
   const [showSol, setShowSol] = useState(false);
-  const [quiz, setQuiz] = useState(null);
+  const [quiz, setQuiz] = useState<Question | null>(null);
 
   const level = LEVELS[lvl];
   const levelComps = useMemo(() => build(LEVELS[lvl].spec), [lvl]);
@@ -360,11 +380,11 @@ export default function KirchhoffLab() {
   }, []);
 
   const resetQuestion = () => { setAnswer(''); setFb(null); setShowHint(false); setInspect(null); };
-  const goLevel = (i) => { setLvl(i); setRevealed(false); resetQuestion(); };
-  const switchMode = (m) => { setMode(m); resetQuestion(); };
+  const goLevel = (i: number) => { setLvl(i); setRevealed(false); resetQuestion(); };
+  const switchMode = (m: 'levels' | 'sandbox') => { setMode(m); resetQuestion(); };
 
   const check = () => {
-    if (!sol.ok || !target) return;
+    if (!sol.ok || !target || !question) return;
     const r = sol.res[target.id];
     const correct = question.kind === 'I' ? r.I : r.V;
     const u = parseFloat(String(answer).replace(',', '.'));
@@ -383,20 +403,20 @@ export default function KirchhoffLab() {
   };
 
   const reveal = () => {
-    if (!sol.ok || !target) return;
+    if (!sol.ok || !target || !question) return;
     const r = sol.res[target.id];
     setFb({ t: 'warn', m: `Answer: ${fmt(question.kind === 'I' ? r.I : r.V)} ${question.kind === 'I' ? 'A' : 'V'}. Click dots and parts to trace why.` });
     if (mode === 'levels') setRevealed(true);
     else setShowSol(true);
   };
 
-  const nextName = (list, type) => {
+  const nextName = (list: Comp[], type: PartType): string => {
     const p = PREFIX[type];
-    const nums = list.filter((c) => c.type === type).map((c) => parseInt(c.name.slice(p.length), 10) || 0);
+    const nums = list.filter((c) => c.type === type).map((c) => parseInt((c.name ?? '').slice(p.length), 10) || 0);
     return p + (Math.max(0, ...nums) + 1);
   };
 
-  const clickEdge = (a, b) => {
+  const clickEdge = (a: number, b: number) => {
     const key = edgeKey(a, b);
     const existing = comps.find((c) => edgeKey(c.a, c.b) === key);
     if (mode === 'levels' || tool === 'inspect') { if (existing && canInspect) setInspect({ k: 'c', id: existing.id }); return; }
@@ -404,7 +424,7 @@ export default function KirchhoffLab() {
     if (tool === 'erase') { if (existing) setSbComps(sbComps.filter((c) => c !== existing)); return; }
     if (tool === 'flip') { if (existing && existing.type !== 'W') setSbComps(sbComps.map((c) => (c === existing ? { ...c, a: c.b, b: c.a } : c))); return; }
     const rest = sbComps.filter((c) => c !== existing);
-    const c = { id: `s${uid++}`, type: tool, a, b };
+    const c: Comp = { id: `s${uid++}`, type: tool, a, b };
     if (tool !== 'W') {
       let v = parseFloat(vals[tool]);
       if (!Number.isFinite(v)) v = DEFAULTS[tool];
@@ -416,10 +436,10 @@ export default function KirchhoffLab() {
   };
 
   const makeQuiz = () => {
-    const cands = sbComps.filter((c) => c.type !== 'W');
+    const cands = sbComps.filter(isPart);
     if (!sol.ok || !cands.length) return;
     const c = cands[Math.floor(Math.random() * cands.length)];
-    const kind = c.type === 'R' ? (Math.random() < 0.5 ? 'I' : 'V') : c.type === 'V' ? 'I' : 'V';
+    const kind: QKind = c.type === 'R' ? (Math.random() < 0.5 ? 'I' : 'V') : c.type === 'V' ? 'I' : 'V';
     setQuiz({ kind, target: c.name });
     setShowSol(false);
     resetQuestion();
@@ -462,15 +482,15 @@ export default function KirchhoffLab() {
         return <line key={`f${c.id}`} x1={x1} y1={y1} x2={x2} y2={y2} className="kl-flowline" style={{ animationDuration: `${dur}s` }} />;
       })}
 
-      {comps.filter((c) => c.type !== 'W').map((c) => {
+      {comps.filter(isPart).map((c) => {
         const g = geom(c);
-        const isT = target && c.id === target.id;
+        const isT = !!target && !!question && c.id === target.id;
         const r = sol.ok ? sol.res[c.id] : null;
-        const lab = g.horiz ? { x: g.mx, y: g.my - 26, textAnchor: 'middle' } : { x: g.mx + 26, y: g.my + 4, textAnchor: 'start' };
-        const fl = g.horiz ? { x: g.mx, y: g.my + 38, textAnchor: 'middle' } : { x: g.mx - 26, y: g.my + 4, textAnchor: 'end' };
+        const lab = g.horiz ? { x: g.mx, y: g.my - 26, textAnchor: 'middle' as const } : { x: g.mx + 26, y: g.my + 4, textAnchor: 'start' as const };
+        const fl = g.horiz ? { x: g.mx, y: g.my + 38, textAnchor: 'middle' as const } : { x: g.mx - 26, y: g.my + 4, textAnchor: 'end' as const };
         const col = isT ? 'var(--kl-target)' : 'var(--kl-ink)';
-        let flow = null;
-        if (isT && question.kind === 'I') {
+        let flow: JSX.Element | null = null;
+        if (isT && question?.kind === 'I') {
           flow = <text {...fl} className="kl-val" fill="var(--kl-target)">{arrowChar(g.ux, g.uy)} I = {showFlow && r ? `${fmt(r.I)} A` : '?'}</text>;
         } else if (isT) {
           const pa = g.horiz ? [g.mx - g.ux * 36, g.my + 20] : [g.mx - 14, g.my - g.uy * 34 + 4];
@@ -594,14 +614,14 @@ export default function KirchhoffLab() {
                     <button key={t.k} aria-pressed={tool === t.k} className={`kl-btn ${tool === t.k ? 'on' : ''}`} onClick={() => { setTool(t.k); if (t.k !== 'inspect') setInspect(null); }}>{t.label}</button>
                   ))}
                 </div>
-                {['R', 'V', 'I'].includes(tool) && (
+                {(tool === 'R' || tool === 'V' || tool === 'I') && (
                   <label className="kl-row kl-gap">
                     <span className="kl-small">Value</span>
                     <input type="number" step="any" className="kl-input kl-num" value={vals[tool]} onChange={(e) => setVals({ ...vals, [tool]: e.target.value })} />
                     <span className="kl-small">{UNIT[tool]}</span>
                   </label>
                 )}
-                <p className="kl-small kl-gap">{TOOLS.find((t) => t.k === tool).help}</p>
+                <p className="kl-small kl-gap">{TOOLS.find((t) => t.k === tool)?.help}</p>
               </section>
               <section className="kl-card">
                 <div className="kl-row">
