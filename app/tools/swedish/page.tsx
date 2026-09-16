@@ -341,6 +341,15 @@ function getFinalMessage(correct: number, total: number): { emoji: string; sv: s
   return               { emoji: "📚", sv: "Öva mer!", en: "Keep practicing!" };
 }
 
+function shuffledSvgOrder(): number[] {
+  const order = Array.from({ length: svgQuizQuestions.length }, (_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order;
+}
+
 export default function SwedishLearning() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -360,8 +369,7 @@ export default function SwedishLearning() {
   const [svgShake, setSvgShake] = useState(false);
 
   useEffect(() => {
-    const order = [...Array(svgQuizQuestions.length).keys()].sort(() => Math.random() - 0.5);
-    setSvgOrder(order);
+    setSvgOrder(shuffledSvgOrder());
   }, []);
 
   const categories = ["All", ...Array.from(new Set(vocabulary.map((w) => w.category)))];
@@ -429,8 +437,7 @@ export default function SwedishLearning() {
   };
 
   const restartSvgQuiz = () => {
-    const order = [...Array(svgQuizQuestions.length).keys()].sort(() => Math.random() - 0.5);
-    setSvgOrder(order);
+    setSvgOrder(shuffledSvgOrder());
     setSvgIndex(0);
     setSvgChosen(null);
     setSvgScore({ correct: 0, total: 0 });
