@@ -212,6 +212,41 @@ const frac = (x) =>
   ({ 1: "1", 0.5: "1/2", 0.25: "1/4", 0.125: "1/8" }[x] ||
     (Math.abs(x - 1 / 6) < 1e-9 ? "1/6" : Math.abs(x - 1 / 3) < 1e-9 ? "1/3" : x.toFixed(2)));
 
+// ------------------------------------------------------------- hkl cuts ---
+// The normal of plane (hkl) is h*b1 + k*b2 + l*b3 with b_i the reciprocal
+// lattice vectors. For cubic that reduces to [hkl] itself; for hcp it does not,
+// which is exactly why this is computed rather than assumed.
+function planeNormal(S, hkl) {
+  const [a1, a2, a3] = S.lattice;
+  const vol = dot(a1, cross(a2, a3));
+  const b1 = cross(a2, a3).map((x) => x / vol);
+  const b2 = cross(a3, a1).map((x) => x / vol);
+  const b3 = cross(a1, a2).map((x) => x / vol);
+  const v = [0, 1, 2].map((i) => hkl[0] * b1[i] + hkl[1] * b2[i] + hkl[2] * b3[i]);
+  const len = Math.hypot(v[0], v[1], v[2]);
+  return len < 1e-9 ? null : v.map((x) => x / len);
+}
+
+function cellVertices(S) {
+  if (S.cell === "cube") return cubeCorners();
+  const hz = S.c / 2, out = [];
+  [0, 60, 120, 180, 240, 300].forEach((d) => {
+    const t = (d * Math.PI) / 180;
+    const x = S.a * Math.cos(t), y = S.a * Math.sin(t);
+    out.push([x, y, hz], [x, y, -hz]);
+  });
+  return out;
+}
+
+const hklLabel = (S, hkl) => {
+  const idx = S.cell === "hex" ? [hkl[0], hkl[1], -(hkl[0] + hkl[1]), hkl[2]] : hkl;
+  const messy = idx.some((v) => v < 0 || Math.abs(v) > 9);
+  return "(" + idx.join(messy ? " " : "") + ")";
+};
+
+const PRESETS_CUBIC = [[1, 0, 0], [1, 1, 0], [1, 1, 1], [2, 1, 0]];
+const PRESETS_HEX = [[0, 0, 1], [1, 0, 0], [1, 1, 0], [1, 0, 1]];
+
 const COL_ATOM = 0x93a7c4, COL_MARK = 0xffb347, COL_OCT = 0x35c4f0, COL_TET = 0xf7568f;
 
 // ------------------------------------------------------------------ view ---
@@ -227,7 +262,7 @@ export default function InterstitialSites() {
   const [ghostOp, setGhostOp] = useState(0.13);
   const [scale, setScale] = useState(0.55);
   const [clipCell, setClipCell] = useState(true);
-  const [cutAxis, setCutAxis] = useState(2);
+  const [hkl, setHkl] = useState([1, 1, 1]);
   const [cutPos, setCutPos] = useState(1);
   const [counted, setCounted] = useState({});
   const [status, setStatus] = useState("");
@@ -266,6 +301,19 @@ export default function InterstitialSites() {
     const cellPlanes = Array.from({ length: 8 }, () => new THREE.Plane(new THREE.Vector3(1, 0, 0), 1e3));
     const slicePlane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 1e3);
     const allPlanes = [...cellPlanes, slicePlane];
+    // a frozen copy of the cell planes, so the section quad stays trimmed to the
+    // cell even when "clip atoms to the cell" pushes the live ones away
+    const sectionPlanes = Array.from({ length: 8 }, () => new THREE.Plane(new THREE.Vector3(1, 0, 0), 1e3));
+
+    const cutPlane = new THREE.Mesh(
+      new THREE.PlaneGeometry(9, 9),
+      new THREE.MeshBasicMaterial({
+        color: 0xffb347, transparent: true, opacity: 0.14, side: THREE.DoubleSide,
+        depthWrite: false, clippingPlanes: sectionPlanes,
+      })
+    );
+    cutPlane.visible = false;
+    root.add(cutPlane);
 
     // cap machinery: unit disc in XY, reused meshes, materials cached per (colour, excluded plane)
     const capGeo = new THREE.CircleGeometry(1, 48);
@@ -354,7 +402,8 @@ export default function InterstitialSites() {
 
     api.current = {
       scene, root, cellPlanes, slicePlane, allPlanes,
-      capGeo, capGroup, capPool, capMat, atomMeshes: [], groups: {},
+      capGeo, capGroup, capPool, capMat, sectionPlanes, cutPlane,
+      atomMeshes: [], groups: {},
     };
 
     return () => {
@@ -377,7 +426,7 @@ export default function InterstitialSites() {
     setCounted({});
 
     ctx.root.children
-      .filter((c) => c !== ctx.capGroup)
+      .filter((c) => c !== ctx.capGroup && c !== ctx.cutPlane)
       .forEach((c) => {
         ctx.root.remove(c);
         c.traverse((o) => { o.geometry?.dispose?.(); o.material?.dispose?.(); });
@@ -417,6 +466,7 @@ export default function InterstitialSites() {
       ctx.cellPlanes[7].set(new THREE.Vector3(0, 0, 1), hz);
     }
     ctx.cellPlanes.forEach((p) => { p.__keep = p.constant; });
+    ctx.sectionPlanes.forEach((p, i) => p.copy(ctx.cellPlanes[i]));
 
     const lg = new THREE.BufferGeometry();
     lg.setAttribute("position", new THREE.Float32BufferAttribute(linePts, 3));
@@ -566,11 +616,23 @@ export default function InterstitialSites() {
     }
     if (ctx.frame) ctx.frame.material.color.setHex(ghosts ? 0xe8eef8 : 0x7d8ca3);
 
-    const half = S.cell === "cube" ? H : cutAxis === 2 ? S.c / 2 : S.a;
-    const n = [0, 0, 0];
-    n[cutAxis] = -1;
-    ctx.slicePlane.normal.set(...n);
-    ctx.slicePlane.constant = cutPos >= 0.999 ? 1e3 : -half + cutPos * 2 * half;
+    const nrm = planeNormal(S, hkl);
+    const cutting = nrm !== null && cutPos < 0.999;
+    if (nrm) {
+      const ext = Math.max(...cellVertices(S).map((v) => Math.abs(dot(nrm, v)))) * 1.02;
+      const offset = -ext + cutPos * 2 * ext;
+      // keep the half-space n.x < offset
+      ctx.slicePlane.normal.set(-nrm[0], -nrm[1], -nrm[2]);
+      ctx.slicePlane.constant = cutting ? offset : 1e3;
+      ctx.cutPlane.visible = cutting;
+      ctx.cutPlane.position.set(nrm[0] * offset, nrm[1] * offset, nrm[2] * offset);
+      ctx.cutPlane.quaternion.setFromUnitVectors(
+        new THREE.Vector3(0, 0, 1), new THREE.Vector3(nrm[0], nrm[1], nrm[2])
+      );
+    } else {
+      ctx.slicePlane.constant = 1e3;
+      ctx.cutPlane.visible = false;
+    }
 
     // ---- caps: a sphere cut by plane (n, c) exposes a disc of radius sqrt(r^2 - d^2)
     const spheres = [...ctx.atomMeshes];
@@ -601,21 +663,21 @@ export default function InterstitialSites() {
       });
     });
     for (let i = used; i < ctx.capPool.length; i++) ctx.capPool[i].visible = false;
-  }, [sid, scale, sites, cage, ghosts, ghostOp, clipCell, cutAxis, cutPos, counted]);
+  }, [sid, scale, sites, cage, ghosts, ghostOp, clipCell, hkl, cutPos, counted]);
 
   const btn = (a) =>
     "flex-1 py-1 text-xs rounded-sm border " +
     (a ? "border-sky-400 bg-sky-900 text-sky-100" : "border-slate-700 text-slate-400 hover:border-slate-500");
 
   return (
-    <div className="w-full h-full flex flex-col bg-slate-950 text-slate-200 font-sans" style={{ height: "100dvh", minHeight: 660 }}>
+    <div className="w-full flex flex-col bg-slate-950 text-slate-200 font-sans" style={{ height: "100dvh" }}>
       <div className="flex items-baseline justify-between px-4 py-2 border-b border-slate-800">
         <h1 className="text-sm font-medium text-slate-100">Interstitial sites &middot; {S.name}</h1>
         <span className="text-xs text-slate-500">drag orbit &middot; scroll zoom &middot; click an atom to count it</span>
       </div>
 
       <div className="flex-1 flex flex-col lg:flex-row min-h-0">
-        <div ref={mountRef} className="flex-1 relative" style={{ minHeight: 380 }}>
+        <div ref={mountRef} className="flex-1 relative min-h-0">
           {status && <div className="absolute inset-0 flex items-center justify-center text-xs text-rose-300 p-6 text-center">{status}</div>}
         </div>
 
@@ -637,12 +699,25 @@ export default function InterstitialSites() {
               <span className="w-10 text-right tabular-nums text-slate-300">{scale.toFixed(2)}</span>
             </div>
             <div className="flex items-center gap-3">
-              <span className="w-16 shrink-0 text-slate-400">Cut</span>
+              <span className="w-16 shrink-0 text-slate-400">Plane</span>
               <div className="flex gap-1 flex-1">
-                {["x", "y", "z"].map((ax, i) => (
-                  <button key={ax} onClick={() => setCutAxis(i)} className={btn(cutAxis === i)}>{ax}</button>
+                {[0, 1, 2].map((i) => (
+                  <input key={i} type="number" min="-6" max="6" step="1" value={hkl[i]}
+                    onChange={(e) => {
+                      const v = Math.max(-6, Math.min(6, Math.round(+e.target.value || 0)));
+                      setHkl(hkl.map((old, j) => (j === i ? v : old)));
+                    }}
+                    className="w-full min-w-0 bg-slate-900 border border-slate-700 rounded-sm px-1 py-0.5 text-center tabular-nums text-slate-200" />
                 ))}
               </div>
+              <span className="w-16 text-right tabular-nums text-amber-300">{hklLabel(S, hkl)}</span>
+            </div>
+            <div className="flex gap-1">
+              {(S.cell === "hex" ? PRESETS_HEX : PRESETS_CUBIC).map((q) => (
+                <button key={q.join()} onClick={() => setHkl(q)} className={btn(hkl.join() === q.join())}>
+                  {hklLabel(S, q)}
+                </button>
+              ))}
             </div>
             <div className="flex items-center gap-3">
               <span className="w-16 shrink-0 text-slate-400">Depth</span>
