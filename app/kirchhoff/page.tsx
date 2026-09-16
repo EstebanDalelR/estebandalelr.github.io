@@ -649,7 +649,7 @@ const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&display=swap');
 .kl{--kl-bg:#0f2a47;--kl-panel:#13345a;--kl-line:rgba(190,215,240,.13);--kl-ink:#eaf2fa;--kl-muted:#8fb0cc;--kl-flow:#ffc15e;--kl-target:#7fe3c6;--kl-bad:#ff8a7a;
   background:var(--kl-bg);color:var(--kl-ink);font-family:'Barlow Semi Condensed',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
-  border-radius:18px;padding:24px;max-width:1080px;margin:0 auto;line-height:1.45}
+  border-radius:18px;padding:24px;max-width:100%;margin:0 auto;line-height:1.45}
 .kl *{box-sizing:border-box}
 .kl p{margin:0 0 8px;font-size:15px}
 .kl-num{font-variant-numeric:tabular-nums}
