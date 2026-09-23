@@ -318,7 +318,9 @@ function Radar({
   const [hoverAxis, setHoverAxis] = useState<number | null>(null);
   const size = 560;
   const c = size / 2;
-  const R = 190;
+  const R = 180;
+  const padX = 150; // room for longest end-anchored labels ("Environmental impact")
+  const padY = 30;
   const n = AXES.length;
 
   const pt = (i: number, v: number) => {
@@ -329,7 +331,12 @@ function Radar({
 
   return (
     <div className="relative">
-      <svg viewBox={`0 0 ${size} ${size}`} className="w-full h-auto" role="img" aria-label="Radar comparison">
+      <svg
+        viewBox={`${-padX} ${-padY} ${size + padX * 2} ${size + padY * 2}`}
+        className="w-full h-auto overflow-visible"
+        role="img"
+        aria-label="Radar comparison"
+      >
         {/* rings */}
         {[2, 4, 6, 8].map((r) => (
           <polygon key={r} points={poly(Array(n).fill(r))} fill="none" stroke="#CBD3DC" strokeWidth={1} />
