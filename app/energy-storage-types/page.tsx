@@ -523,7 +523,7 @@ export default function EnergyStorageRadarPage() {
       </aside>
 
       {/* Main */}
-      <main className="flex-1 px-5 md:px-10 py-8 max-w-5xl">
+      <main className="flex-1 px-5 md:px-10 py-8">
         <header className="mb-4">
           <h2 className="text-2xl font-semibold leading-tight">
             {mode === "family" ? "Storage families compared" : series.length ? "Selected technologies" : "Pick technologies to compare"}
