@@ -20,7 +20,7 @@ export default function MechThermalVisual({ visual }: { visual: string }) {
         <Label x={220} y={350} size={12} color={C.dim}>
           vacuum housing · bearings
         </Label>
-        <motion.g animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }} style={{ originX: "220px", originY: "205px" }}>
+        <motion.g animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
           <circle cx={220} cy={205} r={85} fill="#93c5fd" opacity={0.3} stroke="#93c5fd" strokeWidth={3} />
           <path d="M220 120 L220 290 M135 205 L305 205" stroke="#93c5fd" strokeWidth={4} />
         </motion.g>

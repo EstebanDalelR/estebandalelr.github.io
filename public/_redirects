@@ -1,0 +1,9 @@
+# Cloudflare Pages: the course tools moved under the Battery Masters home.
+/interstitial-sites    /batteries/interstitial-sites    302
+/interstitial-sites/   /batteries/interstitial-sites    302
+/phase-diagrams        /batteries/phase-diagrams        302
+/phase-diagrams/       /batteries/phase-diagrams        302
+/energy-storage-types  /batteries/energy-storage-types  302
+/energy-storage-types/ /batteries/energy-storage-types  302
+/kirchhoff             /batteries/kirchhoff             302
+/kirchhoff/            /batteries/kirchhoff             302

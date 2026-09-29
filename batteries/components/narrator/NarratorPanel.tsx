@@ -11,6 +11,8 @@ type Props = {
   chapterId: string;
   step: Step;
   paused: boolean;
+  /** Playback speed, e.g. 1.5 for 1.5×. */
+  rate: number;
   subtitles: boolean;
   onToggleSubtitles: () => void;
   onFinished?: () => void;
@@ -30,7 +32,7 @@ export const isTyping = (target: EventTarget | null) =>
  * shows timed subtitles. Steps without a recording fall back to a timed
  * "reading" so the page works before any audio exists.
  */
-export default function NarratorPanel({ courseId, chapterId, step, paused, subtitles, onToggleSubtitles, onFinished, onCue }: Props) {
+export default function NarratorPanel({ courseId, chapterId, step, paused, rate, subtitles, onToggleSubtitles, onFinished, onCue }: Props) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const timingsRef = useRef<Timings>({});
@@ -38,6 +40,8 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, subti
   onFinishedRef.current = onFinished;
   const pausedRef = useRef(paused);
   pausedRef.current = paused;
+  const rateRef = useRef(rate);
+  rateRef.current = rate;
 
   const [mouth, setMouth] = useState(0);
   const [cue, setCue] = useState<string>("");
@@ -75,9 +79,9 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, subti
     const audio = audioRef.current;
     let raf = 0;
     let cancelled = false;
-    let fallbackStart = 0;
-    let pauseOffset = 0; // ms spent paused, shifts the fallback clock forward
-    let pausedSince = 0;
+    // Fallback "reading" clock in narration seconds; advances at the playback rate.
+    let fallbackT = 0;
+    let lastFrame = 0;
     let useFallback = !audio;
     let duration = fallbackDuration(step.text);
     let cues = buildCues(step.text, duration);
@@ -92,19 +96,16 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, subti
       onFinishedRef.current?.();
     };
 
-    const elapsed = () => {
-      if (!useFallback) return audio!.currentTime;
-      const now = pausedSince || performance.now();
-      return (now - fallbackStart - pauseOffset) / 1000;
-    };
+    const elapsed = () => (useFallback ? fallbackT : audio!.currentTime);
 
     const seek = (delta: number) => {
       const t = Math.max(0, Math.min(duration, elapsed() + delta));
-      if (useFallback) fallbackStart -= (t - elapsed()) * 1000;
+      if (useFallback) fallbackT = t;
       else audio!.currentTime = t;
       setCue(cues.find((c) => t >= c.start && t < c.end)?.text ?? "");
       if (done && t < duration) {
         done = false;
+        lastFrame = 0;
         setSpeaking(true);
         if (!useFallback && !pausedRef.current) audio!.play().catch(() => {});
         raf = requestAnimationFrame(tick);
@@ -123,25 +124,24 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, subti
       useFallback = true;
       duration = fallbackDuration(step.text);
       cues = buildCues(step.text, duration);
-      fallbackStart = performance.now();
-      pauseOffset = 0;
+      fallbackT = 0;
+      lastFrame = 0;
     };
 
     const tick = () => {
       if (cancelled) return;
       if (pausedRef.current) {
-        if (!pausedSince) pausedSince = performance.now();
+        lastFrame = 0;
         raf = requestAnimationFrame(tick);
         return;
-      }
-      if (pausedSince) {
-        pauseOffset += performance.now() - pausedSince;
-        pausedSince = 0;
       }
       let t: number;
       let level: number;
       if (useFallback) {
-        t = (performance.now() - fallbackStart - pauseOffset) / 1000;
+        const now = performance.now();
+        if (lastFrame) fallbackT += ((now - lastFrame) / 1000) * rateRef.current;
+        lastFrame = now;
+        t = fallbackT;
         // No voice to analyse: fake a talking rhythm.
         level = 0.35 + 0.35 * Math.sin(t * 17) * Math.sin(t * 5.3);
         if (t >= duration) {
@@ -167,6 +167,8 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, subti
     } else {
       audio!.pause();
       audio!.src = audioSrc(courseId, chapterId, step.id);
+      // A new src resets playbackRate to the default, so set both.
+      audio!.defaultPlaybackRate = audio!.playbackRate = rateRef.current;
       audio!.onloadedmetadata = () => {
         const exact = timingsRef.current[key];
         duration = audio!.duration;
@@ -192,6 +194,11 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, subti
       }
     };
   }, [courseId, chapterId, step]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) audio.defaultPlaybackRate = audio.playbackRate = rate;
+  }, [rate]);
 
   // Pause/resume the underlying audio element when the transport pause toggles.
   useEffect(() => {

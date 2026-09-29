@@ -9,6 +9,10 @@ import ReferenceSlide from "@batteries/components/reference/ReferenceSlide";
 import ScrollSection from "@batteries/components/scrolly/ScrollSection";
 import { getCourse } from "@batteries/lib/courses";
 
+const SPEEDS = [0.75, 1, 1.25, 1.5, 2];
+const SPEED_KEY = "battery-masters:speed";
+const formatSpeed = (s: number) => `${s}×`;
+
 /** A narrated, full-screen slide video for one course. */
 export default function Explainer({ courseId }: { courseId: string }) {
   const { narration } = getCourse(courseId);
@@ -19,6 +23,24 @@ export default function Explainer({ courseId }: { courseId: string }) {
   const [autoAdvance, setAutoAdvance] = useState(false);
   const [paused, setPaused] = useState(false);
   const [spoken, setSpoken] = useState("");
+  const [speed, setSpeed] = useState(1);
+
+  // Remember the listener's speed between visits (best effort: storage may be blocked).
+  useEffect(() => {
+    try {
+      const saved = Number(localStorage.getItem(SPEED_KEY));
+      if (SPEEDS.includes(saved)) setSpeed(saved);
+    } catch {}
+  }, []);
+  const changeSpeed = useCallback((delta: number) => {
+    setSpeed((s) => {
+      const next = SPEEDS[(SPEEDS.indexOf(s) + delta + SPEEDS.length) % SPEEDS.length];
+      try {
+        localStorage.setItem(SPEED_KEY, String(next));
+      } catch {}
+      return next;
+    });
+  }, []);
   // Slide a skip is scrolling towards; `pos` lags until the smooth scroll lands.
   const pendingRef = useRef<number | null>(null);
 
@@ -73,13 +95,15 @@ export default function Explainer({ courseId }: { courseId: string }) {
       else if (e.key === "ArrowUp") goToStep(-1);
       else if (e.key === "ArrowDown") goToStep(1);
       else if (e.key === "c" || e.key === "C") setSubtitles((v) => !v);
+      else if (e.key === ">") changeSpeed(1);
+      else if (e.key === "<") changeSpeed(-1);
       else return;
       // Also stops a focused button from treating Space as a click (double toggle).
       e.preventDefault();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [started, goToStep]);
+  }, [started, goToStep, changeSpeed]);
 
   const chapter = chapters[pos.chapter];
   const step = chapter.steps[pos.step];
@@ -109,6 +133,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
             chapterId={chapter.id}
             step={step}
             paused={paused}
+            rate={speed}
             subtitles={subtitles}
             onToggleSubtitles={() => setSubtitles((v) => !v)}
             onFinished={next}
@@ -138,6 +163,16 @@ export default function Explainer({ courseId }: { courseId: string }) {
               className="rounded-full border border-white/10 bg-panel px-3 py-1.5 text-xs text-ink/80 hover:text-ink"
             >
               ⏭
+            </button>
+            <button
+              onClick={() => changeSpeed(1)}
+              aria-label={`Playback speed ${formatSpeed(speed)}`}
+              title="Playback speed (< / >)"
+              className={`min-w-[3.25rem] rounded-full border px-3 py-1.5 text-xs tabular-nums ${
+                speed === 1 ? "border-white/10 bg-panel text-ink/80 hover:text-ink" : "border-accent bg-accent/20 text-accent"
+              }`}
+            >
+              {formatSpeed(speed)}
             </button>
             <button
               onClick={() => setAutoAdvance((a) => !a)}
@@ -170,7 +205,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
               >
                 ▶ Start
               </button>
-              <p className="mt-4 text-xs text-ink/50">Space pause · ←/→ seek · ↑/↓ slides · C subtitles</p>
+              <p className="mt-4 text-xs text-ink/50">Space pause · ←/→ seek · ↑/↓ slides · &lt;/&gt; speed · C subtitles</p>
             </div>
           </motion.div>
         )}
