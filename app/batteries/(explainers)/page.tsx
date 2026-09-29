@@ -4,6 +4,12 @@ import { COURSES } from "@batteries/lib/courses";
 
 const TOOLS = [
   {
+    href: "/batteries/programme",
+    course: "TBT2M programme",
+    name: "Programme Map",
+    blurb: "Every course by semester and track: what it needs, what it unlocks, and your progress to the thesis.",
+  },
+  {
     href: "/batteries/phase-diagrams",
     course: "Materials Chemistry",
     name: "Phase Diagram Explorer",
