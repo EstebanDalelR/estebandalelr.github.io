@@ -1,0 +1,307 @@
+{
+  "title": "Electric Circuits & the Grid — Exam Explainer",
+  "course": "1KB744 Introduction to Energy Storage, Uppsala University",
+  "examSource": "Exam questions: 2022 exam and the course's typical exam questions.",
+  "chapters": [
+    {
+      "id": "intro",
+      "title": "Why Electricity?",
+      "exam": [],
+      "steps": [
+        {
+          "id": "why",
+          "visual": "why",
+          "text": "Hi again! Before we talk about storing energy, we need the language of electricity. Why move energy as electricity at all? It is easy to convert into other forms, easy to send over long distances, clean where it is used, and the losses along the way are relatively small."
+        },
+        {
+          "id": "chain",
+          "visual": "chain",
+          "text": "Today's power system is a chain. Generators turn mechanical power into electric power. Transformers step the voltage up, high voltage lines carry it across the country, and transformers step it back down for households and industry. The new links in the chain are distributed production, and energy storage."
+        },
+        {
+          "id": "sweden",
+          "visual": "sweden",
+          "text": "Here is Sweden on 18 August 2022: half hydropower, a third nuclear, 12% wind. Production and consumption never match exactly, and at that moment Sweden was exporting 2.3 GW. Smoothing that difference is one of the main jobs of energy storage in the grid."
+        }
+      ]
+    },
+    {
+      "id": "current",
+      "title": "Charge and Current",
+      "exam": [
+        "2022 Q2a",
+        "2022 Q2b"
+      ],
+      "steps": [
+        {
+          "id": "charge",
+          "visual": "charge",
+          "text": "In a copper atom, the outer electron is only loosely bound. Give it a little energy and it leaves the atom. Those free electrons carry charge, and moving charge carries energy."
+        },
+        {
+          "id": "definition",
+          "visual": "definition",
+          "equation": "i(t) = \\frac{dq(t)}{dt} \\qquad 1\\,\\mathrm{A} = 1\\,\\mathrm{C/s}",
+          "text": "Current is the amount of charge passing a point per second. 1 A is 1 C per second. Note the convention: current is defined in the direction positive charge would move, which is opposite to the electrons."
+        },
+        {
+          "id": "coulomb",
+          "visual": "coulomb",
+          "text": "Careful, this is a classic exam slip. 1 C is not one mole of electrons. 1 C is about 6.24 × 10¹⁸ electrons. A whole mole of electrons carries 96,485 C, the Faraday constant."
+        },
+        {
+          "id": "danger",
+          "visual": "danger",
+          "text": "How much current is dangerous? About 1 mA through the body, you just feel it. Around 10 mA, muscles cramp and you may not be able to let go. From roughly 50 to 100 mA across the chest, the heart can go into fibrillation. It is the current that kills, and the voltage decides how much current flows."
+        }
+      ]
+    },
+    {
+      "id": "voltage",
+      "title": "Voltage",
+      "exam": [
+        "2022 Q2a"
+      ],
+      "steps": [
+        {
+          "id": "potential",
+          "visual": "potential",
+          "equation": "V = \\frac{E}{Q} \\qquad 1\\,\\mathrm{V} = 1\\,\\mathrm{J/C}",
+          "text": "Voltage is the difference in electric potential between two points. It tells you how much energy each coulomb of charge gains or gives up when it moves between them. 1 V is 1 J per coulomb."
+        },
+        {
+          "id": "hill",
+          "visual": "hill",
+          "text": "Think of it as height. A voltage source lifts charges up a hill, and they give that energy away as they flow down through the circuit. And just like height, voltage is always measured between two points, never at one point alone."
+        }
+      ]
+    },
+    {
+      "id": "resistance",
+      "title": "Resistance, Resistivity and Power",
+      "exam": [
+        "2022 Q2c"
+      ],
+      "steps": [
+        {
+          "id": "ohm",
+          "visual": "ohm",
+          "equation": "v(t) = R\\,i(t) \\qquad 1\\,\\Omega = 1\\,\\mathrm{V/A}",
+          "text": "A resistor has a linear relation between the current through it and the voltage across it. That is Ohm's law. The resistance, in ohms, is the voltage needed per ampere."
+        },
+        {
+          "id": "resistivity",
+          "visual": "resistivity",
+          "equation": "R = \\rho\\,\\frac{L}{A}",
+          "text": "Resistance versus resistivity. Resistivity, rho, is a property of the material: copper is low, rubber is huge. Resistance is a property of a specific component. It grows with length and shrinks with cross sectional area. Same copper, a longer and thinner wire, more resistance."
+        },
+        {
+          "id": "power",
+          "visual": "power",
+          "equation": "p = v\\,i = R\\,i^2 = \\frac{v^2}{R}",
+          "text": "Power is voltage times current. In a resistor that becomes R i squared: double the current and the heat quadruples. That is exactly why the grid transmits power at high voltage, to keep the current, and the losses, small."
+        }
+      ]
+    },
+    {
+      "id": "series",
+      "title": "Series Circuits and Kirchhoff's Voltage Law",
+      "exam": [
+        "2022 Q2d"
+      ],
+      "steps": [
+        {
+          "id": "series",
+          "visual": "series",
+          "equation": "R_{tot} = R_1 + R_2 + R_3",
+          "text": "In a series circuit, the same current flows through every component, and the resistances simply add up."
+        },
+        {
+          "id": "kvl",
+          "visual": "kvl",
+          "equation": "\\sum_{j=1}^{N} V_j = 0",
+          "text": "Kirchhoff's voltage law: around any closed loop, the voltages add up to zero. A charge that comes back to where it started has gained exactly as much energy as it gave away."
+        },
+        {
+          "id": "walk",
+          "visual": "walk",
+          "text": "Let's walk the loop. 36 V across 1, 3 and 2 kΩ gives 6 mA. The potential drops 6 V over the first resistor, 18 V over the second, and the last 12 V over the third, back to 0."
+        },
+        {
+          "id": "divider",
+          "visual": "divider",
+          "equation": "V_{R_1} = \\frac{R_1}{R_1 + R_2}\\,V",
+          "text": "That is a voltage divider. The source voltage splits over the resistors in proportion to their resistance."
+        }
+      ]
+    },
+    {
+      "id": "parallel",
+      "title": "Parallel Circuits and Kirchhoff's Current Law",
+      "exam": [
+        "2022 Q2d",
+        "Typical: KCL"
+      ],
+      "steps": [
+        {
+          "id": "kcl",
+          "visual": "kcl",
+          "equation": "\\sum_{j=1}^{N} I_j = 0",
+          "text": "Kirchhoff's current law: the algebraic sum of all currents into a node is zero. Whatever flows in must flow out, because charge cannot pile up in a wire."
+        },
+        {
+          "id": "parallel",
+          "visual": "parallel",
+          "equation": "\\frac{1}{R_{tot}} = \\frac{1}{R_1} + \\frac{1}{R_2}",
+          "text": "In parallel, every branch sees the same voltage, and the currents add. So the conductances add. Connecting resistances in parallel always lowers the total resistance, below even the smallest one, because you are opening extra paths for the current."
+        },
+        {
+          "id": "example",
+          "visual": "example",
+          "text": "Example: 27 mA enters a node and 21 mA goes through R₁, so 6 mA must go through R₂, which is 7 Ω. Both see the same voltage, so R₁ is 6 mA times 7 Ω divided by 21 mA, which is 2 Ω."
+        }
+      ]
+    },
+    {
+      "id": "ac",
+      "title": "AC Voltage, RMS and Three Phase",
+      "exam": [],
+      "steps": [
+        {
+          "id": "sine",
+          "visual": "sine",
+          "equation": "v(t) = V_{max}\\sin(\\omega t + \\varphi)",
+          "text": "The grid runs on alternating current. The voltage swings as a sine wave, 50 times a second. In a Swedish socket the peak is about 325 V."
+        },
+        {
+          "id": "rms",
+          "visual": "rms",
+          "equation": "V_{rms} = \\frac{V_{max}}{\\sqrt{2}} \\qquad P_{avg} = V_{rms}\\,I_{rms}",
+          "text": "The average of a sine wave is zero, which is useless for power. So we use the root mean square: the peak divided by √2. 325 V peak is 230 V RMS, and average power is V RMS times I RMS."
+        },
+        {
+          "id": "three-phase",
+          "visual": "three-phase",
+          "text": "Three phase uses three sine waves shifted by a third of a cycle, 120°. Each phase pulses, but their sum delivers constant total power. That smooth power is why generators and big motors love three phase."
+        }
+      ]
+    },
+    {
+      "id": "impedance",
+      "title": "Capacitors, Inductors and Impedance",
+      "exam": [
+        "2022 Q2e"
+      ],
+      "steps": [
+        {
+          "id": "capacitor",
+          "visual": "capacitor",
+          "equation": "W = \\tfrac{1}{2} C v_C^2 \\qquad v_C = E\\left(1 - e^{-t/RC}\\right)",
+          "text": "A capacitor stores energy in an electric field. Charge it through a resistor and the current starts high, while the voltage rises slowly. Voltage now lags behind current."
+        },
+        {
+          "id": "inductor",
+          "visual": "inductor",
+          "text": "An inductor is a coiled conductor that stores energy in a magnetic field. It resists changes in current: switch it on, and the voltage jumps first while the current builds up slowly. Now current lags behind voltage."
+        },
+        {
+          "id": "impedance",
+          "visual": "impedance",
+          "equation": "Z = R + jX \\qquad V = I\\,Z",
+          "text": "Resistance versus impedance. Resistance is the opposition to current in a DC circuit. Impedance is the AC version. It includes resistance plus the reactance of capacitors and inductors, so it has both a size and a phase shift, and it depends on frequency. Ohm's law becomes V equals I Z."
+        }
+      ]
+    },
+    {
+      "id": "sync",
+      "title": "Generators, Synchronisation and Inertia",
+      "exam": [
+        "Typical: synchronised generators",
+        "Typical: power mismatch"
+      ],
+      "steps": [
+        {
+          "id": "generator",
+          "visual": "generator",
+          "equation": "P = \\omega\\,T = V\\,I",
+          "text": "A generator links the mechanical and electrical worlds. Its rotational speed sets the voltage and frequency, and the electrical load shows up as a braking torque on the shaft. Mechanical power in, electrical power out."
+        },
+        {
+          "id": "synchronised",
+          "visual": "synchronised",
+          "text": "All the big generators in the grid spin in sync at 50 Hz. The advantage: together they form one huge rotating mass. That inertia stores kinetic energy, and it shares any sudden disturbance across the whole system, so no single plant has to take the hit."
+        },
+        {
+          "id": "mismatch",
+          "visual": "mismatch",
+          "text": "What if production and consumption don't match? If consumption is larger, the missing energy is taken from the rotating masses, the generators slow down, and the frequency drops. If production is larger, they speed up and the frequency rises. Inertia buys time, but the balance must be restored, or protection systems start disconnecting load."
+        }
+      ]
+    },
+    {
+      "id": "frequency",
+      "title": "Primary and Secondary Frequency Regulation",
+      "exam": [
+        "2022 Q3a"
+      ],
+      "steps": [
+        {
+          "id": "primary",
+          "visual": "primary",
+          "text": "Primary control reacts within seconds. Reserves respond automatically to the frequency deviation and stop the fall, stabilising the frequency. But it stabilises at a value that is not quite 50 Hz."
+        },
+        {
+          "id": "secondary",
+          "visual": "secondary",
+          "text": "Secondary control acts within a few minutes. It changes production to bring the frequency back to 50 Hz, and frees the primary reserves for the next disturbance."
+        },
+        {
+          "id": "bands",
+          "visual": "bands",
+          "text": "In the Nordic grid, between 49.9 and 50.1 Hz, normal operation reserves keep the frequency steady. Between 49.5 and 49.9 Hz, disturbance reserves kick in. Fast storage like batteries is ideal for this kind of reserve."
+        }
+      ]
+    },
+    {
+      "id": "power-electronics",
+      "title": "Why Renewables Need Power Electronics",
+      "exam": [
+        "2022 Q3b"
+      ],
+      "steps": [
+        {
+          "id": "mismatch",
+          "visual": "renewables",
+          "text": "Why can't most renewable generators connect directly to the grid? A wind turbine's speed follows the wind, so its generator produces a varying frequency and voltage. Solar panels produce direct current. Neither is 50 Hz AC, synchronised to the grid."
+        },
+        {
+          "id": "converter",
+          "visual": "converter",
+          "text": "The solution is power electronics. A rectifier turns the generator's output into DC, and an inverter turns that DC into AC at exactly the grid's voltage, frequency and phase. Careful: a transformer cannot do this. A transformer only changes voltage, never frequency."
+        },
+        {
+          "id": "switching",
+          "visual": "switching",
+          "text": "How does it work? Fast switches. Chop a 5 V source on and off into a 1 Ω load, and the average voltage follows the fraction of time the switch is on. Control the on time, and you control voltage, current and power from 0 to full."
+        },
+        {
+          "id": "inertia",
+          "visual": "inertia-loss",
+          "text": "The price: a converter-connected turbine is decoupled from the grid, so its rotating mass no longer adds inertia. More renewables means less inertia, and faster frequency swings. That is a key reason the grid needs fast energy storage."
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "title": "Recap",
+      "exam": [],
+      "steps": [
+        {
+          "id": "recap",
+          "visual": "recap",
+          "text": "Recap. Current is charge per second, voltage is energy per charge, and resistance links them. Kirchhoff says voltages around a loop and currents into a node both sum to zero. In the AC grid, synchronised generators share inertia, frequency tells you the balance, and power electronics connect renewables, at the cost of that inertia. Good luck!"
+        }
+      ]
+    }
+  ]
+}

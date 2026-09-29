@@ -1,0 +1,42 @@
+/* Battery Masters styles. Tailwind layers come from styles/index.css; everything
+   here is scoped so the rest of the site keeps its own look. */
+
+.battery-masters {
+  --bg: #0b1220;
+  --panel: #111a2c;
+  --ink: #e6edf7;
+  --accent: #3dd6c6;
+  /* Bottom band kept clear of slide content: transport controls + subtitles. */
+  --caption-space: 13rem;
+  min-height: 100vh;
+  color: var(--ink);
+  background: var(--bg);
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+@media (min-width: 640px) {
+  .battery-masters {
+    --caption-space: 10rem;
+  }
+}
+
+/* One slide = one screen; dvh tracks mobile browser chrome, vh is the fallback. */
+.battery-masters .h-slide {
+  height: 100vh;
+  height: 100dvh;
+}
+.battery-masters .-mt-slide {
+  margin-top: -100vh;
+  margin-top: -100dvh;
+}
+
+html:has(.battery-masters) {
+  scroll-behavior: smooth;
+}
+body:has(.battery-masters) {
+  background: #0b1220;
+}
+
+.battery-masters .katex {
+  font-size: 1.15em;
+}

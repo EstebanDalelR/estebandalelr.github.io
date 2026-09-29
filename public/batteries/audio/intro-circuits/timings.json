@@ -1,0 +1,762 @@
+{
+ "intro/why": {
+  "duration": 18.32,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.0,
+    "text": "Hi again!"
+   },
+   {
+    "start": 1.28,
+    "end": 5.36,
+    "text": "Before we talk about storing energy, we need the language of electricity."
+   },
+   {
+    "start": 5.64,
+    "end": 8.56,
+    "text": "Why move energy as electricity at all?"
+   },
+   {
+    "start": 8.84,
+    "end": 17.92,
+    "text": "It is easy to convert into other forms, easy to send over long distances, clean where it is used, and the losses along the way are relatively small."
+   }
+  ]
+ },
+ "intro/chain": {
+  "duration": 19.96,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.6,
+    "text": "Today's power system is a chain."
+   },
+   {
+    "start": 2.88,
+    "end": 6.2,
+    "text": "Generators turn mechanical power into electric power."
+   },
+   {
+    "start": 6.48,
+    "end": 14.88,
+    "text": "Transformers step the voltage up, high voltage lines carry it across the country, and transformers step it back down for households and industry."
+   },
+   {
+    "start": 15.16,
+    "end": 19.56,
+    "text": "The new links in the chain are distributed production, and energy storage."
+   }
+  ]
+ },
+ "intro/sweden": {
+  "duration": 20.8,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 8.04,
+    "text": "Here is Sweden on 18 August 2022: half hydropower, a third nuclear, 12% wind."
+   },
+   {
+    "start": 8.32,
+    "end": 15.56,
+    "text": "Production and consumption never match exactly, and at that moment Sweden was exporting 2.3 GW."
+   },
+   {
+    "start": 15.84,
+    "end": 20.4,
+    "text": "Smoothing that difference is one of the main jobs of energy storage in the grid."
+   }
+  ]
+ },
+ "current/charge": {
+  "duration": 12.2,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.6,
+    "text": "In a copper atom, the outer electron is only loosely bound."
+   },
+   {
+    "start": 3.88,
+    "end": 6.72,
+    "text": "Give it a little energy and it leaves the atom."
+   },
+   {
+    "start": 7.0,
+    "end": 11.8,
+    "text": "Those free electrons carry charge, and moving charge carries energy."
+   }
+  ]
+ },
+ "current/definition": {
+  "duration": 14.72,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.88,
+    "text": "Current is the amount of charge passing a point per second."
+   },
+   {
+    "start": 4.16,
+    "end": 6.8,
+    "text": "1 A is 1 C per second."
+   },
+   {
+    "start": 7.08,
+    "end": 14.32,
+    "text": "Note the convention: current is defined in the direction positive charge would move, which is opposite to the electrons."
+   }
+  ]
+ },
+ "current/coulomb": {
+  "duration": 18.16,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.88,
+    "text": "Careful, this is a classic exam slip."
+   },
+   {
+    "start": 3.16,
+    "end": 6.16,
+    "text": "1 C is not one mole of electrons."
+   },
+   {
+    "start": 6.44,
+    "end": 10.44,
+    "text": "1 C is about 6.24 × 10¹⁸ electrons."
+   },
+   {
+    "start": 10.72,
+    "end": 17.76,
+    "text": "A whole mole of electrons carries 96,485 C, the Faraday constant."
+   }
+  ]
+ },
+ "current/danger": {
+  "duration": 22.04,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.08,
+    "text": "How much current is dangerous?"
+   },
+   {
+    "start": 2.36,
+    "end": 5.68,
+    "text": "About 1 mA through the body, you just feel it."
+   },
+   {
+    "start": 5.96,
+    "end": 10.44,
+    "text": "Around 10 mA, muscles cramp and you may not be able to let go."
+   },
+   {
+    "start": 10.72,
+    "end": 16.56,
+    "text": "From roughly 50 to 100 mA across the chest, the heart can go into fibrillation."
+   },
+   {
+    "start": 16.84,
+    "end": 21.64,
+    "text": "It is the current that kills, and the voltage decides how much current flows."
+   }
+  ]
+ },
+ "voltage/potential": {
+  "duration": 12.92,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.88,
+    "text": "Voltage is the difference in electric potential between two points."
+   },
+   {
+    "start": 4.16,
+    "end": 9.68,
+    "text": "It tells you how much energy each coulomb of charge gains or gives up when it moves between them."
+   },
+   {
+    "start": 9.96,
+    "end": 12.52,
+    "text": "1 V is 1 J per coulomb."
+   }
+  ]
+ },
+ "voltage/hill": {
+  "duration": 15.2,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.72,
+    "text": "Think of it as height."
+   },
+   {
+    "start": 2.0,
+    "end": 9.04,
+    "text": "A voltage source lifts charges up a hill, and they give that energy away as they flow down through the circuit."
+   },
+   {
+    "start": 9.32,
+    "end": 14.8,
+    "text": "And just like height, voltage is always measured between two points, never at one point alone."
+   }
+  ]
+ },
+ "resistance/ohm": {
+  "duration": 13.24,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.88,
+    "text": "A resistor has a linear relation between the current through it and the voltage across it."
+   },
+   {
+    "start": 6.16,
+    "end": 8.0,
+    "text": "That is Ohm's law."
+   },
+   {
+    "start": 8.28,
+    "end": 12.84,
+    "text": "The resistance, in ohms, is the voltage needed per ampere."
+   }
+  ]
+ },
+ "resistance/resistivity": {
+  "duration": 22.04,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.84,
+    "text": "Resistance versus resistivity."
+   },
+   {
+    "start": 3.12,
+    "end": 9.8,
+    "text": "Resistivity, rho, is a property of the material: copper is low, rubber is huge."
+   },
+   {
+    "start": 10.08,
+    "end": 13.2,
+    "text": "Resistance is a property of a specific component."
+   },
+   {
+    "start": 13.48,
+    "end": 17.0,
+    "text": "It grows with length and shrinks with cross sectional area."
+   },
+   {
+    "start": 17.28,
+    "end": 21.64,
+    "text": "Same copper, a longer and thinner wire, more resistance."
+   }
+  ]
+ },
+ "resistance/power": {
+  "duration": 15.48,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.72,
+    "text": "Power is voltage times current."
+   },
+   {
+    "start": 3.0,
+    "end": 8.36,
+    "text": "In a resistor that becomes R i squared: double the current and the heat quadruples."
+   },
+   {
+    "start": 8.64,
+    "end": 15.08,
+    "text": "That is exactly why the grid transmits power at high voltage, to keep the current, and the losses, small."
+   }
+  ]
+ },
+ "series/series": {
+  "duration": 6.2,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.8,
+    "text": "In a series circuit, the same current flows through every component, and the resistances simply add up."
+   }
+  ]
+ },
+ "series/kvl": {
+  "duration": 11.84,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.24,
+    "text": "Kirchhoff's voltage law: around any closed loop, the voltages add up to zero."
+   },
+   {
+    "start": 5.52,
+    "end": 11.44,
+    "text": "A charge that comes back to where it started has gained exactly as much energy as it gave away."
+   }
+  ]
+ },
+ "series/walk": {
+  "duration": 16.28,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.64,
+    "text": "Let's walk the loop."
+   },
+   {
+    "start": 1.92,
+    "end": 7.2,
+    "text": "36 V across 1, 3 and 2 kΩ gives 6 mA."
+   },
+   {
+    "start": 7.48,
+    "end": 15.88,
+    "text": "The potential drops 6 V over the first resistor, 18 V over the second, and the last 12 V over the third, back to 0."
+   }
+  ]
+ },
+ "series/divider": {
+  "duration": 7.44,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.76,
+    "text": "That is a voltage divider."
+   },
+   {
+    "start": 2.04,
+    "end": 7.04,
+    "text": "The source voltage splits over the resistors in proportion to their resistance."
+   }
+  ]
+ },
+ "parallel/kcl": {
+  "duration": 10.44,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.64,
+    "text": "Kirchhoff's current law: the algebraic sum of all currents into a node is zero."
+   },
+   {
+    "start": 4.92,
+    "end": 10.04,
+    "text": "Whatever flows in must flow out, because charge cannot pile up in a wire."
+   }
+  ]
+ },
+ "parallel/parallel": {
+  "duration": 17.36,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.88,
+    "text": "In parallel, every branch sees the same voltage, and the currents add."
+   },
+   {
+    "start": 5.16,
+    "end": 7.16,
+    "text": "So the conductances add."
+   },
+   {
+    "start": 7.44,
+    "end": 16.96,
+    "text": "Connecting resistances in parallel always lowers the total resistance, below even the smallest one, because you are opening extra paths for the current."
+   }
+  ]
+ },
+ "parallel/example": {
+  "duration": 16.4,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 9.24,
+    "text": "Example: 27 mA enters a node and 21 mA goes through R₁, so 6 mA must go through R₂, which is 7 Ω."
+   },
+   {
+    "start": 9.52,
+    "end": 16.0,
+    "text": "Both see the same voltage, so R₁ is 6 mA times 7 Ω divided by 21 mA, which is 2 Ω."
+   }
+  ]
+ },
+ "ac/sine": {
+  "duration": 12.32,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.72,
+    "text": "The grid runs on alternating current."
+   },
+   {
+    "start": 3.0,
+    "end": 6.8,
+    "text": "The voltage swings as a sine wave, 50 times a second."
+   },
+   {
+    "start": 7.08,
+    "end": 11.92,
+    "text": "In a Swedish socket the peak is about 325 V."
+   }
+  ]
+ },
+ "ac/rms": {
+  "duration": 18.48,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.0,
+    "text": "The average of a sine wave is zero, which is useless for power."
+   },
+   {
+    "start": 4.28,
+    "end": 8.76,
+    "text": "So we use the root mean square: the peak divided by √2."
+   },
+   {
+    "start": 9.04,
+    "end": 18.08,
+    "text": "325 V peak is 230 V RMS, and average power is V RMS times I RMS."
+   }
+  ]
+ },
+ "ac/three-phase": {
+  "duration": 14.84,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.8,
+    "text": "Three phase uses three sine waves shifted by a third of a cycle, 120°."
+   },
+   {
+    "start": 5.08,
+    "end": 9.36,
+    "text": "Each phase pulses, but their sum delivers constant total power."
+   },
+   {
+    "start": 9.64,
+    "end": 14.44,
+    "text": "That smooth power is why generators and big motors love three phase."
+   }
+  ]
+ },
+ "impedance/capacitor": {
+  "duration": 11.72,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.24,
+    "text": "A capacitor stores energy in an electric field."
+   },
+   {
+    "start": 3.52,
+    "end": 8.32,
+    "text": "Charge it through a resistor and the current starts high, while the voltage rises slowly."
+   },
+   {
+    "start": 8.6,
+    "end": 11.32,
+    "text": "Voltage now lags behind current."
+   }
+  ]
+ },
+ "impedance/inductor": {
+  "duration": 14.76,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.92,
+    "text": "An inductor is a coiled conductor that stores energy in a magnetic field."
+   },
+   {
+    "start": 5.2,
+    "end": 11.76,
+    "text": "It resists changes in current: switch it on, and the voltage jumps first while the current builds up slowly."
+   },
+   {
+    "start": 12.04,
+    "end": 14.36,
+    "text": "Now current lags behind voltage."
+   }
+  ]
+ },
+ "impedance/impedance": {
+  "duration": 22.92,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.32,
+    "text": "Resistance versus impedance."
+   },
+   {
+    "start": 2.6,
+    "end": 6.76,
+    "text": "Resistance is the opposition to current in a DC circuit."
+   },
+   {
+    "start": 7.04,
+    "end": 9.4,
+    "text": "Impedance is the AC version."
+   },
+   {
+    "start": 9.68,
+    "end": 18.4,
+    "text": "It includes resistance plus the reactance of capacitors and inductors, so it has both a size and a phase shift, and it depends on frequency."
+   },
+   {
+    "start": 18.68,
+    "end": 22.52,
+    "text": "Ohm's law becomes V equals I Z."
+   }
+  ]
+ },
+ "sync/generator": {
+  "duration": 14.8,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.8,
+    "text": "A generator links the mechanical and electrical worlds."
+   },
+   {
+    "start": 4.08,
+    "end": 11.12,
+    "text": "Its rotational speed sets the voltage and frequency, and the electrical load shows up as a braking torque on the shaft."
+   },
+   {
+    "start": 11.4,
+    "end": 14.4,
+    "text": "Mechanical power in, electrical power out."
+   }
+  ]
+ },
+ "sync/synchronised": {
+  "duration": 17.48,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.0,
+    "text": "All the big generators in the grid spin in sync at 50 Hz."
+   },
+   {
+    "start": 5.28,
+    "end": 9.44,
+    "text": "The advantage: together they form one huge rotating mass."
+   },
+   {
+    "start": 9.72,
+    "end": 17.08,
+    "text": "That inertia stores kinetic energy, and it shares any sudden disturbance across the whole system, so no single plant has to take the hit."
+   }
+  ]
+ },
+ "sync/mismatch": {
+  "duration": 22.04,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.56,
+    "text": "What if production and consumption don't match?"
+   },
+   {
+    "start": 2.84,
+    "end": 11.52,
+    "text": "If consumption is larger, the missing energy is taken from the rotating masses, the generators slow down, and the frequency drops."
+   },
+   {
+    "start": 11.8,
+    "end": 15.8,
+    "text": "If production is larger, they speed up and the frequency rises."
+   },
+   {
+    "start": 16.08,
+    "end": 21.64,
+    "text": "Inertia buys time, but the balance must be restored, or protection systems start disconnecting load."
+   }
+  ]
+ },
+ "frequency/primary": {
+  "duration": 13.68,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.64,
+    "text": "Primary control reacts within seconds."
+   },
+   {
+    "start": 2.92,
+    "end": 9.36,
+    "text": "Reserves respond automatically to the frequency deviation and stop the fall, stabilising the frequency."
+   },
+   {
+    "start": 9.64,
+    "end": 13.28,
+    "text": "But it stabilises at a value that is not quite 50 Hz."
+   }
+  ]
+ },
+ "frequency/secondary": {
+  "duration": 10.68,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.8,
+    "text": "Secondary control acts within a few minutes."
+   },
+   {
+    "start": 3.08,
+    "end": 10.28,
+    "text": "It changes production to bring the frequency back to 50 Hz, and frees the primary reserves for the next disturbance."
+   }
+  ]
+ },
+ "frequency/bands": {
+  "duration": 18.04,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 7.44,
+    "text": "In the Nordic grid, between 49.9 and 50.1 Hz, normal operation reserves keep the frequency steady."
+   },
+   {
+    "start": 7.72,
+    "end": 13.2,
+    "text": "Between 49.5 and 49.9 Hz, disturbance reserves kick in."
+   },
+   {
+    "start": 13.48,
+    "end": 17.64,
+    "text": "Fast storage like batteries is ideal for this kind of reserve."
+   }
+  ]
+ },
+ "power-electronics/mismatch": {
+  "duration": 18.32,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.8,
+    "text": "Why can't most renewable generators connect directly to the grid?"
+   },
+   {
+    "start": 4.08,
+    "end": 10.52,
+    "text": "A wind turbine's speed follows the wind, so its generator produces a varying frequency and voltage."
+   },
+   {
+    "start": 10.8,
+    "end": 13.64,
+    "text": "Solar panels produce direct current."
+   },
+   {
+    "start": 13.92,
+    "end": 17.92,
+    "text": "Neither is 50 Hz AC, synchronised to the grid."
+   }
+  ]
+ },
+ "power-electronics/converter": {
+  "duration": 20.44,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.84,
+    "text": "The solution is power electronics."
+   },
+   {
+    "start": 3.12,
+    "end": 12.6,
+    "text": "A rectifier turns the generator's output into DC, and an inverter turns that DC into AC at exactly the grid's voltage, frequency and phase."
+   },
+   {
+    "start": 12.88,
+    "end": 15.8,
+    "text": "Careful: a transformer cannot do this."
+   },
+   {
+    "start": 16.08,
+    "end": 20.04,
+    "text": "A transformer only changes voltage, never frequency."
+   }
+  ]
+ },
+ "power-electronics/switching": {
+  "duration": 17.0,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.4,
+    "text": "How does it work?"
+   },
+   {
+    "start": 1.68,
+    "end": 2.96,
+    "text": "Fast switches."
+   },
+   {
+    "start": 3.24,
+    "end": 10.68,
+    "text": "Chop a 5 V source on and off into a 1 Ω load, and the average voltage follows the fraction of time the switch is on."
+   },
+   {
+    "start": 10.96,
+    "end": 16.6,
+    "text": "Control the on time, and you control voltage, current and power from 0 to full."
+   }
+  ]
+ },
+ "power-electronics/inertia": {
+  "duration": 16.68,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 7.6,
+    "text": "The price: a converter-connected turbine is decoupled from the grid, so its rotating mass no longer adds inertia."
+   },
+   {
+    "start": 7.88,
+    "end": 12.52,
+    "text": "More renewables means less inertia, and faster frequency swings."
+   },
+   {
+    "start": 12.8,
+    "end": 16.28,
+    "text": "That is a key reason the grid needs fast energy storage."
+   }
+  ]
+ },
+ "outro/recap": {
+  "duration": 25.68,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 0.84,
+    "text": "Recap."
+   },
+   {
+    "start": 1.12,
+    "end": 6.96,
+    "text": "Current is charge per second, voltage is energy per charge, and resistance links them."
+   },
+   {
+    "start": 7.24,
+    "end": 13.16,
+    "text": "Kirchhoff says voltages around a loop and currents into a node both sum to zero."
+   },
+   {
+    "start": 13.44,
+    "end": 23.92,
+    "text": "In the AC grid, synchronised generators share inertia, frequency tells you the balance, and power electronics connect renewables, at the cost of that inertia."
+   },
+   {
+    "start": 24.2,
+    "end": 25.28,
+    "text": "Good luck!"
+   }
+  ]
+ }
+}

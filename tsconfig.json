@@ -23,7 +23,13 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "paths": {
+      "@batteries/*": [
+        "batteries/*"
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",

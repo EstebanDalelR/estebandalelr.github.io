@@ -1,0 +1,397 @@
+{
+  "title": "Energy in Society & Energy Storage — Exam Explainer",
+  "course": "1KB744 Introduction to Energy Storage, Uppsala University",
+  "examSource": "Exam questions: 2022 exam and the course's typical exam questions. Battery chemistries follow Winter & Brodd, Chem. Rev. 2004.",
+  "chapters": [
+    {
+      "id": "intro",
+      "title": "Why We Store Energy",
+      "exam": [],
+      "steps": [
+        {
+          "id": "hello",
+          "visual": "hello",
+          "text": "Hi! This video is the systems-level map of energy storage. Not just batteries, but all five families: mechanical, thermal, chemical, electromagnetic and electrochemical, and how to compare them."
+        },
+        {
+          "id": "flow",
+          "visual": "flow",
+          "text": "Energy flows through society in three stages. Natural sources like sun, wind, fossil fuels and nuclear. Conversion in engines, generators, batteries and fuel cells. And end use as heat, cooling, chemicals, electricity and transport."
+        }
+      ]
+    },
+    {
+      "id": "society",
+      "title": "Energy in Society",
+      "exam": [
+        "Typical: growing consumption"
+      ],
+      "steps": [
+        {
+          "id": "growth",
+          "visual": "growth",
+          "text": "Why does global energy consumption keep rising? Reason one: population. India alone has added about 14 million people per year. Absolute growth, not just use per person, is what the energy system must supply."
+        },
+        {
+          "id": "gdp",
+          "visual": "gdp",
+          "text": "Reason two: development. Energy use per person follows GDP per person. As countries industrialise and living standards rise, each person uses more energy. That is why just use less is not a global answer. Some economies have decoupled growth from energy, through efficiency and structural change, but it is uneven."
+        },
+        {
+          "id": "transitions",
+          "visual": "transitions",
+          "text": "History matters too. Every energy transition so far has added a new source rather than replacing the old one, and each took decades. Coal overtook wood around 1885, and renewables fell from almost all of our energy to about 6% by the 1960s."
+        },
+        {
+          "id": "waste",
+          "visual": "waste",
+          "text": "And look where the energy goes. Roughly two thirds of all primary energy is rejected as waste heat. That is not bad bookkeeping. It is the second law of thermodynamics at work."
+        }
+      ]
+    },
+    {
+      "id": "thermo",
+      "title": "The Laws of Thermodynamics and Energy Quality",
+      "exam": [
+        "2022 Q1a",
+        "2022 Q1b",
+        "2022 Q1c"
+      ],
+      "steps": [
+        {
+          "id": "first",
+          "visual": "first",
+          "text": "The first law: energy is conserved. It is never created or destroyed, only converted between forms: chemical, thermal, kinetic, gravitational, electrical. The practical implication: storage cannot create energy. Every joule you take out, you first put in, and whatever is not delivered was converted, usually into heat."
+        },
+        {
+          "id": "second",
+          "visual": "second",
+          "text": "The second law: energy has quality. High quality energy can be converted completely into low quality energy, but not the other way around. Not all heat can be turned into work. A joule of electricity is worth more than a joule of lukewarm water."
+        },
+        {
+          "id": "carnot",
+          "visual": "carnot",
+          "equation": "\\varepsilon_{max} = 1 - \\frac{T_L}{T_H} = 1 - \\frac{277\\,\\mathrm{K}}{373\\,\\mathrm{K}} \\approx 0.26",
+          "text": "The Carnot limit is the ceiling on any heat engine. With heat at 100 °C and a cold side at 4 °C, at most 26% can become work. Temperatures always in kelvin!"
+        },
+        {
+          "id": "beat",
+          "visual": "beat-carnot",
+          "text": "Here is the big advantage of storage. Batteries, capacitors, pumped hydro and flywheels never go via heat, so Carnot does not apply. A lithium ion battery returns more than 90% of what you put in."
+        },
+        {
+          "id": "quality",
+          "visual": "quality",
+          "text": "Exam answer: high quality energy is electricity, mechanical work, and gravitational or kinetic energy, like water behind a dam or a spinning flywheel. Low quality energy is heat close to ambient temperature, like lukewarm water. High quality is preferred because it can be converted into any other form, including useful work, with high efficiency, and it transmits and stores well."
+        }
+      ]
+    },
+    {
+      "id": "why-storage",
+      "title": "Variability and the Roles of Storage",
+      "exam": [
+        "Typical: storage services"
+      ],
+      "steps": [
+        {
+          "id": "variability",
+          "visual": "variability",
+          "text": "Wind and solar output is set by the weather, not by demand. Wind varies from seconds to weeks, demand has its own daily and seasonal pattern, and the two do not match, on every timescale at once."
+        },
+        {
+          "id": "net-load",
+          "visual": "net-load",
+          "text": "Net load is demand minus variable renewables. As solar grows, midday net load collapses, and the evening ramp becomes steep and short. The problem shifts from how much energy, to when."
+        },
+        {
+          "id": "buys-time",
+          "visual": "buys-time",
+          "text": "Storage decouples the moment of generation from the moment of use. It buys time, nothing more and nothing less. And it always costs some efficiency, so it is worth it only when the alternative is curtailment, a peaking plant, or a new power line."
+        },
+        {
+          "id": "peak",
+          "visual": "peak",
+          "text": "Peak shaving: charge when demand and prices are low, discharge at the peak. Uppsala has a real example: 5 MW, 20 MWh, built from BMW car batteries, supporting about 1,700 homes."
+        }
+      ]
+    },
+    {
+      "id": "compare",
+      "title": "How to Compare Storage Technologies",
+      "exam": [
+        "Typical: five parameters"
+      ],
+      "steps": [
+        {
+          "id": "family",
+          "visual": "family",
+          "text": "Five families: mechanical, like pumped hydro, compressed air and flywheels. Thermal: sensible, latent and liquid air. Chemical: hydrogen and synthetic fuels. Electromagnetic: capacitors and superconducting magnets. And electrochemical: batteries and flow batteries. There is no silver bullet. Always ask: best for what, where, and for how long?"
+        },
+        {
+          "id": "energy-power",
+          "visual": "energy-power",
+          "equation": "\\text{duration} = \\frac{E\\ [\\mathrm{kWh}]}{P\\ [\\mathrm{kW}]}",
+          "text": "Parameter one: energy and power are independent. Energy capacity, in kilowatt hours, decides how long you can supply. Power rating, in kilowatts, decides how much you can supply at once. Their ratio is the duration."
+        },
+        {
+          "id": "density",
+          "visual": "density",
+          "text": "Parameter two: specific energy, per kilogram, and energy density, per litre. Aviation cares about kilograms, a city substation cares about litres, and a desert site may care about neither."
+        },
+        {
+          "id": "ragone",
+          "visual": "ragone",
+          "text": "The Ragone plot puts specific energy against specific power on log axes. The diagonal lines are constant discharge time. Capacitors discharge in seconds, batteries in hours, fuels over days."
+        },
+        {
+          "id": "efficiency",
+          "visual": "efficiency",
+          "text": "Parameter three: round-trip efficiency, energy out over energy in. Always ask where the boundary is drawn, because published numbers often leave out cooling and power electronics. Parameter four: self-discharge. Flywheels lose percent per hour, lithium ion percent per month, fuels almost nothing."
+        },
+        {
+          "id": "life",
+          "visual": "life",
+          "text": "Parameter five: lifetime. Cycle life counts cycles until the capacity falls to about 80%, while calendar life ticks whether you use it or not. Add response time, maturity, and cost per kilowatt and per kilowatt hour, and you have the full checklist."
+        }
+      ]
+    },
+    {
+      "id": "hydro",
+      "title": "Hydropower and Pumped Storage",
+      "exam": [
+        "2022 Q4a",
+        "2022 Q4b",
+        "2022 Q4c"
+      ],
+      "steps": [
+        {
+          "id": "types",
+          "visual": "hydro-types",
+          "text": "Three types of hydropower facilities. An impoundment facility stores river water behind a dam and releases it through turbines. A diversion, or run of river, facility channels part of a river through turbines, with little or no reservoir. And a pumped storage facility moves water between a lower and an upper reservoir with reversible pump turbines."
+        },
+        {
+          "id": "rechargeable",
+          "visual": "hydro-rechargeable",
+          "text": "Are they all rechargeable storage? No. Only pumped storage can be charged with electricity: it pumps water uphill when power is cheap. An impoundment dam stores energy, but it is refilled by rain and snowmelt, not by the grid. And run of river has almost no storage at all."
+        },
+        {
+          "id": "pros-cons",
+          "visual": "hydro-pros-cons",
+          "text": "Advantages of pumped hydro: huge scale, about 200 GW worldwide and still most of the world's stored energy, round trip efficiency of 80 to 90%, low self-discharge, and a lifetime of 50 years. Disadvantages: it needs mountains and water, the investment cost is high and construction is slow, and it floods land and changes rivers."
+        },
+        {
+          "id": "gravity",
+          "visual": "gravity",
+          "equation": "W = m g h = 1000 \\times 9.81 \\times 100\\ \\mathrm{J} \\approx 0.27\\ \\mathrm{kWh}",
+          "text": "Why not just lift blocks instead? One tonne raised 100 m stores about 0.27 kWh, roughly what 1 kg of lithium ion battery holds. The physics works. The materials accounting does not."
+        }
+      ]
+    },
+    {
+      "id": "mech-thermal",
+      "title": "Flywheels, Compressed Air and Thermal Storage",
+      "exam": [],
+      "steps": [
+        {
+          "id": "flywheel",
+          "visual": "flywheel",
+          "equation": "W = \\tfrac{1}{2} I \\omega^2",
+          "text": "A flywheel stores kinetic energy in a spinning rotor, up to 60,000 rpm in a vacuum. Superb power and response, but only 0.5 to 1 kWh per unit, and friction empties it within hours."
+        },
+        {
+          "id": "caes",
+          "visual": "caes",
+          "text": "Compressed air storage pumps air into salt caverns. Compression makes heat. A diabatic plant throws that heat away and burns natural gas on the way out, reaching about 42%. An adiabatic plant stores the heat and reuses it, reaching about 70%, with no fuel."
+        },
+        {
+          "id": "thermal",
+          "visual": "thermal",
+          "text": "Thermal storage stores heat as heat, so it avoids the Carnot penalty entirely. Sensible heat raises a material's temperature, latent heat melts it at constant temperature, and thermochemical storage drives a reversible reaction. Energy density goes up in that order, and so does complexity."
+        },
+        {
+          "id": "district",
+          "visual": "district",
+          "text": "Sweden already does this at scale. District heating networks buffer daily cycles in accumulator tanks, and a rock cavern in Hudiksvall holds 4,100 MWh. For seasonal heat, nothing beats thermal storage on cost."
+        }
+      ]
+    },
+    {
+      "id": "fuels",
+      "title": "Fuels and Power-to-X",
+      "exam": [
+        "2022 Q5a",
+        "2022 Q5b"
+      ],
+      "steps": [
+        {
+          "id": "p2x",
+          "visual": "p2x",
+          "text": "Power-to-X means using electricity, ideally cheap surplus renewables, to make a fuel or chemical, X, that can be stored and used later. The first step is almost always hydrogen from water electrolysis."
+        },
+        {
+          "id": "routes",
+          "visual": "routes",
+          "equation": "\\mathrm{CO_2} + 4\\mathrm{H_2} \\rightarrow \\mathrm{CH_4} + 2\\mathrm{H_2O} \\qquad \\mathrm{N_2} + 3\\mathrm{H_2} \\rightarrow 2\\mathrm{NH_3}",
+          "text": "Three fuels. Hydrogen: split water with electricity. Synthetic methane: react hydrogen with captured carbon dioxide, the Sabatier reaction. Methanol: hydrogen plus carbon dioxide over a catalyst. And ammonia: hydrogen plus nitrogen from air, in the Haber Bosch process, with no carbon at all."
+        },
+        {
+          "id": "density",
+          "visual": "fuel-density",
+          "text": "Advantage one: energy density. Hydrogen holds about 33 kWh/kg, diesel 12, and lithium ion only 0.25. Advantage two: fuels store for months or years with almost no loss, and a tanker carries more energy than any cable."
+        },
+        {
+          "id": "losses",
+          "visual": "fuel-losses",
+          "text": "Disadvantage one: round-trip efficiency. Electrolysis, compression, storage and conversion back to electricity each lose energy, and the total is only 10 to 30%, the worst in this course. Disadvantage two: the infrastructure mostly does not exist yet, and hydrogen leaks and embrittles steel."
+        },
+        {
+          "id": "colours",
+          "visual": "colours",
+          "text": "Hydrogen colours describe the production route, not the molecule. Grey is from natural gas with carbon dioxide released, and about 96% of hydrogen today is fossil. Blue adds carbon capture, green uses renewable electrolysis, and pink uses nuclear power."
+        }
+      ]
+    },
+    {
+      "id": "electromagnetic",
+      "title": "Electromagnetic Storage",
+      "exam": [
+        "Typical: electromagnetic devices"
+      ],
+      "steps": [
+        {
+          "id": "mechanism",
+          "visual": "em-mechanism",
+          "equation": "W_C = \\tfrac{1}{2} C V^2 \\qquad W_L = \\tfrac{1}{2} L I^2",
+          "text": "Two devices. Capacitors and supercapacitors store energy in an electric field between charged surfaces, so no chemical reaction happens. Superconducting magnetic energy storage keeps a current circulating without resistance in a cooled superconducting coil, storing energy in its magnetic field."
+        },
+        {
+          "id": "voltage",
+          "visual": "em-voltage",
+          "text": "A capacitor's voltage falls linearly as it discharges, while a battery holds a plateau set by its chemistry. Discharging a capacitor to half its voltage already releases 75% of its energy."
+        },
+        {
+          "id": "when",
+          "visual": "em-when",
+          "text": "When are they preferred? When speed matters: response in milliseconds, huge power, and millions of cycles. Think power quality and frequency regulation. A single grid installation can reach hundreds of megawatts for a few seconds, and SMES responds in about 5 ms."
+        },
+        {
+          "id": "limits",
+          "visual": "em-limits",
+          "text": "Their greatest limitations: almost no energy capacity, a very high cost per kilowatt hour, fast self-discharge for capacitors, and cryogenic cooling for SMES. They are bought for speed, never for capacity."
+        }
+      ]
+    },
+    {
+      "id": "economics",
+      "title": "Grid-Scale Storage and Economics",
+      "exam": [
+        "Typical: storage services"
+      ],
+      "steps": [
+        {
+          "id": "services",
+          "visual": "services",
+          "text": "What is storage paid for? Milliseconds: power quality and fast frequency response. Seconds to minutes: frequency containment and restoration. Hours: arbitrage, peak shaving and shifting solar into the evening. Days: reserves and adequacy for a windless week."
+        },
+        {
+          "id": "capex",
+          "visual": "capex",
+          "equation": "\\frac{\\text{cost}}{\\mathrm{kWh}} = \\frac{C_{power}}{\\text{duration}} + C_{energy}",
+          "text": "A storage system is two products bolted together: power, like inverters and turbines, priced per kilowatt, and energy, like cells, tanks or caverns, priced per kilowatt hour. For short durations the power cost dominates, for long durations the energy cost does. That is why lithium ion wins at 1 to 4 hours, and pumped hydro, flow batteries, compressed air and hydrogen win beyond."
+        },
+        {
+          "id": "lcos",
+          "visual": "lcos",
+          "text": "The levelised cost of storage is the price per megawatt hour discharged that pays back the whole system over its life. The biggest lever is utilisation: halve the cycles per year and the cost per megawatt hour roughly doubles. An idle asset is expensive however cheap it was."
+        },
+        {
+          "id": "rural",
+          "visual": "rural",
+          "text": "Exam case: a rural community wants stable power. Services: frequency and voltage support, backup during outages, and shifting local solar into the evening. Two technologies: a lithium ion battery for fast response and daily cycling, plus a longer duration store like a flow battery, or pumped hydro if there is a hill and water. Judge them on power, energy and duration, efficiency, lifetime, response time, and cost."
+        }
+      ]
+    },
+    {
+      "id": "chemistries",
+      "title": "Battery Chemistries: Alkaline, Metal–Air and Ni-Cd",
+      "exam": [
+        "2022 Q6",
+        "2022 Q7",
+        "Typical: Ni-Cd"
+      ],
+      "steps": [
+        {
+          "id": "alkaline",
+          "visual": "alkaline",
+          "equation": "\\mathrm{Zn} + 2\\,\\mathrm{MnO_2} \\rightarrow \\mathrm{ZnO} + \\mathrm{Mn_2O_3} \\qquad E \\approx 1.5\\,\\mathrm{V}",
+          "text": "Alkaline batteries are primary cells. The reactions are not designed to be reversed, so they are used once. The anode is zinc powder, the cathode is manganese dioxide mixed with graphite for conductivity, and the electrolyte is potassium hydroxide. The cell gives about 1.5 V, for every size. Size changes the capacity, not the voltage."
+        },
+        {
+          "id": "vs-zinc-carbon",
+          "visual": "zn-c",
+          "text": "Why do alkaline cells hold more energy than zinc carbon cells? The zinc is a fine powder with a huge surface area, the potassium hydroxide electrolyte conducts much better, and more active material fits in the can. So more of the zinc and manganese dioxide is actually used, especially at high currents."
+        },
+        {
+          "id": "metal-air",
+          "visual": "metal-air",
+          "text": "Metal air batteries: zinc, aluminium and lithium air. In common: a metal anode, and a cathode that breathes oxygen from the air, so the cathode reactant does not have to be carried. That gives a very high theoretical energy density. They differ in the metal and electrolyte: zinc and aluminium use water based electrolytes, lithium needs a non aqueous one, and the voltages and rechargeability differ."
+        },
+        {
+          "id": "metal-air-vs",
+          "visual": "metal-air-vs",
+          "text": "Compared with lithium ion, metal air offers higher energy density and cheap, abundant materials. But recharging is poor, the oxygen reactions are slow so power is low, and the electrolyte can dry out or absorb carbon dioxide. Zinc air is sold today as hearing aid batteries: tiny, high energy, with a steady voltage for weeks."
+        },
+        {
+          "id": "nicd",
+          "visual": "nicd",
+          "equation": "\\mathrm{Cd} + 2\\,\\mathrm{NiOOH} + 2\\,\\mathrm{H_2O} \\rightarrow \\mathrm{Cd(OH)_2} + 2\\,\\mathrm{Ni(OH)_2} \\qquad E \\approx 1.2\\,\\mathrm{V}",
+          "text": "Nickel cadmium: cadmium is oxidised at the negative electrode, nickel oxyhydroxide is reduced at the positive, in potassium hydroxide, at about 1.2 V. Energy efficiency is roughly 70 to 80%. It is robust, handles high currents and cold, and lasts many cycles, so it is used in power tools, emergency lighting and aviation. But cadmium is toxic, the energy density is low, and it suffers from the memory effect."
+        }
+      ]
+    },
+    {
+      "id": "testing",
+      "title": "Testing Batteries and Voltage Losses",
+      "exam": [
+        "Typical: battery testing",
+        "Typical: electrochemistry"
+      ],
+      "steps": [
+        {
+          "id": "voltage",
+          "visual": "cell-voltage",
+          "equation": "E_{cell} = E_{cathode} - E_{anode}",
+          "text": "What sets a battery's voltage? The difference between the electrode potentials. Standard potentials are measured against the standard hydrogen electrode, set to zero, so every half reaction gets one number. That lets you predict any cell voltage by subtraction, without measuring every pair."
+        },
+        {
+          "id": "cycling",
+          "visual": "cycling",
+          "text": "To follow a cell's storage capability over time, cycle it at constant current between fixed voltage limits and plot capacity against cycle number. Constant current means a constant reaction rate, capacity is simply current times time, and it mimics real use."
+        },
+        {
+          "id": "efficiency",
+          "visual": "ce-vs-ee",
+          "equation": "\\text{CE} = \\frac{Q_{out}}{Q_{in}} \\qquad \\text{EE} = \\frac{E_{out}}{E_{in}} = \\frac{\\int V_{dis}\\,dQ}{\\int V_{ch}\\,dQ}",
+          "text": "Coulombic efficiency counts charge: charge out over charge in. Energy efficiency counts energy, so it includes voltage. You charge at a higher voltage than you discharge at, so energy efficiency is always lower than coulombic efficiency."
+        },
+        {
+          "id": "losses",
+          "visual": "losses",
+          "text": "Three voltage losses, and the same three things limit the current. Ohmic loss from resistance appears instantly when current flows. Activation loss from slow charge transfer builds up in milliseconds. Concentration loss from mass transport builds up over seconds or longer. Interrupt the current and watch the voltage relax: the instant jump is ohmic, the fast part is activation, the slow tail is concentration. Impedance spectroscopy separates them by frequency."
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "title": "Recap",
+      "exam": [],
+      "steps": [
+        {
+          "id": "recap",
+          "visual": "recap",
+          "text": "Recap. Energy use grows with population and development. The second law makes electricity precious, and storage that avoids heat beats Carnot. Storage buys time at the cost of efficiency. Duration decides the technology: capacitors for seconds, batteries for hours, pumped hydro and fuels for days and seasons. Know your five parameters, and good luck on the exam!"
+        }
+      ]
+    }
+  ]
+}
