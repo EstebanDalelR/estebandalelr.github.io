@@ -40,3 +40,13 @@ body:has(.battery-masters) {
 .battery-masters .katex {
   font-size: 1.15em;
 }
+
+/* Spotlight: slide labels the tutor is talking about right now (lib/spotlight.ts). */
+.battery-masters svg text {
+  transition: fill 0.25s, filter 0.25s;
+}
+.battery-masters svg text.bm-spot {
+  fill: #3dd6c6;
+  font-weight: 700;
+  filter: drop-shadow(0 0 6px rgb(61 214 198 / 0.85));
+}

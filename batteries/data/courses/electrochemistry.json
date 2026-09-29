@@ -11,7 +11,7 @@
         {
           "id": "hello",
           "visual": "family",
-          "text": "Hi! Batteries, supercapacitors and fuel cells look very different, but they are all electrochemical cells. Two electrodes, one electrolyte, and a place where electrons and ions have to meet."
+          "text": "Batteries, supercapacitors and fuel cells look very different, but they are all electrochemical cells. Two electrodes, one electrolyte, and a place where electrons and ions have to meet."
         },
         {
           "id": "difference",
@@ -235,7 +235,7 @@
         {
           "id": "rate-test",
           "visual": "rate-test",
-          "text": "A lithium ion cell is cycled at increasing rates, and the capacity drops. Why?"
+          "text": "A lithium ion cell is cycled at increasing rates, and the capacity drops."
         },
         {
           "id": "ir",

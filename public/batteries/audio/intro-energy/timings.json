@@ -1,20 +1,15 @@
 {
  "intro/hello": {
-  "duration": 14.88,
+  "duration": 13.92,
   "cues": [
    {
     "start": 0.0,
-    "end": 0.68,
-    "text": "Hi!"
-   },
-   {
-    "start": 0.96,
-    "end": 4.92,
+    "end": 3.96,
     "text": "This video is the systems-level map of energy storage."
    },
    {
-    "start": 5.2,
-    "end": 14.48,
+    "start": 4.24,
+    "end": 13.52,
     "text": "Not just batteries, but all five families: mechanical, thermal, chemical, electromagnetic and electrochemical, and how to compare them."
    }
   ]
@@ -495,7 +490,7 @@
   ]
  },
  "hydro/rechargeable": {
-  "duration": 20.84,
+  "duration": 19.12,
   "cues": [
    {
     "start": 0.0,
@@ -504,22 +499,17 @@
    },
    {
     "start": 2.36,
-    "end": 3.8,
-    "text": "No."
-   },
-   {
-    "start": 4.08,
-    "end": 9.68,
+    "end": 7.96,
     "text": "Only pumped storage can be charged with electricity: it pumps water uphill when power is cheap."
    },
    {
-    "start": 9.96,
-    "end": 16.2,
+    "start": 8.24,
+    "end": 14.48,
     "text": "An impoundment dam stores energy, but it is refilled by rain and snowmelt, not by the grid."
    },
    {
-    "start": 16.48,
-    "end": 20.44,
+    "start": 14.76,
+    "end": 18.72,
     "text": "And run of river has almost no storage at all."
    }
   ]
