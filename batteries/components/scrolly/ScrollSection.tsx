@@ -1,14 +1,18 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import AnimatedEquation from "@batteries/components/equations/AnimatedEquation";
 import ChapterVisual from "@batteries/components/visuals/ChapterVisual";
 import type { Chapter } from "@batteries/lib/narration";
+import { spotlight } from "@batteries/lib/spotlight";
 
 type Props = {
   courseId: string;
   chapter: Chapter;
   index: number;
   activeStep: number;
+  /** Sentence the tutor is saying; labels it names are highlighted on the slide. */
+  spoken: string;
 };
 
 export const stepAnchor = (chapterId: string, stepId: string) => `${chapterId}--${stepId}`;
@@ -17,9 +21,14 @@ export const stepAnchor = (chapterId: string, stepId: string) => `${chapterId}--
  * One chapter: a full-screen sticky stage (title, visual, formula) with one
  * invisible full-screen scroll stop per narrated step on top of it.
  */
-export default function ScrollSection({ courseId, chapter, index, activeStep }: Props) {
+export default function ScrollSection({ courseId, chapter, index, activeStep, spoken }: Props) {
   const current = chapter.steps[activeStep];
   const total = chapter.steps.length;
+  const visualRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (visualRef.current) spotlight(visualRef.current, spoken);
+  }, [spoken, current.visual]);
 
   return (
     <section id={chapter.id} className="relative">
@@ -46,7 +55,7 @@ export default function ScrollSection({ courseId, chapter, index, activeStep }: 
         </header>
 
         <div className="mx-auto mt-4 flex min-h-0 w-full max-w-6xl flex-1 items-center justify-center">
-          <div className="aspect-[4/3] h-full max-w-full rounded-2xl border border-white/5 bg-panel/60 p-2">
+          <div ref={visualRef} className="aspect-[4/3] h-full max-w-full rounded-2xl border border-white/5 bg-panel/60 p-2">
             <ChapterVisual courseId={courseId} chapterId={chapter.id} visual={current.visual} />
           </div>
         </div>

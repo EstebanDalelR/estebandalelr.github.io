@@ -14,6 +14,8 @@ type Props = {
   subtitles: boolean;
   onToggleSubtitles: () => void;
   onFinished?: () => void;
+  /** Called with the sentence being spoken ("" between sentences). */
+  onCue?: (text: string) => void;
 };
 
 type Timings = Record<string, { duration: number; cues: Cue[] }>;
@@ -28,7 +30,7 @@ export const isTyping = (target: EventTarget | null) =>
  * shows timed subtitles. Steps without a recording fall back to a timed
  * "reading" so the page works before any audio exists.
  */
-export default function NarratorPanel({ courseId, chapterId, step, paused, subtitles, onToggleSubtitles, onFinished }: Props) {
+export default function NarratorPanel({ courseId, chapterId, step, paused, subtitles, onToggleSubtitles, onFinished, onCue }: Props) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const timingsRef = useRef<Timings>({});
@@ -41,6 +43,10 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, subti
   const [cue, setCue] = useState<string>("");
   const [speaking, setSpeaking] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+
+  const onCueRef = useRef(onCue);
+  onCueRef.current = onCue;
+  useEffect(() => onCueRef.current?.(cue), [cue]);
 
   useEffect(() => {
     fetch(timingsSrc(courseId))

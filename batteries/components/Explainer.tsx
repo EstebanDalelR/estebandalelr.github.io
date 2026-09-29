@@ -18,6 +18,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
   const [subtitles, setSubtitles] = useState(true);
   const [autoAdvance, setAutoAdvance] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [spoken, setSpoken] = useState("");
   // Slide a skip is scrolling towards; `pos` lags until the smooth scroll lands.
   const pendingRef = useRef<number | null>(null);
 
@@ -95,6 +96,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
           index={i}
           // Chapters already passed keep their last slide so the stage doesn't jump while scrolling away.
           activeStep={i === pos.chapter ? pos.step : i < pos.chapter ? c.steps.length - 1 : 0}
+          spoken={i === pos.chapter ? spoken : ""}
         />
       ))}
 
@@ -110,6 +112,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
             subtitles={subtitles}
             onToggleSubtitles={() => setSubtitles((v) => !v)}
             onFinished={next}
+            onCue={setSpoken}
           />
           <div className="fixed bottom-4 left-4 z-40 flex items-center gap-2">
             <button

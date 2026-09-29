@@ -11,7 +11,7 @@
         {
           "id": "hello",
           "visual": "hello",
-          "text": "Hi! This video is the systems-level map of energy storage. Not just batteries, but all five families: mechanical, thermal, chemical, electromagnetic and electrochemical, and how to compare them."
+          "text": "This video is the systems-level map of energy storage. Not just batteries, but all five families: mechanical, thermal, chemical, electromagnetic and electrochemical, and how to compare them."
         },
         {
           "id": "flow",
@@ -172,7 +172,7 @@
         {
           "id": "rechargeable",
           "visual": "hydro-rechargeable",
-          "text": "Are they all rechargeable storage? No. Only pumped storage can be charged with electricity: it pumps water uphill when power is cheap. An impoundment dam stores energy, but it is refilled by rain and snowmelt, not by the grid. And run of river has almost no storage at all."
+          "text": "Are they all rechargeable storage? Only pumped storage can be charged with electricity: it pumps water uphill when power is cheap. An impoundment dam stores energy, but it is refilled by rain and snowmelt, not by the grid. And run of river has almost no storage at all."
         },
         {
           "id": "pros-cons",

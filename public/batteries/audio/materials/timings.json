@@ -1,25 +1,20 @@
 {
  "intro/hello": {
-  "duration": 20.72,
+  "duration": 19.76,
   "cues": [
    {
     "start": 0.0,
-    "end": 0.68,
-    "text": "Hi!"
-   },
-   {
-    "start": 0.96,
-    "end": 5.8,
+    "end": 4.84,
     "text": "Materials chemistry is one long chain of cause and effect."
    },
    {
-    "start": 6.08,
-    "end": 15.2,
+    "start": 5.12,
+    "end": 14.24,
     "text": "Bonding decides the crystal structure, the structure decides the defects, and defects, diffusion and phase transformations decide the microstructure."
    },
    {
-    "start": 15.48,
-    "end": 20.32,
+    "start": 14.52,
+    "end": 19.36,
     "text": "The microstructure is what makes a steel hard or an alloy creep resistant."
    }
   ]

@@ -625,17 +625,12 @@
   ]
  },
  "capacity-fade/rate-test": {
-  "duration": 6.4,
+  "duration": 5.16,
   "cues": [
    {
     "start": 0.0,
     "end": 4.88,
     "text": "A lithium ion cell is cycled at increasing rates, and the capacity drops."
-   },
-   {
-    "start": 5.16,
-    "end": 6.0,
-    "text": "Why?"
    }
   ]
  },
@@ -955,21 +950,16 @@
   ]
  },
  "intro/hello": {
-  "duration": 13.6,
+  "duration": 12.64,
   "cues": [
    {
     "start": 0.0,
-    "end": 0.68,
-    "text": "Hi!"
-   },
-   {
-    "start": 0.96,
-    "end": 7.88,
+    "end": 6.92,
     "text": "Batteries, supercapacitors and fuel cells look very different, but they are all electrochemical cells."
    },
    {
-    "start": 8.16,
-    "end": 13.2,
+    "start": 7.2,
+    "end": 12.24,
     "text": "Two electrodes, one electrolyte, and a place where electrons and ions have to meet."
    }
   ]
