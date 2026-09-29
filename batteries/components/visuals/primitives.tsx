@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 export const W = 600;
 export const H = 450;
@@ -78,6 +78,47 @@ export function Label({
     <text x={x} y={y} fill={color} fontSize={size} textAnchor={anchor} fontWeight={weight} fontFamily="var(--font-geist-sans), sans-serif">
       {children}
     </text>
+  );
+}
+
+/**
+ * A native SVG keyframe loop, placed inside the element it animates. framer-motion
+ * keyframe loops on SVG attributes stop after one pass, so looping attribute
+ * animations use this instead. It (re)starts from the first keyframe whenever
+ * `active` turns on, which keeps step-by-step walks in sync with their labels.
+ * `attr="translate"` animates the transform with "dx dy" values.
+ */
+export function SvgLoop({
+  attr,
+  values,
+  keyTimes,
+  dur,
+  active = true,
+}: {
+  attr: string;
+  values: (number | string)[];
+  keyTimes?: number[];
+  dur: number;
+  active?: boolean;
+}) {
+  const ref = useRef<SVGAnimationElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (active) el.beginElement();
+    else el.endElement();
+  }, [active]);
+  const common = {
+    values: values.join(";"),
+    keyTimes: keyTimes?.join(";"),
+    dur: `${dur}s`,
+    begin: "indefinite",
+    repeatCount: "indefinite",
+  };
+  return attr === "translate" ? (
+    <animateTransform ref={ref as React.Ref<SVGAnimateTransformElement>} attributeName="transform" type="translate" {...common} />
+  ) : (
+    <animate ref={ref as React.Ref<SVGAnimateElement>} attributeName={attr} {...common} />
   );
 }
 

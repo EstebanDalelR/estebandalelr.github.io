@@ -50,7 +50,9 @@ export default function ThermoVisual({ visual }: { visual: string }) {
         </Label>
         {/* ball rolling into a valley */}
         <path d="M100 250 C200 250 220 370 300 370 C380 370 400 280 500 280" fill="none" stroke={C.dim} strokeWidth={3} />
-        <motion.circle r={12} fill={C.electron} initial={false} animate={{ cx: [130, 300], cy: [238, 356] }} transition={{ repeat: Infinity, duration: 2.5, repeatDelay: 0.8 }} />
+        <circle r={12} cx={0} cy={-12} fill={C.electron}>
+          <animateMotion path="M100 250 C200 250 220 370 300 370" keyPoints="0;1;1" keyTimes="0;0.76;1" calcMode="linear" dur="3.3s" repeatCount="indefinite" />
+        </circle>
         <Label x={300} y={398} size={14} weight={700}>
           equilibrium: G at its minimum
         </Label>
