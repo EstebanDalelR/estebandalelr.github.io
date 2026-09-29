@@ -7,6 +7,7 @@
 - [Home](https://www.estebandalelr.co/): Portfolio homepage with profile and social links.
 - [Tools](https://www.estebandalelr.co/tools): Directory of all available browser tools.
 - [Deep Connection](https://www.estebandalelr.co/deep): Card game with tiered questions for couples.
+- [Battery Masters](https://www.estebandalelr.co/batteries): Narrated, scroll-driven exam explainers for the batteries & energy storage courses — Energy in Society & Energy Storage, Electric Circuits & the Grid, Materials Chemistry and Applied Electrochemistry.
 
 ## Tools
 

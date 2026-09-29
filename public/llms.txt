@@ -40,3 +40,11 @@ No backend, no data collection.
 - GitHub: https://github.com/EstebanDalelR
 - Twitter/X: https://twitter.com/estebandalelr
 - LinkedIn: https://linkedin.com/in/estebandalelr
+
+## Battery Masters
+
+- [Battery Masters](https://estebandalelr.github.io/batteries): Narrated, scroll-driven exam explainers for the batteries & energy storage courses.
+- [Energy in Society & Energy Storage](https://estebandalelr.github.io/batteries/introduction/energy-storage)
+- [Electric Circuits & the Grid](https://estebandalelr.github.io/batteries/introduction/electric-circuits)
+- [Materials Chemistry](https://estebandalelr.github.io/batteries/materials)
+- [Applied Electrochemistry](https://estebandalelr.github.io/batteries/electrochemistry)

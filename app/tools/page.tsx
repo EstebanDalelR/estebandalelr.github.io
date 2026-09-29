@@ -139,6 +139,12 @@ const tools = [
     href: "/tools/pilotAlphabet",
     color: "from-green-500 to-emerald-600",
   },
+  {
+    name: "Battery Masters",
+    description: "Narrated exam explainers for the batteries & energy storage courses.",
+    href: "/batteries",
+    color: "from-teal-400 to-cyan-600",
+  },
 ];
 
 export default function ToolsIndex() {

@@ -1,0 +1,1002 @@
+{
+ "intro/roadmap": {
+  "duration": 10.76,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.92,
+    "text": "We will walk through every topic from the March 2023 exam, in the order the questions come."
+   },
+   {
+    "start": 6.2,
+    "end": 10.36,
+    "text": "Keep scrolling, and I will tell you what the examiner is really asking for."
+   }
+  ]
+ },
+ "voltaic-pile/stack": {
+  "duration": 15.32,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 10.24,
+    "text": "In 1799, Alessandro Volta stacked discs of zinc and copper, separated by cloth or cardboard soaked in salt water or dilute acid."
+   },
+   {
+    "start": 10.52,
+    "end": 14.92,
+    "text": "That stack was the first reliable source of continuous electric current."
+   }
+  ]
+ },
+ "voltaic-pile/zinc": {
+  "duration": 14.84,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.16,
+    "text": "Zinc is the better reducing agent, so it is oxidised."
+   },
+   {
+    "start": 4.44,
+    "end": 10.64,
+    "text": "Zinc goes into solution as Zn²⁺, and leaves two electrons behind in the metal."
+   },
+   {
+    "start": 10.92,
+    "end": 14.44,
+    "text": "The zinc disc is the anode, the negative electrode."
+   }
+  ]
+ },
+ "voltaic-pile/copper": {
+  "duration": 17.12,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.8,
+    "text": "The electrons travel through the metal to the copper."
+   },
+   {
+    "start": 3.08,
+    "end": 5.4,
+    "text": "The copper itself is not consumed."
+   },
+   {
+    "start": 5.68,
+    "end": 13.12,
+    "text": "It is an inert surface where something in the electrolyte is reduced, mainly hydrogen ions to hydrogen gas."
+   },
+   {
+    "start": 13.4,
+    "end": 16.72,
+    "text": "The copper is the cathode, the positive electrode."
+   }
+  ]
+ },
+ "voltaic-pile/series": {
+  "duration": 19.24,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 9.36,
+    "text": "The soaked cloth is the electrolyte: ions carry the current inside the cell, electrons carry it in the outer circuit."
+   },
+   {
+    "start": 9.64,
+    "end": 13.92,
+    "text": "Each zinc, electrolyte, copper unit is one cell."
+   },
+   {
+    "start": 14.2,
+    "end": 18.84,
+    "text": "Stacking them connects the cells in series, so the voltages add up."
+   }
+  ]
+ },
+ "li-ion/which-negative": {
+  "duration": 19.24,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.64,
+    "text": "Graphite reacts with lithium ions at about 0.1 V versus lithium."
+   },
+   {
+    "start": 5.92,
+    "end": 10.16,
+    "text": "Lithium iron phosphate reacts at about 3.45 V."
+   },
+   {
+    "start": 10.44,
+    "end": 18.84,
+    "text": "The electrode with the lower potential is the negative electrode, so graphite is the negative, and LFP is the positive."
+   }
+  ]
+ },
+ "li-ion/intercalation": {
+  "duration": 14.28,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.32,
+    "text": "Both are intercalation materials."
+   },
+   {
+    "start": 2.6,
+    "end": 11.52,
+    "text": "The host structure stays roughly the same, and lithium ions slide in and out as counter ions, balancing the electrons that the host gains or loses."
+   },
+   {
+    "start": 11.8,
+    "end": 13.88,
+    "text": "That is why they cycle so well."
+   }
+  ]
+ },
+ "li-ion/balancing": {
+  "duration": 19.2,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.24,
+    "text": "Cell balancing is about matching capacity, not mass."
+   },
+   {
+    "start": 3.52,
+    "end": 10.76,
+    "text": "Graphite stores more than twice as much charge per gram, so you need less than half the mass of graphite compared to LFP."
+   },
+   {
+    "start": 11.04,
+    "end": 18.8,
+    "text": "In practice the negative electrode is given about 10% extra capacity, so lithium metal is never plated on the graphite."
+   }
+  ]
+ },
+ "li-ion/upd": {
+  "duration": 21.52,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.8,
+    "text": "Why does lithium deposit on copper above 0 V?"
+   },
+   {
+    "start": 4.08,
+    "end": 5.92,
+    "text": "Look at the Nernst equation."
+   },
+   {
+    "start": 6.2,
+    "end": 12.44,
+    "text": "When the first lithium lands on copper, it dissolves into the copper, so its activity is far below one."
+   },
+   {
+    "start": 12.72,
+    "end": 17.52,
+    "text": "A low lithium activity gives a potential above the standard potential."
+   },
+   {
+    "start": 17.8,
+    "end": 21.12,
+    "text": "This is called underpotential deposition."
+   }
+  ]
+ },
+ "li-ion/aluminium": {
+  "duration": 30.84,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.08,
+    "text": "Aluminium is protected by its oxide layer."
+   },
+   {
+    "start": 3.36,
+    "end": 10.8,
+    "text": "Above roughly 3.5 V, oxidation of the carbonate solvent releases protons, which dissolve that oxide."
+   },
+   {
+    "start": 11.08,
+    "end": 19.08,
+    "text": "With lithium hexafluorophosphate, fluoride forms a new layer of aluminium fluoride, so the collector re-passivates."
+   },
+   {
+    "start": 19.36,
+    "end": 30.44,
+    "text": "To mitigate corrosion with other salts: add a fluoride source or additive, use highly concentrated electrolytes, or coat the aluminium, for example with carbon."
+   }
+  ]
+ },
+ "li-ion/silicon-lithium": {
+  "duration": 23.12,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.56,
+    "text": "Silicon stores almost ten times more than graphite, but it swells by around 300%."
+   },
+   {
+    "start": 5.84,
+    "end": 10.32,
+    "text": "Particles crack, lose contact, and keep forming new SEI."
+   },
+   {
+    "start": 10.6,
+    "end": 14.04,
+    "text": "Lithium also gets trapped deep inside by diffusion."
+   },
+   {
+    "start": 14.32,
+    "end": 22.72,
+    "text": "Lithium metal has the highest capacity of all, but it grows dendrites that can short the cell, and it constantly reacts with the electrolyte."
+   }
+  ]
+ },
+ "edl/what": {
+  "duration": 16.88,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.48,
+    "text": "Put an electrode in an electrolyte and charge organises itself at the interface."
+   },
+   {
+    "start": 5.76,
+    "end": 11.56,
+    "text": "There is excess charge on the metal surface, and an equal and opposite layer of ions in the solution."
+   },
+   {
+    "start": 11.84,
+    "end": 16.48,
+    "text": "Helmholtz pictured this as a simple parallel plate capacitor."
+   }
+  ]
+ },
+ "edl/composition": {
+  "duration": 19.52,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.48,
+    "text": "The real picture, the Stern model, has two parts."
+   },
+   {
+    "start": 3.76,
+    "end": 13.92,
+    "text": "A compact layer right at the surface: specifically adsorbed ions and solvent at the inner Helmholtz plane, and solvated ions at the outer Helmholtz plane."
+   },
+   {
+    "start": 14.2,
+    "end": 19.12,
+    "text": "Beyond that is the diffuse layer, where thermal motion spreads the ions out."
+   }
+  ]
+ },
+ "edl/potential": {
+  "duration": 16.8,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 9.04,
+    "text": "The potential drops linearly across the compact layer, then decays exponentially through the diffuse layer into the bulk."
+   },
+   {
+    "start": 9.32,
+    "end": 16.4,
+    "text": "At high electrolyte concentration the diffuse layer is thin, and almost all of the drop happens in the compact layer."
+   }
+  ]
+ },
+ "edl/capacitance": {
+  "duration": 22.96,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.84,
+    "text": "Why can the capacitance change with potential?"
+   },
+   {
+    "start": 3.12,
+    "end": 9.84,
+    "text": "The diffuse layer capacitance depends on potential, with a minimum at the potential of zero charge."
+   },
+   {
+    "start": 10.12,
+    "end": 13.76,
+    "text": "Specific adsorption of ions changes with potential."
+   },
+   {
+    "start": 14.04,
+    "end": 22.56,
+    "text": "And for carbon electrodes the density of electronic states changes too, giving a space charge capacitance inside the electrode."
+   }
+  ]
+ },
+ "cv/sweep": {
+  "duration": 13.88,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 9.24,
+    "text": "In cyclic voltammetry, the potential of the working electrode is swept linearly in time, then reversed, while we record the current."
+   },
+   {
+    "start": 9.52,
+    "end": 13.48,
+    "text": "Potential on the x axis, current on the y axis."
+   }
+  ]
+ },
+ "cv/duck": {
+  "duration": 18.72,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.2,
+    "text": "For a reversible redox couple you get the famous duck shape."
+   },
+   {
+    "start": 4.48,
+    "end": 11.2,
+    "text": "As the potential passes the formal potential, the reactant at the surface is used up and the current rises."
+   },
+   {
+    "start": 11.48,
+    "end": 16.68,
+    "text": "Then the diffusion layer grows, supply slows down, and the current falls again."
+   },
+   {
+    "start": 16.96,
+    "end": 18.32,
+    "text": "That makes a peak."
+   }
+  ]
+ },
+ "cv/reverse": {
+  "duration": 15.2,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.28,
+    "text": "On the reverse sweep, the product near the electrode is converted back, giving the opposite peak."
+   },
+   {
+    "start": 5.56,
+    "end": 14.8,
+    "text": "For a reversible one electron system, the peaks are 57 mV apart, the peak currents are equal, and the midpoint gives the formal potential."
+   }
+  ]
+ },
+ "cv/info": {
+  "duration": 23.08,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.44,
+    "text": "What can you learn?"
+   },
+   {
+    "start": 1.72,
+    "end": 9.48,
+    "text": "The formal potential, the number of electrons, whether the reaction is reversible, and the kinetics from the peak separation."
+   },
+   {
+    "start": 9.76,
+    "end": 17.56,
+    "text": "Plot peak current against the square root of scan rate: a straight line means diffusion control, and gives the diffusion coefficient."
+   },
+   {
+    "start": 17.84,
+    "end": 22.68,
+    "text": "Current proportional to scan rate means adsorption or capacitive current."
+   }
+  ]
+ },
+ "cv/caveat": {
+  "duration": 24.64,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.16,
+    "text": "Exam trap!"
+   },
+   {
+    "start": 1.44,
+    "end": 11.56,
+    "text": "Randles Sevcik, Cottrell and Sand equations assume semi-infinite diffusion to a flat electrode, with a supporting electrolyte and no migration."
+   },
+   {
+    "start": 11.84,
+    "end": 19.6,
+    "text": "A lithium ion battery is a thin porous cell, where the diffusion layers overlap within seconds, and there is no supporting electrolyte."
+   },
+   {
+    "start": 19.88,
+    "end": 24.24,
+    "text": "So those equations cannot simply be applied to battery electrodes."
+   }
+  ]
+ },
+ "controlled-current/galvanostatic": {
+  "duration": 14.56,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.8,
+    "text": "In a controlled current experiment, you fix the current and record the potential."
+   },
+   {
+    "start": 5.08,
+    "end": 8.32,
+    "text": "Constant current means a constant reaction rate."
+   },
+   {
+    "start": 8.6,
+    "end": 14.16,
+    "text": "That is how batteries are usually tested, and capacity is simply current times time."
+   }
+  ]
+ },
+ "controlled-current/pros": {
+  "duration": 9.48,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 9.08,
+    "text": "Advantages: it resembles how a battery is used, it is simple, and charge and energy come straight out of the data."
+   }
+  ]
+ },
+ "controlled-current/cons": {
+  "duration": 22.2,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.16,
+    "text": "Disadvantages: the potential is just whatever is needed to carry the current."
+   },
+   {
+    "start": 5.44,
+    "end": 9.16,
+    "text": "If the current is too high, side reactions start."
+   },
+   {
+    "start": 9.44,
+    "end": 12.32,
+    "text": "When the cut off is reached, you do not know why."
+   },
+   {
+    "start": 12.6,
+    "end": 16.24,
+    "text": "There is always a charging current when the potential changes."
+   },
+   {
+    "start": 16.52,
+    "end": 21.8,
+    "text": "And the iR drop shrinks the real cycling window by 2iR."
+   }
+  ]
+ },
+ "controlled-current/potentiostatic": {
+  "duration": 17.84,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 7.8,
+    "text": "With controlled potential, you choose which reaction can happen, and the current tells you directly about kinetics and diffusion."
+   },
+   {
+    "start": 8.08,
+    "end": 14.76,
+    "text": "You can resolve separate processes, like SEI formation, which is hidden in a constant current curve."
+   },
+   {
+    "start": 15.04,
+    "end": 17.44,
+    "text": "But it is less like real operation."
+   }
+  ]
+ },
+ "supercaps/ragone": {
+  "duration": 7.32,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 6.92,
+    "text": "On a Ragone plot, fuel cells sit at high energy, supercapacitors at high power, and batteries in between."
+   }
+  ]
+ },
+ "supercaps/power": {
+  "duration": 22.24,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.92,
+    "text": "Supercapacitors are for high power."
+   },
+   {
+    "start": 3.2,
+    "end": 7.48,
+    "text": "The double layer forms in about 10⁻⁸ s."
+   },
+   {
+    "start": 7.76,
+    "end": 17.76,
+    "text": "It only rearranges charge, with no chemical reaction and no solid state diffusion, so it charges and discharges very fast, for more than a million cycles."
+   },
+   {
+    "start": 18.04,
+    "end": 21.84,
+    "text": "But only a surface stores charge, so the energy density is low."
+   }
+  ]
+ },
+ "supercaps/strategies": {
+  "duration": 28.16,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.04,
+    "text": "Two ways to store more energy in carbon particle supercapacitors."
+   },
+   {
+    "start": 5.32,
+    "end": 17.6,
+    "text": "One: increase the capacitance, with high surface area porous carbon, or by adding pseudocapacitance from surface groups, metal oxides such as ruthenium oxide, or conducting polymers."
+   },
+   {
+    "start": 17.88,
+    "end": 20.04,
+    "text": "Two: increase the voltage."
+   },
+   {
+    "start": 20.32,
+    "end": 27.76,
+    "text": "Energy goes with voltage squared, so an organic electrolyte at 2.7 V beats water at about 1 V."
+   }
+  ]
+ },
+ "fuel-cells/pem": {
+  "duration": 14.52,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.4,
+    "text": "In a PEM fuel cell, hydrogen is oxidised at the anode."
+   },
+   {
+    "start": 4.68,
+    "end": 9.68,
+    "text": "Protons cross the Nafion membrane, and oxygen is reduced to water at the cathode."
+   },
+   {
+    "start": 9.96,
+    "end": 14.12,
+    "text": "The theoretical voltage is 1.23 V."
+   }
+  ]
+ },
+ "fuel-cells/polarisation": {
+  "duration": 19.64,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.16,
+    "text": "Look at the polarisation curve."
+   },
+   {
+    "start": 2.44,
+    "end": 13.08,
+    "text": "The big, steep drop at low current is activation polarisation, mainly from the sluggish oxygen reduction at the cathode, which also goes through a hydrogen peroxide intermediate."
+   },
+   {
+    "start": 13.36,
+    "end": 19.24,
+    "text": "Then comes a linear ohmic region, and finally mass transport losses at high current."
+   }
+  ]
+ },
+ "fuel-cells/improve": {
+  "duration": 22.44,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.2,
+    "text": "To improve efficiency, speed up the oxygen reduction."
+   },
+   {
+    "start": 3.48,
+    "end": 10.24,
+    "text": "Use better and more catalyst, like platinum or platinum alloys dispersed on high surface area carbon."
+   },
+   {
+    "start": 10.52,
+    "end": 15.84,
+    "text": "Raise the temperature, increase the oxygen pressure, and optimise the three phase boundary."
+   },
+   {
+    "start": 16.12,
+    "end": 22.04,
+    "text": "Good water management and a thin, well hydrated membrane reduce the ohmic loss."
+   }
+  ]
+ },
+ "capacity-fade/rate-test": {
+  "duration": 6.4,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.88,
+    "text": "A lithium ion cell is cycled at increasing rates, and the capacity drops."
+   },
+   {
+    "start": 5.16,
+    "end": 6.0,
+    "text": "Why?"
+   }
+  ]
+ },
+ "capacity-fade/ir": {
+  "duration": 14.64,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.2,
+    "text": "Reason one: iR drop."
+   },
+   {
+    "start": 3.48,
+    "end": 9.04,
+    "text": "A higher current means a bigger iR drop, so the cut off voltage is reached earlier."
+   },
+   {
+    "start": 9.32,
+    "end": 14.24,
+    "text": "The window shrinks by 2iR, and it gets worse with high mass loading."
+   }
+  ]
+ },
+ "capacity-fade/diffusion": {
+  "duration": 21.12,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.88,
+    "text": "Reason two: diffusion."
+   },
+   {
+    "start": 2.16,
+    "end": 8.0,
+    "text": "Solid state diffusion is slow, and at high rates there is less time, so the diffusion layer is thinner."
+   },
+   {
+    "start": 8.28,
+    "end": 13.08,
+    "text": "Only the outer part of each particle, and of a thick electrode, is reached."
+   },
+   {
+    "start": 13.36,
+    "end": 20.72,
+    "text": "Lithium ion transport in the electrolyte can also limit, because the transference number is below one."
+   }
+  ]
+ },
+ "capacity-fade/reversible": {
+  "duration": 13.36,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.92,
+    "text": "If the capacity comes back when you return to a slow rate, the loss was kinetic."
+   },
+   {
+    "start": 5.2,
+    "end": 12.96,
+    "text": "If it does not, something degraded: SEI growth, loss of active material, or lithium trapped in the electrode."
+   }
+  ]
+ },
+ "capacity-fade/analyse": {
+  "duration": 24.28,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 7.04,
+    "text": "How to analyse it: compensate for or measure the iR drop, and use impedance spectroscopy."
+   },
+   {
+    "start": 7.32,
+    "end": 11.6,
+    "text": "Use a three electrode cell with a reference, to see which electrode limits."
+   },
+   {
+    "start": 11.88,
+    "end": 23.88,
+    "text": "Vary the mass loading and particle size, run cyclic voltammetry at different scan rates, compare half cells and full cells, and finally open the cell for post mortem analysis."
+   }
+  ]
+ },
+ "eis/basics": {
+  "duration": 20.6,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 8.32,
+    "text": "In impedance spectroscopy, we apply a small sine wave, a few millivolts, around a steady potential, and measure the current response."
+   },
+   {
+    "start": 8.6,
+    "end": 12.08,
+    "text": "The ratio and the phase shift give the impedance."
+   },
+   {
+    "start": 12.36,
+    "end": 18.32,
+    "text": "Repeat this from megahertz down to millihertz, and plot minus the imaginary part against the real part."
+   },
+   {
+    "start": 18.6,
+    "end": 20.2,
+    "text": "That is a Nyquist plot."
+   }
+  ]
+ },
+ "eis/high": {
+  "duration": 22.2,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.8,
+    "text": "Now the exam cell: a polymer electrolyte between two blocking electrodes."
+   },
+   {
+    "start": 5.08,
+    "end": 7.72,
+    "text": "At high frequency you see a semicircle."
+   },
+   {
+    "start": 8.0,
+    "end": 15.36,
+    "text": "It comes from ion migration through the bulk polymer, a bulk resistance in parallel with the geometric capacitance."
+   },
+   {
+    "start": 15.64,
+    "end": 21.8,
+    "text": "Where it meets the real axis gives the bulk resistance, and so the ionic conductivity."
+   }
+  ]
+ },
+ "eis/medium": {
+  "duration": 11.52,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.56,
+    "text": "At medium frequencies the semicircle ends and the curve turns upward."
+   },
+   {
+    "start": 4.84,
+    "end": 11.12,
+    "text": "Here, the ions have time to travel far enough to start piling up at the electrodes."
+   }
+  ]
+ },
+ "eis/low": {
+  "duration": 15.92,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.92,
+    "text": "At low frequency you see a nearly vertical line."
+   },
+   {
+    "start": 3.2,
+    "end": 6.8,
+    "text": "The electrodes are blocking, so no charge crosses the interface."
+   },
+   {
+    "start": 7.08,
+    "end": 11.28,
+    "text": "The ions just charge the double layer, which behaves like a capacitor."
+   },
+   {
+    "start": 11.56,
+    "end": 15.52,
+    "text": "It is often tilted, because real surfaces are rough."
+   }
+  ]
+ },
+ "eis/why": {
+  "duration": 24.88,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.04,
+    "text": "Why do processes show up at different frequencies?"
+   },
+   {
+    "start": 3.32,
+    "end": 7.52,
+    "text": "Each process has its own time constant, RC."
+   },
+   {
+    "start": 7.8,
+    "end": 13.68,
+    "text": "A process only responds if the period of the signal is longer than its time constant."
+   },
+   {
+    "start": 13.96,
+    "end": 18.88,
+    "text": "Fast processes, like ion hopping in the bulk, appear at high frequency."
+   },
+   {
+    "start": 19.16,
+    "end": 24.48,
+    "text": "Slow ones, like double layer charging and diffusion, appear at low frequency."
+   }
+  ]
+ },
+ "kinetics/bv": {
+  "duration": 21.8,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.92,
+    "text": "The Butler Volmer equation links current to overpotential."
+   },
+   {
+    "start": 4.2,
+    "end": 10.76,
+    "text": "The exchange current density, j₀, is the rate of the forward and back reactions at equilibrium."
+   },
+   {
+    "start": 11.04,
+    "end": 15.04,
+    "text": "A large j₀ means a small overpotential."
+   },
+   {
+    "start": 15.32,
+    "end": 21.4,
+    "text": "The symmetry factor, β, decides how symmetric the oxidation and reduction branches are."
+   }
+  ]
+ },
+ "kinetics/choose": {
+  "duration": 26.4,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 6.28,
+    "text": "System A has j₀ of 4 × 10⁻⁵, and β of 0.3."
+   },
+   {
+    "start": 6.56,
+    "end": 13.0,
+    "text": "System B has 3 × 10⁻⁴, and β of 0.47."
+   },
+   {
+    "start": 13.28,
+    "end": 14.6,
+    "text": "Choose B."
+   },
+   {
+    "start": 14.88,
+    "end": 26.0,
+    "text": "It has almost ten times higher exchange current, so lower overpotentials, and a β close to 0.5 gives similar overpotentials on charge and discharge."
+   }
+  ]
+ },
+ "kinetics/particles": {
+  "duration": 30.8,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 6.92,
+    "text": "Last question: same 50 mg, but 1 µm particles versus 10 nm particles."
+   },
+   {
+    "start": 7.2,
+    "end": 12.76,
+    "text": "The theoretical capacity and energy are the same, because they depend on the amount of material."
+   },
+   {
+    "start": 13.04,
+    "end": 16.32,
+    "text": "But the diffusion time scales with length squared."
+   },
+   {
+    "start": 16.6,
+    "end": 24.56,
+    "text": "10 nm particles are about 10,000 times faster to fill, and have far more surface area, so the current density is lower."
+   },
+   {
+    "start": 24.84,
+    "end": 30.4,
+    "text": "Result: much higher power, and more of the capacity is usable at high rates."
+   }
+  ]
+ },
+ "kinetics/downside": {
+  "duration": 12.72,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 12.32,
+    "text": "The downside of nanoparticles: more surface means more SEI and side reactions, lower coulombic efficiency, and lower packing density, so the volumetric energy density can go down."
+   }
+  ]
+ },
+ "outro/recap": {
+  "duration": 17.04,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.8,
+    "text": "That is the whole exam in one scroll."
+   },
+   {
+    "start": 3.08,
+    "end": 7.04,
+    "text": "The recurring idea: batteries do not work at equilibrium."
+   },
+   {
+    "start": 7.32,
+    "end": 14.76,
+    "text": "Thermodynamics tells you the voltage and the capacity, but kinetics and mass transport decide what you actually get."
+   },
+   {
+    "start": 15.04,
+    "end": 16.64,
+    "text": "Good luck on the exam!"
+   }
+  ]
+ },
+ "intro/hello": {
+  "duration": 13.6,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 0.68,
+    "text": "Hi!"
+   },
+   {
+    "start": 0.96,
+    "end": 7.88,
+    "text": "Batteries, supercapacitors and fuel cells look very different, but they are all electrochemical cells."
+   },
+   {
+    "start": 8.16,
+    "end": 13.2,
+    "text": "Two electrodes, one electrolyte, and a place where electrons and ions have to meet."
+   }
+  ]
+ },
+ "intro/difference": {
+  "duration": 17.6,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 6.32,
+    "text": "A battery is a closed system: the electrode materials themselves are oxidised and reduced."
+   },
+   {
+    "start": 6.6,
+    "end": 11.04,
+    "text": "A fuel cell is an open system: the fuel is fed in from a tank."
+   },
+   {
+    "start": 11.32,
+    "end": 14.32,
+    "text": "A supercapacitor has no redox reaction at all."
+   },
+   {
+    "start": 14.6,
+    "end": 17.2,
+    "text": "It stores charge in the electric double layer."
+   }
+  ]
+ }
+}

@@ -1,0 +1,399 @@
+{
+  "title": "Materials Chemistry — Exam Explainer",
+  "course": "1KB230 Materials Chemistry, Uppsala University",
+  "examSource": "Exam questions: October 2022 and February 2025 exams.",
+  "chapters": [
+    {
+      "id": "intro",
+      "title": "From Atoms to Alloys",
+      "exam": [],
+      "steps": [
+        {
+          "id": "hello",
+          "visual": "ladder",
+          "text": "Hi! Materials chemistry is one long chain of cause and effect. Bonding decides the crystal structure, the structure decides the defects, and defects, diffusion and phase transformations decide the microstructure. The microstructure is what makes a steel hard or an alloy creep resistant."
+        },
+        {
+          "id": "roadmap",
+          "visual": "roadmap",
+          "text": "We follow the exam: structures and Miller indices, phase diagrams, diffusion, nucleation and solidification, and finally real alloys. Every chapter shows which exam questions it answers."
+        }
+      ]
+    },
+    {
+      "id": "bonding",
+      "title": "Chemical Bonding and Lattice Energy",
+      "exam": [],
+      "steps": [
+        {
+          "id": "triangle",
+          "visual": "triangle",
+          "text": "Three types of bonding. Metal with metal: metallic bonding, a sea of valence electrons around ion cores, so metals conduct and deform. Metal with non-metal: ionic bonding, electrons transferred, hard but brittle. Non-metal with non-metal: covalent bonding, shared and directional electrons."
+        },
+        {
+          "id": "lattice-energy",
+          "visual": "lattice-energy",
+          "equation": "U = \\frac{e^2 Z_+ Z_- N_A A}{r}\\left(1 - \\frac{1}{n}\\right)",
+          "text": "In an ionic crystal, the lattice energy is the energy needed to break the crystal into gaseous ions. It grows with the ionic charges and shrinks with the distance between the ions. NaCl has 788 kJ/mol, NaF 904 kJ/mol, but MgO, with doubly charged ions, has 3938 kJ/mol."
+        },
+        {
+          "id": "properties",
+          "visual": "properties",
+          "text": "Stronger bonds mean a higher melting point, a higher surface energy, and slower diffusion. Keep that in mind, because it answers several exam questions later on."
+        }
+      ]
+    },
+    {
+      "id": "packing",
+      "title": "Crystal Structures, Packing and Voids",
+      "exam": ["2022 Q1a", "2025 Q1a"],
+      "steps": [
+        {
+          "id": "cells",
+          "visual": "cells",
+          "text": "Metals pack like hard spheres. Body centred cubic has an atom in each corner and one in the middle, with a packing factor of 0.68. Face centred cubic, which is cubic close packing, has atoms on the corners and in the middle of each face, with 0.74. Hexagonal close packing also reaches 0.74."
+        },
+        {
+          "id": "stacking",
+          "visual": "stacking",
+          "text": "Close packed layers can be stacked in two ways. ABAB gives hexagonal close packing, and ABCABC gives cubic close packing. You can never put a layer directly on top of an identical one, because the atoms would sit on top of each other."
+        },
+        {
+          "id": "voids",
+          "visual": "voids",
+          "text": "Between the atoms are voids. In cubic close packing, there are 4 atoms per unit cell, 4 octahedral voids and 8 tetrahedral voids. That is 1 octahedral and 2 tetrahedral voids per atom. Remember this ratio."
+        },
+        {
+          "id": "hydride",
+          "visual": "hydride",
+          "text": "Exam question: titanium forms a hydride with titanium atoms in cubic close packing and all tetrahedral voids filled with hydrogen. There are 2 tetrahedral voids per titanium atom, so the formula is TiH₂."
+        },
+        {
+          "id": "ionic-structures",
+          "visual": "ionic-structures",
+          "text": "Ionic structures work the same way: the larger ion packs, the smaller one fills voids. Rock salt, NaCl, fills all octahedral voids. Fluorite, CaF₂, fills all tetrahedral voids. Zinc blende fills half of them. Careful, one lecture slide says Cs in CdI₂: it should be Cd, cadmium, in half of the octahedral voids."
+        },
+        {
+          "id": "radius-ratio",
+          "visual": "radius-ratio",
+          "text": "Which void does a cation choose? It wants the highest coordination while still touching its anions. Above a radius ratio of 0.414 it fits an octahedral site, above 0.732 a cubic site. That is why NaCl and KCl take the rock salt structure, while the much larger caesium ion in CsCl takes 8-fold cubic coordination."
+        }
+      ]
+    },
+    {
+      "id": "miller",
+      "title": "Miller Indices and X-ray Diffraction",
+      "exam": ["2022 Q1b", "2025 Q1b"],
+      "steps": [
+        {
+          "id": "recipe",
+          "visual": "recipe",
+          "text": "Miller indices name a plane in three steps. Find where the plane cuts the a, b and c axes, in units of the cell edges. Take the reciprocals. Clear any fractions. A plane parallel to an axis cuts it at infinity, and the reciprocal of infinity is 0."
+        },
+        {
+          "id": "example",
+          "visual": "example",
+          "text": "Exam example: the plane cuts x at 1, is parallel to y, and cuts z at 1. The intercepts are 1, infinity and 1, the reciprocals 1, 0 and 1, so the plane is (101). Explain every step: writing only the answer gives half the points."
+        },
+        {
+          "id": "bragg",
+          "visual": "bragg",
+          "equation": "2d\\,\\sin\\theta = n\\lambda",
+          "text": "Why do we care? X-rays reflect from families of planes. They only interfere constructively when the extra path, 2 d sin theta, is a whole number of wavelengths. That is Bragg's law, and the pattern of peaks is a fingerprint of the crystal structure."
+        }
+      ]
+    },
+    {
+      "id": "defects",
+      "title": "Defects, Stacking Faults and Surface Energy",
+      "exam": ["2022 Q1c", "2025 Q1c", "2025 Q1d"],
+      "steps": [
+        {
+          "id": "dimensions",
+          "visual": "dimensions",
+          "text": "Real crystals are never perfect. 0D defects are vacancies, interstitials and substitutional atoms. 1D defects are dislocations. 2D defects are surfaces, grain boundaries and stacking faults. 3D defects are pores and precipitates."
+        },
+        {
+          "id": "stacking-fault",
+          "visual": "stacking-fault",
+          "text": "A stacking fault is an error in the stacking sequence. In a cubic close packed metal, ABCABABC is wrong: the 6th layer should be C but is A. Locally, the sequence ABAB looks like hexagonal packing."
+        },
+        {
+          "id": "surface",
+          "visual": "surface",
+          "text": "Why does a surface cost energy? Surface atoms have lost neighbours, and bonds release energy. In a cubic close packed metal, a (111) surface atom has 9 neighbours instead of 12, so 3 of 12 bonds, 25%, are lost. Stronger bonds mean a higher surface energy, and also a higher melting point. Both follow bond strength."
+        },
+        {
+          "id": "dislocations",
+          "visual": "dislocations",
+          "text": "Plastic deformation happens when dislocations glide. Anything that blocks them, like grain boundaries, solute atoms and precipitates, makes the material harder and stronger."
+        }
+      ]
+    },
+    {
+      "id": "thermo",
+      "title": "Gibbs Energy, the Phase Rule and the Common Tangent",
+      "exam": ["2022 Q2a", "2022 Q2b", "2025 Q2a"],
+      "steps": [
+        {
+          "id": "gibbs",
+          "visual": "gibbs",
+          "equation": "G = H - TS \\qquad \\Delta G < 0 \\ \\text{(spontaneous)}",
+          "text": "Nature minimises the Gibbs free energy, G equals H minus T S. A reaction runs by itself only if delta G is negative, and at equilibrium G is at its minimum."
+        },
+        {
+          "id": "phase-rule",
+          "visual": "phase-rule",
+          "equation": "p + f = c + 2 \\qquad p + f = c + 1\\ \\ (P\\ \\text{constant})",
+          "text": "The Gibbs phase rule links the number of phases p, degrees of freedom f and components c. With pressure fixed, p plus f equals c plus 1. In a binary system, 3 phases can only coexist at a single point. In a ternary system at constant temperature and pressure, 3 phases means 0 degrees of freedom."
+        },
+        {
+          "id": "tangent",
+          "visual": "tangent",
+          "equation": "\\mu_A^{\\alpha} = \\mu_A^{\\beta} \\qquad \\mu_B^{\\alpha} = \\mu_B^{\\beta}",
+          "text": "The tangent method. Draw the tangent to a phase's free energy curve: where it meets pure A, it gives the chemical potential of A, and where it meets pure B, that of B. At equilibrium, each component must have the same chemical potential in both phases. That only happens when both phases share one common tangent, and its touching points give the two phase compositions."
+        },
+        {
+          "id": "nano",
+          "visual": "nano",
+          "text": "What if the alpha phase is nanocrystalline? Surfaces cost energy, so G total equals G bulk plus G surface. The whole alpha curve moves up, the common tangent touches at new points, and the two phase region shifts."
+        }
+      ]
+    },
+    {
+      "id": "binary",
+      "title": "Binary Phase Diagrams and the Lever Rule",
+      "exam": [],
+      "steps": [
+        {
+          "id": "lines",
+          "visual": "lines",
+          "text": "A binary phase diagram maps the stable phases against temperature and composition. The liquidus line is the border to the melt, the solidus line the border to the solid. In a two phase region, a horizontal tie line gives the composition of each phase."
+        },
+        {
+          "id": "lever",
+          "visual": "lever",
+          "text": "The lever rule gives how much of each phase. For a copper nickel alloy with 35 wt% nickel, the melt has 32 and the solid 43 wt% nickel. The fraction of melt is the lever arm on the far side, 8 divided by 11, about 73%. Careful: each phase takes the arm opposite to it."
+        },
+        {
+          "id": "reactions",
+          "visual": "reactions",
+          "text": "Two invariant reactions. At a eutectic point, a melt turns into two solids at once: melt to alpha plus beta. At a peritectic point, a melt reacts with a solid to form a new solid: melt plus alpha to beta. Both have 3 phases in equilibrium, and 0 degrees of freedom."
+        }
+      ]
+    },
+    {
+      "id": "ternary",
+      "title": "Ternary Phase Diagrams",
+      "exam": ["2022 Q2c", "2022 Q2d", "2025 Q2b", "2025 Q2c"],
+      "steps": [
+        {
+          "id": "triangle",
+          "visual": "gibbs-triangle",
+          "text": "Three components need a Gibbs triangle at constant temperature. Each corner is a pure element, each side a binary system. Read a composition by drawing lines parallel to the sides."
+        },
+        {
+          "id": "three-phase",
+          "visual": "three-phase",
+          "text": "Mark the alloy's composition as a point. If it falls in a three phase triangle, the equilibrium phases are the three corners of that triangle. For 50 at% molybdenum, 20 at% boron and 30 at% silicon, the phases are MoB, T1 and MoSi₂."
+        },
+        {
+          "id": "amounts",
+          "visual": "amounts",
+          "text": "The amounts come from a lever rule in two dimensions. Draw a line from each corner phase through the alloy point to the opposite side. The fraction of that phase is the distance from the point to the side, divided by the whole line. The three fractions must add up to 100%."
+        }
+      ]
+    },
+    {
+      "id": "diffusion",
+      "title": "Diffusion and Carburisation",
+      "exam": ["2022 Q3a", "2022 Q3b", "2025 Q3a", "2025 Q3b"],
+      "steps": [
+        {
+          "id": "fick",
+          "visual": "fick",
+          "equation": "J = -D\\,\\frac{dc}{dx} \\qquad \\frac{\\partial c}{\\partial t} = D\\,\\frac{\\partial^2 c}{\\partial x^2}",
+          "text": "Fick's first law: atoms flow down a concentration gradient, and the flux is proportional to it. Fick's second law tells how the concentration changes with time."
+        },
+        {
+          "id": "arrhenius",
+          "visual": "arrhenius",
+          "equation": "D = D_0\\,e^{-Q/RT}",
+          "text": "Diffusion is thermally activated: an atom must break bonds to jump to the next site. The diffusion coefficient grows exponentially with temperature. Metals with strong bonds have a high activation energy, slow diffusion, and a high melting point."
+        },
+        {
+          "id": "paths",
+          "visual": "paths",
+          "text": "Diffusion is fastest along free surfaces, then grain boundaries, then through the bulk, because boundaries are less dense and less ordered. So a fine grained material, with many more grain boundaries, has a higher total diffusion rate than a coarse grained one."
+        },
+        {
+          "id": "erf",
+          "visual": "erf",
+          "equation": "c(x,t) = A + B\\,\\mathrm{erf}\\,z \\qquad z = \\frac{x}{2\\sqrt{Dt}}",
+          "text": "Carburisation keeps the surface at a constant carbon level. The solution is c equals A plus B times the error function of z. Define A and B for full points. At the surface, erf of 0 is 0, so A is the surface concentration. Deep inside at time 0, erf is 1, so A plus B is the starting concentration."
+        },
+        {
+          "id": "worked",
+          "visual": "worked",
+          "text": "2022 exam: surface 0.9 wt% carbon, starting from 0, so A is 0.009 and B is minus 0.009. We want 0.5 wt% at 100 µm, which gives erf z of about 0.444 and z of about 0.42. Then t equals x squared over 4 D z squared. With D read from the figure at the maximum 1000 °C, around 2 × 10⁻¹¹ square metres per second, that is roughly 12 minutes."
+        }
+      ]
+    },
+    {
+      "id": "nucleation",
+      "title": "Nucleation and Undercooling",
+      "exam": ["2022 Q4a", "2025 Q4a"],
+      "steps": [
+        {
+          "id": "balance",
+          "visual": "balance",
+          "equation": "\\Delta G = \\tfrac{4}{3}\\pi r^3\\,\\Delta G_v + 4\\pi r^2\\gamma",
+          "text": "A new solid nucleus gains energy from its volume but pays for its surface. For a tiny nucleus the surface term wins, so the total change in free energy first rises, then falls."
+        },
+        {
+          "id": "critical",
+          "visual": "critical",
+          "equation": "r^* = -\\frac{2\\gamma}{\\Delta G_v} \\qquad \\Delta G^* = \\frac{16\\pi\\gamma^3}{3\\,\\Delta G_v^2}",
+          "text": "The maximum sits at the critical radius, r star. Smaller nuclei dissolve again, larger ones grow. The height of the maximum, delta G star, is the energy barrier for nucleation."
+        },
+        {
+          "id": "undercooling",
+          "visual": "undercooling",
+          "equation": "\\Delta G_v = \\frac{\\Delta H_m\\,\\Delta T}{T_m} \\qquad \\Delta G^* \\propto \\frac{1}{\\Delta T^2}",
+          "text": "Why does nucleation need undercooling? At the melting point, solid and melt have the same free energy, so the driving force is 0 and the barrier is infinite. Only below the melting point does the driving force grow, and the barrier falls with the square of the undercooling."
+        },
+        {
+          "id": "heterogeneous",
+          "visual": "heterogeneous",
+          "text": "In practice, nuclei form on mould walls and particles. This heterogeneous nucleation lowers the barrier, so only a few degrees of undercooling are needed instead of hundreds. Adding nucleation agents gives many nuclei, small grains, and a stronger material."
+        }
+      ]
+    },
+    {
+      "id": "solidification",
+      "title": "Solidification and Microstructure",
+      "exam": ["2022 Q4c", "2022 Q4d", "2025 Q4b", "2025 Q4c", "2025 Q4d"],
+      "steps": [
+        {
+          "id": "eutectic-walk",
+          "visual": "eutectic-walk",
+          "text": "How to describe equilibrium solidification. Start in the melt. At the liquidus line, primary crystals form. While cooling, the melt follows the liquidus line and the solid follows the solidus line. At the eutectic temperature, the remaining melt turns into two solids at once, with 3 phases and 0 degrees of freedom. Then the solid cools."
+        },
+        {
+          "id": "lamellae",
+          "visual": "lamellae",
+          "text": "A eutectic melt forms both solids side by side, as thin alternating lamellae, because that keeps diffusion distances short. A microstructure made only of lamellae, with no primary crystals, means the alloy had the eutectic composition."
+        },
+        {
+          "id": "peritectic-walk",
+          "visual": "peritectic-walk",
+          "text": "A peritectic alloy is different. Primary crystals form first, and at the peritectic temperature the melt must react with them to form a new phase. When all the melt is used up, the two solid phases cool together."
+        },
+        {
+          "id": "coring",
+          "visual": "coring",
+          "text": "Which alloy solidifies closer to equilibrium? Usually the eutectic one. In a peritectic reaction, the new phase forms as a shell around the primary crystals, and atoms must diffuse through that solid shell, which is very slow. The result is coring: grains with a composition gradient, like an onion."
+        },
+        {
+          "id": "dendrites",
+          "visual": "dendrites",
+          "text": "Solute pushed ahead of the growth front lowers the local melting temperature. This constitutional undercooling makes any bump on the front grow faster, and the front breaks up into tree-like dendrites."
+        }
+      ]
+    },
+    {
+      "id": "ttt",
+      "title": "TTT Diagrams, Martensite and Age Hardening",
+      "exam": ["2022 Q4b", "2025 Q5a"],
+      "steps": [
+        {
+          "id": "nose",
+          "visual": "nose",
+          "text": "Why does a TTT diagram have a nose? The rate needs two things that pull in opposite directions. Just below the transformation temperature, diffusion is fast but the driving force, the undercooling, is tiny. At low temperature, the driving force is huge but diffusion is frozen. The rate is fastest in between, so the time is shortest there: the nose."
+        },
+        {
+          "id": "avrami",
+          "visual": "avrami",
+          "equation": "y = 1 - e^{-(kt)^n}",
+          "text": "A TTT diagram is built from Avrami curves: the transformed fraction against time at each temperature. Joining the start times and the finish times gives the two C-shaped curves."
+        },
+        {
+          "id": "martensite",
+          "visual": "martensite",
+          "text": "Quench a steel fast enough to miss the nose, and the carbon has no time to diffuse. The austenite then shears into martensite: a body centred tetragonal phase formed without diffusion, by the collective movement of atoms. It is very hard but brittle, so it is tempered afterwards."
+        },
+        {
+          "id": "age-hardening",
+          "visual": "age-hardening",
+          "text": "Age hardening uses the same ideas. Quench an aluminium copper alloy to keep the copper in solid solution, then age it at a low temperature. Coherent zones and precipitates form, block dislocations, and raise the strength."
+        }
+      ]
+    },
+    {
+      "id": "steels",
+      "title": "Steels",
+      "exam": ["2022 Q5a", "2025 Q5b"],
+      "steps": [
+        {
+          "id": "fe-c",
+          "visual": "fe-c",
+          "text": "Iron is body centred ferrite at room temperature and face centred austenite at high temperature. Austenite dissolves much more carbon, because its octahedral voids are larger. Slowly cooled steel with 0.76 wt% carbon forms pearlite at 727 °C: lamellae of ferrite and cementite."
+        },
+        {
+          "id": "stainless",
+          "visual": "stainless",
+          "text": "Stainless steel needs more than 11 wt% chromium, which forms a protective oxide layer. Nickel stabilises austenite, chromium stabilises ferrite. Austenitic steels like 304 are non magnetic and the most common, ferritic steels are cheaper and magnetic, and martensitic steels can be hardened."
+        },
+        {
+          "id": "schaeffler",
+          "visual": "schaeffler",
+          "text": "A Schaeffler diagram predicts which steel you get. All austenite stabilisers are summed as a nickel equivalent, weighted by how strongly they act, and all ferrite stabilisers as a chromium equivalent. Plot one against the other, and the regions show austenitic, ferritic, martensitic or mixed steel."
+        },
+        {
+          "id": "duplex",
+          "visual": "duplex",
+          "text": "Duplex steels contain about 50% austenite and 50% ferrite. They combine high strength with excellent corrosion resistance, so they are used offshore, in chemical plants and in bridges."
+        }
+      ]
+    },
+    {
+      "id": "alloys",
+      "title": "Superalloys, Aluminium, Titanium and Specific Strength",
+      "exam": ["2022 Q5b", "2022 Q5c", "2025 Q5c"],
+      "steps": [
+        {
+          "id": "superalloys",
+          "visual": "superalloys",
+          "text": "Nickel based superalloys keep their strength close to 1000 °C. Their secret is the microstructure: a face centred gamma matrix full of coherent, ordered gamma prime precipitates. The precipitates block dislocations, which gives high strength and excellent creep resistance."
+        },
+        {
+          "id": "creep-slip",
+          "visual": "creep-slip",
+          "text": "Careful: one answer key says superalloys have low creep resistance. That is a slip. Superalloys have high creep resistance, which is exactly why they are used in the hot parts of jet engines."
+        },
+        {
+          "id": "specific",
+          "visual": "specific",
+          "text": "Specific strength is strength divided by density. A steel can be stronger in absolute terms but heavier, so when mass matters, as in aircraft, cars and implants, a lighter alloy with a lower strength can win."
+        },
+        {
+          "id": "light-alloys",
+          "visual": "light-alloys",
+          "text": "Aluminium has a density of only 2.7 g/cm³ against about 8 for steel, a high specific strength, and a protective oxide, but it melts at 660 °C. Titanium, at 4.5 g/cm³, adds excellent corrosion resistance and biocompatibility, at a high price."
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "title": "Recap",
+      "exam": [],
+      "steps": [
+        {
+          "id": "recap",
+          "visual": "recap",
+          "text": "Recap. Bonding sets structure and melting point. Voids, Miller indices and stacking faults describe the crystal. Common tangents and the phase rule build phase diagrams, and the lever rule reads them. Diffusion and nucleation control how fast things change, and together they explain microstructures, TTT noses, martensite and the alloys we use. Good luck on the exam!"
+        }
+      ]
+    }
+  ]
+}

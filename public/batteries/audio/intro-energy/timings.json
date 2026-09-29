@@ -1,0 +1,1172 @@
+{
+ "intro/hello": {
+  "duration": 14.88,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 0.68,
+    "text": "Hi!"
+   },
+   {
+    "start": 0.96,
+    "end": 4.92,
+    "text": "This video is the systems-level map of energy storage."
+   },
+   {
+    "start": 5.2,
+    "end": 14.48,
+    "text": "Not just batteries, but all five families: mechanical, thermal, chemical, electromagnetic and electrochemical, and how to compare them."
+   }
+  ]
+ },
+ "intro/flow": {
+  "duration": 18.92,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.64,
+    "text": "Energy flows through society in three stages."
+   },
+   {
+    "start": 3.92,
+    "end": 8.2,
+    "text": "Natural sources like sun, wind, fossil fuels and nuclear."
+   },
+   {
+    "start": 8.48,
+    "end": 13.24,
+    "text": "Conversion in engines, generators, batteries and fuel cells."
+   },
+   {
+    "start": 13.52,
+    "end": 18.52,
+    "text": "And end use as heat, cooling, chemicals, electricity and transport."
+   }
+  ]
+ },
+ "society/growth": {
+  "duration": 15.24,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.72,
+    "text": "Why does global energy consumption keep rising?"
+   },
+   {
+    "start": 3.0,
+    "end": 4.84,
+    "text": "Reason one: population."
+   },
+   {
+    "start": 5.12,
+    "end": 8.92,
+    "text": "India alone has added about 14 million people per year."
+   },
+   {
+    "start": 9.2,
+    "end": 14.84,
+    "text": "Absolute growth, not just use per person, is what the energy system must supply."
+   }
+  ]
+ },
+ "society/gdp": {
+  "duration": 25.4,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.2,
+    "text": "Reason two: development."
+   },
+   {
+    "start": 2.48,
+    "end": 6.68,
+    "text": "Energy use per person follows GDP per person."
+   },
+   {
+    "start": 6.96,
+    "end": 13.24,
+    "text": "As countries industrialise and living standards rise, each person uses more energy."
+   },
+   {
+    "start": 13.52,
+    "end": 17.28,
+    "text": "That is why just use less is not a global answer."
+   },
+   {
+    "start": 17.56,
+    "end": 25.0,
+    "text": "Some economies have decoupled growth from energy, through efficiency and structural change, but it is uneven."
+   }
+  ]
+ },
+ "society/transitions": {
+  "duration": 18.16,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.08,
+    "text": "History matters too."
+   },
+   {
+    "start": 2.36,
+    "end": 9.72,
+    "text": "Every energy transition so far has added a new source rather than replacing the old one, and each took decades."
+   },
+   {
+    "start": 10.0,
+    "end": 17.76,
+    "text": "Coal overtook wood around 1885, and renewables fell from almost all of our energy to about 6% by the 1960s."
+   }
+  ]
+ },
+ "society/waste": {
+  "duration": 13.44,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.88,
+    "text": "And look where the energy goes."
+   },
+   {
+    "start": 2.16,
+    "end": 7.48,
+    "text": "Roughly two thirds of all primary energy is rejected as waste heat."
+   },
+   {
+    "start": 7.76,
+    "end": 9.64,
+    "text": "That is not bad bookkeeping."
+   },
+   {
+    "start": 9.92,
+    "end": 13.04,
+    "text": "It is the second law of thermodynamics at work."
+   }
+  ]
+ },
+ "thermo/first": {
+  "duration": 24.08,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.96,
+    "text": "The first law: energy is conserved."
+   },
+   {
+    "start": 3.24,
+    "end": 11.76,
+    "text": "It is never created or destroyed, only converted between forms: chemical, thermal, kinetic, gravitational, electrical."
+   },
+   {
+    "start": 12.04,
+    "end": 16.24,
+    "text": "The practical implication: storage cannot create energy."
+   },
+   {
+    "start": 16.52,
+    "end": 23.68,
+    "text": "Every joule you take out, you first put in, and whatever is not delivered was converted, usually into heat."
+   }
+  ]
+ },
+ "thermo/second": {
+  "duration": 17.8,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.48,
+    "text": "The second law: energy has quality."
+   },
+   {
+    "start": 2.76,
+    "end": 9.44,
+    "text": "High quality energy can be converted completely into low quality energy, but not the other way around."
+   },
+   {
+    "start": 9.72,
+    "end": 12.84,
+    "text": "Not all heat can be turned into work."
+   },
+   {
+    "start": 13.12,
+    "end": 17.4,
+    "text": "A joule of electricity is worth more than a joule of lukewarm water."
+   }
+  ]
+ },
+ "thermo/carnot": {
+  "duration": 14.0,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.24,
+    "text": "The Carnot limit is the ceiling on any heat engine."
+   },
+   {
+    "start": 3.52,
+    "end": 11.12,
+    "text": "With heat at 100 °C and a cold side at 4 °C, at most 26% can become work."
+   },
+   {
+    "start": 11.4,
+    "end": 13.6,
+    "text": "Temperatures always in kelvin!"
+   }
+  ]
+ },
+ "thermo/beat": {
+  "duration": 14.64,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.92,
+    "text": "Here is the big advantage of storage."
+   },
+   {
+    "start": 3.2,
+    "end": 9.48,
+    "text": "Batteries, capacitors, pumped hydro and flywheels never go via heat, so Carnot does not apply."
+   },
+   {
+    "start": 9.76,
+    "end": 14.24,
+    "text": "A lithium ion battery returns more than 90% of what you put in."
+   }
+  ]
+ },
+ "thermo/quality": {
+  "duration": 26.2,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 10.12,
+    "text": "Exam answer: high quality energy is electricity, mechanical work, and gravitational or kinetic energy, like water behind a dam or a spinning flywheel."
+   },
+   {
+    "start": 10.4,
+    "end": 15.72,
+    "text": "Low quality energy is heat close to ambient temperature, like lukewarm water."
+   },
+   {
+    "start": 16.0,
+    "end": 25.8,
+    "text": "High quality is preferred because it can be converted into any other form, including useful work, with high efficiency, and it transmits and stores well."
+   }
+  ]
+ },
+ "why-storage/variability": {
+  "duration": 12.36,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.96,
+    "text": "Wind and solar output is set by the weather, not by demand."
+   },
+   {
+    "start": 4.24,
+    "end": 11.96,
+    "text": "Wind varies from seconds to weeks, demand has its own daily and seasonal pattern, and the two do not match, on every timescale at once."
+   }
+  ]
+ },
+ "why-storage/net-load": {
+  "duration": 14.0,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.8,
+    "text": "Net load is demand minus variable renewables."
+   },
+   {
+    "start": 4.08,
+    "end": 9.72,
+    "text": "As solar grows, midday net load collapses, and the evening ramp becomes steep and short."
+   },
+   {
+    "start": 10.0,
+    "end": 13.6,
+    "text": "The problem shifts from how much energy, to when."
+   }
+  ]
+ },
+ "why-storage/buys-time": {
+  "duration": 17.04,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.56,
+    "text": "Storage decouples the moment of generation from the moment of use."
+   },
+   {
+    "start": 4.84,
+    "end": 7.96,
+    "text": "It buys time, nothing more and nothing less."
+   },
+   {
+    "start": 8.24,
+    "end": 16.64,
+    "text": "And it always costs some efficiency, so it is worth it only when the alternative is curtailment, a peaking plant, or a new power line."
+   }
+  ]
+ },
+ "why-storage/peak": {
+  "duration": 14.44,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.0,
+    "text": "Peak shaving: charge when demand and prices are low, discharge at the peak."
+   },
+   {
+    "start": 5.28,
+    "end": 14.04,
+    "text": "Uppsala has a real example: 5 MW, 20 MWh, built from BMW car batteries, supporting about 1,700 homes."
+   }
+  ]
+ },
+ "compare/family": {
+  "duration": 26.88,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.2,
+    "text": "Five families: mechanical, like pumped hydro, compressed air and flywheels."
+   },
+   {
+    "start": 5.48,
+    "end": 9.0,
+    "text": "Thermal: sensible, latent and liquid air."
+   },
+   {
+    "start": 9.28,
+    "end": 11.92,
+    "text": "Chemical: hydrogen and synthetic fuels."
+   },
+   {
+    "start": 12.2,
+    "end": 16.68,
+    "text": "Electromagnetic: capacitors and superconducting magnets."
+   },
+   {
+    "start": 16.96,
+    "end": 20.44,
+    "text": "And electrochemical: batteries and flow batteries."
+   },
+   {
+    "start": 20.72,
+    "end": 22.52,
+    "text": "There is no silver bullet."
+   },
+   {
+    "start": 22.8,
+    "end": 26.48,
+    "text": "Always ask: best for what, where, and for how long?"
+   }
+  ]
+ },
+ "compare/energy-power": {
+  "duration": 16.16,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.72,
+    "text": "Parameter one: energy and power are independent."
+   },
+   {
+    "start": 4.0,
+    "end": 8.92,
+    "text": "Energy capacity, in kilowatt hours, decides how long you can supply."
+   },
+   {
+    "start": 9.2,
+    "end": 13.2,
+    "text": "Power rating, in kilowatts, decides how much you can supply at once."
+   },
+   {
+    "start": 13.48,
+    "end": 15.76,
+    "text": "Their ratio is the duration."
+   }
+  ]
+ },
+ "compare/density": {
+  "duration": 13.52,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.16,
+    "text": "Parameter two: specific energy, per kilogram, and energy density, per litre."
+   },
+   {
+    "start": 5.44,
+    "end": 13.12,
+    "text": "Aviation cares about kilograms, a city substation cares about litres, and a desert site may care about neither."
+   }
+  ]
+ },
+ "compare/ragone": {
+  "duration": 14.24,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.24,
+    "text": "The Ragone plot puts specific energy against specific power on log axes."
+   },
+   {
+    "start": 5.52,
+    "end": 8.64,
+    "text": "The diagonal lines are constant discharge time."
+   },
+   {
+    "start": 8.92,
+    "end": 13.84,
+    "text": "Capacitors discharge in seconds, batteries in hours, fuels over days."
+   }
+  ]
+ },
+ "compare/efficiency": {
+  "duration": 21.08,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.2,
+    "text": "Parameter three: round-trip efficiency, energy out over energy in."
+   },
+   {
+    "start": 5.48,
+    "end": 11.84,
+    "text": "Always ask where the boundary is drawn, because published numbers often leave out cooling and power electronics."
+   },
+   {
+    "start": 12.12,
+    "end": 14.84,
+    "text": "Parameter four: self-discharge."
+   },
+   {
+    "start": 15.12,
+    "end": 20.68,
+    "text": "Flywheels lose percent per hour, lithium ion percent per month, fuels almost nothing."
+   }
+  ]
+ },
+ "compare/life": {
+  "duration": 17.84,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.4,
+    "text": "Parameter five: lifetime."
+   },
+   {
+    "start": 2.68,
+    "end": 10.72,
+    "text": "Cycle life counts cycles until the capacity falls to about 80%, while calendar life ticks whether you use it or not."
+   },
+   {
+    "start": 11.0,
+    "end": 17.44,
+    "text": "Add response time, maturity, and cost per kilowatt and per kilowatt hour, and you have the full checklist."
+   }
+  ]
+ },
+ "hydro/types": {
+  "duration": 23.48,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.92,
+    "text": "Three types of hydropower facilities."
+   },
+   {
+    "start": 3.2,
+    "end": 8.52,
+    "text": "An impoundment facility stores river water behind a dam and releases it through turbines."
+   },
+   {
+    "start": 8.8,
+    "end": 16.24,
+    "text": "A diversion, or run of river, facility channels part of a river through turbines, with little or no reservoir."
+   },
+   {
+    "start": 16.52,
+    "end": 23.08,
+    "text": "And a pumped storage facility moves water between a lower and an upper reservoir with reversible pump turbines."
+   }
+  ]
+ },
+ "hydro/rechargeable": {
+  "duration": 20.84,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.08,
+    "text": "Are they all rechargeable storage?"
+   },
+   {
+    "start": 2.36,
+    "end": 3.8,
+    "text": "No."
+   },
+   {
+    "start": 4.08,
+    "end": 9.68,
+    "text": "Only pumped storage can be charged with electricity: it pumps water uphill when power is cheap."
+   },
+   {
+    "start": 9.96,
+    "end": 16.2,
+    "text": "An impoundment dam stores energy, but it is refilled by rain and snowmelt, not by the grid."
+   },
+   {
+    "start": 16.48,
+    "end": 20.44,
+    "text": "And run of river has almost no storage at all."
+   }
+  ]
+ },
+ "hydro/pros-cons": {
+  "duration": 23.28,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 14.2,
+    "text": "Advantages of pumped hydro: huge scale, about 200 GW worldwide and still most of the world's stored energy, round trip efficiency of 80 to 90%, low self-discharge, and a lifetime of 50 years."
+   },
+   {
+    "start": 14.48,
+    "end": 22.88,
+    "text": "Disadvantages: it needs mountains and water, the investment cost is high and construction is slow, and it floods land and changes rivers."
+   }
+  ]
+ },
+ "hydro/gravity": {
+  "duration": 15.52,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.56,
+    "text": "Why not just lift blocks instead?"
+   },
+   {
+    "start": 2.84,
+    "end": 10.88,
+    "text": "One tonne raised 100 m stores about 0.27 kWh, roughly what 1 kg of lithium ion battery holds."
+   },
+   {
+    "start": 11.16,
+    "end": 12.52,
+    "text": "The physics works."
+   },
+   {
+    "start": 12.8,
+    "end": 15.12,
+    "text": "The materials accounting does not."
+   }
+  ]
+ },
+ "mech-thermal/flywheel": {
+  "duration": 14.4,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 6.56,
+    "text": "A flywheel stores kinetic energy in a spinning rotor, up to 60,000 rpm in a vacuum."
+   },
+   {
+    "start": 6.84,
+    "end": 14.0,
+    "text": "Superb power and response, but only 0.5 to 1 kWh per unit, and friction empties it within hours."
+   }
+  ]
+ },
+ "mech-thermal/caes": {
+  "duration": 19.88,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.24,
+    "text": "Compressed air storage pumps air into salt caverns."
+   },
+   {
+    "start": 3.52,
+    "end": 5.84,
+    "text": "Compression makes heat."
+   },
+   {
+    "start": 6.12,
+    "end": 13.24,
+    "text": "A diabatic plant throws that heat away and burns natural gas on the way out, reaching about 42%."
+   },
+   {
+    "start": 13.52,
+    "end": 19.48,
+    "text": "An adiabatic plant stores the heat and reuses it, reaching about 70%, with no fuel."
+   }
+  ]
+ },
+ "mech-thermal/thermal": {
+  "duration": 20.84,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.2,
+    "text": "Thermal storage stores heat as heat, so it avoids the Carnot penalty entirely."
+   },
+   {
+    "start": 5.48,
+    "end": 15.76,
+    "text": "Sensible heat raises a material's temperature, latent heat melts it at constant temperature, and thermochemical storage drives a reversible reaction."
+   },
+   {
+    "start": 16.04,
+    "end": 20.44,
+    "text": "Energy density goes up in that order, and so does complexity."
+   }
+  ]
+ },
+ "mech-thermal/district": {
+  "duration": 16.36,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.64,
+    "text": "Sweden already does this at scale."
+   },
+   {
+    "start": 2.92,
+    "end": 11.6,
+    "text": "District heating networks buffer daily cycles in accumulator tanks, and a rock cavern in Hudiksvall holds 4,100 MWh."
+   },
+   {
+    "start": 11.88,
+    "end": 15.96,
+    "text": "For seasonal heat, nothing beats thermal storage on cost."
+   }
+  ]
+ },
+ "fuels/p2x": {
+  "duration": 16.08,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 10.96,
+    "text": "Power-to-X means using electricity, ideally cheap surplus renewables, to make a fuel or chemical, X, that can be stored and used later."
+   },
+   {
+    "start": 11.24,
+    "end": 15.68,
+    "text": "The first step is almost always hydrogen from water electrolysis."
+   }
+  ]
+ },
+ "fuels/routes": {
+  "duration": 21.0,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.08,
+    "text": "Three fuels."
+   },
+   {
+    "start": 1.36,
+    "end": 3.84,
+    "text": "Hydrogen: split water with electricity."
+   },
+   {
+    "start": 4.12,
+    "end": 9.76,
+    "text": "Synthetic methane: react hydrogen with captured carbon dioxide, the Sabatier reaction."
+   },
+   {
+    "start": 10.04,
+    "end": 14.04,
+    "text": "Methanol: hydrogen plus carbon dioxide over a catalyst."
+   },
+   {
+    "start": 14.32,
+    "end": 20.6,
+    "text": "And ammonia: hydrogen plus nitrogen from air, in the Haber Bosch process, with no carbon at all."
+   }
+  ]
+ },
+ "fuels/density": {
+  "duration": 18.16,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.92,
+    "text": "Advantage one: energy density."
+   },
+   {
+    "start": 3.2,
+    "end": 9.88,
+    "text": "Hydrogen holds about 33 kWh/kg, diesel 12, and lithium ion only 0.25."
+   },
+   {
+    "start": 10.16,
+    "end": 17.76,
+    "text": "Advantage two: fuels store for months or years with almost no loss, and a tanker carries more energy than any cable."
+   }
+  ]
+ },
+ "fuels/losses": {
+  "duration": 22.8,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.48,
+    "text": "Disadvantage one: round-trip efficiency."
+   },
+   {
+    "start": 3.76,
+    "end": 15.44,
+    "text": "Electrolysis, compression, storage and conversion back to electricity each lose energy, and the total is only 10 to 30%, the worst in this course."
+   },
+   {
+    "start": 15.72,
+    "end": 22.4,
+    "text": "Disadvantage two: the infrastructure mostly does not exist yet, and hydrogen leaks and embrittles steel."
+   }
+  ]
+ },
+ "fuels/colours": {
+  "duration": 18.84,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.96,
+    "text": "Hydrogen colours describe the production route, not the molecule."
+   },
+   {
+    "start": 4.24,
+    "end": 11.48,
+    "text": "Grey is from natural gas with carbon dioxide released, and about 96% of hydrogen today is fossil."
+   },
+   {
+    "start": 11.76,
+    "end": 18.44,
+    "text": "Blue adds carbon capture, green uses renewable electrolysis, and pink uses nuclear power."
+   }
+  ]
+ },
+ "electromagnetic/mechanism": {
+  "duration": 19.88,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.16,
+    "text": "Two devices."
+   },
+   {
+    "start": 1.44,
+    "end": 10.16,
+    "text": "Capacitors and supercapacitors store energy in an electric field between charged surfaces, so no chemical reaction happens."
+   },
+   {
+    "start": 10.44,
+    "end": 19.48,
+    "text": "Superconducting magnetic energy storage keeps a current circulating without resistance in a cooled superconducting coil, storing energy in its magnetic field."
+   }
+  ]
+ },
+ "electromagnetic/voltage": {
+  "duration": 13.48,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 6.56,
+    "text": "A capacitor's voltage falls linearly as it discharges, while a battery holds a plateau set by its chemistry."
+   },
+   {
+    "start": 6.84,
+    "end": 13.08,
+    "text": "Discharging a capacitor to half its voltage already releases 75% of its energy."
+   }
+  ]
+ },
+ "electromagnetic/when": {
+  "duration": 19.6,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.52,
+    "text": "When are they preferred?"
+   },
+   {
+    "start": 1.8,
+    "end": 7.72,
+    "text": "When speed matters: response in milliseconds, huge power, and millions of cycles."
+   },
+   {
+    "start": 8.0,
+    "end": 10.96,
+    "text": "Think power quality and frequency regulation."
+   },
+   {
+    "start": 11.24,
+    "end": 19.2,
+    "text": "A single grid installation can reach hundreds of megawatts for a few seconds, and SMES responds in about 5 ms."
+   }
+  ]
+ },
+ "electromagnetic/limits": {
+  "duration": 14.48,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 10.76,
+    "text": "Their greatest limitations: almost no energy capacity, a very high cost per kilowatt hour, fast self-discharge for capacitors, and cryogenic cooling for SMES."
+   },
+   {
+    "start": 11.04,
+    "end": 14.08,
+    "text": "They are bought for speed, never for capacity."
+   }
+  ]
+ },
+ "economics/services": {
+  "duration": 20.0,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 1.84,
+    "text": "What is storage paid for?"
+   },
+   {
+    "start": 2.12,
+    "end": 6.28,
+    "text": "Milliseconds: power quality and fast frequency response."
+   },
+   {
+    "start": 6.56,
+    "end": 10.4,
+    "text": "Seconds to minutes: frequency containment and restoration."
+   },
+   {
+    "start": 10.68,
+    "end": 15.16,
+    "text": "Hours: arbitrage, peak shaving and shifting solar into the evening."
+   },
+   {
+    "start": 15.44,
+    "end": 19.6,
+    "text": "Days: reserves and adequacy for a windless week."
+   }
+  ]
+ },
+ "economics/capex": {
+  "duration": 25.72,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 11.04,
+    "text": "A storage system is two products bolted together: power, like inverters and turbines, priced per kilowatt, and energy, like cells, tanks or caverns, priced per kilowatt hour."
+   },
+   {
+    "start": 11.32,
+    "end": 16.6,
+    "text": "For short durations the power cost dominates, for long durations the energy cost does."
+   },
+   {
+    "start": 16.88,
+    "end": 25.32,
+    "text": "That is why lithium ion wins at 1 to 4 hours, and pumped hydro, flow batteries, compressed air and hydrogen win beyond."
+   }
+  ]
+ },
+ "economics/lcos": {
+  "duration": 18.24,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 7.08,
+    "text": "The levelised cost of storage is the price per megawatt hour discharged that pays back the whole system over its life."
+   },
+   {
+    "start": 7.36,
+    "end": 13.92,
+    "text": "The biggest lever is utilisation: halve the cycles per year and the cost per megawatt hour roughly doubles."
+   },
+   {
+    "start": 14.2,
+    "end": 17.84,
+    "text": "An idle asset is expensive however cheap it was."
+   }
+  ]
+ },
+ "economics/rural": {
+  "duration": 29.96,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.96,
+    "text": "Exam case: a rural community wants stable power."
+   },
+   {
+    "start": 4.24,
+    "end": 11.56,
+    "text": "Services: frequency and voltage support, backup during outages, and shifting local solar into the evening."
+   },
+   {
+    "start": 11.84,
+    "end": 22.2,
+    "text": "Two technologies: a lithium ion battery for fast response and daily cycling, plus a longer duration store like a flow battery, or pumped hydro if there is a hill and water."
+   },
+   {
+    "start": 22.48,
+    "end": 29.56,
+    "text": "Judge them on power, energy and duration, efficiency, lifetime, response time, and cost."
+   }
+  ]
+ },
+ "chemistries/alkaline": {
+  "duration": 25.28,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.96,
+    "text": "Alkaline batteries are primary cells."
+   },
+   {
+    "start": 3.24,
+    "end": 7.8,
+    "text": "The reactions are not designed to be reversed, so they are used once."
+   },
+   {
+    "start": 8.08,
+    "end": 17.32,
+    "text": "The anode is zinc powder, the cathode is manganese dioxide mixed with graphite for conductivity, and the electrolyte is potassium hydroxide."
+   },
+   {
+    "start": 17.6,
+    "end": 21.32,
+    "text": "The cell gives about 1.5 V, for every size."
+   },
+   {
+    "start": 21.6,
+    "end": 24.88,
+    "text": "Size changes the capacity, not the voltage."
+   }
+  ]
+ },
+ "chemistries/vs-zinc-carbon": {
+  "duration": 20.36,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.96,
+    "text": "Why do alkaline cells hold more energy than zinc carbon cells?"
+   },
+   {
+    "start": 4.24,
+    "end": 14.04,
+    "text": "The zinc is a fine powder with a huge surface area, the potassium hydroxide electrolyte conducts much better, and more active material fits in the can."
+   },
+   {
+    "start": 14.32,
+    "end": 19.96,
+    "text": "So more of the zinc and manganese dioxide is actually used, especially at high currents."
+   }
+  ]
+ },
+ "chemistries/metal-air": {
+  "duration": 27.08,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.2,
+    "text": "Metal air batteries: zinc, aluminium and lithium air."
+   },
+   {
+    "start": 4.48,
+    "end": 11.64,
+    "text": "In common: a metal anode, and a cathode that breathes oxygen from the air, so the cathode reactant does not have to be carried."
+   },
+   {
+    "start": 11.92,
+    "end": 15.24,
+    "text": "That gives a very high theoretical energy density."
+   },
+   {
+    "start": 15.52,
+    "end": 26.68,
+    "text": "They differ in the metal and electrolyte: zinc and aluminium use water based electrolytes, lithium needs a non aqueous one, and the voltages and rechargeability differ."
+   }
+  ]
+ },
+ "chemistries/metal-air-vs": {
+  "duration": 22.92,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 6.72,
+    "text": "Compared with lithium ion, metal air offers higher energy density and cheap, abundant materials."
+   },
+   {
+    "start": 7.0,
+    "end": 15.32,
+    "text": "But recharging is poor, the oxygen reactions are slow so power is low, and the electrolyte can dry out or absorb carbon dioxide."
+   },
+   {
+    "start": 15.6,
+    "end": 22.52,
+    "text": "Zinc air is sold today as hearing aid batteries: tiny, high energy, with a steady voltage for weeks."
+   }
+  ]
+ },
+ "chemistries/nicd": {
+  "duration": 29.72,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 10.08,
+    "text": "Nickel cadmium: cadmium is oxidised at the negative electrode, nickel oxyhydroxide is reduced at the positive, in potassium hydroxide, at about 1.2 V."
+   },
+   {
+    "start": 10.36,
+    "end": 13.8,
+    "text": "Energy efficiency is roughly 70 to 80%."
+   },
+   {
+    "start": 14.08,
+    "end": 23.4,
+    "text": "It is robust, handles high currents and cold, and lasts many cycles, so it is used in power tools, emergency lighting and aviation."
+   },
+   {
+    "start": 23.68,
+    "end": 29.32,
+    "text": "But cadmium is toxic, the energy density is low, and it suffers from the memory effect."
+   }
+  ]
+ },
+ "testing/voltage": {
+  "duration": 19.2,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.12,
+    "text": "What sets a battery's voltage?"
+   },
+   {
+    "start": 2.4,
+    "end": 5.52,
+    "text": "The difference between the electrode potentials."
+   },
+   {
+    "start": 5.8,
+    "end": 14.04,
+    "text": "Standard potentials are measured against the standard hydrogen electrode, set to zero, so every half reaction gets one number."
+   },
+   {
+    "start": 14.32,
+    "end": 18.8,
+    "text": "That lets you predict any cell voltage by subtraction, without measuring every pair."
+   }
+  ]
+ },
+ "testing/cycling": {
+  "duration": 18.28,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 9.6,
+    "text": "To follow a cell's storage capability over time, cycle it at constant current between fixed voltage limits and plot capacity against cycle number."
+   },
+   {
+    "start": 9.88,
+    "end": 17.88,
+    "text": "Constant current means a constant reaction rate, capacity is simply current times time, and it mimics real use."
+   }
+  ]
+ },
+ "testing/efficiency": {
+  "duration": 17.32,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.8,
+    "text": "Coulombic efficiency counts charge: charge out over charge in."
+   },
+   {
+    "start": 5.08,
+    "end": 9.04,
+    "text": "Energy efficiency counts energy, so it includes voltage."
+   },
+   {
+    "start": 9.32,
+    "end": 16.92,
+    "text": "You charge at a higher voltage than you discharge at, so energy efficiency is always lower than coulombic efficiency."
+   }
+  ]
+ },
+ "testing/losses": {
+  "duration": 32.08,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.16,
+    "text": "Three voltage losses, and the same three things limit the current."
+   },
+   {
+    "start": 4.44,
+    "end": 8.4,
+    "text": "Ohmic loss from resistance appears instantly when current flows."
+   },
+   {
+    "start": 8.68,
+    "end": 13.68,
+    "text": "Activation loss from slow charge transfer builds up in milliseconds."
+   },
+   {
+    "start": 13.96,
+    "end": 18.8,
+    "text": "Concentration loss from mass transport builds up over seconds or longer."
+   },
+   {
+    "start": 19.08,
+    "end": 27.6,
+    "text": "Interrupt the current and watch the voltage relax: the instant jump is ohmic, the fast part is activation, the slow tail is concentration."
+   },
+   {
+    "start": 27.88,
+    "end": 31.68,
+    "text": "Impedance spectroscopy separates them by frequency."
+   }
+  ]
+ },
+ "outro/recap": {
+  "duration": 26.96,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 0.84,
+    "text": "Recap."
+   },
+   {
+    "start": 1.12,
+    "end": 4.92,
+    "text": "Energy use grows with population and development."
+   },
+   {
+    "start": 5.2,
+    "end": 10.4,
+    "text": "The second law makes electricity precious, and storage that avoids heat beats Carnot."
+   },
+   {
+    "start": 10.68,
+    "end": 14.2,
+    "text": "Storage buys time at the cost of efficiency."
+   },
+   {
+    "start": 14.48,
+    "end": 23.04,
+    "text": "Duration decides the technology: capacitors for seconds, batteries for hours, pumped hydro and fuels for days and seasons."
+   },
+   {
+    "start": 23.32,
+    "end": 26.56,
+    "text": "Know your five parameters, and good luck on the exam!"
+   }
+  ]
+ }
+}
