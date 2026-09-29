@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Axes, C, Chip, DrawPath, Label, Reveal, Stage, makeScale } from "../primitives";
+import { Axes, C, Chip, DrawPath, Label, Reveal, Stage, makeScale, SvgLoop } from "../primitives";
 
 /* ---- schematic Pb–Sn-type eutectic diagram ---- */
 const eBox = { x: 70, y: 60, w: 260, h: 300 };
@@ -97,14 +97,15 @@ export default function SolidificationVisual({ visual }: { visual: string }) {
         <line x1={e.sx(14.9)} x2={e.sx(50.3)} y1={e.sy(210)} y2={e.sy(210)} stroke={C.ink} strokeWidth={1.5} />
         <circle cx={e.sx(14.9)} cy={e.sy(210)} r={4} fill={C.lfp} />
         <circle cx={e.sx(50.3)} cy={e.sy(210)} r={4} fill={C.hot} />
-        <motion.circle
-          cx={e.sx(X0)}
-          r={7}
-          fill={C.accent}
-          initial={false}
-          animate={eut ? { cy: [e.sy(330), e.sy(234), e.sy(TE), e.sy(TE), e.sy(120)] } : { cy: e.sy(330) }}
-          transition={eut ? { duration: 7, times: [0, 0.3, 0.55, 0.75, 1], repeat: Infinity } : { duration: 0 }}
-        />
+        <circle cx={e.sx(X0)} cy={e.sy(330)} r={7} fill={C.accent}>
+          <SvgLoop
+            attr="cy"
+            values={[e.sy(330), e.sy(234), e.sy(TE), e.sy(TE), e.sy(120)]}
+            keyTimes={[0, 0.3, 0.55, 0.75, 1]}
+            dur={7}
+            active={eut}
+          />
+        </circle>
         {WALK.map((w, i) => (
           <motion.g key={w.text} initial={false} animate={{ opacity: eut ? 1 : 0 }} transition={{ delay: eut ? 0.3 + i * 0.25 : 0 }}>
             <Label x={362} y={110 + i * 30} anchor="start" size={13} color={w.color}>

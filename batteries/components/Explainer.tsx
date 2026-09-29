@@ -43,6 +43,9 @@ export default function Explainer({ courseId }: { courseId: string }) {
   }, []);
   // Slide a skip is scrolling towards; `pos` lags until the smooth scroll lands.
   const pendingRef = useRef<number | null>(null);
+  // Set once scrollama reports a real position, so the #chapter in a shared link isn't overwritten.
+  const locatedRef = useRef(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const scroller = scrollama();
@@ -50,6 +53,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
       .setup({ step: ".step", offset: 0.6 })
       .onStepEnter(({ element, index }) => {
         if (index === pendingRef.current) pendingRef.current = null;
+        locatedRef.current = true;
         setPos({ chapter: Number(element.dataset.chapter), step: Number(element.dataset.step) });
       });
     const onResize = () => scroller.resize();
@@ -107,6 +111,29 @@ export default function Explainer({ courseId }: { courseId: string }) {
 
   const chapter = chapters[pos.chapter];
   const step = chapter.steps[pos.step];
+
+  // Keep the address bar on the current chapter (#chapter-id) so the URL is always shareable.
+  useEffect(() => {
+    if (!locatedRef.current) return;
+    const hash = pos.chapter === 0 ? "" : `#${chapters[pos.chapter].id}`;
+    if (window.location.hash === hash) return;
+    window.history.replaceState(window.history.state, "", window.location.pathname + window.location.search + hash);
+  }, [pos.chapter, chapters]);
+
+  const chapterLabel = (i: number) => `${i === 0 ? "Start" : `Chapter ${i}`} · ${chapters[i].title}`;
+
+  const shareChapter = useCallback(async () => {
+    const url = `${window.location.origin}${window.location.pathname}#${chapter.id}`;
+    try {
+      if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+        await navigator.share({ title: `${narration.title}: ${chapter.title}`, url });
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {}
+  }, [chapter, narration.title]);
 
   return (
     <main className="min-h-screen bg-bg">
@@ -175,6 +202,15 @@ export default function Explainer({ courseId }: { courseId: string }) {
               {formatSpeed(speed)}
             </button>
             <button
+              onClick={shareChapter}
+              title={`Copy a link to ${chapterLabel(pos.chapter)}`}
+              className={`rounded-full border px-3 py-1.5 text-xs ${
+                copied ? "border-accent bg-accent/20 text-accent" : "border-white/10 bg-panel text-ink/80 hover:text-ink"
+              }`}
+            >
+              {copied ? "✓ Link copied" : "🔗 Share chapter"}
+            </button>
+            <button
               onClick={() => setAutoAdvance((a) => !a)}
               className={`rounded-full border px-3 py-1.5 text-xs ${
                 autoAdvance ? "border-accent bg-accent/20 text-accent" : "border-white/10 bg-panel text-ink/80"
@@ -196,6 +232,11 @@ export default function Explainer({ courseId }: { courseId: string }) {
               <p className="text-sm uppercase tracking-widest text-accent">Exam explainer</p>
               <h1 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">{narration.title}</h1>
               <p className="mt-3 text-ink/70">Your tutor talks you through every exam topic, slide by slide.</p>
+              {pos.chapter > 0 && (
+                <p className="mt-4 rounded-lg border border-accent/30 bg-accent/10 px-3 py-2 text-sm text-accent">
+                  Starts at {chapterLabel(pos.chapter)}
+                </p>
+              )}
               <button
                 onClick={() => {
                   setAutoAdvance(true);
@@ -205,6 +246,14 @@ export default function Explainer({ courseId }: { courseId: string }) {
               >
                 ▶ Start
               </button>
+              {pos.chapter > 0 && (
+                <button
+                  onClick={() => window.scrollTo({ top: 0, behavior: "auto" })}
+                  className="mt-3 block w-full text-xs text-ink/60 underline underline-offset-2 hover:text-ink"
+                >
+                  or go back to the beginning
+                </button>
+              )}
               <p className="mt-4 text-xs text-ink/50">Space pause · ←/→ seek · ↑/↓ slides · &lt;/&gt; speed · C subtitles</p>
             </div>
           </motion.div>

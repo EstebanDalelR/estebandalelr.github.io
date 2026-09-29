@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { C, Chip, Flow, Label, Reveal, Stage } from "../primitives";
+import { C, Chip, Flow, Label, Reveal, Stage, SvgLoop } from "../primitives";
 
 const HILL = "M120 360 L120 120 L250 120 L470 360 Z";
 
@@ -25,16 +24,13 @@ export default function VoltageVisual({ visual }: { visual: string }) {
         <Label x={96} y={325} anchor="end" size={14} weight={700} color={C.lfp}>
           B
         </Label>
-        <motion.g
-          initial={false}
-          animate={potential ? { y: [0, 190, 190] } : { y: 0 }}
-          transition={potential ? { duration: 3, repeat: Infinity, times: [0, 0.7, 1] } : { duration: 0 }}
-        >
+        <g>
+          <SvgLoop attr="translate" values={["0 0", "0 190", "0 190"]} keyTimes={[0, 0.7, 1]} dur={3} active={potential} />
           <circle cx={230} cy={112} r={12} fill={C.cation} />
           <Label x={230} y={117} size={13} color="#0b1220" weight={800}>
             +
           </Label>
-        </motion.g>
+        </g>
         <path d="M280 140 C300 190 300 250 280 300" fill="none" stroke={C.electron} strokeWidth={2} markerEnd="url(#arrow-e)" />
         <Label x={306} y={225} anchor="start" size={13} color={C.electron}>
           gives up energy E

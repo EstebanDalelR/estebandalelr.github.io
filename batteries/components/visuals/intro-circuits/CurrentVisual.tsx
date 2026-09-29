@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { C, Chip, Flow, Label, Reveal, Stage } from "../primitives";
+import { C, Chip, Flow, Label, Reveal, Stage, SvgLoop } from "../primitives";
 
 // Copper: 2, 8, 18, 1 electrons per shell.
 const SHELLS = [
@@ -45,14 +45,11 @@ export default function CurrentVisual({ visual }: { visual: string }) {
           29+
         </Label>
         <circle cx={260} cy={235} r={130} fill="none" stroke={C.grid} strokeDasharray="4 4" />
-        <motion.circle
-          r={7}
-          cy={235}
-          fill={C.electron}
-          initial={false}
-          animate={atom ? { cx: [390, 390, 560], opacity: [1, 1, 0] } : { cx: 390, opacity: 1 }}
-          transition={atom ? { duration: 3, repeat: Infinity, times: [0, 0.35, 1] } : { duration: 0 }}
-        />
+        {/* the lone 4s electron: sits on the outer shell, then leaves the atom */}
+        <circle cx={390} cy={235} r={7} fill={C.electron}>
+          <SvgLoop attr="cx" values={[390, 390, 560]} keyTimes={[0, 0.4, 1]} dur={3} active={atom} />
+          <SvgLoop attr="opacity" values={[1, 1, 0]} keyTimes={[0, 0.4, 1]} dur={3} active={atom} />
+        </circle>
         <Label x={470} y={205} size={13} color={C.electron} weight={700}>
           loosely bound
         </Label>

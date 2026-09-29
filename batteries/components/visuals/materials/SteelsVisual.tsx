@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Axes, C, Chip, DrawPath, Label, Reveal, Stage, makeScale } from "../primitives";
+import { Axes, C, Chip, DrawPath, Label, Reveal, Stage, makeScale, SvgLoop } from "../primitives";
 
 /* ---- Fe–C corner (schematic, metastable) ---- */
 const fBox = { x: 70, y: 60, w: 250, h: 280 };
@@ -102,7 +102,9 @@ export default function SteelsVisual({ visual }: { visual: string }) {
           Stainless: more than 11 wt % Cr
         </Label>
         <rect x={120} y={70} width={360} height={36} fill={C.zinc} opacity={0.5} />
-        <motion.rect x={120} y={62} width={360} height={8} fill={C.lithium} initial={false} animate={{ opacity: visual === "stainless" ? [0.5, 1, 0.5] : 0.5 }} transition={{ duration: 2, repeat: Infinity }} />
+        <rect x={120} y={62} width={360} height={8} fill={C.lithium} opacity={0.5}>
+          <SvgLoop attr="opacity" values={[0.5, 1, 0.5]} dur={2} active={visual === "stainless"} />
+        </rect>
         <Label x={300} y={93} size={12} color="#0b1220" weight={700}>
           steel
         </Label>
