@@ -4,12 +4,13 @@ import { motion } from "framer-motion";
 import { C, Chip, Flow, Label, Reveal, Stage } from "../primitives";
 
 const WATER = "#38bdf8";
+const EARTH = "#2a3550";
 
 function Turbine({ x, y }: { x: number; y: number }) {
   return (
     <g>
       <circle cx={x} cy={y} r={11} fill="#111a2c" stroke={C.ink} strokeWidth={2} />
-      <motion.g animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1.6, ease: "linear" }} style={{ originX: `${x}px`, originY: `${y}px` }}>
+      <motion.g animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1.6, ease: "linear" }} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
         <path d={`M${x - 8} ${y} L${x + 8} ${y} M${x} ${y - 8} L${x} ${y + 8}`} stroke={C.accent} strokeWidth={2.5} />
       </motion.g>
     </g>
@@ -25,55 +26,77 @@ export default function HydroVisual({ visual }: { visual: string }) {
   return (
     <Stage label="Hydropower and pumped storage">
       <Reveal show={types}>
-        {/* 1: impoundment */}
+        {/* 1: impoundment: valley cross-section, reservoir held back by a concrete dam */}
         <g>
           <Label x={100} y={40} size={14} weight={700}>
             Impoundment
           </Label>
-          <path d="M20 110 L120 110 L120 300 L20 300 Z" fill={WATER} opacity={0.5} />
-          <path d="M120 70 L140 70 L150 300 L120 300 Z" fill={C.dim} />
-          <Flow path="M140 250 L180 280" count={3} dur={1} color={WATER} r={4} />
-          <Turbine x={160} y={268} />
-          <Label x={100} y={330} size={12} color={C.dim}>
-            dam + reservoir
-          </Label>
-          <Flow path="M60 40 L60 100" count={3} dur={1.6} color="#bae6fd" r={3} />
-          <Label x={70} y={62} size={12} color="#bae6fd" anchor="start">
+          <path d="M10 95 L28 300 L190 300 L190 318 L10 318 Z" fill={EARTH} />
+          <path d="M22 125 L112 125 L112 300 L28 300 Z" fill={WATER} opacity={0.5} />
+          <path d="M22 125 L112 125" stroke={WATER} strokeWidth={2} />
+          <path d="M108 100 L124 100 L162 300 L108 300 Z" fill={C.dim} />
+          {/* penstock through the dam to the powerhouse at its foot */}
+          <path d="M112 262 L166 288" stroke="#0b1220" strokeWidth={6} strokeLinecap="round" />
+          <Flow path="M112 262 L166 288" count={3} dur={1} color={WATER} r={3} />
+          <path d="M160 294 L190 294 L190 300 L160 300 Z" fill={WATER} opacity={0.5} />
+          <Turbine x={172} y={284} />
+          <Flow path="M55 55 L55 118" count={3} dur={1.6} color="#bae6fd" r={3} />
+          <Label x={64} y={80} size={12} color="#bae6fd" anchor="start">
             rain
           </Label>
+          <Label x={66} y={215} size={12} color="#e0f2fe">
+            reservoir
+          </Label>
+          <Label x={100} y={340} size={12} color={C.dim}>
+            dam + reservoir
+          </Label>
         </g>
-        {/* 2: diversion */}
+        {/* 2: diversion: the river keeps flowing; a low weir sends part of it through a turbine */}
         <g>
           <Label x={300} y={40} size={14} weight={700}>
             Diversion (run-of-river)
           </Label>
-          <path d="M210 120 C260 140 330 140 390 120 L390 150 C330 170 260 170 210 150 Z" fill={WATER} opacity={0.5} />
-          <Flow path="M250 150 L270 230 L330 230 L350 150" count={4} dur={2} color={WATER} r={4} />
-          <Turbine x={300} y={230} />
-          <Label x={300} y={330} size={12} color={C.dim}>
+          <path d="M210 250 L390 290 L390 318 L210 318 Z" fill={EARTH} />
+          <path d="M210 232 L292 250 L292 268 L210 250 Z" fill={WATER} opacity={0.5} />
+          <path d="M300 262 L390 282 L390 290 L300 270 Z" fill={WATER} opacity={0.5} />
+          <path d="M290 244 L300 246 L300 270 L290 268 Z" fill={C.dim} />
+          <Flow path="M212 240 L290 257 L302 262 L388 284" count={6} dur={3} color={WATER} r={3} />
+          {/* intake above the weir, canal and penstock to a powerhouse downstream */}
+          <path d="M270 252 L270 200 L340 200 L350 254" fill="none" stroke="#0b1220" strokeWidth={6} strokeLinejoin="round" />
+          <Flow path="M270 252 L270 200 L340 200 L350 254" count={4} dur={1.8} color={WATER} r={3} />
+          <Turbine x={351} y={263} />
+          <Label x={236} y={205} size={12} color={C.dim}>
+            intake
+          </Label>
+          <Label x={300} y={236} size={12} color={C.dim}>
+            weir
+          </Label>
+          <Label x={300} y={340} size={12} color={C.dim}>
             no or little reservoir
           </Label>
         </g>
-        {/* 3: pumped storage */}
+        {/* 3: pumped storage: an upper basin on a hill, a lower basin at its foot */}
         <g>
           <Label x={500} y={40} size={14} weight={700}>
             Pumped storage
           </Label>
-          <rect x={420} y={80} width={70} height={50} fill={WATER} opacity={0.55} />
-          <rect x={510} y={250} width={75} height={50} fill={WATER} opacity={0.55} />
-          <path d="M470 130 L530 250" stroke={C.dim} strokeWidth={6} />
-          <Turbine x={500} y={190} />
-          <Flow path="M475 135 L525 245" count={3} dur={1.4} color={WATER} r={4} />
+          <path d="M410 300 L430 132 L500 132 L552 300 L590 300 L590 318 L410 318 Z" fill={EARTH} />
+          <path d="M428 108 L502 108 L500 132 L430 132 Z" fill={WATER} opacity={0.55} />
+          <path d="M424 104 L432 104 L432 132 L424 132 Z M498 104 L506 104 L504 132 L498 132 Z" fill={C.dim} />
+          <path d="M548 272 L590 272 L590 300 L552 300 Z" fill={WATER} opacity={0.55} />
+          <path d="M488 128 L540 272" stroke="#0b1220" strokeWidth={6} strokeLinecap="round" />
+          <Flow path="M488 128 L540 272" count={3} dur={1.4} color={WATER} r={3} />
           <Reveal show={recharge}>
-            <Flow path="M535 245 L485 135" count={3} dur={1.4} color={C.lithium} r={4} />
+            <Flow path="M540 272 L488 128" count={3} dur={1.4} color={C.lithium} r={3} />
           </Reveal>
-          <Label x={455} y={148} size={12} color={C.dim}>
+          <Turbine x={534} y={256} />
+          <Label x={465} y={96} size={12} color={C.dim}>
             upper
           </Label>
-          <Label x={555} y={282} size={12} color="#0b1220" weight={700}>
+          <Label x={572} y={262} size={12} color={C.dim}>
             lower
           </Label>
-          <Label x={500} y={330} size={12} color={C.dim} anchor="middle">
+          <Label x={500} y={340} size={12} color={C.dim} anchor="middle">
             reversible pump-turbine
           </Label>
         </g>
