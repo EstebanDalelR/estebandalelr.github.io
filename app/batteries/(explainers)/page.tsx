@@ -2,6 +2,33 @@ import Link from "next/link";
 import Avatar from "@batteries/components/narrator/Avatar";
 import { COURSES } from "@batteries/lib/courses";
 
+const TOOLS = [
+  {
+    href: "/batteries/phase-diagrams",
+    course: "Materials Chemistry",
+    name: "Phase Diagram Explorer",
+    blurb: "Drag across Cu–Ni, Pb–Sn and Fe–Fe₃C; tie lines and the lever rule update as you go.",
+  },
+  {
+    href: "/batteries/interstitial-sites",
+    course: "Materials Chemistry",
+    name: "Interstitial Sites",
+    blurb: "Octahedral and tetrahedral holes in FCC, BCC and HCP lattices, in 3D.",
+  },
+  {
+    href: "/batteries/energy-storage-types",
+    course: "Introduction to Energy Storage",
+    name: "Energy Storage Types",
+    blurb: "Compare storage technologies by energy density, power density, efficiency and duration.",
+  },
+  {
+    href: "/batteries/kirchhoff",
+    course: "Electric Circuits & the Grid",
+    name: "Kirchhoff Lab",
+    blurb: "Solve circuits by hand, then watch the current prove you right.",
+  },
+];
+
 export default function Home() {
   return (
     <main className="mx-auto min-h-screen max-w-4xl px-4 py-16 sm:px-8">
@@ -37,6 +64,22 @@ export default function Home() {
             </li>
           );
         })}
+      </ul>
+
+      <h2 className="mt-14 text-sm uppercase tracking-widest text-accent">Interactive tools</h2>
+      <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+        {TOOLS.map((t) => (
+          <li key={t.href}>
+            <Link
+              href={t.href}
+              className="block h-full rounded-2xl border border-white/10 bg-panel p-5 transition hover:border-accent/60 hover:bg-panel/70"
+            >
+              <p className="text-xs uppercase tracking-widest text-accent">{t.course}</p>
+              <h3 className="mt-2 text-xl font-semibold text-ink">{t.name}</h3>
+              <p className="mt-2 text-sm text-ink/70">{t.blurb}</p>
+            </Link>
+          </li>
+        ))}
       </ul>
     </main>
   );
