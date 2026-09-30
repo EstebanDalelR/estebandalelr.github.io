@@ -122,6 +122,18 @@ export function SvgLoop({
   );
 }
 
+/** A recap card that jumps back to its chapter (hover lights the card's outline). */
+export function RecapLink({ href, title, children }: { href: string; title: string; children: ReactNode }) {
+  return (
+    <a href={href} className="group cursor-pointer" aria-label={`Jump to ${title}`}>
+      <title>{title}</title>
+      {children}
+    </a>
+  );
+}
+
+export const RECAP_CARD_CLASS = "transition-colors group-hover:fill-[#16233a] group-hover:stroke-[#3dd6c6]";
+
 /** Particles that travel along an SVG path forever. */
 export function Flow({
   path,

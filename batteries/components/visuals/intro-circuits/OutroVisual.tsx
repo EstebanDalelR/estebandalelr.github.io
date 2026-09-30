@@ -1,23 +1,32 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { C, Label, Stage } from "../primitives";
+import { getCourse } from "@batteries/lib/courses";
+import { C, Label, Stage, RECAP_CARD_CLASS, RecapLink } from "../primitives";
+
+const { chapters } = getCourse("intro-circuits").narration;
+const titleOf = (id: string) => chapters.find((c) => c.id === id)?.title ?? id;
 
 const CARDS = [
-  { t: "Current", k: ["I = dq/dt", "1 A = 1 C/s"] },
-  { t: "Voltage", k: ["V = E/Q", "1 V = 1 J/C"] },
-  { t: "Resistance", k: ["V = R·I", "R = ρL/A"] },
-  { t: "Power", k: ["p = R·i²", "→ high-V lines"] },
-  { t: "Kirchhoff", k: ["loop: ΣV = 0", "node: ΣI = 0"] },
-  { t: "AC", k: ["230 V rms", "325 V peak, 50 Hz"] },
-  { t: "Impedance", k: ["Z = R + jX", "size + phase"] },
-  { t: "Grid", k: ["inertia, primary", "& secondary"] },
+  { t: "Current", id: "current", k: ["I = dq/dt", "1 A = 1 C/s"] },
+  { t: "Voltage", id: "voltage", k: ["V = E/Q", "1 V = 1 J/C"] },
+  { t: "Resistance", id: "resistance", k: ["V = R·I", "R = ρL/A"] },
+  { t: "Power", id: "resistance", k: ["p = R·i²", "→ high-V lines"] },
+  { t: "Kirchhoff", id: "series", k: ["loop: ΣV = 0", "node: ΣI = 0"] },
+  { t: "AC", id: "ac", k: ["230 V rms", "325 V peak, 50 Hz"] },
+  { t: "Impedance", id: "impedance", k: ["Z = R + jX", "size + phase"] },
+  { t: "Grid", id: "sync", k: ["inertia, primary", "& secondary"] },
 ];
 
 export default function OutroVisual({ visual }: { visual: string }) {
   const show = visual === "recap";
   return (
     <Stage label="Recap">
+      <motion.g initial={false} animate={{ opacity: show ? 1 : 0 }}>
+        <Label x={300} y={20} size={12} color={C.dim}>
+          Click a topic to jump back to it
+        </Label>
+      </motion.g>
       {CARDS.map((c, i) => {
         const x = 18 + (i % 4) * 143;
         const y = 30 + Math.floor(i / 4) * 100;
@@ -28,19 +37,21 @@ export default function OutroVisual({ visual }: { visual: string }) {
             animate={{ opacity: show ? 1 : 0, y: show ? 0 : 12 }}
             transition={{ delay: show ? i * 0.07 : 0, duration: 0.4 }}
           >
-            <rect x={x} y={y} width={133} height={88} rx={10} fill="#111a2c" stroke={C.grid} />
-            <circle cx={x + 16} cy={y + 18} r={10} fill={C.accent} />
-            <Label x={x + 16} y={y + 22} size={12} color="#0b1220" weight={800}>
-              {i + 1}
-            </Label>
-            <Label x={x + 32} y={y + 23} size={13} weight={700} anchor="start">
-              {c.t}
-            </Label>
-            {c.k.map((line, j) => (
-              <Label key={j} x={x + 66} y={y + 52 + j * 20} size={12} color={C.dim}>
-                {line}
+            <RecapLink href={`#${c.id}`} title={titleOf(c.id)}>
+              <rect x={x} y={y} width={133} height={88} rx={10} fill="#111a2c" stroke={C.grid} className={RECAP_CARD_CLASS} />
+              <circle cx={x + 16} cy={y + 18} r={10} fill={C.accent} />
+              <Label x={x + 16} y={y + 22} size={12} color="#0b1220" weight={800}>
+                {i + 1}
               </Label>
-            ))}
+              <Label x={x + 32} y={y + 23} size={13} weight={700} anchor="start">
+                {c.t}
+              </Label>
+              {c.k.map((line, j) => (
+                <Label key={j} x={x + 66} y={y + 52 + j * 20} size={12} color={C.dim}>
+                  {line}
+                </Label>
+              ))}
+            </RecapLink>
           </motion.g>
         );
       })}
