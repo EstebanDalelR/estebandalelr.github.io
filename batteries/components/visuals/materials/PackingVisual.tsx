@@ -8,19 +8,37 @@ function project(ox: number, oy: number, s: number) {
   return (x: number, y: number, z: number): [number, number] => [ox + x * s + y * s * 0.45, oy - z * s - y * s * 0.3];
 }
 
-function CubeFrame({ p }: { p: (x: number, y: number, z: number) => [number, number] }) {
+type Proj = (x: number, y: number, z: number) => [number, number];
+
+// Face diagonals, drawn faintly so face-centred atoms visibly sit on their faces.
+const FACE_DIAGONALS: [number, number, number, number, number, number][] = [
+  [0, 0, 0, 1, 0, 1], [1, 0, 0, 0, 0, 1], [0, 1, 0, 1, 1, 1], [1, 1, 0, 0, 1, 1],
+  [0, 0, 0, 0, 1, 1], [0, 1, 0, 0, 0, 1], [1, 0, 0, 1, 1, 1], [1, 1, 0, 1, 0, 1],
+  [0, 0, 0, 1, 1, 0], [1, 0, 0, 0, 1, 0], [0, 0, 1, 1, 1, 1], [1, 0, 1, 0, 1, 1],
+];
+
+function CubeFrame({ p, faces = false }: { p: Proj; faces?: boolean }) {
   const edges: [number, number, number, number, number, number][] = [
     [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 1],
     [1, 0, 0, 1, 1, 0], [1, 0, 0, 1, 0, 1], [0, 1, 0, 1, 1, 0],
     [0, 1, 0, 0, 1, 1], [0, 0, 1, 1, 0, 1], [0, 0, 1, 0, 1, 1],
     [1, 1, 0, 1, 1, 1], [1, 0, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1],
   ];
+  // The three edges meeting the back-bottom-left corner (0,1,0) are hidden behind the cell.
+  const hidden = (a: number, b: number, c: number) => a === 0 && b === 1 && c === 0;
   return (
     <g stroke={C.dim} strokeWidth={1.5}>
+      {faces &&
+        FACE_DIAGONALS.map(([a, b, c, d, e, f], i) => {
+          const [x1, y1] = p(a, b, c);
+          const [x2, y2] = p(d, e, f);
+          return <line key={`d${i}`} x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={1} opacity={0.22} />;
+        })}
       {edges.map(([a, b, c, d, e, f], i) => {
         const [x1, y1] = p(a, b, c);
         const [x2, y2] = p(d, e, f);
-        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} />;
+        const back = hidden(a, b, c) || hidden(d, e, f);
+        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} strokeDasharray={back ? "5 4" : undefined} opacity={back ? 0.55 : 1} />;
       })}
     </g>
   );
@@ -31,47 +49,76 @@ const FACES: [number, number, number][] = [
   [0.5, 0.5, 0], [0.5, 0.5, 1], [0.5, 0, 0.5], [0.5, 1, 0.5], [0, 0.5, 0.5], [1, 0.5, 0.5],
 ];
 
-function Atoms({ pts, p, r, color }: { pts: [number, number, number][]; p: (x: number, y: number, z: number) => [number, number]; r: number; color: string }) {
+/** Atoms drawn back to front; depth (y) fades and shrinks them so the cell reads in 3D. */
+function Atoms({ pts, p, r, color }: { pts: [number, number, number][]; p: Proj; r: number; color: string }) {
   const sorted = [...pts].sort((a, b) => b[1] - a[1]);
   return (
     <g>
       {sorted.map((pt, i) => {
         const [x, y] = p(...pt);
-        return <circle key={i} cx={x} cy={y} r={r} fill={color} stroke="#0b1220" strokeWidth={1} />;
+        const depth = pt[1];
+        return (
+          <circle key={i} cx={x} cy={y} r={r * (1 - 0.18 * depth)} fill={color} fillOpacity={1 - 0.6 * depth} stroke="#0b1220" strokeWidth={1} />
+        );
       })}
     </g>
   );
 }
 
-// Triangular lattice positions for A, B, C layers.
-const tri = (shift: 0 | 1 | 2) =>
-  Array.from({ length: 12 }, (_, i) => {
-    const row = Math.floor(i / 4);
-    const col = i % 4;
-    const dx = shift === 0 ? 0 : shift === 1 ? 20 : 40;
-    const dy = shift === 0 ? 0 : shift === 1 ? 11.5 : 23;
-    return [col * 40 + (row % 2) * 20 + dx, row * 34.6 + dy] as [number, number];
-  });
-
 const LAYER_COLOR = { A: C.lfp, B: C.copper, C: C.lithium } as const;
+type Layer = keyof typeof LAYER_COLOR;
 
-function StackColumn({ x, seq, title }: { x: number; seq: ("A" | "B" | "C")[]; title: string }) {
+/* Side view: each close-packed layer is a row of atoms. Seen along the rows, B sits a third of a
+   spacing over from A and C two thirds, so hcp (ABAB) repeats every 2 layers and ccp every 3. */
+const SIDE = { gap: 36, r: 10, rise: 40, atoms: 4 };
+const SHIFT: Record<Layer, number> = { A: 0, B: SIDE.gap / 3, C: (2 * SIDE.gap) / 3 };
+
+function StackColumn({ x, seq, title }: { x: number; seq: Layer[]; title: string }) {
+  const bottom = 340;
+  const top = bottom - (seq.length - 1) * SIDE.rise;
   return (
     <g>
-      <Label x={x + 60} y={70} size={15} weight={700}>
+      <Label x={x + 66} y={70} size={15} weight={700}>
         {title}
       </Label>
+      {/* guides through the A positions: they line up again every repeat */}
+      {Array.from({ length: SIDE.atoms }, (_, k) => (
+        <line key={k} x1={x + k * SIDE.gap} x2={x + k * SIDE.gap} y1={top - 22} y2={bottom + 18} stroke={C.lfp} strokeDasharray="3 4" opacity={0.45} />
+      ))}
       {seq.map((l, i) => (
         <g key={i}>
-          <rect x={x} y={330 - i * 44} width={120} height={34} rx={6} fill={LAYER_COLOR[l]} opacity={0.85} />
-          <Label x={x + 60} y={352 - i * 44} size={15} weight={800} color="#0b1220">
+          <Label x={x - 26} y={bottom - i * SIDE.rise + 5} size={14} weight={800} color={LAYER_COLOR[l]}>
             {l}
           </Label>
+          {Array.from({ length: SIDE.atoms }, (_, k) => (
+            <circle key={k} cx={x + k * SIDE.gap + SHIFT[l]} cy={bottom - i * SIDE.rise} r={SIDE.r} fill={LAYER_COLOR[l]} stroke="#0b1220" strokeWidth={1} />
+          ))}
         </g>
       ))}
     </g>
   );
 }
+
+/* Top view on a triangular lattice with spacing D: A atoms, then the two sets of hollows,
+   B = A + (a1 + a2)/3 and C = A + 2(a1 + a2)/3, kept inside the patch of A atoms. */
+const D = 36;
+const H = (D * Math.sqrt(3)) / 2;
+const TOP_R = 78;
+const lattice = (dx: number, dy: number, radius: number) => {
+  const pts: [number, number][] = [];
+  for (let n = -4; n <= 4; n++)
+    for (let m = -5; m <= 5; m++) {
+      const x = m * D + n * (D / 2) + dx;
+      const y = n * H + dy;
+      if (Math.hypot(x, y) <= radius) pts.push([x, y]);
+    }
+  return pts;
+};
+const TOP: Record<Layer, [number, number][]> = {
+  A: lattice(0, 0, TOP_R),
+  B: lattice(D / 2, H / 3, TOP_R - D / 2),
+  C: lattice(D, (2 * H) / 3, TOP_R - D / 2),
+};
 
 const TYPES = [
   { s: "NaCl (rock salt)", p: "ccp Cl⁻", h: "Na⁺ in all octahedral", c: "6-6" },
@@ -114,7 +161,7 @@ export default function PackingVisual({ visual }: { visual: string }) {
         <Label x={430} y={60} size={16} weight={700}>
           fcc = ccp
         </Label>
-        <CubeFrame p={pFcc} />
+        <CubeFrame p={pFcc} faces />
         <Atoms pts={[...CORNERS, ...FACES]} p={pFcc} r={14} color={C.copper} />
         <Label x={430} y={350} size={14}>
           4 atoms per cell
@@ -126,22 +173,26 @@ export default function PackingVisual({ visual }: { visual: string }) {
       </Reveal>
 
       <Reveal show={visual === "stacking"}>
-        <StackColumn x={60} seq={["A", "B", "A", "B", "A", "B"]} title="hcp: ABAB" />
-        <StackColumn x={220} seq={["A", "B", "C", "A", "B", "C"]} title="ccp: ABCABC" />
-        {/* top view of A, B, C positions */}
-        <g transform="translate(390 110)">
-          <Label x={80} y={-20} size={13} color={C.dim}>
+        <StackColumn x={75} seq={["A", "B", "A", "B", "A", "B"]} title="hcp: ABAB" />
+        <StackColumn x={250} seq={["A", "B", "C", "A", "B", "C"]} title="ccp: ABCABC" />
+        {/* top view: first layer A, then where B and C atoms sit in its hollows */}
+        <g transform="translate(495 205)">
+          <Label x={0} y={-112} size={15} weight={700}>
             top view
           </Label>
-          {(["A", "B", "C"] as const).map((l, k) =>
-            tri(k as 0 | 1 | 2).map(([x, y], i) => (
-              <circle key={`${l}${i}`} cx={x} cy={y} r={k === 0 ? 17 : 6} fill={LAYER_COLOR[l]} opacity={k === 0 ? 0.5 : 1} />
-            )),
-          )}
+          {TOP.A.map(([x, y], i) => (
+            <circle key={`a${i}`} cx={x} cy={y} r={D / 2 - 1} fill={LAYER_COLOR.A} fillOpacity={0.45} stroke={LAYER_COLOR.A} strokeOpacity={0.8} />
+          ))}
+          {TOP.B.map(([x, y], i) => (
+            <circle key={`b${i}`} cx={x} cy={y} r={7} fill={LAYER_COLOR.B} stroke="#0b1220" strokeWidth={1} />
+          ))}
+          {TOP.C.map(([x, y], i) => (
+            <circle key={`c${i}`} cx={x} cy={y} r={7} fill={LAYER_COLOR.C} stroke="#0b1220" strokeWidth={1} />
+          ))}
           {(["A", "B", "C"] as const).map((l, k) => (
             <g key={l}>
-              <circle cx={20 + k * 60} cy={140} r={7} fill={LAYER_COLOR[l]} />
-              <Label x={32 + k * 60} y={145} size={13} anchor="start">
+              <circle cx={-52 + k * 44} cy={112} r={7} fill={LAYER_COLOR[l]} />
+              <Label x={-40 + k * 44} y={117} size={13} anchor="start">
                 {l}
               </Label>
             </g>

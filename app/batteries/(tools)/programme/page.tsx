@@ -100,12 +100,167 @@ const TRACK_LABEL: Record<Track, string> = { materials: 'Battery materials', sys
 const NEXT: Record<Progress, Progress> = { none: 'participated', participated: 'passed', passed: 'none' };
 const PROGRESS_LABEL: Record<Progress, string> = { none: 'Mark', participated: '◐ Taking', passed: '✓ Passed' };
 
+/* ───────────────────────── Graph helpers ───────────────────────── */
+
+const SLOT_ORDER: SlotId[] = SEMESTERS.flatMap((s) => s.slots.map((x) => x.id));
+const SLOT_LABEL = Object.fromEntries(
+  SEMESTERS.flatMap((s) => s.slots.map((x) => [x.id, `S${s.n} · ${x.label}`])),
+) as Record<SlotId, string>;
+const AUD_RANK: Record<Audience, number> = { all: 0, systems: 1, materials: 2 };
+
+const DEPENDENTS: Record<string, string[]> = {};
+for (const c of COURSES) for (const r of c.reqs ?? []) (DEPENDENTS[r.code] ??= []).push(c.code);
+
+function closure(start: string, dir: 'up' | 'down'): Set<string> {
+  const out = new Set<string>();
+  const stack = [start];
+  while (stack.length) {
+    const cur = stack.pop()!;
+    const next = dir === 'up' ? (BY_CODE[cur]?.reqs ?? []).map((r) => r.code) : (DEPENDENTS[cur] ?? []);
+    for (const n of next) if (!out.has(n)) { out.add(n); stack.push(n); }
+  }
+  return out;
+}
+
+const COL_W = 184, GAP_X = 52, NODE_H = 68, GAP_Y = 12, HEAD = 34;
+
+function TreeView({
+  courses,
+  selected,
+  onSelect,
+  statusOf,
+}: {
+  courses: Course[];
+  selected: string | null;
+  onSelect: (code: string | null) => void;
+  statusOf: (c: Course) => Status;
+}) {
+  const { pos, width, height, lanes } = useMemo(() => {
+    const pos: Record<string, { x: number; y: number; col: number }> = {};
+    let rows = 0;
+    SLOT_ORDER.forEach((slot, col) => {
+      // Order: audience group first, then barycenter of prerequisites to reduce edge crossings.
+      const bary = (c: Course) => {
+        const ys = (c.reqs ?? []).map((r) => pos[r.code]?.y).filter((y): y is number => y !== undefined);
+        return ys.length ? ys.reduce((a, b) => a + b, 0) / ys.length : 1e9;
+      };
+      const items = courses
+        .filter((c) => c.slots[0] === slot)
+        .sort((a, b) => AUD_RANK[a.audience] - AUD_RANK[b.audience] || bary(a) - bary(b));
+      items.forEach((c, i) => {
+        pos[c.code] = { x: col * (COL_W + GAP_X), y: HEAD + i * (NODE_H + GAP_Y), col };
+      });
+      rows = Math.max(rows, items.length);
+    });
+    // Edges skipping a period would run behind cards, so each gets its own lane under the graph.
+    const lanes: Record<string, number> = {};
+    const base = HEAD + rows * (NODE_H + GAP_Y) + 4;
+    let n = 0;
+    for (const c of courses)
+      for (const r of c.reqs ?? [])
+        if (pos[r.code] && pos[c.code] && pos[c.code].col - pos[r.code].col > 1) lanes[`${r.code}-${c.code}`] = base + n++ * 12;
+    return {
+      pos,
+      lanes,
+      width: SLOT_ORDER.length * (COL_W + GAP_X) - GAP_X,
+      height: base + Math.max(0, n - 1) * 12 + 8,
+    };
+  }, [courses]);
+
+  const edgePath = (from: string, to: string) => {
+    const a = pos[from], b = pos[to];
+    const x1 = a.x + COL_W, y1 = a.y + NODE_H / 2, x2 = b.x - 2, y2 = b.y + NODE_H / 2;
+    const lane = lanes[`${from}-${to}`];
+    if (lane === undefined) {
+      const dx = Math.min(60, (x2 - x1) / 2);
+      return `M${x1} ${y1}C${x1 + dx} ${y1} ${x2 - dx} ${y2} ${x2} ${y2}`;
+    }
+    const g1 = x1 + GAP_X / 2, g2 = b.x - GAP_X / 2, k = 8;
+    return `M${x1} ${y1}H${g1 - k}Q${g1} ${y1} ${g1} ${y1 + k}V${lane - k}Q${g1} ${lane} ${g1 + k} ${lane}H${g2 - k}Q${g2} ${lane} ${g2} ${lane - k}V${y2 + k}Q${g2} ${y2} ${g2 + k} ${y2}H${x2}`;
+  };
+
+  const up = selected ? closure(selected, 'up') : null;
+  const down = selected ? closure(selected, 'down') : null;
+
+  const nodeState = (code: string) =>
+    !selected ? '' : code === selected ? 'is-selected' : up!.has(code) ? 'is-up' : down!.has(code) ? 'is-down' : 'is-dim';
+
+  const edgeState = (from: string, to: string) => {
+    if (!selected) return '';
+    if (up!.has(from) && (to === selected || up!.has(to))) return 'e-up';
+    if (down!.has(to) && (from === selected || down!.has(from))) return 'e-down';
+    return 'e-dim';
+  };
+
+  return (
+    <div className="tree-wrap">
+      <div className="tree" style={{ width, height }}>
+        {SLOT_ORDER.map((slot, col) => (
+          <div key={slot} className="tree-col-label" style={{ left: col * (COL_W + GAP_X), width: COL_W }}>
+            {SLOT_LABEL[slot]}
+          </div>
+        ))}
+
+        <svg className="tree-edges" width={width} height={height} aria-hidden>
+          <defs>
+            <marker id="tbt-arr-passed" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0 0L8 4L0 8z" style={{ fill: 'var(--passed)' }} />
+            </marker>
+            <marker id="tbt-arr-participated" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0 0L8 4L0 8z" style={{ fill: 'var(--part)' }} />
+            </marker>
+          </defs>
+          {courses.flatMap((c) =>
+            (c.reqs ?? [])
+              .filter((r) => pos[r.code] && pos[c.code])
+              .map((r) => {
+                return (
+                  <path
+                    key={`${r.code}-${c.code}`}
+                    d={edgePath(r.code, c.code)}
+                    className={`edge edge-${r.kind} ${edgeState(r.code, c.code)}`}
+                    markerEnd={`url(#tbt-arr-${r.kind})`}
+                  />
+                );
+              }),
+          )}
+        </svg>
+
+        {courses.map((c) => {
+          const p = pos[c.code];
+          if (!p) return null;
+          return (
+            <button
+              key={c.code}
+              className={`node node-${c.audience} st-${statusOf(c)} ${nodeState(c.code)}`}
+              style={{ left: p.x, top: p.y, width: COL_W, height: NODE_H }}
+              onClick={() => onSelect(c.code === selected ? null : c.code)}
+            >
+              <span className="node-top">
+                <span className="code">{c.code === THESIS ? 'Thesis' : c.code}</span>
+                <span>
+                  {c.hp} hp{c.slots.length > 1 ? ` · ${c.slots.length} periods` : ''}
+                </span>
+              </span>
+              <span className="node-name">
+                {c.name}
+                {c.asterisk && <sup className="ast">*</sup>}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 /* ───────────────────────── Component ───────────────────────── */
 
 export default function ProgrammeMap() {
   const [view, setView] = useState<View>('both');
   const [progress, setProgress] = useState<Record<string, Progress>>({});
   const [selected, setSelected] = useState<string | null>(null);
+  const [layout, setLayout] = useState<'timeline' | 'tree'>('timeline');
 
   const prog = (code: string): Progress => progress[code] ?? 'none';
 
@@ -212,6 +367,13 @@ export default function ProgrammeMap() {
               {v === 'both' ? 'Compare both' : TRACK_LABEL[v]}
             </button>
           ))}
+        </div>{' '}
+        <div className="switch" role="tablist" aria-label="Layout">
+          {(['timeline', 'tree'] as const).map((l) => (
+            <button key={l} role="tab" aria-selected={layout === l} className={`sw ${layout === l ? 'on' : ''}`} onClick={() => setLayout(l)}>
+              {l === 'timeline' ? 'Timeline' : 'Tree'}
+            </button>
+          ))}
         </div>
 
         <div className="stats">
@@ -249,7 +411,16 @@ export default function ProgrammeMap() {
       </header>
 
       <main>
-        {SEMESTERS.map((sem) => (
+        {layout === 'tree' && (
+          <>
+            <p className="tree-hint">
+              Solid arrow: must pass · dashed: must take part. Tap a course to trace its full chain,{' '}
+              <span className="hint-up">prerequisites</span> and <span className="hint-down">what it unlocks</span>.
+            </p>
+            <TreeView courses={COURSES.filter(visible)} selected={selected} onSelect={setSelected} statusOf={status} />
+          </>
+        )}
+        {layout === 'timeline' && SEMESTERS.map((sem) => (
           <section key={sem.n} className="semester">
             <h2>Semester {sem.n}</h2>
             <div className={`periods n-${sem.slots.length}`}>
@@ -293,9 +464,14 @@ export default function ProgrammeMap() {
             {sel.name}
             {sel.asterisk && <sup className="ast">*</sup>}
           </h3>
-          <p className={`badge st-${status(sel)}`}>
-            {{ passed: 'Passed', participated: 'Taking', ready: 'Eligible', blocked: 'Requirements missing' }[status(sel)]}
-          </p>
+          <div className="sheet-status">
+            <span className={`badge st-${status(sel)}`}>
+              {{ passed: 'Passed', participated: 'Taking', ready: 'Eligible', blocked: 'Requirements missing' }[status(sel)]}
+            </span>
+            <button className="mark-lg" onClick={() => cycle(sel.code)}>
+              {{ none: 'Mark as taking', participated: 'Mark as passed', passed: 'Reset' }[prog(sel.code)]}
+            </button>
+          </div>
           {sel.note && <p className="note">{sel.note}</p>}
           {sel.fields.length > 0 ? (
             <p className="fields">{sel.fields.join(' · ')}</p>
@@ -455,5 +631,32 @@ const CSS = `
 .tbt .sheet ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
 .tbt .sheet li { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .tbt .sheet li.met::before { content: '✓'; color: var(--ok); font-weight: 700; }
+.tbt .switch + .switch { margin-top: 8px; }
+.tbt .sheet-status { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; }
+.tbt .sheet-status .badge { margin: 0; }
+.tbt .mark-lg { border: 1px solid var(--line); border-radius: 999px; padding: 2px 12px; font-size: 12px; font-weight: 600; }
+
+.tbt .tree-hint { color: var(--muted); font-size: 13px; margin: 28px 0 0; }
+.tbt .hint-up { color: var(--part); font-weight: 600; }
+.tbt .hint-down { color: var(--passed); font-weight: 600; }
+.tbt .tree-wrap { overflow-x: auto; margin: 16px calc(50% - 50vw + 16px) 0; padding-bottom: 12px; -webkit-overflow-scrolling: touch; }
+.tbt .tree { position: relative; margin: 0 auto; }
+.tbt .tree-col-label { position: absolute; top: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.tbt .tree-edges { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+.tbt .edge { fill: none; stroke-width: 1.6; transition: opacity .15s, stroke-width .15s; }
+.tbt .edge-passed { stroke: var(--passed); }
+.tbt .edge-participated { stroke: var(--part); stroke-dasharray: 5 4; }
+.tbt .edge.e-dim { opacity: .1; }
+.tbt .edge.e-up, .tbt .edge.e-down { stroke-width: 2.8; }
+.tbt .node { position: absolute; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px;
+  display: flex; flex-direction: column; gap: 3px; box-shadow: var(--shadow); overflow: hidden; transition: opacity .15s; }
+.tbt .node.node-systems { border-left: 4px solid var(--systems); }
+.tbt .node.node-materials { border-left: 4px solid var(--materials); }
+.tbt .node-top { display: flex; justify-content: space-between; gap: 6px; font-size: 11px; color: var(--muted); }
+.tbt .node-name { font-size: 13px; font-weight: 600; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tbt .node.st-blocked .node-name { color: var(--muted); }
+.tbt .node.is-dim { opacity: .28; }
+.tbt .node.is-up { outline: 2px solid var(--part); outline-offset: 1px; }
+.tbt .node.is-down { outline: 2px solid var(--passed); outline-offset: 1px; }
 .tbt .link { text-decoration: underline; text-underline-offset: 2px; text-align: left; }
 `;
