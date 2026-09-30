@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import NarratorPanel, { isTyping } from "@batteries/components/narrator/NarratorPanel";
 import ProgressBar from "@batteries/components/scrolly/ProgressBar";
 import ReferenceSlide from "@batteries/components/reference/ReferenceSlide";
-import ScrollSection from "@batteries/components/scrolly/ScrollSection";
+import ScrollSection, { stepAnchor } from "@batteries/components/scrolly/ScrollSection";
 import { getCourse } from "@batteries/lib/courses";
 
 const SPEEDS = [0.75, 1, 1.25, 1.5, 2];
@@ -112,13 +112,15 @@ export default function Explainer({ courseId }: { courseId: string }) {
   const chapter = chapters[pos.chapter];
   const step = chapter.steps[pos.step];
 
-  // Keep the address bar on the current chapter (#chapter-id) so the URL is always shareable.
+  // Keep the address bar on the current slide (#chapter, or #chapter--step past a chapter's
+  // first slide) so the URL always points at what is on screen and can be shared as is.
   useEffect(() => {
     if (!locatedRef.current) return;
-    const hash = pos.chapter === 0 ? "" : `#${chapters[pos.chapter].id}`;
+    const c = chapters[pos.chapter];
+    const hash = pos.step > 0 ? `#${stepAnchor(c.id, c.steps[pos.step].id)}` : pos.chapter > 0 ? `#${c.id}` : "";
     if (window.location.hash === hash) return;
     window.history.replaceState(window.history.state, "", window.location.pathname + window.location.search + hash);
-  }, [pos.chapter, chapters]);
+  }, [pos.chapter, pos.step, chapters]);
 
   const chapterLabel = (i: number) => `${i === 0 ? "Start" : `Chapter ${i}`} · ${chapters[i].title}`;
 
@@ -232,9 +234,10 @@ export default function Explainer({ courseId }: { courseId: string }) {
               <p className="text-sm uppercase tracking-widest text-accent">Exam explainer</p>
               <h1 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">{narration.title}</h1>
               <p className="mt-3 text-ink/70">Your tutor talks you through every exam topic, slide by slide.</p>
-              {pos.chapter > 0 && (
+              {(pos.chapter > 0 || pos.step > 0) && (
                 <p className="mt-4 rounded-lg border border-accent/30 bg-accent/10 px-3 py-2 text-sm text-accent">
                   Starts at {chapterLabel(pos.chapter)}
+                  {pos.step > 0 && ` · slide ${pos.step + 1} of ${chapter.steps.length}`}
                 </p>
               )}
               <button
@@ -246,7 +249,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
               >
                 ▶ Start
               </button>
-              {pos.chapter > 0 && (
+              {(pos.chapter > 0 || pos.step > 0) && (
                 <button
                   onClick={() => window.scrollTo({ top: 0, behavior: "auto" })}
                   className="mt-3 block w-full text-xs text-ink/60 underline underline-offset-2 hover:text-ink"
