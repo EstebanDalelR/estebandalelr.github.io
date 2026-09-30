@@ -1,19 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { C, Label, Stage } from "../primitives";
+import { getCourse } from "@batteries/lib/courses";
+import { C, Label, Stage, RECAP_CARD_CLASS, RecapLink } from "../primitives";
+
+const { chapters } = getCourse("intro-energy").narration;
+const titleOf = (id: string) => chapters.find((c) => c.id === id)?.title ?? id;
 
 const CARDS = [
-  { t: "Society", k: ["population +", "development"] },
-  { t: "Thermo", k: ["2nd law:", "quality"] },
-  { t: "Storage", k: ["buys time,", "costs efficiency"] },
-  { t: "Compare", k: ["E, P, η, life,", "response, cost"] },
-  { t: "Hydro", k: ["only pumped", "is rechargeable"] },
-  { t: "Fuels", k: ["dense, but", "10–30 % back"] },
-  { t: "E-magnetic", k: ["speed, not", "capacity"] },
-  { t: "Economics", k: ["duration", "decides"] },
-  { t: "Chemistries", k: ["alkaline 1.5 V", "Ni-Cd 1.2 V"] },
-  { t: "Testing", k: ["EE < CE", "3 losses"] },
+  { t: "Society", id: "society", k: ["population +", "development"] },
+  { t: "Thermo", id: "thermo", k: ["2nd law:", "quality"] },
+  { t: "Storage", id: "why-storage", k: ["buys time,", "costs efficiency"] },
+  { t: "Compare", id: "compare", k: ["E, P, η, life,", "response, cost"] },
+  { t: "Hydro", id: "hydro", k: ["only pumped", "is rechargeable"] },
+  { t: "Fuels", id: "fuels", k: ["dense, but", "10–30 % back"] },
+  { t: "E-magnetic", id: "electromagnetic", k: ["speed, not", "capacity"] },
+  { t: "Economics", id: "economics", k: ["duration", "decides"] },
+  { t: "Chemistries", id: "chemistries", k: ["alkaline 1.5 V", "Ni-Cd 1.2 V"] },
+  { t: "Testing", id: "testing", k: ["EE < CE", "3 losses"] },
 ];
 
 const DURATION = [
@@ -27,24 +31,31 @@ export default function OutroVisual({ visual }: { visual: string }) {
   const show = visual === "recap";
   return (
     <Stage label="Recap">
+      <motion.g initial={false} animate={{ opacity: show ? 1 : 0 }}>
+        <Label x={300} y={20} size={12} color={C.dim}>
+          Click a topic to jump back to it
+        </Label>
+      </motion.g>
       {CARDS.map((c, i) => {
         const x = 20 + (i % 5) * 114;
         const y = 30 + Math.floor(i / 5) * 84;
         return (
           <motion.g key={c.t} initial={false} animate={{ opacity: show ? 1 : 0, y: show ? 0 : 12 }} transition={{ delay: show ? i * 0.07 : 0, duration: 0.4 }}>
-            <rect x={x} y={y} width={104} height={72} rx={10} fill="#111a2c" stroke={C.grid} />
-            <circle cx={x + 16} cy={y + 18} r={10} fill={C.accent} />
-            <Label x={x + 16} y={y + 22} size={12} color="#0b1220" weight={800}>
-              {i + 1}
-            </Label>
-            <Label x={x + 32} y={y + 23} size={12} weight={700} anchor="start">
-              {c.t}
-            </Label>
-            {c.k.map((line, j) => (
-              <Label key={j} x={x + 52} y={y + 46 + j * 16} size={12} color={C.dim}>
-                {line}
+            <RecapLink href={`#${c.id}`} title={titleOf(c.id)}>
+              <rect x={x} y={y} width={104} height={72} rx={10} fill="#111a2c" stroke={C.grid} className={RECAP_CARD_CLASS} />
+              <circle cx={x + 16} cy={y + 18} r={10} fill={C.accent} />
+              <Label x={x + 16} y={y + 22} size={12} color="#0b1220" weight={800}>
+                {i + 1}
               </Label>
-            ))}
+              <Label x={x + 32} y={y + 23} size={12} weight={700} anchor="start">
+                {c.t}
+              </Label>
+              {c.k.map((line, j) => (
+                <Label key={j} x={x + 52} y={y + 46 + j * 16} size={12} color={C.dim}>
+                  {line}
+                </Label>
+              ))}
+            </RecapLink>
           </motion.g>
         );
       })}

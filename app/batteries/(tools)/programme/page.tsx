@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 /* ───────────────────────── Types ───────────────────────── */
 
@@ -30,7 +30,7 @@ interface Course {
 }
 
 /* ───────────────────────── Data ───────────────────────── */
-/* Source: TBT2M programme slides (Sep 2026). Verify against official syllabi. */
+/* Source: uu.se programme outline for TBT2M (valid from Autumn 2026) and each course syllabus, Sep 2026. */
 
 const SEMESTERS: { n: number; slots: { id: SlotId; label: string; when: string }[] }[] = [
   { n: 1, slots: [{ id: 'S1P1', label: 'Period 1', when: 'Sep–Oct' }, { id: 'S1P2', label: 'Period 2', when: 'Nov–Jan' }] },
@@ -40,26 +40,28 @@ const SEMESTERS: { n: number; slots: { id: SlotId; label: string; when: string }
 ];
 
 const BT = 'Battery Technology A1F';
+// The thesis asks for Battery Technology credits "at advanced level": every second-cycle level (A1N and A1F).
+const isBtAdvanced = (f: string) => /^Battery Technology A1[NF]$/.test(f);
 const P = (code: string): Req => ({ code, kind: 'passed' });
 const T = (code: string): Req => ({ code, kind: 'participated' });
 const THESIS = 'THESIS';
 
 const COURSES: Course[] = [
   // Semester 1 — all students
-  { code: '1KB744', name: 'Introduction to Energy Storage', hp: 5, slots: ['S1P1'], audience: 'all', fields: [] },
-  { code: '1KB719', name: 'Electrochemistry for Batteries I', hp: 5, slots: ['S1P1'], audience: 'all', fields: [] },
-  { code: '1KB230', name: 'Materials Chemistry', hp: 5, slots: ['S1P1'], audience: 'all', fields: [] },
+  { code: '1KB744', name: 'Introduction to Energy Storage', hp: 5, slots: ['S1P1'], audience: 'all', fields: ['Battery Technology A1N', 'Chemistry A1N', 'Materials Science A1N', 'Technology A1N'] },
+  { code: '1KB719', name: 'Electrochemistry for Batteries I', hp: 5, slots: ['S1P1'], audience: 'all', fields: ['Battery Technology A1N', 'Chemistry A1N'] },
+  { code: '1KB230', name: 'Materials Chemistry', hp: 5, slots: ['S1P1'], audience: 'all', fields: ['Chemistry A1N', 'Materials Engineering A1N'] },
   { code: '1KB732', name: 'Materials Analysis for Batteries', hp: 10, slots: ['S1P2', 'S2P3'], audience: 'all', fields: ['Chemistry A1N'], note: 'Runs over two periods, 5 hp each.' },
-  { code: '1KB236', name: 'Polymer Technology', hp: 5, slots: ['S1P2'], audience: 'all', fields: [] },
-  { code: '1EL003', name: 'Introduction to Electromobility', hp: 5, slots: ['S1P2'], audience: 'all', fields: [] },
+  { code: '1KB236', name: 'Polymer Technology', hp: 5, slots: ['S1P2'], audience: 'all', fields: ['Chemistry G2F'], note: 'First-cycle (G2F) course: the degree allows at most 30 hp from the first cycle.' },
+  { code: '1EL003', name: 'Introduction to Electromobility', hp: 5, slots: ['S1P2'], audience: 'all', fields: ['Battery Technology A1N', 'Electrical Engineering A1N'] },
 
   // Semester 2 — all students
   { code: '1KB728', name: 'Electrochemistry for Batteries II', hp: 5, slots: ['S2P3'], audience: 'all', fields: [BT, 'Chemistry A1F'], reqs: [T('1KB744'), T('1KB719'), T('1KB230')] },
   { code: '1KB738', name: 'Rechargeable Batteries', hp: 10, slots: ['S2P4'], audience: 'all', fields: [BT, 'Chemistry A1F', 'Materials Science A1F', 'Technology A1F'], reqs: [T('1KB728')] },
 
   // Semester 2 — battery materials
-  { code: '1KB729', name: 'Synthesis of Battery Materials', hp: 5, slots: ['S2P3'], audience: 'materials', fields: [BT, 'Chemistry A1F'] },
-  { code: '1KB566', name: 'Electronic and Atomistic Simulation Methods for Materials', hp: 5, slots: ['S2P4'], audience: 'materials', fields: ['Chemistry A1N', 'Materials Science A1N', 'Physics A1N', 'Technology A1N'] },
+  { code: '1KB729', name: 'Synthesis of Battery Materials', hp: 5, slots: ['S2P3'], audience: 'materials', fields: [BT, 'Chemistry A1F'], reqs: [T('1KB744'), T('1KB230')], note: 'The syllabus names the second course "Materials Chemistry for Batteries"; 1KB230 is the programme\'s materials chemistry course.' },
+  { code: '1KB566', name: 'Electronic and Atomistic Simulation Methods for Materials', hp: 5, slots: ['S2P4'], audience: 'materials', fields: ['Chemistry A1N', 'Materials Science A1N', 'Physics A1N', 'Technology A1N'], reqs: [T('1KB744')], note: 'Programme route in the syllabus: participation in Introduction to Energy Storage and "Materials for Batteries".' },
 
   // Semester 2 — cells & systems
   { code: '1DT115', name: 'Information Technology and Energy Storage', hp: 5, slots: ['S2P3'], audience: 'systems', fields: ['Computer Science A1N', 'Embedded Systems A1N', 'Technology A1N'] },
@@ -77,26 +79,30 @@ const COURSES: Course[] = [
 
   // Semester 3 — cells & systems
   { code: '1KB714', name: 'Battery Control and Safety', hp: 5, slots: ['S3P1'], audience: 'systems', fields: [BT], reqs: [T('1KB738')] },
-  { code: '1EL033', name: 'Electric Vehicles', hp: 5, slots: ['S3P1'], audience: 'systems', fields: ['Electrical Engineering A1F'], reqs: [T('1EL003')], asterisk: true, note: 'Only given if there are enough resources.' },
+  { code: '1EL033', name: 'Electric Vehicles', hp: 5, slots: ['S3P1'], audience: 'systems', fields: ['Electrical Engineering A1F'], reqs: [P('1EL003')], asterisk: true, note: 'Only given if there are enough resources.' },
   { code: '1EL017', name: 'Battery Systems Engineering', hp: 5, slots: ['S3P2'], audience: 'systems', fields: [BT, 'Electrical Engineering A1F', 'Renewable Electricity Production A1F', 'Technology A1F'] },
   { code: '1EL206', name: 'Infrastructure for Electric Propulsion', hp: 5, slots: ['S3P2'], audience: 'systems', fields: ['Electrical Engineering A1F'], reqs: [P('1EL003')] },
 
   // Semester 4
   {
     code: THESIS,
-    name: 'Master Degree Project',
+    name: 'Degree Project in Battery Technology (1KB099)',
     hp: 30,
     slots: ['S4'],
     audience: 'all',
-    fields: [],
+    fields: ['Battery Technology A2E'],
     reqs: [P('1KB744'), P('1KB738')],
-    note: "Also requires: a Bachelor's degree, English 6, and 30 hp of Battery Technology at advanced level (A1F) participated, of which 20 hp passed.",
+    note: "Also requires: a Bachelor's degree, English 6, and participation in 30 hp of Battery Technology at advanced level (A1N or A1F), of which 20 hp completed.",
   },
 ];
 
 const BY_CODE: Record<string, Course> = Object.fromEntries(COURSES.map((c) => [c.code, c]));
 const TOTAL_HP = 120;
 const TRACK_LABEL: Record<Track, string> = { materials: 'Battery materials', systems: 'Cells & systems' };
+// Marks and the chosen track/layout are kept in this browser only (best effort: storage can be blocked).
+const STORAGE_KEY = 'battery-masters:programme';
+type Saved = { progress?: Record<string, Progress>; view?: View; layout?: 'timeline' | 'tree' };
+
 const NEXT: Record<Progress, Progress> = { none: 'participated', participated: 'passed', passed: 'none' };
 const PROGRESS_LABEL: Record<Progress, string> = { none: 'Mark', participated: '◐ Taking', passed: '✓ Passed' };
 
@@ -262,6 +268,27 @@ export default function ProgrammeMap() {
   const [selected, setSelected] = useState<string | null>(null);
   const [layout, setLayout] = useState<'timeline' | 'tree'>('timeline');
 
+  // Load after the first render so the static HTML and hydration match. Saving waits for `ready`,
+  // which only turns on in the render that already holds the loaded marks, so the empty defaults
+  // never overwrite what was stored.
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    try {
+      const saved: Saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+      if (saved.progress) setProgress(saved.progress);
+      if (saved.view) setView(saved.view);
+      if (saved.layout) setLayout(saved.layout);
+    } catch {}
+    setReady(true);
+  }, []);
+  useEffect(() => {
+    if (!ready) return;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ progress, view, layout } satisfies Saved));
+    } catch {}
+  }, [ready, progress, view, layout]);
+  const marked = Object.values(progress).filter((p) => p !== 'none').length;
+
   const prog = (code: string): Progress => progress[code] ?? 'none';
 
   const plan = useMemo(
@@ -271,7 +298,7 @@ export default function ProgrammeMap() {
 
   const bt = useMemo(() => {
     const pool = view === 'both' ? COURSES : plan;
-    const btCourses = pool.filter((c) => c.fields.includes(BT));
+    const btCourses = pool.filter((c) => c.fields.some(isBtAdvanced));
     return {
       inPlan: btCourses.reduce((s, c) => s + c.hp, 0),
       participated: btCourses.filter((c) => prog(c.code) !== 'none').reduce((s, c) => s + c.hp, 0),
@@ -376,6 +403,18 @@ export default function ProgrammeMap() {
           ))}
         </div>
 
+        <p className="saved">
+          {marked > 0 ? `${marked} course${marked === 1 ? '' : 's'} marked · saved in this browser` : 'Your marks are saved in this browser.'}
+          {marked > 0 && (
+            <>
+              {' · '}
+              <button className="link" onClick={() => setProgress({})}>
+                reset
+              </button>
+            </>
+          )}
+        </p>
+
         <div className="stats">
           {view !== 'both' && (
             <div className="stat">
@@ -389,13 +428,13 @@ export default function ProgrammeMap() {
             <span className="stat-n">
               {bt.participated}/{bt.passed}
             </span>
-            <span className="stat-l">Battery Tech A1F taking/passed (thesis: 30/20)</span>
+            <span className="stat-l">Battery Tech advanced-level hp taking/passed (thesis: 30/20)</span>
           </div>
           {view !== 'both' && (
             <div className={`stat ${bt.inPlan < 30 ? 'warn' : ''}`}>
               <span className="stat-n">{bt.inPlan}</span>
               <span className="stat-l">
-                Battery Tech A1F hp in this track{bt.inPlan < 30 ? ' — check whether S1 courses count' : ''}
+                Battery Tech advanced-level hp in this track{bt.inPlan < 30 ? ' — below the 30 the thesis needs' : ''}
               </span>
             </div>
           )}
@@ -449,7 +488,7 @@ export default function ProgrammeMap() {
         </section>
 
         <p className="foot">
-          Built from the programme slides (Sep 2026). Requirements can change, so always confirm in the official syllabus and with the study advisor.
+          Built from the uu.se programme outline and course syllabi (Sep 2026). Requirements can change, so always confirm in the official syllabus and with the study advisor.
         </p>
       </main>
 
@@ -476,7 +515,7 @@ export default function ProgrammeMap() {
           {sel.fields.length > 0 ? (
             <p className="fields">{sel.fields.join(' · ')}</p>
           ) : (
-            sel.code !== THESIS && <p className="fields muted">Main field not listed on the slides.</p>
+            sel.code !== THESIS && <p className="fields muted">Main field not listed in the syllabus.</p>
           )}
 
           <div className="cols">
@@ -495,7 +534,7 @@ export default function ProgrammeMap() {
                   })}
                   {sel.code === THESIS && (
                     <li className={thesisCreditsOk ? 'met' : ''}>
-                      Battery Tech A1F: {bt.participated}/30 taking, {bt.passed}/20 passed
+                      Battery Tech advanced level: {bt.participated}/30 taking, {bt.passed}/20 passed
                     </li>
                   )}
                 </ul>
@@ -632,6 +671,7 @@ const CSS = `
 .tbt .sheet li { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .tbt .sheet li.met::before { content: '✓'; color: var(--ok); font-weight: 700; }
 .tbt .switch + .switch { margin-top: 8px; }
+.tbt .saved { font-size: 12px; color: var(--muted); margin: 12px 0 0; }
 .tbt .sheet-status { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; }
 .tbt .sheet-status .badge { margin: 0; }
 .tbt .mark-lg { border: 1px solid var(--line); border-radius: 999px; padding: 2px 12px; font-size: 12px; font-weight: 600; }
