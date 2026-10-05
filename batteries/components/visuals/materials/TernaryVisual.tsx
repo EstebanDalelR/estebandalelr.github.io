@@ -93,7 +93,7 @@ export default function TernaryVisual({ visual }: { visual: string }) {
         <g transform="translate(20 40)">
           <rect x={0} y={0} width={170} height={112} rx={10} fill="#0b1220" stroke={C.electron} />
           <Label x={85} y={20} size={12} color={C.dim}>
-            2025 exam, read off the figure
+            2025 exam (read off)
           </Label>
           {[
             { t: "SnSb ≈ 19 %", c: C.lfp },

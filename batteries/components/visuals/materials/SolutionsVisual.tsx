@@ -300,22 +300,22 @@ export default function SolutionsVisual({ visual }: { visual: string }) {
 
       {/* explorer */}
       <Reveal show={visual === "explore"}>
-        <rect x={90} y={90} width={420} height={240} rx={18} fill={C.accent} opacity={0.08} stroke={C.accent} strokeWidth={2} />
-        <motion.g initial={false} animate={{ rotate: visual === "explore" ? [0, 8, 0, -8, 0] : 0 }} transition={{ duration: 6, repeat: Infinity }} style={{ originX: "195px", originY: "210px" }}>
-          <Cube x={150} y={180} s={80} color={C.accent} />
-          <circle cx={190} cy={220} r={6} fill={C.lfp} />
-          <circle cx={204} cy={206} r={5} fill={C.electron} />
+        <rect x={70} y={90} width={460} height={240} rx={18} fill={C.accent} opacity={0.08} stroke={C.accent} strokeWidth={2} />
+        <motion.g initial={false} animate={{ rotate: visual === "explore" ? [0, 8, 0, -8, 0] : 0 }} transition={{ duration: 6, repeat: Infinity }} style={{ originX: "160px", originY: "210px" }}>
+          <Cube x={115} y={180} s={80} color={C.accent} />
+          <circle cx={155} cy={220} r={6} fill={C.lfp} />
+          <circle cx={169} cy={206} r={5} fill={C.electron} />
         </motion.g>
-        <Label x={280} y={170} anchor="start" size={18} weight={800} color={C.accent}>
+        <Label x={262} y={170} anchor="start" size={15} weight={800} color={C.accent}>
           Interstitial Sites explorer
         </Label>
-        <Label x={280} y={205} anchor="start" size={13}>
+        <Label x={262} y={205} anchor="start" size={13}>
           rotate fcc and bcc cells
         </Label>
-        <Label x={280} y={228} anchor="start" size={13}>
+        <Label x={262} y={228} anchor="start" size={13}>
           compare octahedral and
         </Label>
-        <Label x={280} y={250} anchor="start" size={13}>
+        <Label x={262} y={250} anchor="start" size={13}>
           tetrahedral sites in 3D
         </Label>
         <Label x={300} y={380} size={13} color={C.dim}>

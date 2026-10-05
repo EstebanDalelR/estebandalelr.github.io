@@ -52,7 +52,7 @@ function PbSn({ show, below }: { show: boolean; below: boolean }) {
       <Label x={ps.sx(60)} y={ps.sy(80)} size={14} weight={700}>
         α + β
       </Label>
-      <Label x={ps.sx(4)} y={ps.sy(30)} size={13} color={C.lfp} anchor="start">
+      <Label x={ps.sx(1.5)} y={ps.sy(60)} size={13} color={C.lfp} anchor="start">
         α
       </Label>
       <Label x={pbBox.x + 6} y={ps.sy(183) - 6} size={12} color={C.dim} anchor="start">
@@ -68,16 +68,16 @@ function PbSn({ show, below }: { show: boolean; below: boolean }) {
       <circle cx={ps.sx(18.3)} cy={y} r={5} fill={C.lfp} />
       <motion.circle initial={false} animate={{ cx: ps.sx(right), cy: y }} r={5} fill={below ? C.anion : C.hot} />
       <circle cx={ps.sx(40)} cy={y} r={6} fill={C.electron} />
-      <Label x={ps.sx((18.3 + 40) / 2)} y={y + (below ? 20 : -10)} size={12} color={C.ink}>
+      <Label x={ps.sx((18.3 + 40) / 2)} y={y + (below ? 20 : 30)} size={12} color={C.ink}>
         {leftArm.toFixed(1)}
       </Label>
-      <Label x={ps.sx((40 + right) / 2)} y={y + (below ? 20 : -10)} size={12} color={C.ink}>
+      <Label x={ps.sx((40 + right) / 2)} y={y + (below ? 20 : 30)} size={12} color={C.ink}>
         {rightArm.toFixed(1)}
       </Label>
-      <Label x={ps.sx(18.3) - 8} y={below ? y - 8 : y + 26} size={12} color={C.lfp} anchor="end">
+      <Label x={ps.sx(18.3) - 8} y={below ? y - 8 : y + 30} size={12} color={C.lfp} anchor="end">
         18.3
       </Label>
-      <Label x={ps.sx(right) + 8} y={below ? y - 8 : y + 26} size={12} color={below ? C.anion : C.hot} anchor="start">
+      <Label x={ps.sx(right) + 8} y={below ? y - 8 : y + 30} size={12} color={below ? C.anion : C.hot} anchor="start">
         {right}
       </Label>
     </g>
