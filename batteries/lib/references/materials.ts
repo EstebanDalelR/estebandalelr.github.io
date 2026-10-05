@@ -17,7 +17,9 @@ export const materials: CourseReference = {
     "diffusion/erf": "Carburisation: error-function solution",
     "nucleation/balance": "Free energy of a spherical nucleus",
     "nucleation/critical": "Critical radius and nucleation barrier",
+    "nucleation/what-undercooling": "Undercooling",
     "nucleation/undercooling": "Driving force from undercooling",
+    "nucleation/rate": "Nucleation rate: barrier times atom mobility",
     "ttt/avrami": "Avrami equation",
   },
   extraFormulas: [

@@ -386,10 +386,27 @@
           "text": "The maximum sits at the critical radius, r star. Smaller nuclei dissolve again, larger ones grow. The height of the maximum, delta G star, is the energy barrier for nucleation."
         },
         {
+          "id": "what-undercooling",
+          "visual": "what-undercooling",
+          "equation": "\\Delta T = T_m - T",
+          "text": "First, what is undercooling? It is how far the melt is below its melting point: delta T equals T m minus T. A melt does not freeze the moment it reaches T m, because solid has to start somewhere, as a tiny nucleus. So on a cooling curve the temperature dips below the melting point while everything is still liquid. When nuclei finally form, the latent heat they release warms the melt back up. This is called recalescence, and the rest freezes on a flat plateau at T m."
+        },
+        {
+          "id": "driving-force",
+          "visual": "driving-force",
+          "text": "Where does the driving force come from? Plot the free energy of the solid and of the melt against temperature. Both fall as it gets hotter, but the melt falls faster, because it has more entropy. The two lines cross at the melting point, where neither phase wins. Below it the solid has the lower free energy, and the gap between the lines is delta G v. That gap grows in proportion to the undercooling: delta G v is about delta H m times delta T over T m."
+        },
+        {
           "id": "undercooling",
           "visual": "undercooling",
           "equation": "\\Delta G_v = \\frac{\\Delta H_m\\,\\Delta T}{T_m} \\qquad \\Delta G^* \\propto \\frac{1}{\\Delta T^2}",
           "text": "Why does nucleation need undercooling? At the melting point, solid and melt have the same free energy, so the driving force is 0 and the barrier is infinite. Only below the melting point does the driving force grow, and the barrier falls with the square of the undercooling."
+        },
+        {
+          "id": "rate",
+          "visual": "rate",
+          "equation": "I \\propto e^{-\\Delta G^*/kT}\\; e^{-Q/kT}",
+          "text": "So is more undercooling always faster? No. Nucleation needs two things. The barrier must be low, which needs a large undercooling. And atoms must still be able to move to join the nucleus, which needs a high temperature. Multiply the two and the nucleation rate peaks at an intermediate undercooling. Near the peak you get many nuclei and fine grains. Quench fast enough to jump past it, and the melt can freeze into a glass with no crystals at all."
         },
         {
           "id": "heterogeneous",
