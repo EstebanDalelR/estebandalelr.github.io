@@ -3,6 +3,8 @@ export type Step = {
   visual: string;
   text: string;
   equation?: string;
+  /** Optional external resource shown as a button on the slide (e.g. a practice tool). */
+  link?: { href: string; label: string };
 };
 
 export type Chapter = {

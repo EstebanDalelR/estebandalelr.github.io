@@ -33,24 +33,82 @@ const LEVERS = [
   { name: "MoSi₂", corner: Z, side: through(Z, Q, X, Y), color: C.lithium },
 ].map((l) => ({ ...l, frac: dist(Q, l.side) / dist(l.corner, l.side) }));
 
+// 2025 exam, Sn–Sb–Cu (schematic): A corner = Sb, B = Cu, C (top) = Sn
+const E_SNSB = P(0.5, 0, 0.5);
+const E_CU2SB = P(1 / 3, 2 / 3, 0);
+const E_CU3SN = P(0, 0.75, 0.25);
+const mix = (w: number[], pts: [number, number][]): [number, number] => {
+  const t = w.reduce((n, x) => n + x, 0);
+  return [pts.reduce((n, p, i) => n + p[0] * w[i], 0) / t, pts.reduce((n, p, i) => n + p[1] * w[i], 0) / t];
+};
+const EP = mix([0.19, 0.33, 0.47], [E_SNSB, E_CU2SB, E_CU3SN]);
+const EXAM_LEVERS = [
+  { name: "SnSb", corner: E_SNSB, side: through(E_SNSB, EP, E_CU2SB, E_CU3SN), color: C.lfp },
+  { name: "Cu2Sb", corner: E_CU2SB, side: through(E_CU2SB, EP, E_SNSB, E_CU3SN), color: C.copper },
+  { name: "Cu3Sn", corner: E_CU3SN, side: through(E_CU3SN, EP, E_SNSB, E_CU2SB), color: C.lithium },
+];
+
 export default function TernaryVisual({ visual }: { visual: string }) {
   const read = visual === "gibbs-triangle";
   const three = visual === "three-phase" || visual === "amounts";
   const amounts = visual === "amounts";
+  const exam = visual === "exam-2025";
   const R = P(0.4, 0.2, 0.4);
 
   return (
     <Stage label="Ternary phase diagrams">
       <polygon points={tri} fill={C.accent} fillOpacity={0.05} stroke={C.dim} strokeWidth={2} />
       <Label x={A[0] - 6} y={A[1] + 24} size={15} weight={700}>
-        A
+        {exam ? "Sb" : "A"}
       </Label>
       <Label x={B[0] + 6} y={B[1] + 24} size={15} weight={700}>
-        B
+        {exam ? "Cu" : "B"}
       </Label>
-      <Label x={Ctop[0]} y={Ctop[1] - 10} size={15} weight={700}>
-        C
+      <Label x={Ctop[0] + 14} y={Ctop[1] + 14} size={15} weight={700} anchor="start">
+        {exam ? "Sn" : "C"}
       </Label>
+
+      <Reveal show={exam}>
+        <polygon points={`${E_SNSB.join(",")} ${E_CU2SB.join(",")} ${E_CU3SN.join(",")}`} fill={C.electron} fillOpacity={0.12} stroke={C.electron} strokeWidth={2} />
+        {EXAM_LEVERS.map((l) => (
+          <g key={l.name}>
+            <line x1={l.corner[0]} y1={l.corner[1]} x2={l.side[0]} y2={l.side[1]} stroke={l.color} strokeWidth={1.5} strokeDasharray="4 3" />
+            <line x1={EP[0]} y1={EP[1]} x2={l.side[0]} y2={l.side[1]} stroke={l.color} strokeWidth={4} />
+            <circle cx={l.corner[0]} cy={l.corner[1]} r={6} fill={l.color} />
+          </g>
+        ))}
+        <Label x={E_SNSB[0] - 10} y={E_SNSB[1]} size={14} weight={700} color={C.lfp} anchor="end">
+          SnSb
+        </Label>
+        <Label x={E_CU2SB[0]} y={E_CU2SB[1] + 22} size={14} weight={700} color={C.copper}>
+          Cu₂Sb
+        </Label>
+        <Label x={E_CU3SN[0] + 10} y={E_CU3SN[1]} size={14} weight={700} color={C.lithium} anchor="start">
+          Cu₃Sn
+        </Label>
+        <circle cx={EP[0]} cy={EP[1]} r={7} fill={C.hot} />
+        <Label x={EP[0] - 10} y={EP[1] - 10} size={13} color={C.hot} weight={700} anchor="end">
+          P
+        </Label>
+        <g transform="translate(20 40)">
+          <rect x={0} y={0} width={170} height={112} rx={10} fill="#0b1220" stroke={C.electron} />
+          <Label x={85} y={20} size={12} color={C.dim}>
+            2025 exam, read off the figure
+          </Label>
+          {[
+            { t: "SnSb ≈ 19 %", c: C.lfp },
+            { t: "Cu₂Sb ≈ 33 %", c: C.copper },
+            { t: "Cu₃Sn ≈ 47 %", c: C.lithium },
+          ].map((r, i) => (
+            <Label key={r.t} x={85} y={44 + i * 20} size={14} weight={700} color={r.c}>
+              {r.t}
+            </Label>
+          ))}
+          <Label x={85} y={104} size={12}>
+            sum 99 % (reading accuracy)
+          </Label>
+        </g>
+      </Reveal>
 
       <Reveal show={read}>
         {/* parallel reading lines through R = 40 % A, 20 % B, 40 % C */}

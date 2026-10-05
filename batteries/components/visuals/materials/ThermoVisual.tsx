@@ -29,6 +29,27 @@ function tangent(k: number, a: number, ca: number, b: number, cb: number) {
 const T0 = tangent(1.6, 0.25, -0.7, 0.75, -0.75);
 const T1 = tangent(1.6, 0.25, -0.58, 0.75, -0.75);
 
+// Stability landscape: two valleys and a hump, like the pre-lab quiz figure.
+const sBox = { x: 80, y: 70, w: 440, h: 250 };
+const gLand = (x: number) => 3.2 * (x - 0.5) ** 2 - 0.55 * Math.exp(-(((x - 0.25) / 0.11) ** 2)) - 0.8 * Math.exp(-(((x - 0.72) / 0.11) ** 2));
+const sScale = makeScale(sBox, [0, 1], [-0.75, 0.85]);
+const land = curve(gLand, 0, 1);
+const extreme = (a: number, b: number, sign: 1 | -1) => land.filter(([x]) => x >= a && x <= b).reduce((best, p) => (sign * p[1] < sign * best[1] ? p : best));
+const round = (v: number) => Math.round(v * 10) / 10;
+const at = ([x, g]: [number, number]): [number, number] => [round(sScale.sx(x)), round(sScale.sy(g))];
+const P_META = at(extreme(0.1, 0.4, 1));
+const P_UNSTABLE = at(extreme(0.35, 0.6, -1));
+const P_SLOPE = at([0.6, gLand(0.6)]);
+const P_STABLE = at(extreme(0.6, 0.9, 1));
+const STATES: { n: string; p: [number, number]; t: string; color: string; dy: number; dx?: number }[] = [
+  { n: "I", p: P_META, t: "Metastable equilibrium", color: C.hot, dy: 34 },
+  { n: "II", p: P_UNSTABLE, t: "Unstable equilibrium", color: C.copper, dy: -22 },
+  { n: "III", p: P_SLOPE, t: "Not in equilibrium", color: C.dim, dy: -22 },
+  { n: "IV", p: P_STABLE, t: "Stable equilibrium", color: C.lithium, dy: 0, dx: 24 },
+];
+// The ball rolls from the slope down into the deepest valley.
+const rollPath = land.filter(([x]) => x >= 0.6 && x <= extreme(0.6, 0.9, 1)[0]).map((p, i) => `${i ? "L" : "M"}${at(p)[0]} ${at(p)[1]}`).join(" ");
+
 export default function ThermoVisual({ visual }: { visual: string }) {
   const tan = visual === "tangent";
   const nano = visual === "nano";
@@ -57,6 +78,46 @@ export default function ThermoVisual({ visual }: { visual: string }) {
           equilibrium: G at its minimum
         </Label>
         <Chip x={300} y={430} text="ΔG < 0 → the reaction runs by itself" color={C.lithium} w={320} />
+      </Reveal>
+
+      <Reveal show={visual === "stability"}>
+        <Label x={300} y={42} size={17} weight={700}>
+          Stable, metastable, unstable
+        </Label>
+        <line x1={sBox.x} y1={sBox.y + sBox.h} x2={sBox.x + sBox.w} y2={sBox.y + sBox.h} stroke={C.dim} />
+        <line x1={sBox.x} y1={sBox.y} x2={sBox.x} y2={sBox.y + sBox.h} stroke={C.dim} />
+        <Label x={sBox.x - 14} y={sBox.y + sBox.h / 2} size={13} color={C.dim}>
+          G
+        </Label>
+        <Label x={300} y={sBox.y + sBox.h + 22} size={13} color={C.dim}>
+          state of the system →
+        </Label>
+        <path d={sScale.path(land)} fill="none" stroke={C.ink} strokeWidth={3} />
+        {STATES.map((st) => (
+          <g key={st.n}>
+            <circle cx={st.p[0]} cy={st.p[1] - 10} r={10} fill={st.color} stroke="#0b1220" strokeWidth={2} />
+            <Label x={st.p[0] + (st.dx ?? 0)} y={st.p[1] + st.dy - (st.dy < 0 ? 10 : 0)} size={15} weight={800} color={st.color}>
+              {st.n}
+            </Label>
+          </g>
+        ))}
+        <circle r={7} cx={0} cy={-8} fill={C.electron} opacity={0.9}>
+          <animateMotion path={rollPath} keyPoints="0;1;1" keyTimes="0;0.6;1" calcMode="linear" dur="2.6s" repeatCount="indefinite" />
+        </circle>
+        {STATES.map((st, i) => (
+          <g key={st.t}>
+            <rect x={20 + i * 142} y={372} width={134} height={44} rx={10} fill={st.color} opacity={0.12} stroke={st.color} />
+            <Label x={87 + i * 142} y={390} size={13} weight={800} color={st.color}>
+              {st.n}
+            </Label>
+            <Label x={87 + i * 142} y={407} size={12}>
+              {st.t}
+            </Label>
+          </g>
+        ))}
+        <Label x={300} y={438} size={13} color={C.dim}>
+          cementite sits in a valley like I · graphite is the true minimum, IV
+        </Label>
       </Reveal>
 
       <Reveal show={visual === "phase-rule"}>

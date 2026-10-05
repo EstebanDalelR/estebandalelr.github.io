@@ -61,6 +61,16 @@ export default function ScrollSection({ courseId, chapter, index, activeStep, sp
         </div>
         <div className="mx-auto flex min-h-14 w-full max-w-4xl items-center justify-center">
           {current.equation && <AnimatedEquation tex={current.equation} className="w-full text-sm sm:text-lg" />}
+          {current.link && (
+            <a
+              href={current.link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-accent bg-accent/15 px-5 py-2 text-sm font-semibold text-accent hover:bg-accent/25"
+            >
+              {current.link.label} ↗
+            </a>
+          )}
         </div>
       </div>
 

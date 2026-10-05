@@ -31,6 +31,21 @@
           "text": "Three types of bonding. Metal with metal: metallic bonding, a sea of valence electrons around ion cores, so metals conduct and deform. Metal with non-metal: ionic bonding, electrons transferred, hard but brittle. Non-metal with non-metal: covalent bonding, shared and directional electrons."
         },
         {
+          "id": "ionic",
+          "visual": "ionic",
+          "text": "Ionic bonding, up close. Sodium holds its single valence electron loosely, and chlorine wants exactly one more. The electron is transferred, leaving a positive sodium ion and a negative chloride ion that attract each other equally in every direction. Push one layer of ions sideways and like charges meet and repel, so ionic crystals are hard but brittle. They only conduct when molten or dissolved, once the ions can move."
+        },
+        {
+          "id": "covalent",
+          "visual": "covalent",
+          "text": "Covalent bonding: two non-metal atoms pull on electrons about equally, so they share a pair between them. In hydrogen, the two 1s orbitals overlap and the shared pair sits between the nuclei, holding them together. Covalent bonds are directional, so they build fixed networks like diamond: very hard, and electrically insulating."
+        },
+        {
+          "id": "metallic",
+          "visual": "metallic",
+          "text": "Metallic bonding: every atom gives its valence electrons to a shared sea that flows around a lattice of positive ion cores. Because these electrons are free to move, metals conduct electricity and heat. And because the bonding is not tied to particular neighbours, layers can slide past each other without breaking bonds, so metals are ductile."
+        },
+        {
           "id": "lattice-energy",
           "visual": "lattice-energy",
           "equation": "U = \\frac{e^2 Z_+ Z_- N_A A}{r}\\left(1 - \\frac{1}{n}\\right)",
@@ -46,7 +61,10 @@
     {
       "id": "packing",
       "title": "Crystal Structures, Packing and Voids",
-      "exam": ["2022 Q1a", "2025 Q1a"],
+      "exam": [
+        "2022 Q1a",
+        "2025 Q1a"
+      ],
       "steps": [
         {
           "id": "cells",
@@ -83,7 +101,10 @@
     {
       "id": "miller",
       "title": "Miller Indices and X-ray Diffraction",
-      "exam": ["2022 Q1b", "2025 Q1b"],
+      "exam": [
+        "2022 Q1b",
+        "2025 Q1b"
+      ],
       "steps": [
         {
           "id": "recipe",
@@ -106,7 +127,11 @@
     {
       "id": "defects",
       "title": "Defects, Stacking Faults and Surface Energy",
-      "exam": ["2022 Q1c", "2025 Q1c", "2025 Q1d"],
+      "exam": [
+        "2022 Q1c",
+        "2025 Q1c",
+        "2025 Q1d"
+      ],
       "steps": [
         {
           "id": "dimensions",
@@ -131,15 +156,68 @@
       ]
     },
     {
+      "id": "solutions",
+      "title": "Solid Solutions: Substitutional and Interstitial",
+      "exam": [
+        "2022 Q1a"
+      ],
+      "steps": [
+        {
+          "id": "two-ways",
+          "visual": "two-ways",
+          "text": "Most alloys are solid solutions: a host crystal with foreign atoms dissolved in it. There are only two ways in. A foreign atom can replace a host atom on its lattice site, which is substitutional, or squeeze into a void between the host atoms, which is interstitial."
+        },
+        {
+          "id": "substitutional",
+          "visual": "substitutional",
+          "text": "Substitution works when the two atoms are alike. The Hume-Rothery rules: atomic radii within about 15%, the same crystal structure, similar electronegativity and similar valence. Copper and nickel meet all four. Both are face centred cubic, with radii of 128 and 125 pm, so they dissolve in each other completely. That is the lens shaped copper nickel diagram."
+        },
+        {
+          "id": "interstitial",
+          "visual": "interstitial",
+          "text": "Interstitial atoms must be small: hydrogen, carbon, nitrogen and boron. They sit in the octahedral or tetrahedral voids of the host. That is how titanium takes up hydrogen to form a hydride, and how carbon dissolves in iron to make steel."
+        },
+        {
+          "id": "carbon-iron",
+          "visual": "carbon-iron",
+          "equation": "r_{oct}^{\\,fcc} = 0.414\\,R \\qquad r_{tet}^{\\,bcc} = 0.291\\,R",
+          "text": "Why does austenite dissolve about 2 wt% carbon, but ferrite only 0.02 wt%? Face centred austenite has fewer but larger voids: its octahedral hole fits a sphere of 0.414 times the iron radius. Body centred ferrite has more voids, but they are small and distorted, the largest only 0.291 times the radius. Carbon is bigger than both, so it strains the lattice, and far less in austenite."
+        },
+        {
+          "id": "diffusion-link",
+          "visual": "diffusion-link",
+          "text": "The two kinds also diffuse differently. A substitutional atom can only move when a vacancy sits next to it, so mostly it waits. An interstitial atom just hops from void to void. That is why carbon diffuses so quickly in steel, and why carburisation works at all."
+        },
+        {
+          "id": "explore",
+          "visual": "explore",
+          "link": {
+            "href": "https://estebandalelr.co/batteries/interstitial-sites",
+            "label": "Open the Interstitial Sites explorer"
+          },
+          "text": "To see the voids in three dimensions, open the Interstitial Sites explorer linked on this slide. Rotate the cells and compare the octahedral and tetrahedral sites in face centred and body centred cubic."
+        }
+      ]
+    },
+    {
       "id": "thermo",
       "title": "Gibbs Energy, the Phase Rule and the Common Tangent",
-      "exam": ["2022 Q2a", "2022 Q2b", "2025 Q2a"],
+      "exam": [
+        "2022 Q2a",
+        "2022 Q2b",
+        "2025 Q2a"
+      ],
       "steps": [
         {
           "id": "gibbs",
           "visual": "gibbs",
           "equation": "G = H - TS \\qquad \\Delta G < 0 \\ \\text{(spontaneous)}",
           "text": "Nature minimises the Gibbs free energy, G equals H minus T S. A reaction runs by itself only if delta G is negative, and at equilibrium G is at its minimum."
+        },
+        {
+          "id": "stability",
+          "visual": "stability",
+          "text": "Not every minimum is the true one. On a Gibbs energy curve, point four sits in the deepest valley: that is stable equilibrium. Point one is a higher valley, a metastable equilibrium. It stays there until something pushes it over the hump. Point two, on top of the hump, is an unstable equilibrium: the smallest nudge sends it rolling. Point three, on a slope, is not in equilibrium at all. Cementite is the classic metastable phase, and graphite is the stable one."
         },
         {
           "id": "phase-rule",
@@ -176,6 +254,39 @@
           "text": "The lever rule gives how much of each phase. For a copper nickel alloy with 35 wt% nickel, the melt has 32 and the solid 43 wt% nickel. The fraction of melt is the lever arm on the far side, 8 divided by 11, about 73%. Careful: each phase takes the arm opposite to it."
         },
         {
+          "id": "pbsn-above",
+          "visual": "pbsn-above",
+          "equation": "w_L = \\frac{40 - 18.3}{61.9 - 18.3} \\approx 0.50",
+          "text": "Second example: lead tin with 40 wt% tin, just above the eutectic at 183 °C. The melt has the eutectic composition, 61.9 wt% tin, and the lead rich solid has 18.3. The melt takes the arm on the solid side: 40 minus 18.3, over 61.9 minus 18.3. That is about 50% melt."
+        },
+        {
+          "id": "pbsn-below",
+          "visual": "pbsn-below",
+          "equation": "w_{Pb} = \\frac{97.8 - 40}{97.8 - 18.3} \\approx 0.73",
+          "text": "Just below 183 °C the melt is gone, and the same alloy is a lead rich solid with 18.3 and a tin rich solid with 97.8 wt% tin. The lead phase is 97.8 minus 40, over 97.8 minus 18.3: about 73%, so 27% tin phase. Same alloy, a different tie line, a different answer."
+        },
+        {
+          "id": "steel",
+          "visual": "steel-lever",
+          "equation": "w_{Fe_3C} = \\frac{1.2 - 0.022}{6.7 - 0.022} \\approx 0.18",
+          "text": "Third example, a steel: 1 kg of austenite with 1.2 wt% carbon, cooled slowly. At room temperature it is ferrite with almost no carbon, 0.022 wt%, and cementite with 6.7 wt%. Cementite is 1.2 minus 0.022, over 6.7 minus 0.022, about 18%. So 0.18 kg of cementite and 0.82 kg of ferrite."
+        },
+        {
+          "id": "pearlite",
+          "visual": "pearlite-lever",
+          "equation": "w_{\\gamma} = \\frac{6.7 - 1.2}{6.7 - 0.76} \\approx 0.93",
+          "text": "How much of that is pearlite? Use the tie line just above 727 °C, between austenite at 0.76 and cementite at 6.7. All the austenite there becomes pearlite: 6.7 minus 1.2, over 6.7 minus 0.76, about 93%. So 0.93 kg of pearlite, plus 0.07 kg of cementite that formed first, along the grain boundaries."
+        },
+        {
+          "id": "practice",
+          "visual": "practice",
+          "link": {
+            "href": "https://estebandalelr.co/batteries/phase-diagrams",
+            "label": "Practise in the Phase Diagram Explorer"
+          },
+          "text": "Now practise. Open the Phase Diagram Explorer linked on this slide. Pick copper nickel, lead tin or iron carbon, drag the composition and the temperature, and check your own lever rule answers against the tie line."
+        },
+        {
           "id": "reactions",
           "visual": "reactions",
           "text": "Two invariant reactions. At a eutectic point, a melt turns into two solids at once: melt to alpha plus beta. At a peritectic point, a melt reacts with a solid to form a new solid: melt plus alpha to beta. Both have 3 phases in equilibrium, and 0 degrees of freedom."
@@ -185,7 +296,12 @@
     {
       "id": "ternary",
       "title": "Ternary Phase Diagrams",
-      "exam": ["2022 Q2c", "2022 Q2d", "2025 Q2b", "2025 Q2c"],
+      "exam": [
+        "2022 Q2c",
+        "2022 Q2d",
+        "2025 Q2b",
+        "2025 Q2c"
+      ],
       "steps": [
         {
           "id": "triangle",
@@ -201,13 +317,23 @@
           "id": "amounts",
           "visual": "amounts",
           "text": "The amounts come from a lever rule in two dimensions. Draw a line from each corner phase through the alloy point to the opposite side. The fraction of that phase is the distance from the point to the side, divided by the whole line. The three fractions must add up to 100%."
+        },
+        {
+          "id": "exam-2025",
+          "visual": "exam-2025",
+          "text": "Fourth example, from the 2025 exam, in the copper antimony tin system. The alloy point sits in the triangle of SnSb, Cu₂Sb and Cu₃Sn. Measuring along the three lines gives about 19% SnSb, 33% Cu₂Sb and 47% Cu₃Sn. That sums to 99%, which is fine: the difference is only reading accuracy."
         }
       ]
     },
     {
       "id": "diffusion",
       "title": "Diffusion and Carburisation",
-      "exam": ["2022 Q3a", "2022 Q3b", "2025 Q3a", "2025 Q3b"],
+      "exam": [
+        "2022 Q3a",
+        "2022 Q3b",
+        "2025 Q3a",
+        "2025 Q3b"
+      ],
       "steps": [
         {
           "id": "fick",
@@ -242,7 +368,10 @@
     {
       "id": "nucleation",
       "title": "Nucleation and Undercooling",
-      "exam": ["2022 Q4a", "2025 Q4a"],
+      "exam": [
+        "2022 Q4a",
+        "2025 Q4a"
+      ],
       "steps": [
         {
           "id": "balance",
@@ -272,7 +401,13 @@
     {
       "id": "solidification",
       "title": "Solidification and Microstructure",
-      "exam": ["2022 Q4c", "2022 Q4d", "2025 Q4b", "2025 Q4c", "2025 Q4d"],
+      "exam": [
+        "2022 Q4c",
+        "2022 Q4d",
+        "2025 Q4b",
+        "2025 Q4c",
+        "2025 Q4d"
+      ],
       "steps": [
         {
           "id": "eutectic-walk",
@@ -304,7 +439,10 @@
     {
       "id": "ttt",
       "title": "TTT Diagrams, Martensite and Age Hardening",
-      "exam": ["2022 Q4b", "2025 Q5a"],
+      "exam": [
+        "2022 Q4b",
+        "2025 Q5a"
+      ],
       "steps": [
         {
           "id": "nose",
@@ -332,7 +470,10 @@
     {
       "id": "steels",
       "title": "Steels",
-      "exam": ["2022 Q5a", "2025 Q5b"],
+      "exam": [
+        "2022 Q5a",
+        "2025 Q5b"
+      ],
       "steps": [
         {
           "id": "fe-c",
@@ -359,7 +500,11 @@
     {
       "id": "alloys",
       "title": "Superalloys, Aluminium, Titanium and Specific Strength",
-      "exam": ["2022 Q5b", "2022 Q5c", "2025 Q5c"],
+      "exam": [
+        "2022 Q5b",
+        "2022 Q5c",
+        "2025 Q5c"
+      ],
       "steps": [
         {
           "id": "superalloys",

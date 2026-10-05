@@ -50,6 +50,7 @@ No backend, no data collection.
 - [Applied Electrochemistry](https://estebandalelr.github.io/batteries/electrochemistry)
 - [Programme Map](https://estebandalelr.github.io/batteries/programme): The TBT2M Battery Technology & Energy Storage master programme by semester and track, with prerequisites and a progress tracker.
 - [Phase Diagram Explorer](https://estebandalelr.github.io/batteries/phase-diagrams): Cu–Ni, Pb–Sn and Fe–Fe₃C phase diagrams with live tie lines and the lever rule.
+- [Metallography Lab](https://estebandalelr.github.io/batteries/metallography): Pre-lab quiz practice for the Materials Chemistry metallography lab, with Fe–C point picking and a lab cheat sheet.
 - [Interstitial Sites](https://estebandalelr.github.io/batteries/interstitial-sites): Octahedral and tetrahedral sites in FCC, BCC and HCP lattices, in 3D.
 - [Energy Storage Types](https://estebandalelr.github.io/batteries/energy-storage-types): Compare storage technologies by energy density, power density, efficiency and duration.
 - [Kirchhoff Lab](https://estebandalelr.github.io/batteries/kirchhoff): Solve circuits by hand, then check them against a live simulation.

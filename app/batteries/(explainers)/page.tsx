@@ -16,6 +16,12 @@ const TOOLS = [
     blurb: "Drag across Cu–Ni, Pb–Sn and Fe–Fe₃C; tie lines and the lever rule update as you go.",
   },
   {
+    href: "/batteries/metallography",
+    course: "Materials Chemistry",
+    name: "Metallography Lab",
+    blurb: "The pre-lab quiz with explanations: click points on Fe–C, match Pb–Sn microstructures, and a lab cheat sheet.",
+  },
+  {
     href: "/batteries/interstitial-sites",
     course: "Materials Chemistry",
     name: "Interstitial Sites",

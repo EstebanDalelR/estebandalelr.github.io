@@ -17,6 +17,7 @@ const ROADMAP = [
   "Packing",
   "Miller",
   "Defects",
+  "Solutions",
   "Thermo",
   "Binary",
   "Ternary",
