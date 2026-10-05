@@ -82,7 +82,28 @@ export default function Explainer({ courseId }: { courseId: string }) {
     const target = stops[current + delta];
     if (!target) return;
     pendingRef.current = current + delta;
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY, behavior: "smooth" });
+    // Switch slides now rather than when the scroll lands: a hidden tab never runs the smooth
+    // scroll, so waiting on scrollama would stop the narration while the audio is in the background.
+    if (target.classList.contains("step")) {
+      setPos({ chapter: Number(target.dataset.chapter), step: Number(target.dataset.step) });
+    }
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY, behavior: document.hidden ? "auto" : "smooth" });
+  }, []);
+
+  // Background tabs don't scroll, so catch the page up with the narration on return.
+  const posRef = useRef(pos);
+  posRef.current = pos;
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.hidden) return;
+      const { chapter, step } = posRef.current;
+      const el = document.querySelector<HTMLElement>(`.step[data-chapter="${chapter}"][data-step="${step}"]`);
+      if (!el || Math.abs(el.getBoundingClientRect().top) < 2) return;
+      pendingRef.current = null;
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: "auto" });
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
   }, []);
 
   // Auto-advance: when the tutor finishes a step, scroll to the next one.
