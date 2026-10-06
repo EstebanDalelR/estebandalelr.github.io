@@ -30,6 +30,19 @@ function edgeCenters() {
   return out;
 }
 
+function buildSC() {
+  return {
+    id: "sc", name: "SC", cell: "cube", R: A / 2,
+    lattice: [[A, 0, 0], [0, A, 0], [0, 0, A]],
+    atoms: cubeCorners().map((p) => ({ p, share: 1 / 8, label: "corner" })),
+    oct: [],
+    tet: [],
+    // the only hole: the body centre, inside a cube of 8 corner atoms
+    cub: [{ p: [0, 0, 0], share: 1 }],
+    ratios: { cub: 0.732 }, coordination: 6, packing: 0.52,
+  };
+}
+
 function buildFCC() {
   return {
     id: "fcc", name: "FCC", cell: "cube", R: (A * Math.SQRT2) / 4,
@@ -104,9 +117,19 @@ function buildHCP() {
   };
 }
 
-const STRUCTURES = { fcc: buildFCC(), bcc: buildBCC(), hcp: buildHCP() };
+const STRUCTURES = { sc: buildSC(), fcc: buildFCC(), bcc: buildBCC(), hcp: buildHCP() };
 // cubic cells tile on their own lattice vectors; hcp needs the hexagon tiling
-Object.values(STRUCTURES).forEach((s) => { s.cellT = s.cellT || s.lattice; });
+Object.values(STRUCTURES).forEach((s) => {
+  s.cellT = s.cellT || s.lattice;
+  s.cub = s.cub || [];
+});
+
+const SITE_KINDS = [
+  { k: "oct", label: "Octahedral", n: 6, color: "#35c4f0" },
+  { k: "tet", label: "Tetrahedral", n: 4, color: "#f7568f" },
+  { k: "cub", label: "Cubic", n: 8, color: "#7be38a" },
+];
+const siteKinds = (S) => SITE_KINDS.filter((x) => S[x.k].length > 0);
 
 // ---------------------------------------------------- neighbours + hulls ---
 
@@ -166,6 +189,10 @@ function hullFaces(P) {
 
 function cageMeshes(verts, color, planes) {
   const faces = hullFaces(verts);
+  // A cube's square faces come back as overlapping triangles; keep only the true (shortest) edges.
+  const len = (a, b) => Math.hypot(...sub(verts[a], verts[b]));
+  let shortest = Infinity;
+  if (verts.length === 8) faces.forEach((f) => { for (let e = 0; e < 3; e++) shortest = Math.min(shortest, len(f[e], f[(e + 1) % 3])); });
   const tri = [];
   faces.forEach(([i, j, k]) => tri.push(...verts[i], ...verts[j], ...verts[k]));
   const g = new THREE.BufferGeometry();
@@ -183,7 +210,7 @@ function cageMeshes(verts, color, planes) {
     for (let e = 0; e < 3; e++) {
       const a = f[e], b = f[(e + 1) % 3];
       const kk = Math.min(a, b) + "-" + Math.max(a, b);
-      if (seen.has(kk)) continue;
+      if (seen.has(kk) || len(a, b) > shortest * 1.001) continue;
       seen.add(kk);
       ep.push(...verts[a], ...verts[b]);
     }
@@ -298,7 +325,7 @@ function buildAxes(S) {
   return g;
 }
 
-const COL_ATOM = 0x93a7c4, COL_MARK = 0xffb347, COL_OCT = 0x35c4f0, COL_TET = 0xf7568f;
+const COL_ATOM = 0x93a7c4, COL_MARK = 0xffb347, COL_OCT = 0x35c4f0, COL_TET = 0xf7568f, COL_CUB = 0x7be38a;
 
 // ------------------------------------------------------------------ view ---
 
@@ -323,6 +350,15 @@ export default function InterstitialSites() {
   const atomTotal = S.atoms.reduce((s, x) => s + x.share, 0);
   const octTotal = S.oct.reduce((s, x) => s + x.share, 0);
   const tetTotal = S.tet.reduce((s, x) => s + x.share, 0);
+  const cubTotal = S.cub.reduce((s, x) => s + x.share, 0);
+  const siteTotal = { oct: octTotal, tet: tetTotal, cub: cubTotal };
+  const kinds = siteKinds(S);
+  const kind = SITE_KINDS.find((x) => x.k === sites);
+
+  // A structure without the selected kind of site (SC has no octahedra) falls back to one it has.
+  useEffect(() => {
+    if (sites !== "none" && !S[sites].length) setSites(kinds[0]?.k ?? "none");
+  }, [sid]);
   const rows = useMemo(() => tally(S.atoms), [sid]);
   const userSum = Object.values(counted).reduce((s, x) => s + x, 0);
   const nCounted = Object.keys(counted).length;
@@ -620,6 +656,8 @@ export default function InterstitialSites() {
     ctx.groups.tet = mkSites(S.tet, COL_TET, S.ratios.tet);
     ctx.groups.octCage = mkCages(S.oct, COL_OCT, 6);
     ctx.groups.tetCage = mkCages(S.tet, COL_TET, 4);
+    ctx.groups.cub = mkSites(S.cub, COL_CUB, S.ratios.cub);
+    ctx.groups.cubCage = mkCages(S.cub, COL_CUB, 8);
   }, [sid]);
 
   // ---- per-control updates, including cut caps
@@ -637,14 +675,14 @@ export default function InterstitialSites() {
       m.userData.radius = rAtom;
     });
     [
-      ["oct", sites === "oct"], ["tet", sites === "tet"],
-      ["octCage", sites === "oct" && cage], ["tetCage", sites === "tet" && cage],
+      ["oct", sites === "oct"], ["tet", sites === "tet"], ["cub", sites === "cub"],
+      ["octCage", sites === "oct" && cage], ["tetCage", sites === "tet" && cage], ["cubCage", sites === "cub" && cage],
       ["axes", axes],
     ].forEach(([k, vis]) => {
       const g = ctx.groups[k];
       if (!g) return;
       g.visible = vis;
-      if (k === "oct" || k === "tet")
+      if (k === "oct" || k === "tet" || k === "cub")
         g.children.forEach((m) => {
           m.scale.setScalar(rAtom * m.userData.ratio);
           m.userData.radius = rAtom * m.userData.ratio;
@@ -694,6 +732,7 @@ export default function InterstitialSites() {
     const spheres = [...ctx.atomMeshes];
     if (sites === "oct") spheres.push(...ctx.groups.oct.children);
     if (sites === "tet") spheres.push(...ctx.groups.tet.children);
+    if (sites === "cub") spheres.push(...ctx.groups.cub.children);
 
     let used = 0;
     const zAxis = new THREE.Vector3(0, 0, 1);
@@ -739,7 +778,7 @@ export default function InterstitialSites() {
 
         <div className="w-full lg:w-80 shrink-0 border-t lg:border-t-0 lg:border-l border-slate-800 p-4 space-y-4 overflow-y-auto">
           <div className="flex gap-1">
-            {["fcc", "bcc", "hcp"].map((k) => (
+            {["sc", "fcc", "bcc", "hcp"].map((k) => (
               <button key={k} onClick={() => setSid(k)} className={btn(sid === k)}>{STRUCTURES[k].name}</button>
             ))}
           </div>
@@ -796,15 +835,15 @@ export default function InterstitialSites() {
 
           <div className="space-y-2 text-xs border-t border-slate-800 pt-3">
             <div className="flex gap-1">
-              {[["none", "No sites"], ["oct", "Octahedral"], ["tet", "Tetrahedral"]].map(([k, l]) => (
+              {[["none", "No sites"], ...kinds.map((x) => [x.k, x.label])].map(([k, l]) => (
                 <button key={k} onClick={() => setSites(k)} className={btn(sites === k)}>{l}</button>
               ))}
             </div>
-            {sites !== "none" && (
+            {kind && S[sites].length > 0 && (
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full" style={{ background: sites === "oct" ? "#35c4f0" : "#f7568f" }} />
+                <span className="w-2.5 h-2.5 rounded-full" style={{ background: kind.color }} />
                 <span className="flex-1 text-slate-400 tabular-nums">
-                  {sites === "oct" ? octTotal : tetTotal} per cell &middot; r/R {sites === "oct" ? S.ratios.oct : S.ratios.tet}
+                  {siteTotal[sites]} per cell &middot; r/R {S.ratios[sites]}
                 </span>
                 <label className="flex items-center gap-1.5 text-slate-300">
                   <input type="checkbox" checked={cage} onChange={(e) => setCage(e.target.checked)} className="accent-sky-400" />
@@ -861,8 +900,10 @@ export default function InterstitialSites() {
 
           <div className="text-xs text-slate-500 leading-relaxed">
             CN {S.coordination} &middot; APF {S.packing}. Cages show the host atoms coordinating each
-            site &mdash; turn the radius down to see them. BCC octahedra are visibly squashed; the
-            0.155 ratio is the short axis, which is why carbon in ferrite strains the lattice so hard.
+            site &mdash; turn the radius down to see them.{" "}
+            {sid === "sc"
+              ? "Simple cubic has no octahedral or tetrahedral holes, only one large cubic hole at the body centre, with 8 neighbours. That is where Cs⁺ sits among the Cl⁻ in CsCl. Polonium is the only element with this structure."
+              : "BCC octahedra are visibly squashed; the 0.155 ratio is the short axis, which is why carbon in ferrite strains the lattice so hard."}
           </div>
         </div>
       </div>

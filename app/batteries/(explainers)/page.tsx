@@ -25,7 +25,7 @@ const TOOLS = [
     href: "/batteries/interstitial-sites",
     course: "Materials Chemistry",
     name: "Interstitial Sites",
-    blurb: "Octahedral and tetrahedral holes in FCC, BCC and HCP lattices, in 3D.",
+    blurb: "Octahedral, tetrahedral and cubic holes in SC, FCC, BCC and HCP lattices, in 3D.",
   },
   {
     href: "/batteries/energy-storage-types",
