@@ -52,8 +52,80 @@ function Lamellae({ x, y, w, h, angle, n }: { x: number; y: number; w: number; h
   );
 }
 
+type Grain = { cx: number; cy: number; r: number };
+
+const HYPO: Grain[] = [
+  { cx: 0.2, cy: 0.25, r: 0.17 },
+  { cx: 0.62, cy: 0.2, r: 0.18 },
+  { cx: 0.42, cy: 0.62, r: 0.19 },
+  { cx: 0.85, cy: 0.58, r: 0.16 },
+  { cx: 0.15, cy: 0.85, r: 0.14 },
+  { cx: 0.75, cy: 0.9, r: 0.13 },
+];
+
+/** Primary grains in a eutectic matrix. With `animated`, grains grow in the melt, then the melt freezes as lamellae. */
+function Primary({
+  box,
+  grains,
+  color,
+  id,
+  animated,
+}: {
+  box: { x: number; y: number; w: number; h: number };
+  grains: Grain[];
+  color: string;
+  id: string;
+  animated: boolean;
+}) {
+  const dur = 8;
+  return (
+    <g>
+      <defs>
+        <pattern id={id} width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+          <rect width="8" height="4" fill={C.electron} opacity={0.85} />
+          <rect y="4" width="8" height="4" fill={C.lfp} opacity={0.85} />
+        </pattern>
+        <clipPath id={`${id}-clip`}>
+          <rect x={box.x} y={box.y} width={box.w} height={box.h} />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${id}-clip)`}>
+        <rect x={box.x} y={box.y} width={box.w} height={box.h} fill={C.hot} opacity={0.2} />
+        <motion.rect
+          x={box.x}
+          y={box.y}
+          width={box.w}
+          height={box.h}
+          fill={`url(#${id})`}
+          initial={false}
+          animate={animated ? { opacity: [0, 0, 1, 1] } : { opacity: 1 }}
+          transition={animated ? { duration: dur, times: [0, 0.55, 0.75, 1], repeat: Infinity } : { duration: 0 }}
+        />
+        {grains.map((g, i) => {
+          const r = g.r * box.w;
+          return (
+            <motion.circle
+              key={i}
+              cx={box.x + g.cx * box.w}
+              cy={box.y + g.cy * box.h}
+              fill={color}
+              stroke="#0b1220"
+              strokeWidth={1.5}
+              initial={false}
+              animate={animated ? { r: [4, r, r, r] } : { r }}
+              transition={animated ? { duration: dur, times: [0, 0.5, 0.75, 1], repeat: Infinity } : { duration: 0 }}
+            />
+          );
+        })}
+      </g>
+      <rect x={box.x} y={box.y} width={box.w} height={box.h} fill="none" stroke={C.dim} />
+    </g>
+  );
+}
+
 export default function SolidificationVisual({ visual }: { visual: string }) {
   const eut = visual === "eutectic-walk";
+  const three = visual === "hypo-hyper";
   return (
     <Stage label="Solidification">
       {/* eutectic walk */}
@@ -146,6 +218,121 @@ export default function SolidificationVisual({ visual }: { visual: string }) {
           λ² R = constant
         </Label>
         <Chip x={300} y={400} text="only lamellae, no primary crystals → eutectic composition" color={C.accent} w={440} />
+      </Reveal>
+
+      {/* hypo / eutectic / hypereutectic compositions */}
+      <Reveal show={three}>
+        <Axes box={eBox} xLabel="wt % B →" yLabel="T (°C)" />
+        {[liqL, liqR].map((d) => (
+          <DrawPath key={d} d={d} show={three} color={C.hot} width={3} />
+        ))}
+        {[solL, solR, solvL, solvR].map((d) => (
+          <DrawPath key={d} d={d} show={three} color={C.lfp} width={2.5} delay={0.3} />
+        ))}
+        <DrawPath d={eutLine} show={three} color={C.electron} width={3} delay={0.5} />
+        {[
+          { x: 40, c: C.lfp, t: "hypo", d: 0.8 },
+          { x: 61.9, c: C.electron, t: "eutectic", d: 1.1 },
+          { x: 85, c: C.anion, t: "hyper", d: 1.4 },
+        ].map((a) => (
+          <g key={a.t}>
+            <DrawPath d={e.path([[a.x, 345], [a.x, 110]])} show={three} color={a.c} width={2.5} dash="5 4" delay={a.d} />
+            <Label x={e.sx(a.x)} y={e.sy(345) - 8} size={12} weight={700} color={a.c}>
+              {a.t}
+            </Label>
+          </g>
+        ))}
+        <Label x={e.sx(61.9)} y={e.sy(TE) + 18} size={12} color={C.electron}>
+          E
+        </Label>
+        <Label x={362} y={120} anchor="start" size={13} weight={700} color={C.lfp}>
+          hypoeutectic: left of E
+        </Label>
+        <Label x={362} y={142} anchor="start" size={13} color={C.dim}>
+          primary α, then eutectic
+        </Label>
+        <Label x={362} y={190} anchor="start" size={13} weight={700} color={C.electron}>
+          eutectic: at E
+        </Label>
+        <Label x={362} y={212} anchor="start" size={13} color={C.dim}>
+          all melt → α + β at 183 °C
+        </Label>
+        <Label x={362} y={260} anchor="start" size={13} weight={700} color={C.anion}>
+          hypereutectic: right of E
+        </Label>
+        <Label x={362} y={282} anchor="start" size={13} color={C.dim}>
+          primary β, then eutectic
+        </Label>
+        <Chip x={300} y={425} text="vertical line = cooling path · microstructure depends on where it sits" w={470} />
+      </Reveal>
+
+      {/* hypoeutectic microstructure forming */}
+      <Reveal show={visual === "hypo-micro"}>
+        <Label x={300} y={40} size={15} weight={700}>
+          Hypoeutectic: primary α, eutectic in between
+        </Label>
+        <Primary box={{ x: 40, y: 65, w: 270, h: 270 }} grains={HYPO} color={C.lfp} id="hypo-eut" animated={visual === "hypo-micro"} />
+        <Label x={175} y={355} size={12} color={C.dim}>
+          melt → α grows → leftover melt freezes
+        </Label>
+        {[
+          { t: "1 · α grains grow in the melt", c: C.lfp },
+          { t: "2 · melt gets richer in B", c: C.hot },
+          { t: "3 · at E it reaches 61.9 wt%", c: C.hot },
+          { t: "4 · it freezes as α + β lamellae", c: C.electron },
+          { t: "     at the grain interfaces", c: C.electron },
+        ].map((w, i) => (
+          <Label key={w.t} x={335} y={110 + i * 28} anchor="start" size={13} color={w.c}>
+            {w.t}
+          </Label>
+        ))}
+        <rect x={335} y={270} width={14} height={14} fill={C.lfp} />
+        <Label x={357} y={282} anchor="start" size={12}>
+          primary α
+        </Label>
+        <rect x={335} y={294} width={14} height={14} fill={C.electron} />
+        <Label x={357} y={306} anchor="start" size={12}>
+          eutectic (α + β lamellae)
+        </Label>
+        <Chip x={300} y={405} text="hypoeutectic = primary α grains + eutectic in the spaces between" color={C.lfp} w={500} />
+      </Reveal>
+
+      {/* three microstructures + lever rule */}
+      <Reveal show={visual === "hyper-micro"}>
+        <Label x={300} y={38} size={15} weight={700}>
+          Three alloys, three microstructures
+        </Label>
+        <Primary box={{ x: 25, y: 60, w: 165, h: 165 }} grains={HYPO} color={C.lfp} id="m-hypo" animated={false} />
+        <Lamellae x={218} y={60} w={165} h={165} angle={25} n={16} />
+        <Primary box={{ x: 410, y: 60, w: 165, h: 165 }} grains={HYPO.map((g) => ({ ...g, cx: 1 - g.cx }))} color={C.anion} id="m-hyper" animated={false} />
+        <Label x={107} y={246} size={13} weight={700} color={C.lfp}>
+          hypoeutectic
+        </Label>
+        <Label x={107} y={264} size={12} color={C.dim}>
+          primary α + eutectic
+        </Label>
+        <Label x={300} y={246} size={13} weight={700} color={C.electron}>
+          eutectic
+        </Label>
+        <Label x={300} y={264} size={12} color={C.dim}>
+          colonies, no primary phase
+        </Label>
+        <Label x={492} y={246} size={13} weight={700} color={C.anion}>
+          hypereutectic
+        </Label>
+        <Label x={492} y={264} size={12} color={C.dim}>
+          primary β + eutectic
+        </Label>
+        <Label x={300} y={305} size={13} weight={700}>
+          Lever rule at T_E⁺ (Pb–40Sn)
+        </Label>
+        <Label x={300} y={328} size={13}>
+          primary α = (61.9 − 40) / (61.9 − 18.3) ≈ 50%
+        </Label>
+        <Label x={300} y={350} size={13}>
+          eutectic melt = (40 − 18.3) / (61.9 − 18.3) ≈ 50%
+        </Label>
+        <Chip x={300} y={402} text="the melt left at T_E⁺ becomes eutectic: its share is the lever arm" color={C.accent} w={470} />
       </Reveal>
 
       {/* peritectic walk */}

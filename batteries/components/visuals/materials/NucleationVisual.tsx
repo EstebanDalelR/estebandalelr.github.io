@@ -27,6 +27,28 @@ const DGV = -3;
 const rStar = (dGv: number) => (-2 * GAMMA) / dGv;
 const gStar = (dGv: number) => (16 * Math.PI * GAMMA ** 3) / (3 * dGv * dGv);
 
+// Cooling curve (px): the melt overshoots below T_m, recalesces, then freezes on a plateau.
+const TM_Y = 190;
+const DIP_Y = 290;
+const COOLING = "M90 70 L250 " + TM_Y + " Q300 228 322 " + DIP_Y + " Q330 300 340 250 L352 " + TM_Y + " L430 " + TM_Y + " L500 330";
+
+// Free energy vs temperature (px): straight lines G = H − TS crossing at T_m.
+const GT = { x0: 90, x1: 500, tm: 380 };
+const gSolid = (x: number) => 200 + (x - GT.tm) * 0.25;
+const gLiquid = (x: number) => 200 + (x - GT.tm) * 0.55;
+const T_LOW = 230;
+
+// Nucleation rate vs undercooling: a falling barrier times falling atom mobility.
+const rBox = { x: 80, y: 60, w: 430, h: 280 };
+const rs = makeScale(rBox, [0, 1], [0, 1.15]);
+const barrierTerm = (x: number) => Math.exp(-0.12 / (x * x));
+const mobilityTerm = (x: number) => Math.exp(-3 * x);
+const RATE_SAMPLES = Array.from({ length: 101 }, (_, i) => Math.max(0.01, i / 100));
+const RATE_MAX = Math.max(...RATE_SAMPLES.map((x) => barrierTerm(x) * mobilityTerm(x)));
+const ratePts = (f: (x: number) => number): [number, number][] => RATE_SAMPLES.map((x) => [x, f(x)]);
+const rate = (x: number) => (barrierTerm(x) * mobilityTerm(x)) / RATE_MAX;
+const RATE_PEAK = RATE_SAMPLES.reduce((a, b) => (rate(b) > rate(a) ? b : a));
+
 const FAMILY = [
   { dGv: -1.6, label: "small ΔT", color: C.hot },
   { dGv: -3, label: "medium ΔT", color: C.electron },
@@ -34,7 +56,7 @@ const FAMILY = [
 ];
 
 export default function NucleationVisual({ visual }: { visual: string }) {
-  const plot = visual !== "heterogeneous";
+  const plot = visual === "balance" || visual === "critical" || visual === "undercooling";
   const single = visual === "balance" || visual === "critical";
   const under = visual === "undercooling";
 
@@ -94,6 +116,131 @@ export default function NucleationVisual({ visual }: { visual: string }) {
           ))}
           <Chip x={300} y={415} text="more undercooling → smaller r*, lower ΔG* ∝ 1/ΔT²" color={C.lithium} w={400} />
         </Reveal>
+      </Reveal>
+
+      <Reveal show={visual === "what-undercooling"}>
+        <Label x={300} y={40} size={17} weight={700}>
+          Undercooling on a cooling curve
+        </Label>
+        <line x1={80} y1={50} x2={80} y2={350} stroke={C.dim} />
+        <line x1={80} y1={350} x2={520} y2={350} stroke={C.dim} />
+        <Label x={66} y={200} size={13} color={C.dim}>
+          T
+        </Label>
+        <Label x={300} y={372} size={13} color={C.dim}>
+          time →
+        </Label>
+        <line x1={80} y1={TM_Y} x2={520} y2={TM_Y} stroke={C.dim} strokeDasharray="5 5" />
+        <Label x={524} y={TM_Y + 4} size={13} anchor="start" weight={700}>
+          T_m
+        </Label>
+        <path d={COOLING} fill="none" stroke={C.accent} strokeWidth={3.5} />
+        <circle r={7} fill={C.electron}>
+          <animateMotion path={COOLING} dur="5s" repeatCount="indefinite" />
+        </circle>
+        <line x1={318} y1={TM_Y} x2={318} y2={DIP_Y - 4} stroke={C.hot} strokeWidth={2} markerStart="url(#arrow)" markerEnd="url(#arrow)" />
+        <Label x={308} y={DIP_Y - 40} size={15} weight={800} color={C.hot} anchor="end">
+          ΔT
+        </Label>
+        <Label x={210} y={120} size={13} color={C.dim}>
+          melt cools
+        </Label>
+        <Label x={322} y={316} size={12} color={C.hot}>
+          still liquid below T_m
+        </Label>
+        <Label x={190} y={244} size={12} color={C.electron}>
+          nuclei form: latent heat
+        </Label>
+        <Label x={190} y={260} size={12} color={C.electron}>
+          warms it back (recalescence)
+        </Label>
+        <Label x={392} y={TM_Y - 12} size={13} color={C.lithium} weight={700}>
+          freezing plateau
+        </Label>
+        <Label x={440} y={300} size={13} color={C.dim} anchor="end">
+          solid cools
+        </Label>
+        <Chip x={300} y={420} text="undercooling ΔT = T_m − T" color={C.hot} w={260} />
+      </Reveal>
+
+      <Reveal show={visual === "driving-force"}>
+        <Label x={300} y={40} size={17} weight={700}>
+          Where the driving force comes from
+        </Label>
+        <line x1={GT.x0} y1={50} x2={GT.x0} y2={340} stroke={C.dim} />
+        <line x1={GT.x0} y1={340} x2={GT.x1 + 20} y2={340} stroke={C.dim} />
+        <Label x={GT.x0 - 14} y={195} size={13} color={C.dim}>
+          G
+        </Label>
+        <Label x={300} y={362} size={13} color={C.dim}>
+          temperature →
+        </Label>
+        <line x1={GT.x0} y1={gSolid(GT.x0)} x2={GT.x1} y2={gSolid(GT.x1)} stroke={C.copper} strokeWidth={3.5} />
+        <line x1={GT.x0} y1={gLiquid(GT.x0)} x2={GT.x1} y2={gLiquid(GT.x1)} stroke={C.lfp} strokeWidth={3.5} />
+        <Label x={GT.x1} y={gSolid(GT.x1) - 12} size={14} weight={700} color={C.copper} anchor="end">
+          G solid
+        </Label>
+        <Label x={GT.x1} y={gLiquid(GT.x1) + 24} size={14} weight={700} color={C.lfp} anchor="end">
+          G liquid
+        </Label>
+        <line x1={GT.tm} y1={200} x2={GT.tm} y2={340} stroke={C.dim} strokeDasharray="4 4" />
+        <circle cx={GT.tm} cy={200} r={6} fill={C.ink} />
+        <Label x={GT.tm} y={356} size={13} weight={700}>
+          T_m
+        </Label>
+        <Label x={GT.tm + 60} y={175} size={12} color={C.dim}>
+          melt is lower: stays liquid
+        </Label>
+        <line x1={T_LOW} y1={gSolid(T_LOW)} x2={T_LOW} y2={gLiquid(T_LOW)} stroke={C.hot} strokeWidth={2.5} markerStart="url(#arrow)" markerEnd="url(#arrow)" />
+        <Label x={T_LOW - 8} y={(gSolid(T_LOW) + gLiquid(T_LOW)) / 2 + 5} size={15} weight={800} color={C.hot} anchor="end">
+          ΔG_v
+        </Label>
+        <line x1={T_LOW} y1={326} x2={GT.tm} y2={326} stroke={C.hot} strokeWidth={2} markerStart="url(#arrow)" markerEnd="url(#arrow)" />
+        <Label x={(T_LOW + GT.tm) / 2} y={318} size={14} weight={800} color={C.hot}>
+          ΔT
+        </Label>
+        <line x1={T_LOW} y1={gLiquid(T_LOW)} x2={T_LOW} y2={340} stroke={C.hot} strokeDasharray="3 4" />
+        <Chip x={300} y={405} text="ΔG_v ≈ ΔH_m · ΔT / T_m: the gap grows with ΔT" color={C.lithium} w={400} />
+        <Label x={300} y={440} size={12} color={C.dim}>
+          at T_m the lines cross: ΔG_v = 0, no reason to freeze
+        </Label>
+      </Reveal>
+
+      <Reveal show={visual === "rate"}>
+        <Label x={300} y={40} size={17} weight={700}>
+          Nucleation rate: too warm or too cold is slow
+        </Label>
+        <line x1={rBox.x} y1={rBox.y} x2={rBox.x} y2={rBox.y + rBox.h} stroke={C.dim} />
+        <line x1={rBox.x} y1={rBox.y + rBox.h} x2={rBox.x + rBox.w} y2={rBox.y + rBox.h} stroke={C.dim} />
+        <Label x={300} y={rBox.y + rBox.h + 22} size={13} color={C.dim}>
+          undercooling ΔT →
+        </Label>
+        <Label x={rBox.x - 14} y={rBox.y + rBox.h / 2} size={13} color={C.dim}>
+          rate
+        </Label>
+        <path d={rs.path(ratePts(barrierTerm))} fill="none" stroke={C.hot} strokeWidth={2} strokeDasharray="6 5" />
+        <path d={rs.path(ratePts(mobilityTerm))} fill="none" stroke={C.lfp} strokeWidth={2} strokeDasharray="6 5" />
+        <path d={rs.path(ratePts(rate))} fill="none" stroke={C.accent} strokeWidth={3.5} />
+        <circle cx={rs.sx(RATE_PEAK)} cy={rs.sy(1)} r={6} fill={C.accent} />
+        <Label x={rs.sx(0.62)} y={rs.sy(1.02)} size={13} color={C.hot} anchor="start">
+          barrier gets lower
+        </Label>
+        <Label x={rs.sx(0.02)} y={rs.sy(1.07)} size={13} color={C.lfp} anchor="start">
+          atoms get slower
+        </Label>
+        <Label x={rs.sx(RATE_PEAK) + 40} y={rs.sy(0.97)} size={13} weight={700} color={C.accent} anchor="start">
+          nucleation rate
+        </Label>
+        <Label x={rs.sx(0.02)} y={rs.sy(0.1)} size={12} color={C.dim} anchor="start">
+          few nuclei
+        </Label>
+        <Label x={rs.sx(RATE_PEAK) + 10} y={rs.sy(1.1)} size={12} color={C.dim} anchor="start">
+          many nuclei, fine grains
+        </Label>
+        <Label x={rs.sx(0.97)} y={rs.sy(0.45)} size={12} color={C.dim} anchor="end">
+          quenched past the peak: glass
+        </Label>
+        <Chip x={300} y={415} text="rate ∝ e^(−ΔG*/kT) · e^(−Q/kT)" color={C.accent} w={300} />
       </Reveal>
 
       <Reveal show={visual === "heterogeneous"}>

@@ -4,6 +4,7 @@ import BondingVisual from "./BondingVisual";
 import PackingVisual from "./PackingVisual";
 import MillerVisual from "./MillerVisual";
 import DefectsVisual from "./DefectsVisual";
+import SolutionsVisual from "./SolutionsVisual";
 import ThermoVisual from "./ThermoVisual";
 import BinaryVisual from "./BinaryVisual";
 import TernaryVisual from "./TernaryVisual";
@@ -22,6 +23,7 @@ export const visuals: Record<string, ComponentType<{ visual: string }>> = {
   packing: PackingVisual,
   miller: MillerVisual,
   defects: DefectsVisual,
+  solutions: SolutionsVisual,
   thermo: ThermoVisual,
   binary: BinaryVisual,
   ternary: TernaryVisual,

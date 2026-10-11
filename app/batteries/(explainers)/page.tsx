@@ -16,10 +16,22 @@ const TOOLS = [
     blurb: "Drag across Cu–Ni, Pb–Sn and Fe–Fe₃C; tie lines and the lever rule update as you go.",
   },
   {
+    href: "/batteries/metallography",
+    course: "Materials Chemistry",
+    name: "Metallography Lab",
+    blurb: "The pre-lab quiz with explanations: click points on Fe–C, match Pb–Sn microstructures, and a lab cheat sheet.",
+  },
+  {
     href: "/batteries/interstitial-sites",
     course: "Materials Chemistry",
     name: "Interstitial Sites",
-    blurb: "Octahedral and tetrahedral holes in FCC, BCC and HCP lattices, in 3D.",
+    blurb: "Octahedral, tetrahedral and cubic holes in SC, FCC, BCC and HCP lattices, in 3D.",
+  },
+  {
+    href: "/batteries/electrochem-lab",
+    course: "Applied Electrochemistry",
+    name: "Electrochemistry Lab",
+    blurb: "Simulated CV, chronoamperometry and chronopotentiometry: tune scan rate, k⁰ and current, check Randles–Ševčík, Cottrell and Sand.",
   },
   {
     href: "/batteries/energy-storage-types",
