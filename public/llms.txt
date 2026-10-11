@@ -52,5 +52,6 @@ No backend, no data collection.
 - [Phase Diagram Explorer](https://estebandalelr.github.io/batteries/phase-diagrams): Cu–Ni, Pb–Sn and Fe–Fe₃C phase diagrams with live tie lines and the lever rule.
 - [Metallography Lab](https://estebandalelr.github.io/batteries/metallography): Pre-lab quiz practice for the Materials Chemistry metallography lab, with Fe–C point picking and a lab cheat sheet.
 - [Interstitial Sites](https://estebandalelr.github.io/batteries/interstitial-sites): Octahedral, tetrahedral and cubic sites in SC, FCC, BCC and HCP lattices, in 3D.
+- [Electrochemistry Lab](https://estebandalelr.github.io/batteries/electrochem-lab): Simulated cyclic voltammetry, chronoamperometry and chronopotentiometry with Randles–Ševčík, Cottrell and Sand readouts.
 - [Energy Storage Types](https://estebandalelr.github.io/batteries/energy-storage-types): Compare storage technologies by energy density, power density, efficiency and duration.
 - [Kirchhoff Lab](https://estebandalelr.github.io/batteries/kirchhoff): Solve circuits by hand, then check them against a live simulation.

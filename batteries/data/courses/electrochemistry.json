@@ -143,6 +143,10 @@
         {
           "id": "info",
           "visual": "cv-scanrate",
+          "link": {
+            "href": "https://estebandalelr.co/batteries/electrochem-lab",
+            "label": "Try it in the Electrochemistry Lab"
+          },
           "equation": "i_p = 0.446\\,nFAC\\left(\\frac{nFDv}{RT}\\right)^{1/2}",
           "text": "What can you learn? The formal potential, the number of electrons, whether the reaction is reversible, and the kinetics from the peak separation. Plot peak current against the square root of scan rate: a straight line means diffusion control, and gives the diffusion coefficient. Current proportional to scan rate means adsorption or capacitive current."
         },

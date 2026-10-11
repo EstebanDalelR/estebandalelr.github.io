@@ -28,6 +28,12 @@ const TOOLS = [
     blurb: "Octahedral, tetrahedral and cubic holes in SC, FCC, BCC and HCP lattices, in 3D.",
   },
   {
+    href: "/batteries/electrochem-lab",
+    course: "Applied Electrochemistry",
+    name: "Electrochemistry Lab",
+    blurb: "Simulated CV, chronoamperometry and chronopotentiometry: tune scan rate, k⁰ and current, check Randles–Ševčík, Cottrell and Sand.",
+  },
+  {
     href: "/batteries/energy-storage-types",
     course: "Introduction to Energy Storage",
     name: "Energy Storage Types",
