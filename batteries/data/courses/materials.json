@@ -437,6 +437,21 @@
           "text": "A eutectic melt forms both solids side by side, as thin alternating lamellae, because that keeps diffusion distances short. A microstructure made only of lamellae, with no primary crystals, means the alloy had the eutectic composition."
         },
         {
+          "id": "hypo-hyper",
+          "visual": "hypo-hyper",
+          "text": "Where the alloy sits relative to the eutectic point matters. Left of it, the alloy is hypoeutectic. At the eutectic composition, it is eutectic. Right of it, it is hypereutectic. Each one follows a vertical cooling line, and each ends up with a different microstructure."
+        },
+        {
+          "id": "hypo-micro",
+          "visual": "hypo-micro",
+          "text": "Take a hypoeutectic alloy. Primary alpha grains nucleate and grow first, between the liquidus and the eutectic temperature. The leftover melt gets richer in B, until it reaches the eutectic composition. That melt is pushed into the spaces between the alpha grains, and at the eutectic temperature it freezes as lamellar alpha plus beta, at the grain interfaces."
+        },
+        {
+          "id": "hyper-micro",
+          "visual": "hyper-micro",
+          "text": "A eutectic alloy has no primary phase. All the melt turns into lamellae at one temperature, in eutectic colonies that meet at colony boundaries. A hypereutectic alloy is the mirror image: primary beta grains form first, and eutectic fills the grain boundaries. Just above the eutectic temperature, the lever rule gives the split. For lead tin with 40 wt% tin, about 50% is primary alpha and 50% is eutectic."
+        },
+        {
           "id": "peritectic-walk",
           "visual": "peritectic-walk",
           "text": "A peritectic alloy is different. Primary crystals form first, and at the peritectic temperature the melt must react with them to form a new phase. When all the melt is used up, the two solid phases cool together."

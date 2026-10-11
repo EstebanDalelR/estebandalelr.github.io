@@ -1523,5 +1523,90 @@
     "text": "That sums to 99%, which is fine: the difference is only reading accuracy."
    }
   ]
+ },
+ "solidification/hypo-hyper": {
+  "duration": 18.72,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.56,
+    "text": "Where the alloy sits relative to the eutectic point matters."
+   },
+   {
+    "start": 3.84,
+    "end": 6.72,
+    "text": "Left of it, the alloy is hypoeutectic."
+   },
+   {
+    "start": 7.0,
+    "end": 10.6,
+    "text": "At the eutectic composition, it is eutectic."
+   },
+   {
+    "start": 10.88,
+    "end": 13.24,
+    "text": "Right of it, it is hypereutectic."
+   },
+   {
+    "start": 13.52,
+    "end": 18.32,
+    "text": "Each one follows a vertical cooling line, and each ends up with a different microstructure."
+   }
+  ]
+ },
+ "solidification/hypo-micro": {
+  "duration": 24.08,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.56,
+    "text": "Take a hypoeutectic alloy."
+   },
+   {
+    "start": 2.84,
+    "end": 8.76,
+    "text": "Primary alpha grains nucleate and grow first, between the liquidus and the eutectic temperature."
+   },
+   {
+    "start": 9.04,
+    "end": 13.68,
+    "text": "The leftover melt gets richer in B, until it reaches the eutectic composition."
+   },
+   {
+    "start": 13.96,
+    "end": 23.68,
+    "text": "That melt is pushed into the spaces between the alpha grains, and at the eutectic temperature it freezes as lamellar alpha plus beta, at the grain interfaces."
+   }
+  ]
+ },
+ "solidification/hyper-micro": {
+  "duration": 29.64,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.12,
+    "text": "A eutectic alloy has no primary phase."
+   },
+   {
+    "start": 3.4,
+    "end": 9.56,
+    "text": "All the melt turns into lamellae at one temperature, in eutectic colonies that meet at colony boundaries."
+   },
+   {
+    "start": 9.84,
+    "end": 17.96,
+    "text": "A hypereutectic alloy is the mirror image: primary beta grains form first, and eutectic fills the grain boundaries."
+   },
+   {
+    "start": 18.24,
+    "end": 22.48,
+    "text": "Just above the eutectic temperature, the lever rule gives the split."
+   },
+   {
+    "start": 22.76,
+    "end": 29.24,
+    "text": "For lead tin with 40 wt% tin, about 50% is primary alpha and 50% is eutectic."
+   }
+  ]
  }
 }
