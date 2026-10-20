@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "katex/dist/katex.min.css";
 import "./batteries.css";
@@ -17,6 +17,13 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Battery Masters",
   description: "Narrated, scroll-driven walkthroughs of the batteries & energy storage course material.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0b1220",
 };
 
 export default function BatteriesLayout({ children }: { children: React.ReactNode }) {

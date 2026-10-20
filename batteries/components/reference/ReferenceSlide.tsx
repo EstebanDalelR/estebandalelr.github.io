@@ -20,7 +20,7 @@ export default function ReferenceSlide({ courseId }: { courseId: string }) {
   const [tab, setTab] = useState<Tab>("Formulas");
 
   return (
-    <section id="reference" data-stop className="h-slide flex flex-col px-4 pb-[var(--caption-space)] pt-14 sm:px-8">
+    <section id="reference" data-stop className="h-slide flex flex-col px-4 pb-[var(--caption-space)] pt-[calc(3.5rem+env(safe-area-inset-top))] sm:px-8">
       <header className="mx-auto w-full max-w-6xl">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">Reference</p>
         <h2 className="mt-1 text-3xl font-bold leading-tight text-ink sm:text-5xl">Formulas, definitions & script</h2>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MutableRefObject } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Avatar from "./Avatar";
 import SubtitleBar from "./SubtitleBar";
@@ -18,6 +18,8 @@ type Props = {
   onFinished?: () => void;
   /** Called with the sentence being spoken ("" between sentences). */
   onCue?: (text: string) => void;
+  /** Filled with a seek(deltaSeconds) function for the active step (lock-screen controls). */
+  seekRef?: MutableRefObject<((delta: number) => void) | null>;
 };
 
 type Timings = Record<string, { duration: number; cues: Cue[] }>;
@@ -32,7 +34,7 @@ export const isTyping = (target: EventTarget | null) =>
  * shows timed subtitles. Steps without a recording fall back to a timed
  * "reading" so the page works before any audio exists.
  */
-export default function NarratorPanel({ courseId, chapterId, step, paused, rate, subtitles, onToggleSubtitles, onFinished, onCue }: Props) {
+export default function NarratorPanel({ courseId, chapterId, step, paused, rate, subtitles, onToggleSubtitles, onFinished, onCue, seekRef }: Props) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const timingsRef = useRef<Timings>({});
@@ -119,6 +121,7 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, rate,
       seek(e.key === "ArrowLeft" ? -SEEK_SECONDS : SEEK_SECONDS);
     };
     window.addEventListener("keydown", onKey);
+    if (seekRef) seekRef.current = seek;
 
     const startFallback = () => {
       useFallback = true;
@@ -187,6 +190,7 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, rate,
     return () => {
       cancelled = true;
       window.removeEventListener("keydown", onKey);
+      if (seekRef?.current === seek) seekRef.current = null;
       cancelAnimationFrame(raf);
       if (audio) {
         audio.onended = audio.onerror = audio.onloadedmetadata = null;
@@ -211,14 +215,14 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, rate,
   return (
     <>
       {subtitles && <SubtitleBar text={cue} />}
-      <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-2">
+      <div className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] right-[max(0.75rem,env(safe-area-inset-right))] z-40 flex flex-col items-end gap-1.5 max-sm:bottom-[calc(max(0.75rem,env(safe-area-inset-bottom))+3.25rem)] sm:bottom-[max(1rem,env(safe-area-inset-bottom))] sm:right-[max(1rem,env(safe-area-inset-right))] sm:gap-2">
         <AnimatePresence>
           {!collapsed && (
             <motion.div
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 20 }}
-              className="relative h-28 w-28 rounded-full border border-white/10 bg-panel shadow-2xl shadow-black/40 sm:h-36 sm:w-36"
+              className="relative rounded-full border border-white/10 bg-panel shadow-2xl shadow-black/40 max-sm:h-16 max-sm:w-16 sm:h-36 sm:w-36 [@media(max-height:500px)]:!h-14 [@media(max-height:500px)]:!w-14"
             >
               <motion.div
                 className="absolute inset-0 rounded-full"
@@ -236,7 +240,7 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, rate,
             onClick={onToggleSubtitles}
             aria-pressed={subtitles}
             title="Subtitles (C)"
-            className={`rounded-full border px-3 py-1.5 text-xs ${
+            className={`min-h-8 rounded-full border px-3 py-1.5 text-xs max-sm:min-h-10 ${
               subtitles ? "border-accent bg-accent/20 text-accent" : "border-white/10 bg-panel text-ink/80 hover:text-ink"
             }`}
           >
@@ -244,7 +248,7 @@ export default function NarratorPanel({ courseId, chapterId, step, paused, rate,
           </button>
           <button
             onClick={() => setCollapsed((c) => !c)}
-            className="rounded-full border border-white/10 bg-panel px-3 py-1.5 text-xs text-ink/80 hover:text-ink"
+            className="min-h-8 rounded-full border border-white/10 bg-panel px-3 py-1.5 text-xs text-ink/80 hover:text-ink max-sm:min-h-10"
             aria-label={collapsed ? "Show narrator" : "Hide narrator"}
           >
             {collapsed ? "Show tutor" : "Hide"}

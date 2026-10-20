@@ -8,9 +8,14 @@ import ProgressBar from "@batteries/components/scrolly/ProgressBar";
 import ReferenceSlide from "@batteries/components/reference/ReferenceSlide";
 import ScrollSection, { stepAnchor } from "@batteries/components/scrolly/ScrollSection";
 import { getCourse } from "@batteries/lib/courses";
+import { isCoarsePointer, enterFullscreen, prefersReducedMotion, useFullscreen, useMediaSession, useWakeLock } from "@batteries/lib/browser";
 
 const SPEEDS = [0.75, 1, 1.25, 1.5, 2];
 const SPEED_KEY = "battery-masters:speed";
+const SEEK_SECONDS = 5;
+const BTN = "h-10 min-w-10 rounded-full border px-3 text-xs sm:h-auto sm:min-w-0 sm:py-1.5 [@media(max-height:500px)]:h-10 [@media(max-height:500px)]:min-w-10";
+const IDLE = "border-white/10 bg-panel text-ink/80 hover:text-ink";
+const ON = "border-accent bg-accent/20 text-accent";
 const formatSpeed = (s: number) => `${s}×`;
 
 /** A narrated, full-screen slide video for one course. */
@@ -46,6 +51,8 @@ export default function Explainer({ courseId }: { courseId: string }) {
   // Set once scrollama reports a real position, so the #chapter in a shared link isn't overwritten.
   const locatedRef = useRef(false);
   const [copied, setCopied] = useState(false);
+  const seekRef = useRef<((delta: number) => void) | null>(null);
+  const fullscreen = useFullscreen();
 
   useEffect(() => {
     const scroller = scrollama();
@@ -58,8 +65,10 @@ export default function Explainer({ courseId }: { courseId: string }) {
       });
     const onResize = () => scroller.resize();
     window.addEventListener("resize", onResize);
+    window.addEventListener("orientationchange", onResize);
     return () => {
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onResize);
       scroller.destroy();
     };
   }, []);
@@ -87,7 +96,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
     if (target.classList.contains("step")) {
       setPos({ chapter: Number(target.dataset.chapter), step: Number(target.dataset.step) });
     }
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY, behavior: document.hidden ? "auto" : "smooth" });
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY, behavior: document.hidden || prefersReducedMotion() ? "auto" : "smooth" });
   }, []);
 
   // Background tabs don't scroll, so catch the page up with the narration on return.
@@ -120,6 +129,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
       else if (e.key === "ArrowUp") goToStep(-1);
       else if (e.key === "ArrowDown") goToStep(1);
       else if (e.key === "c" || e.key === "C") setSubtitles((v) => !v);
+      else if (e.key === "f" || e.key === "F") fullscreen.toggle();
       else if (e.key === ">") changeSpeed(1);
       else if (e.key === "<") changeSpeed(-1);
       else return;
@@ -128,7 +138,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [started, goToStep, changeSpeed]);
+  }, [started, goToStep, changeSpeed, fullscreen.toggle]);
 
   const chapter = chapters[pos.chapter];
   const step = chapter.steps[pos.step];
@@ -142,6 +152,20 @@ export default function Explainer({ courseId }: { courseId: string }) {
     if (window.location.hash === hash) return;
     window.history.replaceState(window.history.state, "", window.location.pathname + window.location.search + hash);
   }, [pos.chapter, pos.step, chapters]);
+
+  useWakeLock(started && !paused);
+  useMediaSession(
+    started,
+    { title: `${chapter.title}${chapter.steps.length > 1 ? ` (${pos.step + 1}/${chapter.steps.length})` : ""}`, artist: "Battery Masters", album: narration.title },
+    paused,
+    {
+      play: () => setPaused(false),
+      pause: () => setPaused(true),
+      previous: () => goToStep(-1),
+      next: () => goToStep(1),
+      seek: (d) => seekRef.current?.(d),
+    },
+  );
 
   const chapterLabel = (i: number) => `${i === 0 ? "Start" : `Chapter ${i}`} · ${chapters[i].title}`;
 
@@ -188,21 +212,22 @@ export default function Explainer({ courseId }: { courseId: string }) {
             onToggleSubtitles={() => setSubtitles((v) => !v)}
             onFinished={next}
             onCue={setSpoken}
+            seekRef={seekRef}
           />
-          <div className="fixed bottom-4 left-4 z-40 flex items-center gap-2">
+          <div className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-[max(0.75rem,env(safe-area-inset-left))] right-[max(0.75rem,env(safe-area-inset-right))] z-40 flex items-center justify-between gap-1.5 sm:bottom-[max(1rem,env(safe-area-inset-bottom))] sm:left-[max(1rem,env(safe-area-inset-left))] sm:right-auto sm:justify-start sm:gap-2">
             <button
               onClick={() => goToStep(-1)}
               aria-label="Previous slide"
               title="Previous slide (↑)"
-              className="rounded-full border border-white/10 bg-panel px-3 py-1.5 text-xs text-ink/80 hover:text-ink"
+              className={`${BTN} ${IDLE}`}
             >
               ⏮
             </button>
             <button
               onClick={() => setPaused((p) => !p)}
               aria-label={paused ? "Play" : "Pause"}
-              title={`${paused ? "Play" : "Pause"} (Space) · ←/→ seek 5s`}
-              className="rounded-full border border-white/10 bg-panel px-3 py-1.5 text-xs text-ink/80 hover:text-ink"
+              title={`${paused ? "Play" : "Pause"} (Space) · ←/→ seek ${SEEK_SECONDS}s`}
+              className={`${BTN} ${IDLE}`}
             >
               {paused ? "▶" : "⏸"}
             </button>
@@ -210,7 +235,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
               onClick={() => goToStep(1)}
               aria-label="Next slide"
               title="Next slide (↓)"
-              className="rounded-full border border-white/10 bg-panel px-3 py-1.5 text-xs text-ink/80 hover:text-ink"
+              className={`${BTN} ${IDLE}`}
             >
               ⏭
             </button>
@@ -218,29 +243,43 @@ export default function Explainer({ courseId }: { courseId: string }) {
               onClick={() => changeSpeed(1)}
               aria-label={`Playback speed ${formatSpeed(speed)}`}
               title="Playback speed (< / >)"
-              className={`min-w-[3.25rem] rounded-full border px-3 py-1.5 text-xs tabular-nums ${
-                speed === 1 ? "border-white/10 bg-panel text-ink/80 hover:text-ink" : "border-accent bg-accent/20 text-accent"
-              }`}
+              className={`${BTN} tabular-nums sm:min-w-[3.25rem] ${speed === 1 ? IDLE : ON}`}
             >
               {formatSpeed(speed)}
             </button>
             <button
               onClick={shareChapter}
+              aria-label={copied ? "Link copied" : "Share chapter"}
               title={`Copy a link to ${chapterLabel(pos.chapter)}`}
-              className={`rounded-full border px-3 py-1.5 text-xs ${
-                copied ? "border-accent bg-accent/20 text-accent" : "border-white/10 bg-panel text-ink/80 hover:text-ink"
-              }`}
+              className={`${BTN} ${copied ? ON : IDLE}`}
             >
-              {copied ? "✓ Link copied" : "🔗 Share chapter"}
+              {copied ? "✓" : "🔗"}
+              <span className="max-sm:hidden [@media(max-height:500px)]:hidden">{copied ? " Link copied" : " Share chapter"}</span>
             </button>
             <button
               onClick={() => setAutoAdvance((a) => !a)}
-              className={`rounded-full border px-3 py-1.5 text-xs ${
-                autoAdvance ? "border-accent bg-accent/20 text-accent" : "border-white/10 bg-panel text-ink/80"
-              }`}
+              aria-label={autoAdvance ? "Auto-play on" : "Auto-play off"}
+              aria-pressed={autoAdvance}
+              title="Auto-play next slide"
+              className={`${BTN} ${autoAdvance ? ON : "border-white/10 bg-panel text-ink/80"}`}
             >
-              {autoAdvance ? "▶ Auto-play on" : "▶ Auto-play off"}
+              ▶<span className="max-sm:hidden [@media(max-height:500px)]:hidden"> {autoAdvance ? "Auto-play on" : "Auto-play off"}</span>
             </button>
+            {fullscreen.supported && (
+              <button
+                onClick={fullscreen.toggle}
+                aria-label={fullscreen.active ? "Exit full screen" : "Full screen"}
+                aria-pressed={fullscreen.active}
+                title="Full screen (F)"
+                className={`${BTN} ${fullscreen.active ? ON : IDLE}`}
+              >
+                {fullscreen.active ? (
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 2v4H2M10 2v4h4M6 14v-4H2M10 14v-4h4" /></svg>
+                ) : (
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" /></svg>
+                )}
+              </button>
+            )}
           </div>
         </>
       )}
@@ -265,6 +304,8 @@ export default function Explainer({ courseId }: { courseId: string }) {
                 onClick={() => {
                   setAutoAdvance(true);
                   setStarted(true);
+                  // Taps on phones are the only chance to go full screen; keyboard users can press F.
+                  if (isCoarsePointer()) enterFullscreen();
                 }}
                 className="mt-6 rounded-full bg-accent px-6 py-2.5 font-semibold text-bg hover:brightness-110"
               >
@@ -278,7 +319,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
                   or go back to the beginning
                 </button>
               )}
-              <p className="mt-4 text-xs text-ink/50">Space pause · ←/→ seek · ↑/↓ slides · &lt;/&gt; speed · C subtitles</p>
+              <p className="mt-4 text-xs text-ink/50">Space pause · ←/→ seek · ↑/↓ slides · &lt;/&gt; speed · C subtitles · F full screen</p>
             </div>
           </motion.div>
         )}
