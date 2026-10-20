@@ -7,7 +7,7 @@
   --ink: #e6edf7;
   --accent: #3dd6c6;
   /* Bottom band kept clear of slide content: transport controls + subtitles. */
-  --caption-space: 13rem;
+  --caption-space: calc(13rem + env(safe-area-inset-bottom));
   min-height: 100vh;
   color: var(--ink);
   background: var(--bg);
@@ -16,7 +16,7 @@
 
 @media (min-width: 640px) {
   .battery-masters {
-    --caption-space: 10rem;
+    --caption-space: calc(10rem + env(safe-area-inset-bottom));
   }
 }
 
@@ -30,8 +30,10 @@
   margin-top: -100dvh;
 }
 
-html:has(.battery-masters) {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.battery-masters) {
+    scroll-behavior: smooth;
+  }
 }
 body:has(.battery-masters) {
   background: #0b1220;
@@ -49,4 +51,11 @@ body:has(.battery-masters) {
   fill: #3dd6c6;
   font-weight: 700;
   filter: drop-shadow(0 0 6px rgb(61 214 198 / 0.85));
+}
+
+/* Short landscape phones: controls and subtitles share the bottom edge, so reserve less. */
+@media (max-height: 500px) {
+  .battery-masters {
+    --caption-space: calc(6.5rem + env(safe-area-inset-bottom));
+  }
 }

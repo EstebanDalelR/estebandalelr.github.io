@@ -32,7 +32,7 @@ export default function ScrollSection({ courseId, chapter, index, activeStep, sp
 
   return (
     <section id={chapter.id} className="relative">
-      <div className="sticky top-0 h-slide flex flex-col px-4 pb-[var(--caption-space)] pt-14 sm:px-8">
+      <div className="sticky top-0 h-slide flex flex-col px-4 pb-[var(--caption-space)] pt-[calc(3.5rem+env(safe-area-inset-top))] sm:px-8">
         <header className="mx-auto w-full max-w-6xl">
           <p className="text-sm font-semibold uppercase tracking-widest text-accent">
             {index === 0 ? "Start" : `Chapter ${index}`}

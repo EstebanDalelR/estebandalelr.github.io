@@ -6,8 +6,8 @@ import type { Chapter } from "@batteries/lib/narration";
 export default function ProgressBar({ chapters, chapterIndex, stepIndex }: { chapters: Chapter[]; chapterIndex: number; stepIndex: number }) {
   const last = chapters.length - 1;
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 flex h-10 items-center gap-1 bg-bg/80 px-3 backdrop-blur" aria-label="Chapters">
-      <Link href="/batteries" className="mr-2 text-xs text-ink/60 hover:text-ink" aria-label="All videos">
+    <nav className="fixed inset-x-0 top-0 z-50 flex h-[calc(2.5rem+env(safe-area-inset-top))] items-center gap-1 bg-bg/80 pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] pt-[env(safe-area-inset-top)] backdrop-blur" aria-label="Chapters">
+      <Link href="/batteries" className="mr-1 flex h-full shrink-0 items-center pr-1 text-xs text-ink/60 hover:text-ink" aria-label="All videos">
         ← All
       </Link>
       {chapters.map((c, i) => {
@@ -15,7 +15,7 @@ export default function ProgressBar({ chapters, chapterIndex, stepIndex }: { cha
         // Pin edge tooltips to the side they sit on so they never leave the viewport.
         const align = i === 0 ? "left-0" : i === last ? "right-0" : "left-1/2 -translate-x-1/2";
         return (
-          <a key={c.id} href={`#${c.id}`} aria-label={c.title} className="group relative flex h-full flex-1 items-center">
+          <a key={c.id} href={`#${c.id}`} aria-label={c.title} className="group relative flex h-full min-w-0 flex-1 items-center">
             <span className="relative h-1.5 w-full overflow-hidden rounded-full bg-white/10 transition-[height] group-hover:h-2.5">
               <span className="absolute inset-y-0 left-0 bg-accent transition-[width] duration-500" style={{ width: `${fill * 100}%` }} />
             </span>
@@ -29,7 +29,7 @@ export default function ProgressBar({ chapters, chapterIndex, stepIndex }: { cha
       })}
       <a
         href="#reference"
-        className="ml-2 shrink-0 rounded-full border border-white/10 px-2.5 py-0.5 text-xs text-ink/70 hover:border-accent/50 hover:text-accent"
+        className="ml-1 shrink-0 rounded-full border border-white/10 px-2.5 py-1.5 text-xs text-ink/70 hover:border-accent/50 hover:text-accent"
       >
         Reference
       </a>
