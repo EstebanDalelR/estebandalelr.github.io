@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { C, Chip, Flow, Label, Reveal, Stage } from "../primitives";
 
-const CHAPTERS = ["Pile", "Li-ion", "EDL", "CV", "i vs E", "Supercap", "Fuel cell", "Rate", "EIS", "Kinetics"];
+const CHAPTERS = ["Pile", "Li-ion", "Bands", "EDL", "CV", "i vs E", "Supercap", "Fuel cell", "Rate", "EIS", "Kinetics"];
 
 function Device({ x, title, kind }: { x: number; title: string; kind: "battery" | "fuel" | "cap" }) {
   return (

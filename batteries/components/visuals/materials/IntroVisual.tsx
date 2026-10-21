@@ -27,6 +27,7 @@ const ROADMAP = [
   "TTT",
   "Steels",
   "Alloys",
+  "Batteries",
 ];
 
 export default function IntroVisual({ visual }: { visual: string }) {

@@ -20,16 +20,16 @@
   ]
  },
  "intro/roadmap": {
-  "duration": 14.76,
+  "duration": 16.2,
   "cues": [
    {
     "start": 0.0,
-    "end": 10.12,
-    "text": "We follow the exam: structures and Miller indices, phase diagrams, diffusion, nucleation and solidification, and finally real alloys."
+    "end": 11.56,
+    "text": "We follow the exam: structures and Miller indices, phase diagrams, diffusion, nucleation and solidification, and real alloys, and then the battery materials that put it all to use."
    },
    {
-    "start": 10.4,
-    "end": 14.36,
+    "start": 11.84,
+    "end": 15.8,
     "text": "Every chapter shows which exam questions it answers."
    }
   ]
@@ -1145,7 +1145,7 @@
   ]
  },
  "outro/recap": {
-  "duration": 28.0,
+  "duration": 36.32,
   "cues": [
    {
     "start": 0.0,
@@ -1169,12 +1169,17 @@
    },
    {
     "start": 15.6,
-    "end": 25.88,
+    "end": 27.0,
     "text": "Diffusion and nucleation control how fast things change, and together they explain microstructures, TTT noses, martensite and the alloys we use."
    },
    {
-    "start": 26.16,
-    "end": 27.6,
+    "start": 27.28,
+    "end": 34.2,
+    "text": "Battery materials apply all of it: channels, defects and diffusion decide how a cathode performs."
+   },
+   {
+    "start": 34.48,
+    "end": 35.92,
     "text": "Good luck on the exam!"
    }
   ]
@@ -1606,6 +1611,276 @@
     "start": 22.76,
     "end": 29.24,
     "text": "For lead tin with 40 wt% tin, about 50% is primary alpha and 50% is eutectic."
+   }
+  ]
+ },
+ "battery-materials/why-lithium": {
+  "duration": 33.12,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.92,
+    "text": "Lithium-ion batteries are a materials story."
+   },
+   {
+    "start": 3.2,
+    "end": 13.56,
+    "text": "Voltage is the potential difference between two electrode materials, and capacity is current times time, so both are set by which materials you pick."
+   },
+   {
+    "start": 13.84,
+    "end": 15.12,
+    "text": "Why lithium?"
+   },
+   {
+    "start": 15.4,
+    "end": 25.0,
+    "text": "It is light, its ion is small, and it has the most negative redox potential of the metals, minus 3.04 volts against the hydrogen electrode."
+   },
+   {
+    "start": 25.28,
+    "end": 32.72,
+    "text": "Energy density has roughly doubled every ten years, and the best cells are now near 270 watt hours per kilogram."
+   }
+  ]
+ },
+ "battery-materials/families": {
+  "duration": 37.48,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.8,
+    "text": "Positive electrode materials come in three structural families, defined by how lithium moves."
+   },
+   {
+    "start": 6.08,
+    "end": 14.8,
+    "text": "Layered oxides, like LiCoO₂, have two dimensional diffusion planes: high potential and capacity, but expensive."
+   },
+   {
+    "start": 15.08,
+    "end": 23.48,
+    "text": "Spinel oxides, like LNMO, have three dimensional channels: high potential, moderate capacity, cheaper."
+   },
+   {
+    "start": 23.76,
+    "end": 31.2,
+    "text": "Polyanionic compounds, like LiFePO₄, have one dimensional channels: high power, moderate capacity, cheap."
+   },
+   {
+    "start": 31.48,
+    "end": 37.08,
+    "text": "In all of them lithium goes in and out while the host atoms stay put, a topotactic reaction."
+   }
+  ]
+ },
+ "battery-materials/layered": {
+  "duration": 50.6,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 7.32,
+    "text": "Lithium cobalt oxide, at about 3.9 volts, was the first commercial cathode, from Sony in 1991."
+   },
+   {
+    "start": 7.6,
+    "end": 19.96,
+    "text": "In practice only about half the lithium can be removed, around 140 to 150 milliamp hours per gram, because deeper charging brings low thermal stability, cobalt dissolution and oxygen release."
+   },
+   {
+    "start": 20.24,
+    "end": 31.32,
+    "text": "Swap cobalt for nickel and capacity rises: NCA reaches about 200 milliamp hours per gram, but nickel is reactive and Ni and Li can swap places, an antisite defect."
+   },
+   {
+    "start": 31.6,
+    "end": 36.24,
+    "text": "Manganese is cheapest, but the layered structure is unstable and it dissolves."
+   },
+   {
+    "start": 36.52,
+    "end": 45.76,
+    "text": "NMC mixes all three: 111 gives 3.7 volts and 170 milliamp hours per gram, and 811 pushes nickel higher."
+   },
+   {
+    "start": 46.04,
+    "end": 50.2,
+    "text": "Cobalt buys stability, nickel capacity, manganese low cost."
+   }
+  ]
+ },
+ "battery-materials/spinel-olivine": {
+  "duration": 55.68,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.36,
+    "text": "Spinel LiMn₂O₄ is cheap and non-toxic, but Mn²⁺ dissolves."
+   },
+   {
+    "start": 5.64,
+    "end": 19.44,
+    "text": "Replace half the manganese by nickel, in LNMO, and all manganese is 4+ and stable, while nickel does the redox at 4.7 volts: high energy, but it pushes the electrolyte past its limit."
+   },
+   {
+    "start": 19.72,
+    "end": 28.24,
+    "text": "Lithium iron phosphate sits at 3.45 volts and 160 milliamp hours per gram, and is cheap, safe and stable."
+   },
+   {
+    "start": 28.52,
+    "end": 30.76,
+    "text": "Its weakness is transport."
+   },
+   {
+    "start": 31.04,
+    "end": 40.08,
+    "text": "Lithium moves along one dimensional channels, so a single antisite iron atom can block one, and both ionic and electronic conductivity are low."
+   },
+   {
+    "start": 40.36,
+    "end": 46.6,
+    "text": "Engineering fixes it: carbon coating for the electrons, nanoparticles for the ions."
+   },
+   {
+    "start": 46.88,
+    "end": 55.28,
+    "text": "Diffusion time goes as L squared over 4D, so a particle 50 times smaller is 2,500 times faster."
+   }
+  ]
+ },
+ "battery-materials/anodes-insertion": {
+  "duration": 44.0,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 4.16,
+    "text": "Now the negative side, which works by three mechanisms."
+   },
+   {
+    "start": 4.44,
+    "end": 5.44,
+    "text": "First insertion."
+   },
+   {
+    "start": 5.72,
+    "end": 13.96,
+    "text": "Graphite forms LiC₆ at 0.1 volts, with lithium between layers 3.35 ångström apart."
+   },
+   {
+    "start": 14.24,
+    "end": 18.84,
+    "text": "Disordered hard and soft carbons sit near 0.5 volts."
+   },
+   {
+    "start": 19.12,
+    "end": 26.76,
+    "text": "Lithium titanate, LTO, sits at 1.5 volts: safer and more stable, but lower in energy."
+   },
+   {
+    "start": 27.04,
+    "end": 32.96,
+    "text": "Lithium moves fast parallel to the graphene planes and orders of magnitude slower across them."
+   },
+   {
+    "start": 33.24,
+    "end": 43.6,
+    "text": "And graphite works below the stability window of the electrolyte, so the cell only works because of the SEI, which costs some irreversible capacity in the first cycle."
+   }
+  ]
+ },
+ "battery-materials/anodes-high": {
+  "duration": 47.92,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 3.96,
+    "text": "Alloying and conversion trade stability for capacity."
+   },
+   {
+    "start": 4.24,
+    "end": 13.96,
+    "text": "Silicon and tin alloy with lithium, for example Li₄.₄Sn, with very large capacities but enormous volume changes and poor cycle life."
+   },
+   {
+    "start": 14.24,
+    "end": 21.96,
+    "text": "Mitigations: amorphous materials, porous particles, small particles, thin films and elastic binders."
+   },
+   {
+    "start": 22.24,
+    "end": 35.72,
+    "text": "Conversion materials, metal oxides, nitrides and phosphides, are reduced to metal nanoparticles plus a lithium compound: huge capacity, but a large voltage hysteresis and poor efficiency."
+   },
+   {
+    "start": 36.0,
+    "end": 47.52,
+    "text": "And lithium metal: the highest energy density and the lowest potential, essential for lithium air and polymer cells, but with a poor SEI, low coulombic efficiency and dendrites."
+   }
+  ]
+ },
+ "battery-materials/electrolyte": {
+  "duration": 54.0,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 5.92,
+    "text": "The electrolyte is a solvent plus a salt, typically carbonates with LiPF₆."
+   },
+   {
+    "start": 6.2,
+    "end": 12.48,
+    "text": "It must conduct ions, insulate electrons, dissolve the salt and stay stable."
+   },
+   {
+    "start": 12.76,
+    "end": 17.96,
+    "text": "Ions travel with their solvation shell, so a lower viscosity means faster transport."
+   },
+   {
+    "start": 18.24,
+    "end": 30.24,
+    "text": "But graphite and lithium sit outside the stability window of the electrolyte, roughly one to four volts versus lithium, so it decomposes, and a stable SEI is what protects the cell."
+   },
+   {
+    "start": 30.52,
+    "end": 46.52,
+    "text": "Additives help: vinylene or fluoroethylene carbonate build a good SEI, redox shuttles prevent overcharge, shut-down additives form an insulating film, and flame retardants contain phosphorus or halogens, always with side effects."
+   },
+   {
+    "start": 46.8,
+    "end": 53.6,
+    "text": "Polymer electrolytes like PEO only conduct above the glass transition temperature, when the chains can move."
+   }
+  ]
+ },
+ "battery-materials/challenges": {
+  "duration": 39.84,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 11.32,
+    "text": "The recurring challenges are volume change, phase transformations, mechanical degradation, thermal stability and the critical raw materials: lithium, cobalt and nickel."
+   },
+   {
+    "start": 11.6,
+    "end": 17.24,
+    "text": "By material: LFP has one dimensional transport and a two phase reaction."
+   },
+   {
+    "start": 17.52,
+    "end": 20.84,
+    "text": "Graphite shows staging, and lithium plating is its risk."
+   },
+   {
+    "start": 21.12,
+    "end": 28.28,
+    "text": "NMC forms a solid solution, but suffers cation mixing, microcracks, and oxygen loss at high voltage."
+   },
+   {
+    "start": 28.56,
+    "end": 39.44,
+    "text": "Notice how the earlier chapters apply: defects block channels, diffusion sets the rate, and phase behaviour, solid solution versus two phases, shapes the voltage curve."
    }
   ]
  }

@@ -21,14 +21,16 @@
         {
           "id": "roadmap",
           "visual": "roadmap",
-          "text": "We will walk through every topic from the March 2023 exam, in the order the questions come. Keep scrolling, and I will tell you what the examiner is really asking for."
+          "text": "We will walk through every topic from the March 2023 exam, in the order the questions come, with one extra chapter on the electronic structure of solids, where electrons in electrodes get their energy. Keep scrolling, and I will tell you what the examiner is really asking for."
         }
       ]
     },
     {
       "id": "voltaic-pile",
       "title": "The Voltaic Pile",
-      "exam": ["Q1a"],
+      "exam": [
+        "Q1a"
+      ],
       "steps": [
         {
           "id": "stack",
@@ -55,7 +57,13 @@
     {
       "id": "li-ion",
       "title": "Lithium-ion: graphite and LFP",
-      "exam": ["Q1b", "Q1c", "Q7a", "Q7b", "Q7c"],
+      "exam": [
+        "Q1b",
+        "Q1c",
+        "Q7a",
+        "Q7b",
+        "Q7c"
+      ],
       "steps": [
         {
           "id": "which-negative",
@@ -92,9 +100,73 @@
       ]
     },
     {
+      "id": "electronic",
+      "title": "Electronic Structure of Solids: Bands and the Fermi Level",
+      "exam": [
+        "Typical: band theory"
+      ],
+      "steps": [
+        {
+          "id": "why",
+          "visual": "why",
+          "text": "Why does a battery chemist care about electrons in solids? Because an electrode has to conduct them. Lithium cobalt oxide was the first commercial cathode: stable, but expensive. The cheap alternative, lithium manganese oxide, transforms from a layered to a spinel structure during cycling, and calculations show that manganese changes oxidation state while it does: two Mn³⁺ become one Mn²⁺ and one Mn⁴⁺. To understand that, we need the electronic structure of the solid."
+        },
+        {
+          "id": "bands",
+          "visual": "levels",
+          "equation": "\\Psi_{AB} = c_1\\Psi_A + c_2\\Psi_B",
+          "text": "Start with two atoms. Mixing their atomic orbitals, the LCAO picture, gives one bonding and one antibonding molecular orbital. Add a third atom, a fourth, a ring of them, and every extra atom adds one more level. In a crystal with about 10²³ atoms the levels are so close together that they merge into a continuous energy band."
+        },
+        {
+          "id": "dispersion",
+          "visual": "dispersion",
+          "equation": "E(k) = \\alpha + 2\\beta\\cos(ka) \\qquad E_{free}(k) = \\frac{\\hbar^2 k^2}{2m}",
+          "text": "For a chain of atoms a distance a apart, the simple Hückel or tight-binding model gives E of k equals alpha plus two beta cosine ka. The wavenumber k is tied to the electron's momentum, and a plot of E against k is the band structure. It is enough to look between minus pi over a and pi over a, the first Brillouin zone. At k equals zero all orbitals are in phase: fully bonding, the bottom of the band. At pi over a the signs alternate: fully antibonding, the top."
+        },
+        {
+          "id": "width",
+          "visual": "width",
+          "equation": "m^* = -\\frac{\\hbar^2}{2\\beta a^2}",
+          "text": "The width of the band depends on how strongly neighbouring orbitals overlap. Push the atoms closer and beta grows, so the band widens. Pull them apart and it shrinks towards the single atomic level. Near the bottom the cosine looks like the free electron parabola, if we swap the electron mass for an effective mass. A wide band means a small effective mass and mobile electrons. A narrow band means a heavy effective mass and poor conductivity."
+        },
+        {
+          "id": "dos",
+          "visual": "dos",
+          "equation": "g(E) = \\frac{L}{2\\pi}\\int \\delta\\big(E(k)-E\\big)\\,dk \\;\\propto\\; \\frac{1}{|dE/dk|}",
+          "text": "The density of states, DOS, counts how many levels lie between E and E plus dE. Where the band is flat, many k values fall into the same energy window, so the density of states is high. In one dimension that means peaks at the band edges. It matters for electrodes: in carbon, a low density of states near the Fermi level adds a space charge capacitance in series with the double layer, as we will see in the next chapter."
+        },
+        {
+          "id": "gap",
+          "visual": "gap",
+          "equation": "E_g = E_{CBM} - E_{VBM}",
+          "text": "A molecule has a HOMO and a LUMO. A solid has a valence band maximum and a conduction band minimum, and the difference is the band gap. Going down a group the gap shrinks: diamond 5.4 electron volts, silicon 1.1, germanium 0.7, grey tin zero. More ionic bonding opens it: indium antimonide 0.2, cadmium telluride 1.6, silver iodide 2.8. A silicon wafer looks dark because its 1.1 eV gap is below the roughly 1.7 to 3.1 eV of visible photons, so it absorbs all of them."
+        },
+        {
+          "id": "metals",
+          "visual": "metals",
+          "text": "What decides whether a solid conducts? Band filling. In equilibrium E of minus k equals E of k, so electrons moving left and right cancel and there is no current. In a completely filled band an electric field cannot change that, because there are no empty states to move into: that is an insulator or a semiconductor. A metal has a partly filled band, so the field can shift the electron distribution and a net current flows. Room temperature conductivity covers more than twenty orders of magnitude, from insulators below about 10⁻⁸ siemens per centimetre to metals above about 10³."
+        },
+        {
+          "id": "fermi",
+          "visual": "fermi",
+          "equation": "f(E) = \\frac{1}{1+\\exp\\left[(E-E_F)/k_BT\\right]} \\qquad n \\propto \\exp\\left(-\\frac{E_g}{2k_BT}\\right)",
+          "text": "Which levels are occupied at a given temperature? The Fermi-Dirac distribution answers. At absolute zero it is a step: everything below the Fermi level is full, everything above is empty. Warm it up and the step smears over a few kT, and f is exactly one half at the Fermi level. Far above it, the distribution reduces to a Boltzmann tail. In an intrinsic semiconductor the Fermi level sits mid gap, so the conduction band bottom is E g over two above it, and the number of thermally excited electrons goes as e to the minus E g over two kT. That is why semiconductors conduct better when heated."
+        },
+        {
+          "id": "doping",
+          "visual": "doping",
+          "text": "Impurities and defects change the picture. Donors add electrons just below the conduction band, giving an n-type semiconductor with the Fermi level close to the conduction band. Acceptors leave holes in the valence band, giving p-type, with the Fermi level close to the valence band. For electrodes, remember that the Fermi level is the electrochemical potential of the electrons, which is exactly what the electrode potential moves up and down. And many cathode materials sit towards the insulating end, which is why conductive carbon is added."
+        }
+      ]
+    },
+    {
       "id": "edl",
       "title": "The Electric Double Layer",
-      "exam": ["Q2a", "Q2b", "Q2c"],
+      "exam": [
+        "Q2a",
+        "Q2b",
+        "Q2c"
+      ],
       "steps": [
         {
           "id": "what",
@@ -122,7 +194,10 @@
     {
       "id": "cv",
       "title": "Cyclic Voltammetry",
-      "exam": ["Q3a", "Q8a"],
+      "exam": [
+        "Q3a",
+        "Q8a"
+      ],
       "steps": [
         {
           "id": "sweep",
@@ -160,7 +235,9 @@
     {
       "id": "controlled-current",
       "title": "Controlled Current vs Controlled Potential",
-      "exam": ["Q3b"],
+      "exam": [
+        "Q3b"
+      ],
       "steps": [
         {
           "id": "galvanostatic",
@@ -188,7 +265,10 @@
     {
       "id": "supercaps",
       "title": "Supercapacitors",
-      "exam": ["Q4a", "Q4b"],
+      "exam": [
+        "Q4a",
+        "Q4b"
+      ],
       "steps": [
         {
           "id": "ragone",
@@ -211,7 +291,9 @@
     {
       "id": "fuel-cells",
       "title": "PEM Fuel Cells",
-      "exam": ["Q4c"],
+      "exam": [
+        "Q4c"
+      ],
       "steps": [
         {
           "id": "pem",
@@ -234,7 +316,10 @@
     {
       "id": "capacity-fade",
       "title": "Capacity Loss at High Rates",
-      "exam": ["Q5a", "Q5b"],
+      "exam": [
+        "Q5a",
+        "Q5b"
+      ],
       "steps": [
         {
           "id": "rate-test",
@@ -267,7 +352,11 @@
     {
       "id": "eis",
       "title": "Electrochemical Impedance Spectroscopy",
-      "exam": ["Q6a", "Q6b", "Q6c"],
+      "exam": [
+        "Q6a",
+        "Q6b",
+        "Q6c"
+      ],
       "steps": [
         {
           "id": "basics",
@@ -301,7 +390,10 @@
     {
       "id": "kinetics",
       "title": "Butler–Volmer, Kinetics and Particle Size",
-      "exam": ["Q8b", "Q8c"],
+      "exam": [
+        "Q8b",
+        "Q8c"
+      ],
       "steps": [
         {
           "id": "bv",

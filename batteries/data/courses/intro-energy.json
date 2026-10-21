@@ -50,6 +50,41 @@
       ]
     },
     {
+      "id": "numbers",
+      "title": "Orders of Magnitude: Energy Numbers to Know",
+      "exam": [
+        "Seminar: short questions"
+      ],
+      "steps": [
+        {
+          "id": "totals",
+          "visual": "totals",
+          "text": "Start with the totals, because the energy debate needs orders of magnitude. Sweden uses roughly 370 terawatt hours of final energy per year, and about 140 terawatt hours of that is electricity, a bit over a third. Globally we use about 12 terawatts of final energy on average, roughly 100,000 terawatt hours a year. Only about 20% of that is electricity, and around 80% comes from fossil fuels."
+        },
+        {
+          "id": "wind",
+          "visual": "wind",
+          "equation": "E \\approx P \\times CF \\times 8760\\,\\mathrm{h} = 5\\,\\mathrm{MW} \\times 0.35 \\times 8760\\,\\mathrm{h} \\approx 15\\,\\mathrm{GWh}",
+          "text": "Wind. A turbine can capture at most 59% of the wind's power, the Betz limit, and a good one reaches about 45%. Over a year it delivers about a third of its rated power, the capacity factor. So a 5 megawatt turbine gives roughly 15 gigawatt hours per year. Supplying Sweden's 370 terawatt hours with wind alone takes about 25,000 turbines. The world would need around 7 million."
+        },
+        {
+          "id": "nuclear",
+          "visual": "nuclear",
+          "text": "Nuclear. There are about 440 reactors worldwide, each around a gigawatt, producing roughly 8 terawatt hours a year. Sweden would need about 45, and it has 6. The world would need over 10,000, about thirty times as many as exist today."
+        },
+        {
+          "id": "solar",
+          "visual": "solar",
+          "text": "Solar. A commercial silicon module converts about 20% of the sunlight. In Sweden that is around 200 kilowatt hours per square metre per year, so about 2,000 square kilometres would cover Swedish final energy, under half a percent of the country. For the world, a few hundred thousand square kilometres, roughly the area of Germany. Is it true that the sun shines when we least need it? Partly. In Sweden solar peaks in June while heating peaks in January. In sunny countries, midday cooling matches the sun much better."
+        },
+        {
+          "id": "biomass",
+          "visual": "biomass",
+          "text": "Biomass. Photosynthesis turns only about 1% of the sunlight into biomass, and a harvested crop gives less. So biomass needs tens of times more land than solar panels for the same energy: roughly 50,000 square kilometres for Sweden, a tenth of the country, and about 10 million for the world, most of today's cropland. These are order of magnitude estimates. What matters is the ranking: biomass is by far the most land hungry."
+        }
+      ]
+    },
+    {
       "id": "thermo",
       "title": "The Laws of Thermodynamics and Energy Quality",
       "exam": [
@@ -112,6 +147,56 @@
           "id": "peak",
           "visual": "peak",
           "text": "Peak shaving: charge when demand and prices are low, discharge at the peak. Uppsala has a real example: 5 MW, 20 MWh, built from BMW car batteries, supporting about 1,700 homes."
+        }
+      ]
+    },
+    {
+      "id": "roadmaps",
+      "title": "100% Renewable Roadmaps (Jacobson et al. 2017)",
+      "exam": [
+        "Seminar: Jacobson roadmaps"
+      ],
+      "steps": [
+        {
+          "id": "idea",
+          "visual": "wws",
+          "text": "Now a concrete proposal. Jacobson and colleagues made roadmaps for 139 countries that electrify every energy sector, transport, heating and cooling, industry and agriculture, and generate all the electricity from wind, water and sunlight, WWS. Where batteries do not reach, such as long distance transport, hydrogen made by electrolysis is used. The target is 80% by 2030 and 100% by 2050, to avoid 1.5 degrees of warming. The authors stress that this is one possible end state, not a prediction, and that the mix is not unique."
+        },
+        {
+          "id": "demand",
+          "visual": "demand",
+          "equation": "11.8\\,\\mathrm{TW} \\approx 20.6\\,\\mathrm{TW} \\times (1 - 0.230 - 0.126 - 0.069)",
+          "text": "The first surprise: total power demand falls. Business as usual needs 20.6 terawatts in 2050. With 100% WWS it is 11.8, a 42.5% reduction. Three reasons. Electricity does more work per unit of energy than combustion, with heat pumps and electric motors: minus 23%. No energy is spent mining, transporting and refining fuels: minus 12.6%. And assumed extra efficiency policies: minus 6.9%. Remember the second law: combustion throws most of its energy away as heat. Switching to WWS is itself an efficiency measure."
+        },
+        {
+          "id": "mix",
+          "visual": "mix",
+          "text": "What generates it? About 37% wind, onshore and offshore, and about 48% solar photovoltaics, on rooftops and in plants. Concentrated solar power with storage gives about 10%, hydropower 4%, and geothermal, wave and tidal about 1% together. Notice that hydropower gets no new capacity: only a higher capacity factor, because fossil plants no longer suppress its use. Nuclear, coal with carbon capture and biofuels are left out on purpose. The authors argue they have opportunity costs in emissions and in the time from planning to operation, and carry risks such as waste and weapons proliferation. Whether you agree is exactly the seminar question."
+        },
+        {
+          "id": "land",
+          "visual": "land",
+          "text": "Land and rooftops. The new installations need only about 0.22% of the land area of the 139 countries for their footprint, mostly utility solar, plus 0.92% for the spacing between onshore wind turbines, which can still be farmed or grazed. Offshore wind, wave and tidal sit in the water. Rooftop solar needs no new land at all, but the roadmaps assume 35% of suitable residential roofs and 68% of commercial and government roofs are used, with more in sunny, wealthy countries."
+        },
+        {
+          "id": "matching",
+          "visual": "match",
+          "text": "Matching supply and demand is where storage enters. The paper itself does not test grid stability. It relies on a companion study with an hourly grid model and five years of simulated weather, with storage in many forms: batteries, pumped hydro, hydropower reservoirs, concentrated solar with heat storage, hydrogen, heat in rock and water, cold in ice, and demand response. Several different combinations kept supply equal to demand, with no nuclear or fossil backup. Three seminar terms. Base power is steady output that runs almost all the time. Balancing power follows the fast swings of demand and supply. Reserve power is spare capacity held for outages and extreme weather. Wind and solar are not base power, so balancing is where the worry lies."
+        },
+        {
+          "id": "costs",
+          "visual": "costs",
+          "text": "Costs and benefits. The up-front cost is about 125 trillion dollars for roughly 50 terawatts of new capacity, similar per megawatt to business as usual, but the fuel is free. The levelised cost of electricity is 8.9 cents per kilowatt hour for WWS against 9.8 for business as usual, around 9.7 with peaking and storage added. The big numbers are avoided damages: about 4.6 million premature air pollution deaths a year today and 3.5 million in 2050, worth about 23 trillion dollars a year, plus about 28 trillion of climate damage. And about 52 million new permanent jobs against 28 million lost, a net 24 million."
+        },
+        {
+          "id": "assumptions",
+          "visual": "assumptions",
+          "text": "Read it critically, as the seminar asks. One method for 139 very different countries averages over local limits. Each country is assumed to supply itself with no electricity trade, which probably overstates local storage needs, since trade smooths out weather. Hydropower is frozen: realistic where the good sites are used, but elsewhere there is untapped potential. The plan counts on technologies that are not mature: electric and hydrogen aircraft, wave and tidal power, large scale hydrogen and heat storage. And the pace, 80% by 2030, is far faster than any past energy transition, as we saw earlier."
+        },
+        {
+          "id": "debate",
+          "visual": "debate",
+          "text": "Then the open questions. Would one source suffice? No: every source has limits in resource, variability, land or risk, which is why even this paper needs a mix, and the best mix differs by region: hydro in Norway, sun in Spain, wind around the North Sea. Scale matters: rooftop solar or a small dam is benign, but wind and dams everywhere change landscapes and rivers. An existing hydro plant has its impact already paid, a new one does not. On democracy, rooftop solar and local wind decentralise power, while big nuclear or dams concentrate it. Should we just use less? Efficiency helps, and the roadmaps already cut demand 42.5%, but billions of people still need more energy. On research funding there is no obvious rule: betting on one source is risky, spreading evenly ignores maturity, and who decides is a political question."
         }
       ]
     },
@@ -389,7 +474,7 @@
         {
           "id": "recap",
           "visual": "recap",
-          "text": "Recap. Energy use grows with population and development. The second law makes electricity precious, and storage that avoids heat beats Carnot. Storage buys time at the cost of efficiency. Duration decides the technology: capacitors for seconds, batteries for hours, pumped hydro and fuels for days and seasons. Know your five parameters, and good luck on the exam!"
+          "text": "Recap. Energy use grows with population and development. The second law makes electricity precious, and storage that avoids heat beats Carnot. Storage buys time at the cost of efficiency. Duration decides the technology: capacitors for seconds, batteries for hours, pumped hydro and fuels for days and seasons. The 100% renewable roadmaps show how large the task is. Know your five parameters, and good luck on the exam!"
         }
       ]
     }

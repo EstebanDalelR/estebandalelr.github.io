@@ -2,7 +2,11 @@ import type { CourseReference } from "../reference";
 
 export const materials: CourseReference = {
   formulaLabels: {
-    "bonding/lattice-energy": "Born–Landé lattice energy",
+    "battery-materials/why-lithium": "Lithium oxidation and its standard potential",
+    "battery-materials/layered": "LiCoO₂ charge reaction",
+    "battery-materials/spinel-olivine": "Solid-state diffusion time",
+    "battery-materials/anodes-high": "Alloying reaction of tin with lithium",
+        "bonding/lattice-energy": "Born–Landé lattice energy",
     "miller/bragg": "Bragg's law",
     "solutions/carbon-iron": "Largest interstitial holes in fcc and bcc iron",
     "thermo/gibbs": "Gibbs free energy and spontaneity",
@@ -23,6 +27,9 @@ export const materials: CourseReference = {
     "ttt/avrami": "Avrami equation",
   },
   extraFormulas: [
+    { chapterId: "battery-materials", label: "Theoretical specific capacity", tex: "Q_{th} = \\frac{n F}{3.6\\,M}\\ \\mathrm{mAh\\,g^{-1}}\\quad (M\\ \\text{in g/mol})" },
+    { chapterId: "battery-materials", label: "Capacity from current and time", tex: "Q = I\\,t" },
+    { chapterId: "battery-materials", label: "Cell voltage from electrode potentials", tex: "E_{cell} = E_{positive} - E_{negative}" },
     { chapterId: "binary", label: "Lever rule (fraction of melt)", tex: "w_L = \\frac{C_\\alpha - C_0}{C_\\alpha - C_L}" },
     { chapterId: "diffusion", label: "Time to reach a depth x", tex: "t = \\frac{x^2}{4 D z^2}" },
     { chapterId: "nucleation", label: "Heterogeneous nucleation barrier", tex: "\\Delta G^*_{het} = S(\\theta)\\,\\Delta G^*_{hom},\\quad S(\\theta) = \\frac{2 - 3\\cos\\theta + \\cos^3\\theta}{4}" },
@@ -63,6 +70,17 @@ export const materials: CourseReference = {
     { term: "Duplex steel", chapterId: "steels", text: "About 50 % austenite and 50 % ferrite: high strength with excellent corrosion resistance." },
     { term: "γ′ precipitates", chapterId: "alloys", text: "Coherent ordered precipitates in the fcc γ matrix of Ni-based superalloys that give high strength and creep resistance." },
     { term: "Creep", chapterId: "alloys", text: "Time-dependent deformation under a constant load, important at high temperature." },
-    { term: "Specific strength", chapterId: "alloys", text: "Strength divided by density; decisive when mass matters." },
+    { term: "Intercalation (topotactic) reaction", chapterId: "battery-materials", text: "Reversible insertion of Li⁺ into a host whose atoms do not rearrange; the basis of graphite, layered, spinel and olivine electrodes." },
+    { term: "Layered oxide (LiMO₂)", chapterId: "battery-materials", text: "Cathode with 2D lithium diffusion planes between transition-metal oxide slabs: LiCoO₂, NCA, NMC. High potential and capacity." },
+    { term: "NMC / NCA", chapterId: "battery-materials", text: "LiNiₓMnᵧCo_zO₂ and LiNi₀.₈Co₀.₁₅Al₀.₀₅O₂: Co gives stability, Ni capacity (but reactivity), Mn low cost." },
+    { term: "Spinel oxide (LiMn₂O₄, LNMO)", chapterId: "battery-materials", text: "Cathode with 3D lithium channels; LNMO (LiNi₀.₅Mn₁.₅O₄) works at about 4.7 V with all Mn as Mn⁴⁺." },
+    { term: "Polyanionic cathode (LiFePO₄)", chapterId: "battery-materials", text: "Olivine with 1D lithium channels, 3.45 V, cheap and safe; needs carbon coating and nanoparticles because of low conductivity and antisite defects." },
+    { term: "Antisite defect", chapterId: "battery-materials", text: "Atoms on each other's sites (Li/Fe in LFP, Li/Ni in NCA); in 1D channels one such defect can block lithium transport." },
+    { term: "Alloying anode", chapterId: "battery-materials", text: "Si, Sn and similar metals that react with lithium to form Li–M alloys (e.g. Li₄.₄Sn): very large capacity, large volume change, poor cycle life." },
+    { term: "Conversion electrode", chapterId: "battery-materials", text: "A metal oxide, nitride, sulfide or phosphide reduced to metal nanoparticles plus a lithium compound: large capacity but voltage hysteresis." },
+    { term: "Lithium titanate (LTO)", chapterId: "battery-materials", text: "Li₄Ti₅O₁₂ anode at about 1.5 V vs Li/Li⁺: safe and very stable, but low energy." },
+    { term: "Electrolyte stability window", chapterId: "battery-materials", text: "The potential range in which the electrolyte is neither oxidised nor reduced (about 1–4 V vs Li/Li⁺ for carbonates). Electrodes outside it rely on a passivating SEI." },
+    { term: "Redox shuttle / shut-down additive", chapterId: "battery-materials", text: "Additives that limit overcharge: a shuttle is oxidised and reduced repeatedly to carry the excess charge; shut-down additives form an insulating film." },
+        { term: "Specific strength", chapterId: "alloys", text: "Strength divided by density; decisive when mass matters." },
   ],
 };
