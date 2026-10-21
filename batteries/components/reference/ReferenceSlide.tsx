@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SpeedReader from "@batteries/components/reference/SpeedReader";
 import AnimatedEquation from "@batteries/components/equations/AnimatedEquation";
 import { stepAnchor } from "@batteries/components/scrolly/ScrollSection";
 import { getCourse } from "@batteries/lib/courses";
@@ -9,7 +10,7 @@ import { getReference } from "@batteries/lib/reference";
 const TABS = ["Formulas", "Definitions", "Full script"] as const;
 type Tab = (typeof TABS)[number];
 
-export default function ReferenceSlide({ courseId }: { courseId: string }) {
+export default function ReferenceSlide({ courseId, onSpeedRead }: { courseId: string; onSpeedRead?: () => void }) {
   const { narration } = getCourse(courseId);
   const { chapters } = narration;
   const { formulas, definitions } = getReference(courseId);
@@ -18,6 +19,12 @@ export default function ReferenceSlide({ courseId }: { courseId: string }) {
     return `${i === 0 ? "Start" : `Ch. ${i}`} · ${chapters[i].title}`;
   };
   const [tab, setTab] = useState<Tab>("Formulas");
+  // Where the speed reader opens (null = closed). Opening pauses the narration.
+  const [reader, setReader] = useState<{ chapter: number; step?: number } | null>(null);
+  const openReader = (chapter: number, step?: number) => {
+    onSpeedRead?.();
+    setReader({ chapter, step });
+  };
 
   return (
     <section id="reference" data-stop className="h-slide flex flex-col px-4 pb-[var(--caption-space)] pt-[calc(3.5rem+env(safe-area-inset-top))] sm:px-8">
@@ -76,22 +83,37 @@ export default function ReferenceSlide({ courseId }: { courseId: string }) {
 
         {tab === "Full script" && (
           <div className="mx-auto max-w-3xl space-y-8">
-            {chapters.map((c) => (
+            <button
+              onClick={() => openReader(0)}
+              className="rounded-full border border-accent bg-accent/20 px-4 py-1.5 text-sm font-semibold text-accent hover:bg-accent/30"
+            >
+              ⚡ Speed read
+            </button>
+            {chapters.map((c, ci) => (
               <div key={c.id}>
-                <h3 className="text-lg font-bold text-ink">
+                <h3 className="flex flex-wrap items-baseline gap-x-3 text-lg font-bold text-ink">
                   <a href={`#${c.id}`} className="hover:text-accent">
                     {chapterLabel(c.id)}
                   </a>
+                  <button onClick={() => openReader(ci)} className="text-xs font-normal text-accent hover:underline">
+                    ⚡ Speed read from here
+                  </button>
                 </h3>
                 <div className="mt-2 space-y-2">
-                  {c.steps.map((s) => (
-                    <a
-                      key={s.id}
-                      href={`#${stepAnchor(c.id, s.id)}`}
-                      className="block rounded-lg px-2 py-1 leading-relaxed text-ink/80 hover:bg-white/5 hover:text-ink"
-                    >
-                      {s.text}
-                    </a>
+                  {c.steps.map((s, si) => (
+                    <div key={s.id} className="group flex items-start gap-1 rounded-lg px-2 py-1 hover:bg-white/5">
+                      <a href={`#${stepAnchor(c.id, s.id)}`} className="flex-1 leading-relaxed text-ink/80 group-hover:text-ink">
+                        {s.text}
+                      </a>
+                      <button
+                        onClick={() => openReader(ci, si)}
+                        aria-label="Speed read from this step"
+                        title="Speed read from here"
+                        className="mt-0.5 h-8 w-8 shrink-0 rounded-full text-accent/70 hover:bg-accent/20 hover:text-accent sm:opacity-40 sm:group-hover:opacity-100"
+                      >
+                        ⚡
+                      </button>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -102,6 +124,18 @@ export default function ReferenceSlide({ courseId }: { courseId: string }) {
           </div>
         )}
       </div>
+
+      {reader && (
+        <SpeedReader
+          chapters={chapters}
+          start={reader}
+          onClose={() => setReader(null)}
+          onShowScript={() => {
+            setTab("Full script");
+            setReader(null);
+          }}
+        />
+      )}
     </section>
   );
 }
