@@ -20,11 +20,11 @@ export default function ReferenceSlide({ courseId }: { courseId: string }) {
   const [tab, setTab] = useState<Tab>("Formulas");
 
   return (
-    <section id="reference" data-stop className="h-slide flex flex-col px-4 pb-[var(--caption-space)] pt-[calc(3.5rem+env(safe-area-inset-top))] sm:px-8">
-      <header className="mx-auto w-full max-w-6xl">
-        <p className="text-sm font-semibold uppercase tracking-widest text-accent">Reference</p>
-        <h2 className="mt-1 text-3xl font-bold leading-tight text-ink sm:text-5xl">Formulas, definitions & script</h2>
-        <div role="tablist" className="mt-4 flex flex-wrap gap-2">
+    <section id="reference" data-stop className="h-slide flex flex-col px-4 pb-[var(--caption-space)] pt-[calc(3.5rem+env(safe-area-inset-top))] sm:px-8 [@media(max-height:500px)]:pt-[calc(2.75rem+env(safe-area-inset-top))]">
+      <header className="mx-auto w-full max-w-6xl [@media(max-height:500px)]:flex [@media(max-height:500px)]:items-baseline [@media(max-height:500px)]:gap-2">
+        <p className="text-sm font-semibold uppercase tracking-widest text-accent [@media(max-height:500px)]:shrink-0 [@media(max-height:500px)]:text-[10px] [@media(max-height:500px)]:leading-none">Reference</p>
+        <h2 className="mt-1 text-3xl font-bold leading-tight text-ink sm:text-5xl [@media(max-height:500px)]:mt-0 [@media(max-height:500px)]:min-w-0 [@media(max-height:500px)]:truncate [@media(max-height:500px)]:text-lg">Formulas, definitions & script</h2>
+        <div role="tablist" className="mt-4 [@media(max-height:500px)]:mt-1.5 flex flex-wrap gap-2">
           {TABS.map((t) => (
             <button
               key={t}
@@ -41,7 +41,7 @@ export default function ReferenceSlide({ courseId }: { courseId: string }) {
         </div>
       </header>
 
-      <div role="tabpanel" className="mx-auto mt-4 min-h-0 w-full max-w-6xl flex-1 overflow-y-auto overscroll-contain rounded-2xl border border-white/5 bg-panel/60 p-4 sm:p-6">
+      <div role="tabpanel" className="mx-auto mt-4 [@media(max-height:500px)]:mt-2 min-h-0 w-full max-w-6xl flex-1 overflow-y-auto overscroll-contain rounded-2xl border border-white/5 bg-panel/60 p-4 sm:p-6">
         {tab === "Formulas" && (
           <div className="grid gap-4 lg:grid-cols-2">
             {formulas.map((f) => (

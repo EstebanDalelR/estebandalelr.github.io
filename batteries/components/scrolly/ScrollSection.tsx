@@ -32,9 +32,9 @@ export default function ScrollSection({ courseId, chapter, index, activeStep, sp
 
   return (
     <section id={chapter.id} className="relative">
-      <div className="sticky top-0 h-slide flex flex-col px-4 pb-[var(--caption-space)] pt-[calc(3.5rem+env(safe-area-inset-top))] sm:px-8">
-        <header className="mx-auto w-full max-w-6xl">
-          <p className="text-sm font-semibold uppercase tracking-widest text-accent">
+      <div className="sticky top-0 h-slide flex flex-col px-4 pb-[var(--caption-space)] pt-[calc(3.5rem+env(safe-area-inset-top))] sm:px-8 [@media(max-height:500px)]:pt-[calc(2.75rem+env(safe-area-inset-top))]">
+        <header className="mx-auto w-full max-w-6xl [@media(max-height:500px)]:flex [@media(max-height:500px)]:items-baseline [@media(max-height:500px)]:gap-2">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent [@media(max-height:500px)]:shrink-0 [@media(max-height:500px)]:text-[10px] [@media(max-height:500px)]:leading-none">
             {index === 0 ? "Start" : `Chapter ${index}`}
             {total > 1 && (
               <span className="ml-3 font-normal tracking-normal text-ink/50">
@@ -42,9 +42,9 @@ export default function ScrollSection({ courseId, chapter, index, activeStep, sp
               </span>
             )}
           </p>
-          <h2 className="mt-1 text-3xl font-bold leading-tight text-ink sm:text-5xl">{chapter.title}</h2>
+          <h2 className="mt-1 text-3xl font-bold leading-tight text-ink sm:text-5xl [@media(max-height:500px)]:mt-0 [@media(max-height:500px)]:min-w-0 [@media(max-height:500px)]:truncate [@media(max-height:500px)]:text-lg">{chapter.title}</h2>
           {chapter.exam.length > 0 && (
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2 [@media(max-height:500px)]:hidden">
               {chapter.exam.map((q) => (
                 <span key={q} className="rounded-full border border-accent/40 bg-accent/10 px-3 py-0.5 text-xs text-accent">
                   Exam {q}
@@ -54,13 +54,13 @@ export default function ScrollSection({ courseId, chapter, index, activeStep, sp
           )}
         </header>
 
-        <div className="mx-auto mt-4 flex min-h-0 w-full max-w-6xl flex-1 items-center justify-center">
+        <div className="mx-auto mt-4 [@media(max-height:500px)]:mt-1 flex min-h-0 w-full max-w-6xl flex-1 items-center justify-center">
           <div ref={visualRef} className="aspect-[4/3] h-full max-w-full rounded-2xl border border-white/5 bg-panel/60 p-2">
             <ChapterVisual courseId={courseId} chapterId={chapter.id} visual={current.visual} />
           </div>
         </div>
-        <div className="mx-auto flex min-h-14 w-full max-w-4xl items-center justify-center">
-          {current.equation && <AnimatedEquation tex={current.equation} className="w-full text-sm sm:text-lg" />}
+        <div className="mx-auto flex min-h-14 [@media(max-height:500px)]:min-h-8 w-full max-w-4xl items-center justify-center">
+          {current.equation && <AnimatedEquation tex={current.equation} className="w-full text-sm sm:text-lg [@media(max-height:500px)]:text-sm" />}
           {current.link && (
             <a
               href={current.link.href}
