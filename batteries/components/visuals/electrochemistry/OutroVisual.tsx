@@ -6,17 +6,19 @@ import { C, Label, Stage } from "../primitives";
 
 const { chapters } = getCourse("electrochemistry").narration;
 
+const titleOf = (id: string) => chapters.find((c) => c.id === id)?.title ?? id;
+
 const CARDS = [
-  { t: "Pile", k: ["Zn oxidised,", "H⁺ reduced"] },
-  { t: "Li-ion", k: ["graphite (−)", "LFP (+)"] },
-  { t: "EDL", k: ["compact +", "diffuse layer"] },
-  { t: "CV", k: ["ΔEp = 57/n mV", "ip ∝ √v"] },
-  { t: "i vs E", k: ["fixed rate vs", "chosen reaction"] },
-  { t: "Supercaps", k: ["high power", "E = ½CV²"] },
-  { t: "Fuel cell", k: ["cathode ORR", "activation loss"] },
-  { t: "Rate test", k: ["iR drop +", "diffusion"] },
-  { t: "EIS", k: ["τ = RC", "per process"] },
-  { t: "Kinetics", k: ["big j₀,", "β ≈ 0.5, nano"] },
+  { t: "Pile", id: "voltaic-pile", k: ["Zn oxidised,", "H⁺ reduced"] },
+  { t: "Li-ion", id: "li-ion", k: ["graphite (−)", "LFP (+)"] },
+  { t: "EDL", id: "edl", k: ["compact +", "diffuse layer"] },
+  { t: "CV", id: "cv", k: ["ΔEp = 57/n mV", "ip ∝ √v"] },
+  { t: "i vs E", id: "controlled-current", k: ["fixed rate vs", "chosen reaction"] },
+  { t: "Supercaps", id: "supercaps", k: ["high power", "E = ½CV²"] },
+  { t: "Fuel cell", id: "fuel-cells", k: ["cathode ORR", "activation loss"] },
+  { t: "Rate test", id: "capacity-fade", k: ["iR drop +", "diffusion"] },
+  { t: "EIS", id: "eis", k: ["τ = RC", "per process"] },
+  { t: "Kinetics", id: "kinetics", k: ["big j₀,", "β ≈ 0.5, nano"] },
 ];
 
 export default function OutroVisual({ visual }: { visual: string }) {
@@ -40,8 +42,8 @@ export default function OutroVisual({ visual }: { visual: string }) {
             animate={{ opacity: show ? 1 : 0, y: show ? 0 : 12 }}
             transition={{ delay: show ? i * 0.07 : 0, duration: 0.4 }}
           >
-            <a href={`#${chapters[i + 1].id}`} className="group cursor-pointer" aria-label={`Jump to ${chapters[i + 1].title}`}>
-              <title>{chapters[i + 1].title}</title>
+            <a href={`#${c.id}`} className="group cursor-pointer" aria-label={`Jump to ${titleOf(c.id)}`}>
+              <title>{titleOf(c.id)}</title>
               <rect
                 x={x}
                 y={y}

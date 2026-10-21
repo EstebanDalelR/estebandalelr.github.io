@@ -16,7 +16,7 @@
         {
           "id": "roadmap",
           "visual": "roadmap",
-          "text": "We follow the exam: structures and Miller indices, phase diagrams, diffusion, nucleation and solidification, and finally real alloys. Every chapter shows which exam questions it answers."
+          "text": "We follow the exam: structures and Miller indices, phase diagrams, diffusion, nucleation and solidification, and real alloys, and then the battery materials that put it all to use. Every chapter shows which exam questions it answers."
         }
       ]
     },
@@ -561,6 +561,59 @@
       ]
     },
     {
+      "id": "battery-materials",
+      "title": "Battery Materials: Cathodes, Anodes and Electrolytes",
+      "exam": [
+        "Typical: battery materials"
+      ],
+      "steps": [
+        {
+          "id": "why-lithium",
+          "visual": "why-lithium",
+          "equation": "\\mathrm{Li} \\rightarrow \\mathrm{Li^+} + e^- \\qquad E^0 = -3.04\\,\\mathrm{V\\ vs\\ SHE}",
+          "text": "Lithium-ion batteries are a materials story. Voltage is the potential difference between two electrode materials, and capacity is current times time, so both are set by which materials you pick. Why lithium? It is light, its ion is small, and it has the most negative redox potential of the metals, minus 3.04 volts against the hydrogen electrode. Energy density has roughly doubled every ten years, and the best cells are now near 270 watt hours per kilogram."
+        },
+        {
+          "id": "families",
+          "visual": "families",
+          "text": "Positive electrode materials come in three structural families, defined by how lithium moves. Layered oxides, like LiCoO₂, have two dimensional diffusion planes: high potential and capacity, but expensive. Spinel oxides, like LNMO, have three dimensional channels: high potential, moderate capacity, cheaper. Polyanionic compounds, like LiFePO₄, have one dimensional channels: high power, moderate capacity, cheap. In all of them lithium goes in and out while the host atoms stay put, a topotactic reaction."
+        },
+        {
+          "id": "layered",
+          "visual": "layered",
+          "equation": "\\mathrm{LiCoO_2} \\rightleftharpoons \\mathrm{Li}_{1-x}\\mathrm{CoO_2} + x\\,\\mathrm{Li^+} + x\\,e^-",
+          "text": "Lithium cobalt oxide, at about 3.9 volts, was the first commercial cathode, from Sony in 1991. In practice only about half the lithium can be removed, around 140 to 150 milliamp hours per gram, because deeper charging brings low thermal stability, cobalt dissolution and oxygen release. Swap cobalt for nickel and capacity rises: NCA reaches about 200 milliamp hours per gram, but nickel is reactive and Ni and Li can swap places, an antisite defect. Manganese is cheapest, but the layered structure is unstable and it dissolves. NMC mixes all three: 111 gives 3.7 volts and 170 milliamp hours per gram, and 811 pushes nickel higher. Cobalt buys stability, nickel capacity, manganese low cost."
+        },
+        {
+          "id": "spinel-olivine",
+          "visual": "spinel-olivine",
+          "equation": "t \\approx \\frac{L^2}{4D}",
+          "text": "Spinel LiMn₂O₄ is cheap and non-toxic, but Mn²⁺ dissolves. Replace half the manganese by nickel, in LNMO, and all manganese is 4+ and stable, while nickel does the redox at 4.7 volts: high energy, but it pushes the electrolyte past its limit. Lithium iron phosphate sits at 3.45 volts and 160 milliamp hours per gram, and is cheap, safe and stable. Its weakness is transport. Lithium moves along one dimensional channels, so a single antisite iron atom can block one, and both ionic and electronic conductivity are low. Engineering fixes it: carbon coating for the electrons, nanoparticles for the ions. Diffusion time goes as L squared over 4D, so a particle 50 times smaller is 2,500 times faster."
+        },
+        {
+          "id": "anodes-insertion",
+          "visual": "anodes-insertion",
+          "text": "Now the negative side, which works by three mechanisms. First insertion. Graphite forms LiC₆ at 0.1 volts, with lithium between layers 3.35 ångström apart. Disordered hard and soft carbons sit near 0.5 volts. Lithium titanate, LTO, sits at 1.5 volts: safer and more stable, but lower in energy. Lithium moves fast parallel to the graphene planes and orders of magnitude slower across them. And graphite works below the stability window of the electrolyte, so the cell only works because of the SEI, which costs some irreversible capacity in the first cycle."
+        },
+        {
+          "id": "anodes-high",
+          "visual": "anodes-high",
+          "equation": "\\mathrm{Sn} + 4.4\\,\\mathrm{Li^+} + 4.4\\,e^- \\rightleftharpoons \\mathrm{Li_{4.4}Sn}",
+          "text": "Alloying and conversion trade stability for capacity. Silicon and tin alloy with lithium, for example Li₄.₄Sn, with very large capacities but enormous volume changes and poor cycle life. Mitigations: amorphous materials, porous particles, small particles, thin films and elastic binders. Conversion materials, metal oxides, nitrides and phosphides, are reduced to metal nanoparticles plus a lithium compound: huge capacity, but a large voltage hysteresis and poor efficiency. And lithium metal: the highest energy density and the lowest potential, essential for lithium air and polymer cells, but with a poor SEI, low coulombic efficiency and dendrites."
+        },
+        {
+          "id": "electrolyte",
+          "visual": "electrolyte",
+          "text": "The electrolyte is a solvent plus a salt, typically carbonates with LiPF₆. It must conduct ions, insulate electrons, dissolve the salt and stay stable. Ions travel with their solvation shell, so a lower viscosity means faster transport. But graphite and lithium sit outside the stability window of the electrolyte, roughly one to four volts versus lithium, so it decomposes, and a stable SEI is what protects the cell. Additives help: vinylene or fluoroethylene carbonate build a good SEI, redox shuttles prevent overcharge, shut-down additives form an insulating film, and flame retardants contain phosphorus or halogens, always with side effects. Polymer electrolytes like PEO only conduct above the glass transition temperature, when the chains can move."
+        },
+        {
+          "id": "challenges",
+          "visual": "challenges",
+          "text": "The recurring challenges are volume change, phase transformations, mechanical degradation, thermal stability and the critical raw materials: lithium, cobalt and nickel. By material: LFP has one dimensional transport and a two phase reaction. Graphite shows staging, and lithium plating is its risk. NMC forms a solid solution, but suffers cation mixing, microcracks, and oxygen loss at high voltage. Notice how the earlier chapters apply: defects block channels, diffusion sets the rate, and phase behaviour, solid solution versus two phases, shapes the voltage curve."
+        }
+      ]
+    },
+    {
       "id": "outro",
       "title": "Recap",
       "exam": [],
@@ -568,7 +621,7 @@
         {
           "id": "recap",
           "visual": "recap",
-          "text": "Recap. Bonding sets structure and melting point. Voids, Miller indices and stacking faults describe the crystal. Common tangents and the phase rule build phase diagrams, and the lever rule reads them. Diffusion and nucleation control how fast things change, and together they explain microstructures, TTT noses, martensite and the alloys we use. Good luck on the exam!"
+          "text": "Recap. Bonding sets structure and melting point. Voids, Miller indices and stacking faults describe the crystal. Common tangents and the phase rule build phase diagrams, and the lever rule reads them. Diffusion and nucleation control how fast things change, and together they explain microstructures, TTT noses, martensite and the alloys we use. Battery materials apply all of it: channels, defects and diffusion decide how a cathode performs. Good luck on the exam!"
         }
       ]
     }

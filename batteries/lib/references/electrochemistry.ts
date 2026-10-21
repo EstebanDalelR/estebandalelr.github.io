@@ -4,7 +4,13 @@ import type { CourseReference, Definition, Formula } from "../reference";
 const formulaLabels: Record<string, string> = {
   "li-ion/which-negative": "Graphite and LFP electrode reactions",
   "li-ion/upd": "Nernst equation for lithium deposition",
-  "edl/potential": "Double-layer capacitance (compact + diffuse in series)",
+  "electronic/bands": "LCAO molecular orbital (bonding / antibonding mixing)",
+  "electronic/dispersion": "Tight-binding band and free-electron dispersion",
+  "electronic/width": "Effective mass from band width",
+  "electronic/dos": "Density of states",
+  "electronic/gap": "Band gap",
+  "electronic/fermi": "Fermi–Dirac distribution and intrinsic carrier density",
+    "edl/potential": "Double-layer capacitance (compact + diffuse in series)",
   "cv/reverse": "Reversible CV: peak separation and formal potential",
   "cv/info": "Randles–Ševčík peak current (25 °C)",
   "controlled-current/cons": "Effective cut-off potentials with iR drop",
@@ -18,6 +24,9 @@ const formulaLabels: Record<string, string> = {
 };
 
 const extraFormulas: Formula[] = [
+  { chapterId: "electronic", label: "Boltzmann limit of Fermi–Dirac (E − E_F ≫ kT)", tex: "f(E) \\approx \\exp\\left[-(E-E_F)/k_BT\\right]" },
+  { chapterId: "electronic", label: "Free-electron momentum", tex: "p = \\hbar k" },
+  { chapterId: "electronic", label: "Band edge in the tight-binding model (β < 0)", tex: "E(k\\to 0) \\approx (\\alpha + 2\\beta) - \\beta (ka)^2" },
   { chapterId: "controlled-current", label: "Capacity from a constant-current test", tex: "Q = I\\,t" },
 ];
 
@@ -32,7 +41,19 @@ const definitions: Definition[] = [
   { term: "Passivation", chapterId: "li-ion", text: "Protection of a metal by a thin surface layer, such as the oxide or AlF₃ layer on an aluminium current collector." },
   { term: "SEI (solid electrolyte interphase)", chapterId: "li-ion", text: "A layer formed by electrolyte reduction on the negative electrode. It conducts Li⁺ but not electrons, and consumes lithium as it grows." },
   { term: "Dendrites", chapterId: "li-ion", text: "Needle-like lithium metal growths that can pierce the separator and short-circuit the cell." },
-  { term: "Electric double layer", chapterId: "edl", text: "The charge separation at an electrode–electrolyte interface: excess charge on the metal and an equal, opposite layer of ions in solution." },
+  { term: "LCAO", chapterId: "electronic", text: "Linear combination of atomic orbitals: molecular (and crystal) wavefunctions built as a weighted sum of atomic orbitals, giving bonding and antibonding combinations." },
+  { term: "Energy band", chapterId: "electronic", text: "A quasi-continuous range of allowed electron energies formed when the atomic levels of ~10²³ atoms overlap in a crystal." },
+  { term: "Band structure E(k)", chapterId: "electronic", text: "Electron energy plotted against wavenumber k (momentum p = ħk) within the first Brillouin zone, −π/a < k < π/a for a 1D chain." },
+  { term: "Brillouin zone", chapterId: "electronic", text: "The unit cell of reciprocal space; all distinct states are found for k between −π/a and π/a in a 1D crystal with spacing a." },
+  { term: "Tight-binding (Hückel) model", chapterId: "electronic", text: "Bands built from nearest-neighbour overlap of atomic orbitals: E(k) = α + 2β cos(ka), where α is the atomic level and β < 0 the interaction between neighbours." },
+  { term: "Effective mass (m*)", chapterId: "electronic", text: "The mass that makes a free-electron parabola fit the band curvature, m* = −ħ²/(2βa²). Wide bands have small m* and high mobility; narrow bands have large m*." },
+  { term: "Density of states (DOS)", chapterId: "electronic", text: "The number of electronic levels per unit energy, g(E). It is large where the band is flat (it peaks at band edges in 1D)." },
+  { term: "Band gap (E_g)", chapterId: "electronic", text: "Energy between the valence band maximum (VBM) and the conduction band minimum (CBM), the solid-state analogue of HOMO–LUMO. It shrinks down a group (C 5.4, Si 1.1, Ge 0.7, α-Sn 0 eV) and grows with ionicity." },
+  { term: "Fermi level (E_F)", chapterId: "electronic", text: "The energy at which the occupation probability is ½, i.e. the electrochemical potential of the electrons. It lies inside the band in a metal and in the gap in a semiconductor." },
+  { term: "Fermi–Dirac distribution", chapterId: "electronic", text: "Occupation probability of a level at energy E and temperature T: a step at T = 0 that smears over a few kT; it reduces to a Boltzmann tail far above E_F." },
+  { term: "Metal vs insulator vs semiconductor", chapterId: "electronic", text: "A metal has a partly filled band (net current possible). Insulators and semiconductors have a filled valence band and an empty conduction band; a small gap lets thermal excitation give n ∝ exp(−E_g/2kT)." },
+  { term: "n-type and p-type", chapterId: "electronic", text: "Donors add electrons near the conduction band (n-type, E_F near the CB); acceptors create holes in the valence band (p-type, E_F near the VB)." },
+    { term: "Electric double layer", chapterId: "edl", text: "The charge separation at an electrode–electrolyte interface: excess charge on the metal and an equal, opposite layer of ions in solution." },
   { term: "Helmholtz model", chapterId: "edl", text: "The simplest double-layer picture: a parallel-plate capacitor with a fixed layer of ions at the surface." },
   { term: "Stern model", chapterId: "edl", text: "A compact layer (inner and outer Helmholtz planes) at the surface plus a diffuse layer beyond it; the two capacitances act in series." },
   { term: "Diffuse layer", chapterId: "edl", text: "The region where thermal motion spreads out the ions and the potential decays exponentially into the bulk. It is thin at high concentration." },

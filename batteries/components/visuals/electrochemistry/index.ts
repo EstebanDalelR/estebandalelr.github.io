@@ -2,6 +2,7 @@ import type { ComponentType } from "react";
 import IntroVisual from "./IntroVisual";
 import VoltaicPileVisual from "./VoltaicPileVisual";
 import LiIonVisual from "./LiIonVisual";
+import ElectronicVisual from "./ElectronicVisual";
 import EdlVisual from "./EdlVisual";
 import CvVisual from "./CvVisual";
 import ControlledCurrentVisual from "./ControlledCurrentVisual";
@@ -17,6 +18,7 @@ export const visuals: Record<string, ComponentType<{ visual: string }>> = {
   intro: IntroVisual,
   "voltaic-pile": VoltaicPileVisual,
   "li-ion": LiIonVisual,
+  electronic: ElectronicVisual,
   edl: EdlVisual,
   cv: CvVisual,
   "controlled-current": ControlledCurrentVisual,

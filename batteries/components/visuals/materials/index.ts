@@ -14,6 +14,7 @@ import SolidificationVisual from "./SolidificationVisual";
 import TttVisual from "./TttVisual";
 import SteelsVisual from "./SteelsVisual";
 import AlloysVisual from "./AlloysVisual";
+import BatteryMaterialsVisual from "./BatteryMaterialsVisual";
 import OutroVisual from "./OutroVisual";
 
 /** Chapter id -> visual for the materials chemistry course. */
@@ -33,5 +34,6 @@ export const visuals: Record<string, ComponentType<{ visual: string }>> = {
   ttt: TttVisual,
   steels: SteelsVisual,
   alloys: AlloysVisual,
+  "battery-materials": BatteryMaterialsVisual,
   outro: OutroVisual,
 };
