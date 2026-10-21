@@ -198,7 +198,7 @@ export default function Explainer({ courseId }: { courseId: string }) {
         />
       ))}
 
-      <ReferenceSlide courseId={courseId} />
+      <ReferenceSlide courseId={courseId} onSpeedRead={() => setPaused(true)} />
 
       {started && (
         <>
