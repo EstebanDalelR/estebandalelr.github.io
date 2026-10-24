@@ -1883,5 +1883,160 @@
     "text": "Notice how the earlier chapters apply: defects block channels, diffusion sets the rate, and phase behaviour, solid solution versus two phases, shapes the voltage curve."
    }
   ]
+ },
+ "thermo/stability": {
+  "duration": 32.16,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.08,
+    "text": "Not every minimum is the true one."
+   },
+   {
+    "start": 2.36,
+    "end": 7.96,
+    "text": "On a Gibbs energy curve, point four sits in the deepest valley: that is stable equilibrium."
+   },
+   {
+    "start": 8.24,
+    "end": 12.24,
+    "text": "Point one is a higher valley, a metastable equilibrium."
+   },
+   {
+    "start": 12.52,
+    "end": 16.16,
+    "text": "It stays there until something pushes it over the hump."
+   },
+   {
+    "start": 16.44,
+    "end": 22.36,
+    "text": "Point two, on top of the hump, is an unstable equilibrium: the smallest nudge sends it rolling."
+   },
+   {
+    "start": 22.64,
+    "end": 26.68,
+    "text": "Point three, on a slope, is not in equilibrium at all."
+   },
+   {
+    "start": 26.96,
+    "end": 31.76,
+    "text": "Cementite is the classic metastable phase, and graphite is the stable one."
+   }
+  ]
+ },
+ "nucleation/what-undercooling": {
+  "duration": 34.08,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.12,
+    "text": "First, what is undercooling?"
+   },
+   {
+    "start": 2.4,
+    "end": 8.96,
+    "text": "It is how far the melt is below its melting point: delta T equals T m minus T."
+   },
+   {
+    "start": 9.24,
+    "end": 15.6,
+    "text": "A melt does not freeze the moment it reaches T m, because solid has to start somewhere, as a tiny nucleus."
+   },
+   {
+    "start": 15.88,
+    "end": 22.32,
+    "text": "So on a cooling curve the temperature dips below the melting point while everything is still liquid."
+   },
+   {
+    "start": 22.6,
+    "end": 27.76,
+    "text": "When nuclei finally form, the latent heat they release warms the melt back up."
+   },
+   {
+    "start": 28.04,
+    "end": 33.68,
+    "text": "This is called recalescence, and the rest freezes on a flat plateau at T m."
+   }
+  ]
+ },
+ "nucleation/driving-force": {
+  "duration": 32.04,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.44,
+    "text": "Where does the driving force come from?"
+   },
+   {
+    "start": 2.72,
+    "end": 6.72,
+    "text": "Plot the free energy of the solid and of the melt against temperature."
+   },
+   {
+    "start": 7.0,
+    "end": 12.2,
+    "text": "Both fall as it gets hotter, but the melt falls faster, because it has more entropy."
+   },
+   {
+    "start": 12.48,
+    "end": 16.96,
+    "text": "The two lines cross at the melting point, where neither phase wins."
+   },
+   {
+    "start": 17.24,
+    "end": 23.16,
+    "text": "Below it the solid has the lower free energy, and the gap between the lines is delta G v."
+   },
+   {
+    "start": 23.44,
+    "end": 31.64,
+    "text": "That gap grows in proportion to the undercooling: delta G v is about delta H m times delta T over T m."
+   }
+  ]
+ },
+ "nucleation/rate": {
+  "duration": 31.44,
+  "cues": [
+   {
+    "start": 0.0,
+    "end": 2.56,
+    "text": "So is more undercooling always faster?"
+   },
+   {
+    "start": 2.84,
+    "end": 4.28,
+    "text": "No."
+   },
+   {
+    "start": 4.56,
+    "end": 6.6,
+    "text": "Nucleation needs two things."
+   },
+   {
+    "start": 6.88,
+    "end": 10.4,
+    "text": "The barrier must be low, which needs a large undercooling."
+   },
+   {
+    "start": 10.68,
+    "end": 16.04,
+    "text": "And atoms must still be able to move to join the nucleus, which needs a high temperature."
+   },
+   {
+    "start": 16.32,
+    "end": 21.44,
+    "text": "Multiply the two and the nucleation rate peaks at an intermediate undercooling."
+   },
+   {
+    "start": 21.72,
+    "end": 25.44,
+    "text": "Near the peak you get many nuclei and fine grains."
+   },
+   {
+    "start": 25.72,
+    "end": 31.04,
+    "text": "Quench fast enough to jump past it, and the melt can freeze into a glass with no crystals at all."
+   }
+  ]
  }
 }
