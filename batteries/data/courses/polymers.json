@@ -1,0 +1,210 @@
+{
+  "title": "Polymer Technology — Explainer",
+  "course": "1KB236 Polymer Technology, Uppsala University",
+  "examSource": "Built from lectures F1 (organic chemistry refresher) and F2 (basics of polymer science), 2026; no past exam mapped yet.",
+  "chapters": [
+    {
+      "id": "intro",
+      "title": "Long Chains, Big Consequences",
+      "exam": [],
+      "steps": [
+        {
+          "id": "hello",
+          "visual": "chain",
+          "text": "A polymer is a very long molecule built from thousands of small units joined end to end, like beads on a string. Plastics, rubber, cellulose, proteins and the binder that holds a battery electrode together are all polymers. This course is about how the chemistry of the bead and the length of the string decide the material."
+        },
+        {
+          "id": "roadmap",
+          "visual": "roadmap",
+          "text": "We start with an organic chemistry refresher: structures, nucleophiles and electrophiles, radical reactions and stereochemistry. Then the basics of polymer science: history, repeating units, architectures, tacticity, crosslinking, and how we describe chain length with molecular weight averages."
+        }
+      ]
+    },
+    {
+      "id": "organic",
+      "title": "Organic Structures and Reactions",
+      "exam": [],
+      "steps": [
+        {
+          "id": "structures",
+          "visual": "structures",
+          "text": "Carbon makes four bonds, so organic molecules are chains and rings of carbon dressed with hydrogen and other atoms. Methane, CH₄, is the smallest. Butane and decane are straight chains of four and ten carbons. Swap one hydrogen for an amine or a hydroxyl group and you get methanamine or methanol: the functional group decides how the molecule reacts."
+        },
+        {
+          "id": "bonds",
+          "visual": "bonds",
+          "text": "Two carbons can share one, two or three bonds. Ethane has a single bond, ethene a double bond and ethyne a triple bond. The double bond in ethene is the handle that polymerisation pulls on: open it, and each monomer can join two neighbours."
+        },
+        {
+          "id": "polar",
+          "visual": "polar",
+          "text": "Most reactions are electrons moving from where there are many to where there are few. A nucleophile has a region of high electron density, marked δ−, such as a lone pair or a negative charge. An electrophile has a region of low electron density, δ+, like a carbon bonded to an electronegative halogen."
+        },
+        {
+          "id": "substitution",
+          "visual": "substitution",
+          "text": "In a nucleophilic substitution, the nucleophile attacks the electrophilic carbon and pushes out a leaving group. Hydroxide attacking bromomethane gives methanol and a bromide ion. A carbonyl carbon, double bonded to oxygen, is electrophilic too, and that is how polyesters and polyamides are made."
+        },
+        {
+          "id": "radical",
+          "visual": "radical",
+          "text": "Radical reactions run in three stages. Initiation: heat, UV light or a metal catalyst splits a bond evenly, a homolytic cleavage, so each fragment keeps one unpaired electron. Propagation: the radical attacks another molecule and passes the unpaired electron on, again and again. Termination: two radicals meet and form a stable, non-radical product."
+        },
+        {
+          "id": "termination",
+          "visual": "termination",
+          "text": "There are two ways to terminate. In combination, two radical chain ends join into one longer chain. In disproportionation, one radical takes a hydrogen from the other, leaving two dead chains: one saturated, one with a double bond at its end. This is exactly how free radical polymerisation stops."
+        }
+      ]
+    },
+    {
+      "id": "stereo",
+      "title": "Stereochemistry and Tacticity",
+      "exam": [],
+      "steps": [
+        {
+          "id": "isomers",
+          "visual": "cis-trans",
+          "text": "Isomers have the same formula but a different arrangement in space. The double bond in 2-butene cannot rotate, so the two methyl groups sit either on the same side, cis-2-butene, or on opposite sides, trans-2-butene. Same atoms, different shape, different properties."
+        },
+        {
+          "id": "chirality",
+          "visual": "chiral",
+          "text": "A carbon with four different groups is chiral. It has two mirror-image forms, called enantiomers, with the same connectivity but opposite 3D shape. Like your left and right hands, they cannot be superimposed, however you turn them."
+        },
+        {
+          "id": "tacticity",
+          "visual": "tacticity",
+          "text": "In a vinyl polymer, every other carbon carries a side group and is a stereocentre, and tacticity describes how these centres line up along the chain. Isotactic: every side group on the same side. Syndiotactic: the side groups alternate. Atactic: no order at all."
+        },
+        {
+          "id": "why",
+          "visual": "packing",
+          "text": "Tacticity is set by the synthesis route, and it decides the properties. Regular chains, isotactic or syndiotactic, can pack into crystals: isotactic polypropylene is stiff and melts near 165 °C. Atactic chains cannot pack, so ordinary atactic polystyrene is an amorphous glass."
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "title": "From Rubber to Macromolecules",
+      "exam": [],
+      "steps": [
+        {
+          "id": "timeline",
+          "visual": "timeline",
+          "text": "People used polymers long before they understood them. Polystyrene was first isolated in 1839, and vulcanised rubber was patented by 1845. Celluloid followed in 1868, and Bakelite, the first synthetic polymer material, in 1909. Polyesters arrived in 1928, nylon in 1935, Teflon in 1938 and PET in 1941."
+        },
+        {
+          "id": "staudinger",
+          "visual": "staudinger",
+          "text": "Polymers are viscous, diffuse slowly and refuse to crystallise neatly, so for decades chemists thought they were clusters of small molecules held together by physical forces. In 1920 Hermann Staudinger argued the opposite: if it behaves like a large molecule, it is a large molecule. By 1930 the macromolecular hypothesis was accepted, and Carothers at DuPont soon made neoprene, polyesters and polyamides."
+        },
+        {
+          "id": "today",
+          "visual": "today",
+          "text": "Today polymers enable modern technology. More than half of an Airbus A350 airframe is carbon fibre composite in a polymer matrix. 3D printing builds parts layer by layer from polymers, and CLIP prints continuously by curing a resin with UV light while oxygen keeps a thin dead zone at the window liquid."
+        }
+      ]
+    },
+    {
+      "id": "basics",
+      "title": "Polymers, Monomers and Architecture",
+      "exam": [],
+      "steps": [
+        {
+          "id": "definition",
+          "visual": "definition",
+          "text": "IUPAC defines a polymer as a substance composed of macromolecules. A macromolecule is a molecule of high relative molecular mass, whose structure is essentially the multiple repetition of units derived from molecules of low relative molecular mass. Cellulose is a natural example: a polysaccharide of glucose units held together by acetal links."
+        },
+        {
+          "id": "repeating-unit",
+          "visual": "repeat",
+          "text": "Polymerisation joins monomers into chains. Ethylene polymerises to polyethylene, but careful: the monomer is not the repeating unit. Ethylene has a double bond, and in the chain it becomes a saturated CH₂–CH₂ unit. Strictly, the smallest unit that repeats is just CH₂."
+        },
+        {
+          "id": "architectures",
+          "visual": "architectures",
+          "text": "Chains come in different architectures: linear, branched, star, or a network. Built from one monomer, a chain is a homopolymer. With two monomers it is a copolymer, and the order matters: alternating, random, block, where long runs of each monomer follow each other, or graft, where chains of one monomer hang off a backbone of the other."
+        },
+        {
+          "id": "crosslinking",
+          "visual": "crosslink",
+          "text": "Chains can be tied together. Chemical crosslinks are covalent bonds, and physical crosslinks are intermolecular interactions. A network swollen in a solvent is a gel. A loosely crosslinked network is a rubber, elastic between the crosslinks. A densely crosslinked, rigid network is a thermoset."
+        },
+        {
+          "id": "classes",
+          "visual": "classes",
+          "text": "That gives the main families. Thermoplastics are uncrosslinked chains that soften on heating and can be melted and reshaped, like polyethylene. Thermosets are crosslinked for good and char rather than melt, like epoxy. Elastomers are lightly crosslinked rubbers that stretch and snap back."
+        }
+      ]
+    },
+    {
+      "id": "mw",
+      "title": "Chain Length and Molecular Weight",
+      "exam": [],
+      "steps": [
+        {
+          "id": "size",
+          "visual": "size",
+          "text": "Size matters. Polyethylene glycol of 400 g/mol is a liquid, at 4000 g/mol it is a waxy solid, and at hundreds of thousands it is a tough, film-forming plastic. Same repeating unit, different chain length, completely different material."
+        },
+        {
+          "id": "dispersity",
+          "visual": "distribution",
+          "text": "Unlike a small molecule, a polymer sample is polydisperse: not all chains have the same length. So we describe it with averages over the distribution, where Nᵢ chains have the molar mass Mᵢ."
+        },
+        {
+          "id": "number-average",
+          "visual": "mn",
+          "equation": "\\bar M_n = \\frac{\\sum N_i M_i}{\\sum N_i} = X_n\\,M_0",
+          "text": "The number average, Mn, is the total mass divided by the number of chains: every chain counts equally. It also equals the degree of polymerisation, Xn, times the molar mass of the repeating unit, M₀."
+        },
+        {
+          "id": "weight-average",
+          "visual": "mw",
+          "equation": "\\bar M_w = \\frac{\\sum N_i M_i^2}{\\sum N_i M_i} \\qquad Đ = \\frac{\\bar M_w}{\\bar M_n} \\ge 1",
+          "text": "The weight average, Mw, weights each chain by its mass, so long chains count more. Mw is always at least as large as Mn. Their ratio is the dispersity, Đ, which is one for a perfectly uniform polymer and grows as the distribution broadens."
+        },
+        {
+          "id": "example",
+          "visual": "example",
+          "equation": "\\bar M_w = \\frac{10\\,000^2 + 30\\,000^2}{10\\,000 + 30\\,000} = 25\\,000\\ \\mathrm{g\\,mol^{-1}}",
+          "text": "A worked example. Mix 1 mole of chains of 10,000 g/mol with 1 mole of chains of 30,000 g/mol. Mn is the plain average, 20,000 g/mol. Mw weights by mass: ten thousand squared plus thirty thousand squared, over forty thousand, gives 25,000 g/mol. The dispersity is 1.25."
+        },
+        {
+          "id": "units",
+          "visual": "units",
+          "text": "Mind the unit. Molar mass is given in g/mol. The dalton is the mass of a single molecule, so quoting a polymer in kilodaltons implies every chain has the same mass, which is never true."
+        },
+        {
+          "id": "measure",
+          "visual": "measure",
+          "equation": "[\\eta] = \\lim_{c \\to 0} \\frac{\\eta - \\eta_0}{\\eta_0\\,c} = K M^a",
+          "text": "How do we measure it? End-group analysis counts chain ends: with a known number of ends per chain, the ratio of repeating units to end groups gives Xn, and so Mn. Viscometry uses the Mark–Houwink equation: the intrinsic viscosity grows as K times M to the power a, because longer chains sweep out more volume and drag more solvent."
+        },
+        {
+          "id": "gpc",
+          "visual": "gpc",
+          "text": "Gel permeation chromatography, GPC, also called size exclusion chromatography, pumps the polymer solution through a column of porous beads. Small coils wander into the pores and take the long way, while large coils are excluded and elute first. The separation is by hydrodynamic volume, and a calibration with narrow standards turns elution time into the full molecular weight distribution."
+        },
+        {
+          "id": "oligomer",
+          "visual": "oligomer",
+          "text": "So when does an oligomer become a polymer? When adding or removing one unit no longer changes the properties noticeably: they level off with chain length. And the molecular weight of a covalently crosslinked network? In effect infinite, because the whole piece is one molecule."
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "title": "Recap",
+      "exam": [],
+      "steps": [
+        {
+          "id": "recap",
+          "visual": "recap",
+          "text": "To recap: electrons flow from nucleophile to electrophile, and radicals initiate, propagate and terminate. Stereochemistry and tacticity decide whether chains can crystallise. The monomer is not the repeating unit, architecture and crosslinking set the family, and chain length is described by Mn, Mw and the dispersity."
+        }
+      ]
+    }
+  ]
+}

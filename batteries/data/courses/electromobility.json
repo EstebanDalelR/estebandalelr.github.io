@@ -1,0 +1,181 @@
+{
+  "title": "Introduction to Electromobility — Explainer",
+  "course": "1EL003 Introduction to Electromobility, Uppsala University",
+  "examSource": "Built from lectures F1 (introduction) and F2 (charging infrastructure), 2026; the e-exam is on 8 January 2027.",
+  "chapters": [
+    {
+      "id": "intro",
+      "title": "What Is Electromobility?",
+      "exam": [],
+      "steps": [
+        {
+          "id": "hello",
+          "visual": "definition",
+          "text": "Electromobility means using electric powertrains, connected vehicles and charging infrastructure to move people and goods. It covers battery electric vehicles, plug-in hybrids and hydrogen fuel cell vehicles, and reaches from e-bikes to buses, ships and aircraft."
+        },
+        {
+          "id": "map",
+          "visual": "map",
+          "text": "It is much more than the vehicle. Electromobility ties together electric powertrains, motors, power electronics and batteries; the charging infrastructure and how long charging takes; the environment; and the economics of purchase, charging and maintenance. Politics steers it all through regulation and funding."
+        },
+        {
+          "id": "course",
+          "visual": "course",
+          "text": "In this course you learn the types of electric vehicles and their pros and cons, the components of the driveline, scenarios for society and sustainability, and what charging demands from the electric grid. The written e-exam is worth 70 points, and the seminars and group project add bonus points on top."
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "title": "A Brief History of Electric Cars",
+      "exam": [],
+      "steps": [
+        {
+          "id": "rise",
+          "visual": "rise",
+          "text": "Electric cars are older than you might think. An electric tricycle drove in Paris in 1881, the first practical electric car followed in 1888, and by 1890 a six-passenger electric car reached 22.5 km/h. Electric trams and trolleybuses filled the cities."
+        },
+        {
+          "id": "decline",
+          "visual": "decline",
+          "text": "In the 1920s the interest collapsed. Large oil discoveries made petrol cheap, better roads meant people drove farther, and combustion cars had the range that electric ones lacked."
+        },
+        {
+          "id": "return",
+          "visual": "return",
+          "text": "From the late 1960s, rising oil prices, petrol shortages and air pollution brought electric drive back. In 1971 an electric rover drove on the Moon during Apollo 15. California pushed for zero-emission vehicles, the Toyota Prius made hybrids mainstream, the Tesla Roadster showed a 322 km range, and the Nissan Leaf brought the electric car to the mass market."
+        },
+        {
+          "id": "now",
+          "visual": "now",
+          "text": "Today lithium-ion pack prices have fallen to about $108/kWh, and electrification has reached heavy transport. The Volvo FH Aero Electric truck targets 600 km of range, and the Megawatt Charging System delivers up to 1.44 MW, about 40 minutes from 20 to 80%."
+        },
+        {
+          "id": "water-air",
+          "visual": "water-air",
+          "text": "On water, Stockholm's Candela P-12 electric hydrofoil cut the Ekerö commute from 55 to 30 minutes, with 66% less energy and 94% less CO₂. Autonomous ferries, shuttles and robotaxis already carry passengers, and electric aircraft such as the 30-seat Heart Aerospace ES-30 aim to enter service in the 2030s."
+        }
+      ]
+    },
+    {
+      "id": "policy",
+      "title": "Climate Policy Drives the Shift",
+      "exam": [],
+      "steps": [
+        {
+          "id": "green-deal",
+          "visual": "targets",
+          "text": "The European Green Deal aims for net-zero greenhouse gas emissions by 2050, with a cut of at least 55% by 2030 compared with 1990. By 2024 EU emissions were 39.5% below the 1990 level, so the hardest part is still ahead."
+        },
+        {
+          "id": "fit-for-55",
+          "visual": "fit55",
+          "text": "In 2021 the Fit for 55 package turned the targets into law. From 2035, new cars and vans with a combustion engine can no longer be placed on the EU market. The alternative fuels infrastructure rules force charging and refuelling to be built along roads and in ports, and ReFuelEU Aviation pushes sustainable aviation fuel."
+        },
+        {
+          "id": "sweden",
+          "visual": "sweden",
+          "text": "Sweden goes further: domestic transport emissions 70% lower by 2030 than in 2010, net-zero by 2045, and negative emissions after that. EU road transport emissions may have peaked in 2025, and public charging points passed 1.1 million, but further cuts are still needed."
+        }
+      ]
+    },
+    {
+      "id": "levels",
+      "title": "Charging Levels and Connectors",
+      "exam": [],
+      "steps": [
+        {
+          "id": "levels",
+          "visual": "levels",
+          "text": "Charging comes in three levels. Level 1 is slow AC from a household socket, 1 to 2 kW, eight to twenty hours to 80%. Level 2 is AC from a wallbox or public post, 7 to 22 kW, three to eight hours. DC fast charging delivers 50 to 350 kW or more and takes a car from 0 to 80% in 15 to 45 minutes."
+        },
+        {
+          "id": "onboard",
+          "visual": "onboard",
+          "text": "The key difference is where AC becomes DC. With AC charging, the converter is the on-board charger inside the car, and its rating, often 11 kW, limits the speed. With DC charging, the conversion happens in the station, which can be far bigger, so the power is limited by the station and the battery instead."
+        },
+        {
+          "id": "connectors",
+          "visual": "connectors",
+          "text": "Connectors follow the same split. Type 1 is single-phase AC, used in North America and Japan. Type 2, the Mennekes plug, takes single- and three-phase AC and is the EU standard. CCS adds two DC pins below the AC plug and is the global fast-charging standard. CHAdeMO, the early DC standard of the Nissan Leaf, is being phased out, and GB/T is China's standard for both AC and DC."
+        },
+        {
+          "id": "where",
+          "visual": "where",
+          "text": "Sweden, with about 10.6 million people, has seen chargeable cars grow steeply since 2013, and Uppsala alone has more than 300 public charging points. Most charging, though, still happens at home and at work."
+        }
+      ]
+    },
+    {
+      "id": "tech",
+      "title": "Charging Technologies",
+      "exam": [],
+      "steps": [
+        {
+          "id": "tree",
+          "visual": "tree",
+          "text": "Beyond the cable, there are three families. Static charging while parked, either conductive through a plug or wireless. Dynamic charging while driving, on an electric road system. And battery swapping, where the empty battery is exchanged for a full one."
+        },
+        {
+          "id": "wireless",
+          "visual": "wireless",
+          "text": "Inductive charging uses a magnetic field between a coil in the ground and a coil under the car, like a phone on a charging pad, at about 85 to 90% efficiency. It works parked or, with coils in the road, while driving. Capacitive charging uses an electric field between plates instead: potentially lighter, but still experimental."
+        },
+        {
+          "id": "ers",
+          "visual": "ers",
+          "text": "Electric road systems feed vehicles while they drive: through overhead lines like a trolleybus, a conductive rail in the road, or inductive coils beneath it. Sweden has trialled all three, with overhead lines at Sandviken, rails at Arlanda and Lund, and coils in Visby. But the first permanent electric road, on the E20 between Hallsberg and Örebro, was removed from the national plan in 2025 because of cost."
+        },
+        {
+          "id": "swapping",
+          "visual": "swap",
+          "text": "Battery swapping replaces the battery instead of recharging it, in about 3 to 5 minutes, as in Nio's swap stations. It suits taxis and fleets, but it needs standardised battery packs across vehicles, which carmakers rarely agree on."
+        },
+        {
+          "id": "compare",
+          "visual": "compare",
+          "text": "Compared side by side: static plug-in charging is cheap at home and scales well, but you have to plug in. Dynamic charging charges continuously but is very expensive to build. Wireless charging is hands-free but slower. Swapping is the fastest, but only works for fleets with a common battery."
+        }
+      ]
+    },
+    {
+      "id": "smart",
+      "title": "Smart and Heavy-Duty Charging",
+      "exam": [],
+      "steps": [
+        {
+          "id": "automation",
+          "visual": "automation",
+          "text": "Charging can be automated too. At level 0 a human plugs in the cable. Levels 1 to 3 add increasing assistance. At level 4 the car positions itself and a robot arm connects the plug. At level 5 charging needs no human at all, which is what a robotaxi needs."
+        },
+        {
+          "id": "when",
+          "visual": "price",
+          "text": "When should you charge? The spot price of electricity changes every hour: low at night and when wind and sun are plentiful, high at the morning and evening peaks. Smart charging moves the charging to cheap hours, which saves money and eases the load on the grid."
+        },
+        {
+          "id": "heavy",
+          "visual": "heavy",
+          "text": "Trucks need far more power. A long-haul truck battery holds several hundred kilowatt hours, so depots and freight corridors need megawatt chargers, and Sweden's first public MCS demonstration took place at the Milence hub in Landvetter. Charging has to fit into the driver's mandatory rest breaks."
+        },
+        {
+          "id": "future",
+          "visual": "airport",
+          "text": "Looking ahead, Swedish airports aim to be fossil-free by 2050, with electrified ground operations, renewable energy, storage and the airport as a regional energy hub. Solar-powered tractors and drones show that electric propulsion reaches everywhere. The open question for a national charging plan: coverage, speed, or cost first?"
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "title": "Recap",
+      "exam": [],
+      "steps": [
+        {
+          "id": "recap",
+          "visual": "recap",
+          "text": "To recap: electromobility is vehicles, charging and policy together. Electric cars rose, fell and came back with oil prices and climate goals. AC charging is limited by the on-board charger and DC by the station. Wireless, electric roads and swapping each fit a niche, and smart charging decides when the grid takes the load."
+        }
+      ]
+    }
+  ]
+}
