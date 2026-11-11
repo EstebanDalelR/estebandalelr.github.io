@@ -3,6 +3,9 @@ import electrochemistry from "@batteries/data/courses/electrochemistry.json";
 import introCircuits from "@batteries/data/courses/intro-circuits.json";
 import introEnergy from "@batteries/data/courses/intro-energy.json";
 import materials from "@batteries/data/courses/materials.json";
+import polymers from "@batteries/data/courses/polymers.json";
+import electromobility from "@batteries/data/courses/electromobility.json";
+import materialsAnalysis from "@batteries/data/courses/materials-analysis.json";
 
 export type Course = {
   id: string;
@@ -41,6 +44,27 @@ export const COURSES: Course[] = [
     label: "Applied Electrochemistry",
     blurb: "Voltaic pile to Butler–Volmer: every question of the March 2023 exam.",
     narration: electrochemistry as Narration,
+  },
+  {
+    id: "polymers",
+    route: "/batteries/polymers",
+    label: "Polymer Technology",
+    blurb: "Organic chemistry refresher, tacticity, architectures, crosslinking, and Mn, Mw and dispersity.",
+    narration: polymers as Narration,
+  },
+  {
+    id: "electromobility",
+    route: "/batteries/electromobility",
+    label: "Introduction to Electromobility",
+    blurb: "EV history, EU and Swedish climate policy, charging levels and connectors, wireless, electric roads and swapping.",
+    narration: electromobility as Narration,
+  },
+  {
+    id: "materials-analysis",
+    route: "/batteries/materials-analysis",
+    label: "Materials Analysis for Batteries",
+    blurb: "Probe–interaction–detection, TGA, DTA/DSC, thermal runaway of NMC811 vs graphite, ARC and DMA.",
+    narration: materialsAnalysis as Narration,
   },
 ];
 

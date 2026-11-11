@@ -4,6 +4,9 @@ import { electrochemistry } from "./references/electrochemistry";
 import { introCircuits } from "./references/intro-circuits";
 import { introEnergy } from "./references/intro-energy";
 import { materials } from "./references/materials";
+import { polymers } from "./references/polymers";
+import { electromobility } from "./references/electromobility";
+import { materialsAnalysis } from "./references/materials-analysis";
 
 export type Formula = { chapterId: string; stepId?: string; label: string; tex: string };
 export type Definition = { term: string; chapterId: string; text: string };
@@ -22,6 +25,9 @@ const REFERENCES: Record<string, CourseReference> = {
   "intro-circuits": introCircuits,
   "intro-energy": introEnergy,
   materials,
+  polymers,
+  electromobility,
+  "materials-analysis": materialsAnalysis,
 };
 
 export function getReference(courseId: string): { formulas: Formula[]; definitions: Definition[] } {

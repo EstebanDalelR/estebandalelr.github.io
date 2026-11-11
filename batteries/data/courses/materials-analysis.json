@@ -1,0 +1,223 @@
+{
+  "title": "Materials Analysis for Batteries — Explainer",
+  "course": "1KB732 Materials Analysis for Batteries, Uppsala University",
+  "examSource": "Built from lectures F1 (course introduction) and F2 (thermal and thermomechanical analysis), 2026; no past exam mapped yet.",
+  "chapters": [
+    {
+      "id": "intro",
+      "title": "Why Analyse Battery Materials?",
+      "exam": [],
+      "steps": [
+        {
+          "id": "hello",
+          "visual": "nobel",
+          "equation": "\\mathrm{LiC_6 + CoO_2 \\rightarrow C_6 + LiCoO_2} \\qquad E \\approx 3.8\\ \\mathrm{V}",
+          "text": "In 2019 the Nobel Prize in Chemistry went to Goodenough, Whittingham and Yoshino for the lithium-ion battery: a graphite anode and a lithium cobalt oxide cathode. On discharge, lithium leaves the graphite as an ion and an electron, crosses to the cathode and slots back into the oxide, giving about 3.8 V."
+        },
+        {
+          "id": "anatomy",
+          "visual": "anatomy",
+          "text": "Open a cylindrical cell and you find a jelly roll: a copper foil coated with anode, a porous separator, and an aluminium foil coated with cathode, wound up and soaked in electrolyte. Each electrode layer is 100 to 200 µm thick and about 30% porous: more than 90 wt% active material, under 5 wt% conductive carbon and under 5 wt% binder such as PVDF."
+        },
+        {
+          "id": "interphase",
+          "visual": "sei",
+          "text": "So a battery is foils, powders, binders, plastics and liquids, and above all their interfaces. On cycling, particles crack, the electrolyte decomposes and a solid electrolyte interphase, the SEI, grows on the anode. Materials analysis tells us how the battery works, and why it fails."
+        }
+      ]
+    },
+    {
+      "id": "framework",
+      "title": "Probe, Matter, Interaction, Detection",
+      "exam": [],
+      "steps": [
+        {
+          "id": "probe",
+          "visual": "probe",
+          "text": "Every technique follows the same chain. A probe, such as photons, electrons, neutrons, heat or force, hits the sample. It interacts with matter: it is scattered, absorbed, or makes the sample emit something. A detector measures what comes out, and from that we infer structure, composition or properties."
+        },
+        {
+          "id": "interactions",
+          "visual": "interactions",
+          "text": "X-rays, for example, are diffracted by crystal planes, which gives the crystal structure in XRD. They can knock out core electrons, which XPS measures to identify elements and their oxidation states. Or they make atoms fluoresce. Electrons in a microscope map the morphology: particle size and shape."
+        },
+        {
+          "id": "destructive",
+          "visual": "destructive",
+          "text": "Non-destructive techniques, like X-ray scattering, leave the sample intact and working, so one precious sample can be measured again and again. Destructive ones, like accelerating rate calorimetry, change it for good, so you need several samples."
+        },
+        {
+          "id": "depth",
+          "visual": "depth",
+          "text": "Ask how deep you look. Diffraction and neutrons see the bulk of the particles. XPS sees only the top few nanometres, which is exactly where the SEI lives."
+        },
+        {
+          "id": "operando",
+          "visual": "operando",
+          "text": "And ask when you look. Ex situ: take the material out and measure it. Post mortem: open a cell after it has died. In situ: measure inside a working setup. Operando: measure while the battery is actually charging and discharging, which catches states that relax the moment the current stops."
+        },
+        {
+          "id": "facilities",
+          "visual": "facilities",
+          "text": "Some measurements need large-scale facilities, and Sweden has two of them in Lund: MAX IV, a synchrotron that produces extremely bright X-rays, and the European Spallation Source, ESS, a neutron source whose first neutrons are planned for early 2027."
+        }
+      ]
+    },
+    {
+      "id": "thermal",
+      "title": "Thermal Analysis: the Principle",
+      "exam": [],
+      "steps": [
+        {
+          "id": "principle",
+          "visual": "furnace",
+          "text": "Thermal analysis measures a property of a sample while its temperature follows a program. The sample sits in a small crucible in a furnace, often next to an empty reference, and sensors record its mass, its temperature difference to the reference, or the heat flow."
+        },
+        {
+          "id": "programs",
+          "visual": "programs",
+          "text": "The temperature program can be isothermal, held constant; dynamic, ramped at a constant rate such as 10 °C per minute; cycles of heating and cooling; a mix of ramps and holds; or a sinusoidal modulation on top of a ramp, which separates reversible from irreversible events."
+        }
+      ]
+    },
+    {
+      "id": "tga",
+      "title": "Thermogravimetric Analysis",
+      "exam": [],
+      "steps": [
+        {
+          "id": "tga",
+          "visual": "tga",
+          "text": "Thermogravimetric analysis, TGA, weighs the sample continuously while heating it. Every step down in the curve is a mass loss: water evaporating, a gas released by decomposition, or a binder burning off. The derivative curve turns each step into a peak, so overlapping steps can be told apart."
+        },
+        {
+          "id": "oxalate",
+          "visual": "oxalate",
+          "equation": "\\begin{aligned}\\mathrm{CaC_2O_4\\cdot H_2O} &\\rightarrow \\mathrm{CaC_2O_4 + H_2O} && 12.3\\,\\%\\\\ \\mathrm{CaC_2O_4} &\\rightarrow \\mathrm{CaCO_3 + CO} && 19.2\\,\\%\\\\ \\mathrm{CaCO_3} &\\rightarrow \\mathrm{CaO + CO_2} && 30.1\\,\\%\\end{aligned}",
+          "text": "Calcium oxalate monohydrate is the classic test sample. First it loses its water, 12.3% of the mass. Next the oxalate releases carbon monoxide and becomes calcium carbonate, another 19.2%. Last, the carbonate releases carbon dioxide and leaves calcium oxide, 30.1%. The measured steps match these theoretical values almost exactly."
+        },
+        {
+          "id": "copper",
+          "visual": "copper",
+          "text": "Try it for copper sulfate pentahydrate, 250 g/mol. Its five waters weigh 90 g/mol, 36% of the mass. Losing SO₂ and half an oxygen molecule to leave copper oxide costs another 32%, so 31.8% remains. If the residue is reduced further to Cu₂O, only 28.6% is left. Theoretical mass losses tell you what each step is."
+        },
+        {
+          "id": "coupling",
+          "visual": "coupling",
+          "text": "TGA tells you how much mass is lost, not what it is. Couple the gas outlet to a mass spectrometer, or to a gas chromatograph and a mass spectrometer, and you identify each released gas as it appears."
+        }
+      ]
+    },
+    {
+      "id": "dsc",
+      "title": "DTA and DSC",
+      "exam": [],
+      "steps": [
+        {
+          "id": "dta",
+          "visual": "dta",
+          "text": "Differential thermal analysis, DTA, heats a sample and a reference side by side and records their temperature difference. When the sample melts, it absorbs heat and lags behind; when it crystallises or reacts exothermically, it runs ahead."
+        },
+        {
+          "id": "dsc",
+          "visual": "dsc",
+          "text": "Differential scanning calorimetry, DSC, measures the heat flowing into or out of the sample, so the peak areas give enthalpies in joules per gram. Combined with TGA in simultaneous thermal analysis, you see mass loss and heat flow at the same time."
+        },
+        {
+          "id": "events",
+          "visual": "events",
+          "text": "A polymer DSC curve reads like a story. The glass transition, Tg, is a step in the baseline, because the heat capacity jumps when the chains start to move. Cold crystallisation is an exothermic peak. Melting, at Tm, is an endothermic peak. Decomposition comes last."
+        },
+        {
+          "id": "crystallinity",
+          "visual": "crystallinity",
+          "equation": "\\chi = \\frac{\\Delta H_{measured}}{\\Delta H_{100\\%}}",
+          "text": "The melting peak gives the degree of crystallinity: the measured melting enthalpy divided by that of a 100% crystalline sample. Polyethylene that melts with 146 joules per gram, against 293 for a perfect crystal, is about 50% crystalline."
+        },
+        {
+          "id": "aging",
+          "visual": "aging",
+          "text": "Glasses age. Polystyrene annealed at 80 °C, below its Tg of about 100 °C, slowly relaxes, and on reheating an enthalpy relaxation peak appears right at the glass transition. It grows with the annealing time: 0, 1, 5 and 20 hours."
+        }
+      ]
+    },
+    {
+      "id": "safety",
+      "title": "Thermal Runaway and Safety",
+      "exam": [],
+      "steps": [
+        {
+          "id": "runaway",
+          "visual": "runaway",
+          "text": "Thermal runaway is a feedback loop. An exothermic reaction heats the cell, the higher temperature speeds up the reaction, which releases even more heat, until the cell vents or catches fire. How violent it gets depends strongly on the state of charge."
+        },
+        {
+          "id": "nmc",
+          "visual": "nmc",
+          "text": "DSC on washed electrodes shows why. At 100% state of charge, graphite releases 345 joules per gram, as its SEI decomposes and the lithiated carbon reacts. Delithiated NMC811 releases 1618 joules per gram, because the layered oxide decomposes and gives off oxygen."
+        },
+        {
+          "id": "soc",
+          "visual": "soc",
+          "text": "Against state of charge, the heat grows steeply for both electrodes: at 0% it is only 72 and 50 joules per gram, at 50% already 625 and 216. The charged cathode always dominates, so it is the bigger thermal runaway risk, which is why nickel-rich cathodes need careful thermal management."
+        },
+        {
+          "id": "arc",
+          "visual": "arc",
+          "text": "Accelerating rate calorimetry, ARC, tests a whole cell in an adiabatic bomb. It runs heat, wait, search: heat one step, wait to equilibrate, then search for self-heating. Once the cell heats itself faster than a threshold, typically 0.02 °C per minute, the calorimeter follows it without losing heat and records the onset and the runaway."
+        }
+      ]
+    },
+    {
+      "id": "mech",
+      "title": "Thermomechanical Analysis",
+      "exam": [],
+      "steps": [
+        {
+          "id": "terms",
+          "visual": "terms",
+          "text": "First, the words. Elasticity is the tendency to return to the original shape after a force. Stiffness is how much stress a given strain needs: the modulus. Strength is how much stress a material takes before it deforms permanently or breaks. Hardness is resistance to local deformation, such as indentation, scratching or cutting."
+        },
+        {
+          "id": "stress-strain",
+          "visual": "stress-strain",
+          "equation": "E = \\frac{\\sigma}{\\varepsilon} \\qquad G = \\left.\\frac{d\\tau}{d\\gamma}\\right|_{\\tau \\simeq 0}",
+          "text": "Stress is force per area, strain is the relative change in length, and the slope of the first, elastic part of the curve is Young's modulus. In shear, the same idea gives the shear modulus G: shear stress over shear strain at small deformation."
+        },
+        {
+          "id": "creep",
+          "visual": "creep",
+          "text": "Polymers are viscoelastic: part spring, part dashpot. Hold the stress constant and the strain keeps growing with time, which is creep. Hold the strain constant and the stress decays, which is stress relaxation. For a separator or a polymer electrolyte under stack pressure, creep matters."
+        },
+        {
+          "id": "dma",
+          "visual": "dma",
+          "equation": "\\tan\\delta = \\frac{E''}{E'}",
+          "text": "Dynamic mechanical analysis, DMA, applies a small sinusoidal stress and measures the strain. An elastic solid responds in phase, and a viscous liquid lags by 90°. A real polymer lags by an angle delta in between. The in-phase part is the storage modulus E′, the out-of-phase part the loss modulus E″, and tan delta is their ratio."
+        },
+        {
+          "id": "sweep",
+          "visual": "sweep",
+          "text": "Scan the temperature and a polymer shows its states. In the glassy region the storage modulus is high, around 1 GPa. At the glass transition it falls by orders of magnitude while tan delta peaks. Then comes the rubbery plateau and, for an uncrosslinked polymer, flow. In a semi-crystalline polymer the crystallites hold the plateau up until they melt."
+        },
+        {
+          "id": "electrolyte",
+          "visual": "electrolyte",
+          "text": "For solid polymer electrolytes this is the central trade-off. Ions move with the chain motion, so conductivity needs a soft polymer well above its Tg, but the electrolyte must also be stiff enough to keep the electrodes apart. DMA and DSC together show where a material sits between the two."
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "title": "Recap",
+      "exam": [],
+      "steps": [
+        {
+          "id": "recap",
+          "visual": "recap",
+          "text": "To recap: a battery is many materials and interfaces, and every technique is a probe, an interaction and a detector. TGA weighs, DTA and DSC measure heat, and theoretical mass losses and enthalpies identify each event. The charged cathode drives thermal runaway, and DMA links a polymer's stiffness to its temperature."
+        }
+      ]
+    }
+  ]
+}
