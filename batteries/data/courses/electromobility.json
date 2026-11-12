@@ -1,7 +1,7 @@
 {
   "title": "Introduction to Electromobility — Explainer",
   "course": "1EL003 Introduction to Electromobility, Uppsala University",
-  "examSource": "Built from lectures F1 (introduction) and F2 (charging infrastructure), 2026; the e-exam is on 8 January 2027.",
+  "examSource": "Built from lectures F1 (introduction), F2 (charging infrastructure), F3 (smart charging and V2X) and F4 (electric vehicles and vehicle dynamics), 2026; the e-exam is on 8 January 2027.",
   "chapters": [
     {
       "id": "intro",
@@ -166,6 +166,209 @@
       ]
     },
     {
+      "id": "v2x",
+      "title": "Smart Charging and V2X",
+      "exam": [],
+      "steps": [
+        {
+          "id": "grid",
+          "visual": "grid",
+          "text": "The electrical grid was built for one-way flow: large power plants, transmission lines, then distribution to homes. Now it is turning two-way, with solar on rooftops, wind farms, batteries and local microgrids. Electric vehicles arrive in the middle of this change as a large new load."
+        },
+        {
+          "id": "demand",
+          "visual": "demand",
+          "text": "Left alone, most people plug in when they get home, so charging piles onto the evening peak around six to eight o'clock, exactly when households already use the most. With many EVs, that means higher peaks, voltage drops and overloaded transformers and lines. But the same cars are parked most of the day, so they could also be part of the solution."
+        },
+        {
+          "id": "dumb",
+          "visual": "uncontrolled",
+          "text": "There are four charging strategies. The first is uncontrolled, or dumb, charging. The car is treated as an ordinary load: charging starts the moment it is plugged in and runs until the battery is full. The price is assumed constant, nothing nudges the user to wait, and the only cure for the extra peak is expensive grid reinforcement."
+        },
+        {
+          "id": "tariff",
+          "visual": "tariff",
+          "text": "The second is multiple tariff charging, or time-of-use pricing. Electricity is cheaper in off-peak valley hours, so owners are encouraged to charge then, but they still decide. It shifts part of the demand, yet it is still counted as uncontrolled, and if thousands of EVs all start when the cheap tariff begins, they create a new peak of their own."
+        },
+        {
+          "id": "smart",
+          "visual": "smart",
+          "text": "The third is smart, or controlled, charging. An aggregator, or the distribution system operator in an isolated system, manages the charging power of many cars at once. It schedules charging around grid conditions, market prices and available generation, while still delivering what each user needs. This prevents overloads and voltage problems, avoids costly reinforcements, and lets the fleet sell ancillary services by adjusting how fast it charges."
+        },
+        {
+          "id": "v2g",
+          "visual": "v2g",
+          "text": "The fourth is bidirectional charging, called V2G or more generally V2X. Now the aggregator controls both charging and discharging, so the cars become distributed energy storage that can push power back during high demand. It offers more reserve than smart charging alone, for peak shaving, load balancing and voltage support. The cost is extra battery cycling and degradation, so owners need a bigger financial incentive."
+        },
+        {
+          "id": "compare",
+          "visual": "strategy-table",
+          "text": "Side by side: dumb charging gives the user full control, no grid control and very limited benefit. Multiple tariff keeps user control and adds price signals, for a moderate benefit. Smart charging hands control to the aggregator or DSO, with high benefit. Only vehicle-to-grid also exports power back to the grid."
+        },
+        {
+          "id": "topologies",
+          "visual": "topologies",
+          "text": "V2X comes in several forms. V2L, vehicle-to-load, powers a device directly, for camping, an outage or a rural site. V2H, vehicle-to-home, runs the house during expensive hours or a blackout. V2B does the same for commercial and industrial buildings, with larger benefits. And V2G, vehicle-to-grid, sells one or more energy services to the grid itself. Smart charging without export is often called V1G."
+        }
+      ]
+    },
+    {
+      "id": "flex",
+      "title": "What EV Flexibility Offers the Grid",
+      "exam": [],
+      "steps": [
+        {
+          "id": "load-curve",
+          "visual": "load-curve",
+          "text": "The first opportunity is reshaping the load curve. Smart V1G charging fills the night-time valley, when power is cheap and plentiful. V2G goes further and shaves the evening peak by feeding power back, so fewer expensive fossil peak plants need to run."
+        },
+        {
+          "id": "frequency",
+          "visual": "frequency",
+          "text": "The second is ancillary services for the transmission grid. Grid frequency must stay close to 50 Hz in Europe. An aggregated EV fleet can respond within 500 ms, faster than thermal power plants, which makes it ideal for the primary frequency reserve, FCR. V2G inverters can also inject or absorb reactive power to support the voltage."
+        },
+        {
+          "id": "congestion",
+          "visual": "congestion",
+          "text": "Next come the local problems. When a line is congested, the operator can pause or slow charging in that area only, which can defer cable upgrades worth millions of euros. In residential streets, many home chargers of 11 kW running together can overload a feeder; spreading them across the night solves it. And fast chargers can support the local voltage with reactive power."
+        },
+        {
+          "id": "renewables",
+          "visual": "renewables",
+          "text": "Flexible charging also soaks up renewable energy. At midday, when solar peaks, parked workplace fleets can act as green energy sponges instead of the clean power being curtailed. Behind the meter, a household charges at the cheapest night hours, runs the home from the car in the evening, and lowers the total cost of ownership."
+        },
+        {
+          "id": "challenges",
+          "visual": "challenges",
+          "text": "So who benefits? Transmission operators, the TSOs, gain frequency control and peak reduction. Distribution operators, the DSOs, gain congestion relief and local voltage control. Consumers gain lower bills. What is still missing is the ecosystem: charging and grid planned together, clear roles for every actor, regulation and business models for flexibility markets, common standards, and rules for data."
+        },
+        {
+          "id": "dsm",
+          "visual": "dsm",
+          "text": "All of this is demand-side flexibility: end users deliberately changing their consumption, or generation, in response to prices, market signals or the system operator. Its goals are a flatter load profile, more renewables and lower operating costs. Passenger EVs are parked up to 90% of the time, which makes them an excellent resource, as long as smart meters and communication technology track consumption, send dynamic tariffs and automate the adjustments."
+        },
+        {
+          "id": "services",
+          "visual": "services",
+          "text": "V2G services differ by response time. Frequency regulation and voltage support act in milliseconds to seconds. Operating reserves act in seconds to minutes. Peak shaving, renewable integration and congestion management work over minutes to hours, valley filling over hours, and capacity markets over hours to days. Most real projects stack several of these revenue streams, a practice called value stacking."
+        },
+        {
+          "id": "discuss",
+          "visual": "discuss",
+          "text": "A good exercise: sort these services into energy services, which move energy in time, like arbitrage, peak shaving and renewable integration, and ancillary services, which keep the grid stable, like frequency regulation, reserves and voltage support. Then ask yourself: if you owned an electric car, would you join V2G, and on what conditions?"
+        }
+      ]
+    },
+    {
+      "id": "range",
+      "title": "Range and What Drains It",
+      "exam": [],
+      "steps": [
+        {
+          "id": "anxiety",
+          "visual": "anxiety",
+          "text": "Range anxiety, the fear of running out of battery before reaching your destination, has long been one of the main barriers to electric cars. As ranges grow, the question is changing from can I get there, to can I charge when I get there. Drivers now worry about finding a free charger, whether it works, how long they will wait, and what it costs."
+        },
+        {
+          "id": "factors",
+          "visual": "factors",
+          "text": "Many things change how far a car really goes. The driver: driving style, speed and charging habits. The car: its weight, shape, tyre pressure, propulsion system and auxiliaries such as heating. And the conditions: temperature, wind, weather, road gradient, traffic and route length."
+        },
+        {
+          "id": "cold",
+          "visual": "cold",
+          "text": "Temperature matters most of all. Range is best around 25 °C and drops sharply in the cold, when the battery is sluggish and the cabin must be heated. In a long test of a Nissan Leaf in the UK, the energy used per kilometre differed by around 70% between the cold and warm months."
+        }
+      ]
+    },
+    {
+      "id": "dynamics",
+      "title": "Vehicle Dynamics: The Forces on a Car",
+      "exam": [],
+      "steps": [
+        {
+          "id": "power",
+          "visual": "power-energy",
+          "text": "Range follows from simple physics. Power is force times speed. Energy is power times time. Put them together and the distance you can drive is the battery energy times the speed, divided by the power you draw. Draw more power at the same speed, and the range falls.",
+          "equation": "P = F\\,v \\qquad E = P\\,t \\qquad S = \\frac{E\\,v}{P}"
+        },
+        {
+          "id": "forces",
+          "visual": "forces",
+          "text": "The motor has to supply four forces. The acceleration force to change speed, the rolling resistance of the tyres, the aerodynamic drag of the air, and the climbing force on a slope. Together they make up the motive force the drivetrain must deliver.",
+          "equation": "F_m = F_a + F_R + F_D + F_C"
+        },
+        {
+          "id": "accel",
+          "visual": "acceleration",
+          "text": "The acceleration force is Newton's second law: mass times acceleration. The wheels, motor and gears must spin up too, which adds roughly 5% on top.",
+          "equation": "F_a = m\\,a = m\\,\\frac{dv}{dt} \\qquad F_a + F_{\\omega a} \\approx 1.05\\,F_a"
+        },
+        {
+          "id": "drag",
+          "visual": "drag",
+          "text": "Aerodynamic drag is one half, times the air density, times the drag coefficient, times the frontal area, times the speed squared. The speed here is relative to the air, so a headwind adds to it and a tailwind subtracts. Air density depends on temperature, humidity and altitude, and the drag coefficient on how streamlined the car is.",
+          "equation": "F_D = \\tfrac{1}{2}\\,\\rho_{air}\\,C_D\\,A\\,(v \\pm v_{air})^2"
+        },
+        {
+          "id": "drag-example",
+          "visual": "drag-example",
+          "text": "Try it. A car with a drag coefficient of 0.25, a frontal area of 2 square metres and 20 kWh of usable energy drives at 120 km/h, about 33.3 metres per second. In calm air the drag is about 333 newtons, which takes 11.1 kW, giving a range of 216 km. A 12 km/h headwind raises the drag to 403 newtons and cuts the range to 179 km. The same tailwind stretches it to 267 km."
+        },
+        {
+          "id": "rolling",
+          "visual": "rolling",
+          "text": "Rolling resistance comes from the tyres deforming on the road and from friction in the drivetrain. It is the rolling coefficient times the mass times g, 9.81 metres per second squared, and it barely depends on speed. A car of 2000 kg with a coefficient of 0.0085 feels about 167 newtons; at 10 km/h that costs only about 464 watts.",
+          "equation": "F_R = C_R\\,m\\,g"
+        },
+        {
+          "id": "climb",
+          "visual": "climb",
+          "text": "The climbing force is the mass times g times the sine of the slope angle. Uphill it adds to what the motor must deliver. Downhill it turns negative, and the motor can regenerate energy back into the battery. A car of 1645 kg rolling down a slope of 6° at 120 km/h has about 56 kW to recover.",
+          "equation": "F_C = m\\,g\\,\\sin\\theta"
+        },
+        {
+          "id": "coastdown",
+          "visual": "coastdown",
+          "text": "In practice, engineers measure drag and rolling resistance together with a coast-down test: get up to speed, shift to neutral, and record how fast the car slows. The result is the road-load force, A plus B times speed plus C times speed squared. A is mainly rolling resistance, B is small rotational losses, and C is aerodynamic drag.",
+          "equation": "F_v = A + B\\,v + C\\,v^2"
+        },
+        {
+          "id": "speed",
+          "visual": "speed-power",
+          "text": "This explains why highway speed eats range. Rolling power grows in step with speed, but drag power grows with the cube of speed. For a Tesla Model 3, air resistance dominates at highway speeds, and even a gentle 1° incline adds a large climbing term.",
+          "equation": "P_D \\propto v^3 \\qquad P_R \\propto v"
+        },
+        {
+          "id": "hvac",
+          "visual": "hvac",
+          "text": "Auxiliaries count too. A car with a battery of 24 kWh covers 170 km at a steady 88 km/h, so it drives for about 1.93 hours and draws about 12.4 kW. Switch on heating or air conditioning drawing 6 kW, and the total becomes about 18.4 kW. The battery now lasts only 1.3 hours, and the range drops to about 114 km."
+        },
+        {
+          "id": "grade",
+          "visual": "grade",
+          "text": "A harder one. A car of 1645 kg drives at 126 km/h, or 35 metres per second, with a road load of A equals 130, B equals 0.71 and C equals 0.49. The road load is about 755 newtons, or 26.4 kW. The battery draws 85 kW at 92% drivetrain efficiency, so 78.2 kW reaches the wheels. The extra 51.8 kW must be climbing, which gives a grade of about 5.3°, uphill."
+        }
+      ]
+    },
+    {
+      "id": "propulsion",
+      "title": "Electric Propulsion and Vehicle Types",
+      "exam": [],
+      "steps": [
+        {
+          "id": "system",
+          "visual": "propulsion",
+          "text": "Every electric propulsion system, in a car or a ship, has the same parts. Energy storage, usually a battery, feeds power electronics, the inverter, which drives the electric motor. A controller, fed by sensors and communication links, decides what the power electronics do. Power flows one way through the chain, information flows around it."
+        },
+        {
+          "id": "types",
+          "visual": "ev-types",
+          "text": "Vehicle types range from conventional to fully electric. A conventional car has only a combustion engine running on fuel. A hybrid, HEV, uses the engine as primary and an electric motor as secondary, still filled only with fuel. A plug-in hybrid, PHEV, flips this, with the electric motor as primary and the engine as backup, using both fuel and electricity. A battery electric vehicle, BEV, runs on electricity alone."
+        }
+      ]
+    },
+    {
       "id": "outro",
       "title": "Recap",
       "exam": [],
@@ -173,7 +376,7 @@
         {
           "id": "recap",
           "visual": "recap",
-          "text": "To recap: electromobility is vehicles, charging and policy together. Electric cars rose, fell and came back with oil prices and climate goals. AC charging is limited by the on-board charger and DC by the station. Wireless, electric roads and swapping each fit a niche, and smart charging decides when the grid takes the load."
+          "text": "To recap: electromobility is vehicles, charging and policy together. AC charging is limited by the on-board charger and DC by the station. Smart charging and V2G turn parked cars into flexibility that shaves peaks, steadies frequency and absorbs renewables. And range comes down to physics: drag grows with the square of speed, cold and auxiliaries drain the battery, and downhill the motor gives energy back."
         }
       ]
     }

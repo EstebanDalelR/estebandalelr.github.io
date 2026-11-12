@@ -1,7 +1,16 @@
 import type { CourseReference } from "../reference";
 
 export const electromobility: CourseReference = {
-  formulaLabels: {},
+  formulaLabels: {
+    "dynamics/power": "Power, energy and driving distance",
+    "dynamics/forces": "Motive force",
+    "dynamics/accel": "Acceleration force (rotating parts ≈ +5 %)",
+    "dynamics/drag": "Aerodynamic drag",
+    "dynamics/rolling": "Rolling resistance",
+    "dynamics/climb": "Climbing (downgrade) force",
+    "dynamics/coastdown": "Road-load force from a coast-down test",
+    "dynamics/speed": "Drag and rolling power vs speed",
+  },
   extraFormulas: [
     { chapterId: "levels", label: "Charging time (ideal)", tex: "t \\approx \\frac{\\Delta\\text{SOC}\\cdot E_{battery}}{P_{charge}}" },
     { chapterId: "levels", label: "Charging power", tex: "P = V\\,I \\quad (\\text{3-phase AC: } P = \\sqrt{3}\\,V_{LL} I)" },
@@ -22,5 +31,22 @@ export const electromobility: CourseReference = {
     { term: "Charging automation levels", chapterId: "smart", text: "0: human plugs in; 1–3: assistance; 4: autonomous positioning with a robot connecting the cable; 5: fully autonomous." },
     { term: "Smart charging", chapterId: "smart", text: "Shifting charging to hours with low spot prices and low grid load." },
     { term: "Megawatt Charging System (MCS)", chapterId: "smart", text: "Heavy-duty charging standard up to ≈ 1.44 MW (demonstrated); about 40 min from 20 to 80 % for a long-haul truck." },
+    { term: "Uncontrolled (dumb) charging", chapterId: "v2x", text: "Charging starts at plug-in and runs until full; flat price, no incentive to shift. Adds to the evening peak." },
+    { term: "Multiple tariff (time-of-use)", chapterId: "v2x", text: "Cheaper off-peak prices nudge owners, who still decide. Counted as uncontrolled; a synchronised start can create a new peak." },
+    { term: "Smart (controlled) charging, V1G", chapterId: "v2x", text: "An aggregator or DSO sets charging power from grid conditions, prices and generation while meeting users' needs. No export." },
+    { term: "Aggregator", chapterId: "v2x", text: "Coordinates a large group of EVs and trades their flexibility in electricity and reserve markets on their behalf." },
+    { term: "V2G / V2X", chapterId: "v2x", text: "Bidirectional charging: EVs also discharge to the grid (V2G), a home (V2H), a building (V2B) or a load (V2L). Costs extra battery degradation." },
+    { term: "TSO / DSO", chapterId: "flex", text: "Transmission system operator (high-voltage grid, frequency) and distribution system operator (local grid, congestion and voltage)." },
+    { term: "FCR", chapterId: "flex", text: "Frequency containment reserve: the primary, fastest reserve holding 50 Hz. Aggregated EVs can respond within about 500 ms." },
+    { term: "Peak shaving / valley filling", chapterId: "flex", text: "Discharging (V2G) during the peak and shifting charging (V1G) into the low-demand night." },
+    { term: "Demand-side flexibility", chapterId: "flex", text: "End users intentionally changing consumption or generation in response to prices, market signals or the system operator." },
+    { term: "Energy vs ancillary services", chapterId: "flex", text: "Energy services move energy in time (arbitrage, peak shaving, renewable integration); ancillary services keep the grid stable (frequency, reserves, voltage)." },
+    { term: "Value stacking", chapterId: "flex", text: "Earning from several V2G services with the same fleet: arbitrage, frequency regulation, reserves, peak shaving, grid services." },
+    { term: "Range vs charging anxiety", chapterId: "range", text: "Fear of not reaching the destination, giving way (from about 2024) to worry about finding a working, free, affordable charger." },
+    { term: "Specific energy consumption", chapterId: "range", text: "Energy used on a trip divided by the distance. In a UK Nissan Leaf study it was about 70 % higher in cold months than warm ones." },
+    { term: "Coast-down test", chapterId: "dynamics", text: "Let the car roll in neutral and record the slowdown to fit Fv = A + Bv + Cv²: A ≈ rolling, B rotational losses, C ≈ drag." },
+    { term: "Regenerative braking", chapterId: "dynamics", text: "Downhill the climbing force is negative, so the motor works as a generator and recharges the battery." },
+    { term: "Electric propulsion system", chapterId: "propulsion", text: "Energy storage → power electronics (inverter) → electric motor, run by a controller using sensors and communication." },
+    { term: "HEV / PHEV / BEV", chapterId: "propulsion", text: "Hybrid: engine primary, e-motor secondary, fuel only. Plug-in hybrid: e-motor primary, engine backup, fuel + electricity. BEV: electricity only." },
   ],
 };

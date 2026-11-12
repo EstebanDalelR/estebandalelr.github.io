@@ -9,6 +9,11 @@ const CARDS = [
   { t: "Levels", id: "levels", k: ["AC: on-board limits", "DC: station limits"] },
   { t: "Technologies", id: "tech", k: ["wireless, ERS,", "swapping: niches"] },
   { t: "Smart", id: "smart", k: ["charge when cheap,", "trucks need MW"] },
+  { t: "V2X", id: "v2x", k: ["dumb → tariff →", "smart → V2G"] },
+  { t: "Flexibility", id: "flex", k: ["peaks, frequency,", "congestion, solar"] },
+  { t: "Range", id: "range", k: ["charging anxiety,", "cold costs ~70 %"] },
+  { t: "Dynamics", id: "dynamics", k: ["Fa + FR + FD + FC", "drag power ∝ v³"] },
+  { t: "Propulsion", id: "propulsion", k: ["battery → inverter", "→ motor; HEV→BEV"] },
 ];
 
 export default function OutroVisual({ visual }: { visual: string }) {
@@ -19,7 +24,7 @@ export default function OutroVisual({ visual }: { visual: string }) {
       show={visual === "recap"}
       takeaway={{
         title: "The vehicle is only half the system",
-        lines: ["charging power, location and timing decide", "what electric transport asks of the grid"],
+        lines: ["charging timing decides what EVs ask of the grid,", "and physics decides how far they go"],
       }}
     />
   );
