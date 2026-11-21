@@ -34,8 +34,8 @@ export default function SpeedReader({
     words.forEach((w) => p.push(p[p.length - 1] + delayFactor(w)));
     return p;
   }, [words]);
-  // Fixed size from the median token's longer side, so typical words never change size. Only
-  // tokens longer than that shrink to fit half the stage (monospace glyph is ~0.62em wide).
+  // Fixed size from the p95 token's longer side, so nearly all words share one size. Only the
+  // ~5% longer tokens shrink to fit half the stage (monospace glyph is ~0.62em wide).
   const baseSide = useMemo(() => {
     const sides = words
       .map((w) => {
@@ -43,7 +43,7 @@ export default function SpeedReader({
         return Math.max(p, w.text.length - p - 1);
       })
       .sort((a, b) => a - b);
-    return Math.max(4, sides[Math.floor(sides.length / 2)] ?? 4);
+    return Math.max(4, sides[Math.floor(sides.length * 0.95)] ?? 4);
   }, [words]);
   const chapterStart = useMemo(() => chapters.map((_, ci) => words.findIndex((w) => w.chapter === ci)), [chapters, words]);
   const sentenceStarts = useMemo(
