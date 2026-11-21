@@ -25,7 +25,8 @@ export default function SpeedReader({
   /** Where to begin: chapter index and optional step index. */
   start: { chapter: number; step?: number };
   onClose: () => void;
-  onShowScript: () => void;
+  /** Optional link to a screen-reader friendly version of the text. */
+  onShowScript?: () => void;
 }) {
   const words = useMemo(() => buildWords(chapters), [chapters]);
   // prefix[i] = sum of delay factors before word i, so time remaining is O(1).
@@ -349,11 +350,16 @@ export default function SpeedReader({
         </div>
 
         <p className="text-center text-xs text-ink/50">
-          Space play/pause · ←/→ sentence · ↑/↓ speed · Esc close. This display is silent for screen readers on purpose;{" "}
-          <button onClick={onShowScript} className="text-accent underline underline-offset-2">
-            use the normal script
-          </button>
-          .
+          Space play/pause · ←/→ sentence · ↑/↓ speed · Esc close.
+          {onShowScript && (
+            <>
+              {" "}This display is silent for screen readers on purpose;{" "}
+              <button onClick={onShowScript} className="text-accent underline underline-offset-2">
+                use the normal script
+              </button>
+              .
+            </>
+          )}
         </p>
         <div aria-live="off" className="sr-only">
           {w?.text}
