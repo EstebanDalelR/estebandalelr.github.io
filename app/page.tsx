@@ -86,7 +86,7 @@ export default function IndexPage() {
                     lineHeight: '1.8'
                   }}>
                     <p className="first-letter:text-5xl first-letter:font-bold first-letter:mr-1 first-letter:float-left first-letter:text-amber-900">
-                      I was born in the vibrant city of Miami, where the sun kissed the ocean and the air was thick with humidity and promise.
+                      I was born in a small town in Colombia, the kind where everyone knows your name before you learn it yourself, but it was Bogotá, cold and grey and endlessly alive, that raised me.
                     </p>
                   </div>
                 </div>
