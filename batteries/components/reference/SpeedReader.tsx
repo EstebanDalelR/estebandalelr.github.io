@@ -34,14 +34,16 @@ export default function SpeedReader({
     words.forEach((w) => p.push(p[p.length - 1] + delayFactor(w)));
     return p;
   }, [words]);
-  // One font size for the whole session, sized so the longest side of any token fits half the
-  // stage (monospace glyph is ~0.62em wide). Per-word sizing made the text jump.
-  const fontSize = useMemo(() => {
-    const side = words.reduce((m, w) => {
-      const p = orpIndex(w.text);
-      return Math.max(m, p, w.text.length - p - 1);
-    }, 4);
-    return `min(3.75rem, ${(44 / (0.62 * side)).toFixed(2)}cqw)`;
+  // Fixed size from the median token's longer side, so typical words never change size. Only
+  // tokens longer than that shrink to fit half the stage (monospace glyph is ~0.62em wide).
+  const baseSide = useMemo(() => {
+    const sides = words
+      .map((w) => {
+        const p = orpIndex(w.text);
+        return Math.max(p, w.text.length - p - 1);
+      })
+      .sort((a, b) => a - b);
+    return Math.max(4, sides[Math.floor(sides.length / 2)] ?? 4);
   }, [words]);
   const chapterStart = useMemo(() => chapters.map((_, ci) => words.findIndex((w) => w.chapter === ci)), [chapters, words]);
   const sentenceStarts = useMemo(
@@ -201,6 +203,7 @@ export default function SpeedReader({
   const left = w?.text.slice(0, p) ?? "";
   const pivot = w?.text[p] ?? "";
   const right = w?.text.slice(p + 1) ?? "";
+  const fontSize = `min(3.75rem, ${(44 / (0.62 * Math.max(baseSide, left.length, right.length))).toFixed(2)}cqw)`;
   const minutes = words.length / wpm;
 
   const onPointerDown = (e: React.PointerEvent) => {
