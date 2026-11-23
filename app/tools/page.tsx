@@ -8,6 +8,12 @@ const tools = [
     color: "from-emerald-500 to-teal-500",
   },
   {
+    name: "Speed Reader",
+    description: "Paste text and read it one word at a time (RSVP) at your chosen speed.",
+    href: "/tools/speedReader",
+    color: "from-teal-500 to-emerald-600",
+  },
+  {
     name: "Text Diff",
     description: "Compare two blocks of text side-by-side and highlight differences.",
     href: "/tools/textDiff",
