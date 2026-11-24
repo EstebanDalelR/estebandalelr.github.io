@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [
+    "/_next/*",
+    "/batteries/audio/*",
+    "/llms.txt",
+    "/robots.txt",
+    "/sitemap.xml",
+    "/esteban.jfif",
+    "/estebandalelr.jpg"
+  ]
+}
