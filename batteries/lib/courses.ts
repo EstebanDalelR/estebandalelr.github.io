@@ -56,7 +56,7 @@ export const COURSES: Course[] = [
     id: "electromobility",
     route: "/batteries/electromobility",
     label: "Introduction to Electromobility",
-    blurb: "EV history and policy, charging levels and technologies, smart charging and V2G, range and vehicle dynamics.",
+    blurb: "EV history and policy, charging and V2G, range and vehicle dynamics, electric machines, and batteries from cell to pack.",
     narration: electromobility as Narration,
   },
   {

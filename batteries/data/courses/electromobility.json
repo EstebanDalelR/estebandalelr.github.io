@@ -1,7 +1,7 @@
 {
   "title": "Introduction to Electromobility — Explainer",
   "course": "1EL003 Introduction to Electromobility, Uppsala University",
-  "examSource": "Built from lectures F1 (introduction), F2 (charging infrastructure), F3 (smart charging and V2X) and F4 (electric vehicles and vehicle dynamics), 2026; the e-exam is on 8 January 2027.",
+  "examSource": "Built from lectures F1 (introduction), F2 (charging infrastructure), F3 (smart charging and V2X), F4 (electric vehicles and vehicle dynamics), F5 (electrical machines) and F7 (batteries for electromobility), 2026; the e-exam is on 8 January 2027.",
   "chapters": [
     {
       "id": "intro",
@@ -369,6 +369,240 @@
       ]
     },
     {
+      "id": "magnetism",
+      "title": "How Electric Machines Work",
+      "exam": [],
+      "steps": [
+        {
+          "id": "share",
+          "visual": "motor-share",
+          "text": "Electric motors are everywhere. In 2023 motor systems used 53% of the world's electricity, about 13,462 TWh. They take 72% of industry's electricity, 87% of agriculture's, 86% of transport's and 36% of buildings'. In 2011 the estimate was about 45%, so the share is growing."
+        },
+        {
+          "id": "laws",
+          "visual": "laws",
+          "text": "A machine needs only three cause-and-effect pairs. Ampère: a current makes a magnetic field, and a coil of N turns adds up to N times I ampere-turns. Faraday: a changing flux induces a voltage, which gives back-EMF and eddy currents, and Lenz says the induced current opposes the change. Lorentz: a current in a field feels a force, and that force at a radius is torque.",
+          "equation": "e = -\\frac{d\\Phi}{dt} \\qquad F = B\\,I\\,L"
+        },
+        {
+          "id": "core",
+          "visual": "core",
+          "text": "The magnetic core multiplies the field. Electrical steel has a relative permeability in the thousands, while air has about 1. So steel carries the flux around a closed magnetic circuit. The rotor must turn, so an air gap is unavoidable, and it costs many ampere-turns. Keep the gap small.",
+          "equation": "B = \\mu_0\\,\\mu_r\\,H"
+        },
+        {
+          "id": "bh",
+          "visual": "bh-loop",
+          "text": "Iron is made of tiny magnetic domains. Unmagnetised, they point randomly and cancel. An applied field lines them up, until at about 1.5 to 2 tesla they are all aligned and the steel saturates. Bring the field back to zero and some flux remains, the remanence. The reverse field needed to remove it is the coercivity. The area of the loop is energy lost every cycle, the hysteresis loss."
+        },
+        {
+          "id": "soft-hard",
+          "visual": "soft-hard",
+          "text": "Soft magnetic materials, like electrical steel, have a narrow loop: they magnetise easily and lose little per cycle, so they guide the flux in the stator and rotor. Hard materials, the permanent magnets NdFeB, SmCo, ferrite and AlNiCo, have a wide loop and keep their magnetisation, so they supply the rotor field without any current."
+        },
+        {
+          "id": "lamination",
+          "visual": "lamination",
+          "text": "A solid steel core acts like one big shorted turn. The changing flux drives eddy currents that heat it, and the loss grows with the frequency squared and the thickness squared. The fix is thin sheets, typically 0.2 to 0.5 mm, insulated from each other. The windings are copper, the magnets supply the rotor flux, and polymer insulation with air, water or oil cooling keeps the temperature in bounds.",
+          "equation": "P_{eddy} \\propto f^2\\,t^2"
+        }
+      ]
+    },
+    {
+      "id": "rotating",
+      "title": "The Rotating Field and Torque",
+      "exam": [],
+      "steps": [
+        {
+          "id": "phases",
+          "visual": "three-phase",
+          "text": "Feed one coil with DC and the rotor turns toward it, then stops. A single phase has dead points with no torque, and two phases work but the power is not smooth. Three currents, shifted by 120°, give three pulsating fields that add up to one field of constant size, rotating at constant speed. Three phases give constant power."
+        },
+        {
+          "id": "speed",
+          "visual": "sync-speed",
+          "text": "The field turns at the synchronous speed: 120 times the frequency, divided by the number of poles, in rpm. A two-pole machine at 50 Hz turns at 3000 rpm, a four-pole one at 1500 rpm. More poles means a slower field. In an EV the inverter varies the frequency, so the speed is set electronically: at 200 Hz the four-pole machine reaches 6000 rpm.",
+          "equation": "n_s = \\frac{120\\,f}{P}"
+        },
+        {
+          "id": "torque",
+          "visual": "torque",
+          "text": "The rotor has its own field and is dragged along by the stator field, like one magnet following another. The torque is proportional to the stator field, times the rotor field, times the sine of the load angle between them. A salient iron rotor adds reluctance torque, because iron also wants to line up with the field. Distributed windings give a smoother field, concentrated windings are more compact.",
+          "equation": "T \\propto B_{s}\\,B_{r}\\,\\sin\\alpha"
+        },
+        {
+          "id": "quadrants",
+          "visual": "quadrants",
+          "text": "Power is torque times speed. When it is positive, electrical power goes in and mechanical power comes out: the machine is a motor. When it is negative, mechanical power goes in and electrical power comes out: it is a generator, or a brake. The same hardware does both, which is how regenerative braking works in an EV, forwards and in reverse.",
+          "equation": "P = T\\,\\omega"
+        }
+      ]
+    },
+    {
+      "id": "machines",
+      "title": "Types of Electric Machines",
+      "exam": [],
+      "steps": [
+        {
+          "id": "classes",
+          "visual": "classes",
+          "text": "All AC machines share the same stator and rotating field. What differs is how the rotor gets its field. Induced currents give the induction, or asynchronous, machine. Permanent magnets give the permanent-magnet synchronous machine, PMSM. DC in a rotor winding gives the wound-field synchronous machine. Shaped iron alone gives the reluctance machine."
+        },
+        {
+          "id": "induction",
+          "visual": "induction",
+          "text": "In an induction machine the rotor is just conductors in steel. It turns slightly slower than the field, and this slip induces rotor currents, by Faraday, which feel a force in the stator field, by Lorentz. No slip, no torque. It is robust, simple and free of magnets, with no back-EMF at a fault. But the rotor copper losses lower its efficiency and power density.",
+          "equation": "s = \\frac{n_s - n}{n_s}"
+        },
+        {
+          "id": "pmsm",
+          "visual": "pmsm",
+          "text": "In a PMSM, magnets on the rotor lock onto the rotating field. There is no rotor current and so no rotor copper loss, which gives the highest efficiency and power density: the choice of most EVs, like the Toyota Prius and Chevrolet Volt. The catch: it makes back-EMF whenever it spins, even at a fault, and magnets bring cost, supply risk and demagnetisation limits."
+        },
+        {
+          "id": "wound",
+          "visual": "wound",
+          "text": "A wound-field synchronous machine feeds DC into a rotor winding, through slip rings and brushes or a brushless exciter. Its field can be adjusted, or switched off at a fault. Power-station generators work this way, and so does the Renault ZOE. The price is rotor copper loss, extra parts and complexity."
+        },
+        {
+          "id": "magnets",
+          "visual": "magnets",
+          "text": "Magnets trade strength for temperature and cost. NdFeB is the strongest, 1.0 to 1.4 tesla, but only up to about 80 to 200 °C, with rare-earth supply risk. SmCo, 0.8 to 1.1 tesla, survives 250 to 350 °C but is costly. Ferrite is cheap and free of rare earths, but only 0.2 to 0.45 tesla, and it demagnetises when cold. AlNiCo is very stable but easily demagnetised, and mostly legacy."
+        },
+        {
+          "id": "topologies",
+          "visual": "rotor-topologies",
+          "text": "The magnets can sit on the rotor surface, which is simple but needs a retaining sleeve. Buried inside, in an interior PM machine, they add reluctance torque and a wide field-weakening range. In a spoke rotor they stand radially and concentrate the flux, so weak, cheap ferrite can reach a high air-gap flux. That is how a rare-earth-free ferrite spoke design can replace the earlier NdFeB design in the same space."
+        },
+        {
+          "id": "compare",
+          "visual": "machine-compare",
+          "text": "Compare them. The induction machine has significant rotor copper losses and no magnets, with good efficiency: early Teslas and industry. The PM machine has small rotor losses and the highest efficiency and power density: most EVs. The wound-field machine adjusts its flux, with field copper losses. Reluctance machines are robust but noisy, and DC machines, once dominant, lost out to power electronics."
+        },
+        {
+          "id": "losses",
+          "visual": "losses",
+          "text": "Efficiency is the output power over the input power. Copper loss is I squared R heat in the windings. Iron loss is hysteresis and eddy currents in the steel. Mechanical loss is bearing friction and windage, and magnets add eddy-current loss. At low speed and high torque copper loss dominates; at high speed iron and magnet losses take over. So design for the drive cycle, not only the peak.",
+          "equation": "\\eta = \\frac{P_{out}}{P_{in}} \\qquad P_{Cu} = I^2 R"
+        }
+      ]
+    },
+    {
+      "id": "ev-batteries",
+      "title": "Batteries for Different Electric Vehicles",
+      "exam": [],
+      "steps": [
+        {
+          "id": "criteria",
+          "visual": "app-criteria",
+          "text": "Each application wants something different from a battery. Consumer electronics want 150 to 300 Wh/kg at any cost, but only 500 to 1000 cycles and 2 to 3 years. Grid storage wants the lowest cost and 15 to 20 years, while 50 to 100 Wh/kg is enough. An EV sits in between: 100 to 150 Wh/kg, $100 to $150/kWh, −20 to 60 °C, 10 to 15 years and 3000 to 7000 cycles, with fast charge and discharge."
+        },
+        {
+          "id": "jamais",
+          "visual": "jamais-contente",
+          "text": "Batteries have driven cars from the start. In 1899 La Jamais Contente, the never contented, was the first car to pass 100 km/h. It had two motors and 50 kW, but it weighed 1450 kg, and half of that was its 100 lead-acid cells. Charging took 7 hours. Weight and range made combustion engines more appealing for the next hundred years."
+        },
+        {
+          "id": "types",
+          "visual": "electrification",
+          "text": "The degree of electrification runs from a pure combustion car, through start-stop, mild and strong hybrids, HEV, and the plug-in hybrid, PHEV, to the full EV. An extended-range EV, EREV, drives only on its motor and uses a small engine solely to charge the battery. The right choice depends on the electric range needed, the energy use per km, the performance wanted and the climate and terrain."
+        },
+        {
+          "id": "modes",
+          "visual": "cs-cd",
+          "text": "A hybrid runs in charge-sustaining mode: the state of charge wobbles around a set level and the battery never empties. A plug-in hybrid first charges from the grid, runs down in charge-depleting mode, then switches to charge sustaining. An EV is charge depleting all the way. So the packs differ: under 3 kWh for an HEV, 5 to 15 kWh for a PHEV, and 30 to 100 kWh for an EV."
+        },
+        {
+          "id": "usage",
+          "visual": "usage",
+          "text": "Usage matters too. Hybrid trucks on urban, rural and inter-city routes see very different speed profiles: frequent stops in town, a steady 80 to 90 km/h between cities. Their state of charge spends most time near the lower limit, because the hybrid strategy draws the battery down during acceleration. The same chemistry ages differently on each route."
+        }
+      ]
+    },
+    {
+      "id": "pack-design",
+      "title": "Designing the Battery Pack",
+      "exam": [],
+      "steps": [
+        {
+          "id": "design",
+          "visual": "design-map",
+          "text": "Battery design starts from the vehicle. Its weight, rolling resistance, auxiliary loads, temperature, energy management and electric range set two numbers: the power, which fixes the C-rate, and the energy, which fixes the capacity. Together they select the battery technology. Four general criteria follow: mechanical stability, temperature, battery life and voltage characteristics."
+        },
+        {
+          "id": "mechanical",
+          "visual": "mechanical",
+          "text": "A pack joins hundreds of cells, so it must be mechanically stable from cell to pack. The connections between cells must carry current with little leakage and withstand vibration, corrosion must be avoided, and in a crash the pack's encapsulation and its place in the vehicle must protect the cells."
+        },
+        {
+          "id": "thermal",
+          "visual": "thermal",
+          "text": "Temperature sets the limits for performance, safety and life. Specifications run from −40 to 80 °C, but cycle life falls fast when the cell is hot: at 60 °C it fades far sooner than at 25 °C. Cells make Joule heat, I squared R, so packs need cooling. Air cooling is cheap with no risk of leaks, but too weak for fast charging; liquid cooling performs better but costs more. In the cold, a heater is needed, because charging a cold cell can grow lithium dendrites.",
+          "equation": "P = I^2 R"
+        },
+        {
+          "id": "life",
+          "visual": "soc-dod",
+          "text": "A battery reaches end of life at 80% of its beginning-of-life capacity, though it still works below that. Calendar life counts years, cycle life counts charge and discharge cycles, and shelf life is storage without use. The state of charge is the share of capacity still available, the depth of discharge the share already used, and together they make 100%. The state of health, a rough estimate from capacity loss, is hard to measure.",
+          "equation": "\\text{DOD} + \\text{SOC} = 100\\%"
+        },
+        {
+          "id": "voltage",
+          "visual": "voltage-profile",
+          "text": "Most devices like a flat discharge curve, so the voltage stays steady over a wide range of charge, as with LFP. But in an EV the state of charge drives energy management and the range estimate, and a flat curve hides it. A sloping curve, or one with clear voltage steps, makes the state of charge easier to read."
+        },
+        {
+          "id": "bms",
+          "visual": "bms",
+          "text": "The battery management system is the brain of an EV. It measures voltage, current and temperature, estimates the state of charge, state of power and state of health, balances the cells, controls the thermal management, and reports to the car and the cloud."
+        }
+      ]
+    },
+    {
+      "id": "cells",
+      "title": "Cells, Modules and Chemistries",
+      "exam": [],
+      "steps": [
+        {
+          "id": "formats",
+          "visual": "cell-formats",
+          "text": "Cells come in three formats. Cylindrical cells are cheap and mass produced, but their steel or aluminium cans are bulky: e-bikes, power tools and Tesla cars. Prismatic cells pack efficiently with higher energy density but come in many sizes: EVs and storage. Pouch cells are light and flexible with the highest energy density, but cost more and are hard to scale: phones and drones."
+        },
+        {
+          "id": "packs",
+          "visual": "series-parallel",
+          "text": "Cells form modules, and modules, with protection systems, form the pack. Cells in series add their voltage; strings in parallel add their capacity. 8S2P means 8 cells in series and 2 such strings in parallel, 16 cells. With cells of 3.6 V and 5 Ah that gives 28.8 V and 10 Ah. A 16S4P module has twice the voltage and twice the capacity.",
+          "equation": "V = n_s\\,V_{cell} \\qquad Q = n_p\\,Q_{cell}"
+        },
+        {
+          "id": "bigger",
+          "visual": "cell-size",
+          "text": "Tesla's cells grew from the 18650, 18 mm by 65 mm, to the 2170 and the 4680, 46 mm by 80 mm. Bigger cells mean fewer cells and welds, easier management, more active material, higher energy density and a lower cost per Wh."
+        },
+        {
+          "id": "electrodes",
+          "visual": "electrodes",
+          "text": "Cell energy is capacity times voltage. Today's electrodes are intercalation hosts: graphite at 372 mAh/g and 0.15 V versus lithium, or LTO at 160 mAh/g and 1.55 V, against oxide or phosphate cathodes at about 150 mAh/g and 3.7 V. Conversion electrodes promise far more: silicon at 3580 mAh/g, sulphur at 1672 mAh/g, oxygen at 3840 mAh/g. Intercalation gives excellent reversibility, conversion gives high energy.",
+          "equation": "E_{cell} = Q_{cell} \\times V_{cell}"
+        },
+        {
+          "id": "chemistries",
+          "visual": "chem-table",
+          "text": "The EV workhorses are NCM and LFP. NCM, nickel manganese cobalt oxide, has high specific energy at low cost. LFP, lithium iron phosphate, has lower energy but high power, safety and lifespan. LCO has high energy but poor safety and life. NCA has high energy but low safety. LTO is safe and long-lived but low in energy and costly."
+        },
+        {
+          "id": "solid-state",
+          "visual": "solid-state",
+          "text": "Solid electrolytes promise safety, since they do not burn, and could enable lithium metal anodes and high-voltage cathodes. But lithium metal grows dendrites, the electrolytes are unstable at low and high voltage, ceramics are hard to manufacture, many need a dry room, and the price is high. Solid-state batteries are unlikely in EVs before 2030."
+        },
+        {
+          "id": "aviation",
+          "visual": "aviation",
+          "text": "How far is electric flight? A Dornier 228 carries 1900 kg of fuel, about 22,944 kWh. At 30% turboprop efficiency that is roughly 6900 kWh of useful work. The same 1900 kg of the best battery packs, at 255 Wh/kg, holds only 484 kWh, or about 390 kWh at 80% electric efficiency. That is about 18 times less, so batteries still have a long way to go."
+        }
+      ]
+    },
+    {
       "id": "outro",
       "title": "Recap",
       "exam": [],
@@ -376,7 +610,7 @@
         {
           "id": "recap",
           "visual": "recap",
-          "text": "To recap: electromobility is vehicles, charging and policy together. AC charging is limited by the on-board charger and DC by the station. Smart charging and V2G turn parked cars into flexibility that shaves peaks, steadies frequency and absorbs renewables. And range comes down to physics: drag grows with the square of speed, cold and auxiliaries drain the battery, and downhill the motor gives energy back."
+          "text": "To recap: electromobility is vehicles, charging and policy together. AC charging is limited by the on-board charger and DC by the station. Smart charging and V2G turn parked cars into flexibility for the grid. Range comes down to physics: drag grows with the square of speed, and downhill the motor gives energy back. Motors turn a rotating field into torque, most EVs with permanent magnets. And the battery is chosen for the vehicle: power and energy, temperature, life and chemistry, with NCM and LFP leading."
         }
       ]
     }

@@ -10,6 +10,12 @@ import FlexVisual from "./FlexVisual";
 import RangeVisual from "./RangeVisual";
 import DynamicsVisual from "./DynamicsVisual";
 import PropulsionVisual from "./PropulsionVisual";
+import MagnetismVisual from "./MagnetismVisual";
+import RotatingVisual from "./RotatingVisual";
+import MachinesVisual from "./MachinesVisual";
+import EvBatteriesVisual from "./EvBatteriesVisual";
+import PackDesignVisual from "./PackDesignVisual";
+import CellsVisual from "./CellsVisual";
 import OutroVisual from "./OutroVisual";
 
 /** Chapter id -> visual for the introduction to electromobility course. */
@@ -25,5 +31,11 @@ export const visuals: Record<string, ComponentType<{ visual: string }>> = {
   range: RangeVisual,
   dynamics: DynamicsVisual,
   propulsion: PropulsionVisual,
+  magnetism: MagnetismVisual,
+  rotating: RotatingVisual,
+  machines: MachinesVisual,
+  "ev-batteries": EvBatteriesVisual,
+  "pack-design": PackDesignVisual,
+  cells: CellsVisual,
   outro: OutroVisual,
 };
